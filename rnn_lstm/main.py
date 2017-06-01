@@ -10,6 +10,7 @@ TRAINING_MESSAGE_ON = False
 def main(train_user, train_data, validation_data, lst_test_data):
     log = open('log.txt', 'a+')
     print('training starts for {0}'.format(train_user))
+    log.write('training starts for {0} \n'.format(train_user))
     word_2_id = dp.build_vocab(train_data)
     raw_train_data = dp.file_to_word_ids(train_data, word_2_id)
     raw_valid_data = dp.file_to_word_ids(validation_data, word_2_id)
