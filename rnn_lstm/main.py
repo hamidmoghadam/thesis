@@ -14,8 +14,8 @@ def main(train_data, validation_data, lst_test_data):
     for test_data in lst_test_data:
         lst_raw_test_data.append(dp.file_to_word_ids(test_data[1], word_2_id))
 
-    config = lstm.SmallConfig()
-    eval_config = lstm.SmallConfig()
+    config = lstm.BestConfig()
+    eval_config = lstm.BestConfig()
     eval_config.batch_size = 1
     eval_config.num_steps = 1
 
