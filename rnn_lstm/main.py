@@ -80,11 +80,12 @@ def main(train_user, train_data, validation_data, lst_test_data):
                     min_perplexity = test_perplexity
                     min_perplexity_user = lst_test_data[i][0]
                 print([lst_test_data[i][0], "Test Perplexity : %.3f" % test_perplexity])
-                log.wirte(lst_test_data[i][0] + " Test Perplexity : %.3f" % test_perplexity + '\n')
+                log.write(lst_test_data[i][0] + " Test Perplexity : %.3f" % test_perplexity + '\n')
                 log.flush()
                 i += 1
             print('------------ {0} : {1} --------------'.format(train_user, min_perplexity_user))
             log.write('------------ {0} : {1} --------------\n'.format(train_user, min_perplexity_user))
+            log.flush()
     log.close()
 
 user_count = 50
