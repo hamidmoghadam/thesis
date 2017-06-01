@@ -74,14 +74,14 @@ def main(train_data, validation_data, lst_test_data):
                 print("Test Perplexity : %.3f" % test_perplexity)
                 i += 1
 
-
+user_count = 50
 with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encoding='utf-8') as username_pair:
     reader = csv.reader(username_pair, delimiter=' ')
     lst_username_pair = []
     for row in reader:
         lst_username_pair.append((row[0], row[2].replace(r'twitter.com/', '')))
 
-    for row in lst_username_pair[:2]:
+    for row in lst_username_pair[:user_count]:
         twitter_username = row[1]
         print(twitter_username)
 
@@ -106,7 +106,7 @@ with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encodin
             valid_data = '<eos>'.join(lst_tweets[trin_data_end_index:])
 
         lst_test_data = []
-        for item in lst_username_pair[:2]:
+        for item in lst_username_pair[:user_count]:
             tumblr_username = item[0]
             posts_path = '../tumblr_twitter_scrapper/posts/{0}.csv'.format(
                 tumblr_username)
