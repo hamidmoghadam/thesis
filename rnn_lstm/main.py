@@ -8,6 +8,7 @@ import codecs
 TRAINING_MESSAGE_ON = False
 
 def main(train_user, train_data, validation_data, lst_test_data):
+    log = open('log.txt', 'a+')
     print('training starts for {0}'.format(train_user))
     word_2_id = dp.build_vocab(train_data)
     raw_train_data = dp.file_to_word_ids(train_data, word_2_id)
@@ -78,8 +79,12 @@ def main(train_user, train_data, validation_data, lst_test_data):
                     min_perplexity = test_perplexity
                     min_perplexity_user = lst_test_data[i][0]
                 print([lst_test_data[i][0], "Test Perplexity : %.3f" % test_perplexity])
+                log.wirte(lst_test_data[i][0] + " Test Perplexity : %.3f" % test_perplexity + '\n')
+                log.flush()
                 i += 1
             print('------------ {0} : {1} --------------'.format(train_user, min_perplexity_user))
+            log.write('------------ {0} : {1} --------------\n'.format(train_user, min_perplexity_user))
+    log.close()
 
 user_count = 50
 with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encoding='utf-8') as username_pair:
