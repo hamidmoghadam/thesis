@@ -8,6 +8,7 @@ import codecs
 TRAINING_MESSAGE_ON = False
 
 def main(train_user, train_data, validation_data, lst_test_data):
+    print('training starts for {0}'.format(train_user))
     word_2_id = dp.build_vocab(train_data)
     raw_train_data = dp.file_to_word_ids(train_data, word_2_id)
     raw_valid_data = dp.file_to_word_ids(validation_data, word_2_id)
@@ -89,8 +90,6 @@ with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encodin
 
     for row in lst_username_pair[:user_count]:
         twitter_username = row[1]
-        print(twitter_username)
-
         tweets_path = '../tumblr_twitter_scrapper/tweets/{0}.csv'.format(
             twitter_username)
 
