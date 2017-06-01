@@ -5,8 +5,9 @@ import numpy as np
 import data_provider as dp
 import codecs
 
+TRAINING_MESSAGE_ON = False
 
-def main(train_data, validation_data, lst_test_data):
+def main(train_user, train_data, validation_data, lst_test_data):
     word_2_id = dp.build_vocab(train_data)
     raw_train_data = dp.file_to_word_ids(train_data, word_2_id)
     raw_valid_data = dp.file_to_word_ids(validation_data, word_2_id)
@@ -57,22 +58,27 @@ def main(train_data, validation_data, lst_test_data):
                                                   1 - config.max_epoch, 0.0)
                 lr = config.learning_rate * lr_decay
                 m.set_lr(lr, session)
-
-                print("Epoch: %d Learning rate: %.3f" % (i + 1, lr))
+                if TRAINING_MESSAGE_ON:
+                    print("Epoch: %d Learning rate: %.3f" % (i + 1, lr))
 
                 train_perplexity = m.run_epoch(session)
-                print("Epoch: %d Train Perplexity: %.3f" %
-                      (i + 1, train_perplexity))
+                if TRAINING_MESSAGE_ON:
+                    print("Epoch: %d Train Perplexity: %.3f" % (i + 1, train_perplexity))
 
                 valid_perplexity = mvalid.run_epoch(session)
-                print("Epoch: %d Valid Perplexity: %.3f" %
-                      (i + 1, valid_perplexity))
+                if TRAINING_MESSAGE_ON:
+                    print("Epoch: %d Valid Perplexity: %.3f" % (i + 1, valid_perplexity))
             i = 0
+            min_perplexity = 100
+            min_perplexity_user = ''
             for mtest in lst_mtest:
                 test_perplexity = mtest.run_epoch(session)
-                print(lst_test_data[i][0])
-                print("Test Perplexity : %.3f" % test_perplexity)
+                if test_perplexity < min_perplexity:
+                    min_perplexity = test_perplexity
+                    min_perplexity_user = lst_test_data[i][0]
+                print([lst_test_data[i][0], "Test Perplexity : %.3f" % test_perplexity])
                 i += 1
+            print('------------ {0} : {1} --------------'.format(train_user, min_perplexity_user))
 
 user_count = 50
 with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encoding='utf-8') as username_pair:
@@ -123,4 +129,4 @@ with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encodin
             test_data = '<eos>'.join(lst_posts)
             lst_test_data.append((tumblr_username, test_data))
 
-        main(train_data, valid_data, lst_test_data)
+        main(row[2], train_data, valid_data, lst_test_data)
