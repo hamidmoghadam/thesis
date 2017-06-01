@@ -129,4 +129,4 @@ with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encodin
             test_data = '<eos>'.join(lst_posts)
             lst_test_data.append((tumblr_username, test_data))
 
-        main(row[2], train_data, valid_data, lst_test_data)
+        main(row[0], train_data, valid_data, lst_test_data)
