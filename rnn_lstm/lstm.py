@@ -5,14 +5,16 @@ import data_provider as dp
 import inspect
 
 
-class LSMTInput(object):
-  """The input data."""
+class LSTMInput(object):
+    """The input data."""
 
-  def __init__(self, config, data, name=None):
-    self.batch_size = batch_size = config.batch_size
-    self.num_steps = num_steps = config.num_steps
-    self.epoch_size = ((len(data) // batch_size) - 1) // num_steps
-    self.input_data, self.targets = dp.ptb_producer(data, batch_size, num_steps, name=name)
+    def __init__(self, config, data, name=None):
+        self.batch_size = batch_size = config.batch_size
+        self.num_steps = num_steps = config.num_steps
+        self.epoch_size = ((len(data) // batch_size) - 1) // num_steps
+        self.input_data, self.targets = dp.batch_producer(
+            data, batch_size, num_steps, name=name)
+
 
 class LSTMNetwork(object):
     def __init__(self, config, is_training, input):
@@ -39,10 +41,12 @@ class LSTMNetwork(object):
             def attn_cell():
                 return tf.contrib.rnn.DropoutWrapper(lstm_cell(), output_keep_prob=self._config.keep_prob)
 
-        cell = tf.contrib.rnn.MultiRNNCell([attn_cell() for _ in range(self._config.num_layers)], state_is_tuple=True)
+        cell = tf.contrib.rnn.MultiRNNCell(
+            [attn_cell() for _ in range(self._config.num_layers)], state_is_tuple=True)
 
         with tf.device("/cpu:0"):
-            embedding = tf.get_variable("embedding", [vocab_size, size], dtype=tf.float32)
+            embedding = tf.get_variable(
+                "embedding", [vocab_size, size], dtype=tf.float32)
             inputs = tf.nn.embedding_lookup(embedding, self._input.input_data)
 
         if self._is_training and self._config.keep_prob < 1:
@@ -54,13 +58,16 @@ class LSTMNetwork(object):
         state = self._initial_state
         with tf.variable_scope("RNN"):
             for time_step in range(num_steps):
-                if time_step > 0: tf.get_variable_scope().reuse_variables()
+                if time_step > 0:
+                    tf.get_variable_scope().reuse_variables()
                 (cell_output, state) = cell(inputs[:, time_step, :], state)
                 outputs.append(cell_output)
 
         output = tf.reshape(tf.stack(axis=1, values=outputs), [-1, size])
-        softmax_w = tf.get_variable("softmax_w", [size, vocab_size], dtype=tf.float32)
-        softmax_b = tf.get_variable("softmax_b", [vocab_size], dtype=tf.float32)
+        softmax_w = tf.get_variable(
+            "softmax_w", [size, vocab_size], dtype=tf.float32)
+        softmax_b = tf.get_variable(
+            "softmax_b", [vocab_size], dtype=tf.float32)
         logits = tf.matmul(output, softmax_w) + softmax_b
 
         loss = tf.contrib.legacy_seq2seq.sequence_loss_by_example(
@@ -77,11 +84,11 @@ class LSTMNetwork(object):
             self._new_lr = tf.placeholder(tf.float32, shape=[], name="new_lr")
             self._lr_update = tf.assign(self._lr, self._new_lr)
 
-            grads, _ = tf.clip_by_global_norm(tf.gradients(self._cost, self._tvars), self._config.max_grad_norm)
+            grads, _ = tf.clip_by_global_norm(tf.gradients(
+                self._cost, self._tvars), self._config.max_grad_norm)
             optimizer = tf.train.GradientDescentOptimizer(self._lr)
             self._train_op = optimizer.apply_gradients(zip(grads, self._tvars),
                                                        global_step=tf.contrib.framework.get_or_create_global_step())
-
 
     def set_lr(self, lr, session):
         session.run(self._lr_update, feed_dict={self._new_lr: lr})
@@ -115,30 +122,35 @@ class LSTMNetwork(object):
             costs += cost
             iters += self._input.num_steps
 
-
         return np.exp(costs / iters)
 
+
 class SmallConfig(object):
-  """Small config."""
-  init_scale = 0.1
-  learning_rate = 1.0
-  max_grad_norm = 5
-  num_layers = 2
-  num_steps = 25
-  hidden_size = 100
-  max_epoch = 4
-  max_max_epoch = 1
-  keep_prob = 1.0
-  lr_decay = 0.5
-  batch_size = 20
-  vocab_size = 10000
+    """Small config."""
+    init_scale = 0.1
+    learning_rate = 1.0
+    max_grad_norm = 5
+    num_layers = 2
+    num_steps = 25
+    hidden_size = 100
+    max_epoch = 4
+    max_max_epoch = 1
+    keep_prob = 1.0
+    lr_decay = 0.5
+    batch_size = 20
+    vocab_size = 10000
 
 
-
-
-
-
-
-
-
-
+class BestConfig(object):
+    init_scale = 0.1
+    learning_rate = 1.0
+    max_grad_norm = 5
+    num_layers = 1
+    num_steps = 3
+    hidden_size = 50
+    max_epoch = 4
+    max_max_epoch = 10
+    keep_prob = 1.0
+    lr_decay = 0.95
+    batch_size = 20
+    vocab_size = 8000
