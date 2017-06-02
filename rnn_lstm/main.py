@@ -5,7 +5,7 @@ import numpy as np
 import data_provider as dp
 import codecs
 
-TRAINING_MESSAGE_ON = False
+TRAINING_MESSAGE_ON = True
 
 def main(train_user, train_data, validation_data, lst_test_data):
     log = open('log.txt', 'a+')
@@ -111,11 +111,12 @@ with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encodin
                     lst_tweets.append(item[1])
             if len(lst_tweets) < 10:
                 continue
-            np.random.shuffle(lst_tweets)
-            trin_data_end_index = int(np.round(len(lst_tweets) * 0.7))
 
-            train_data = '<eos>'.join(lst_tweets[:trin_data_end_index])
-            valid_data = '<eos>'.join(lst_tweets[trin_data_end_index:])
+            trin_data_end_index = int(np.round(len(lst_tweets) * 0.3))
+
+            train_data = '<eos>'.join(lst_tweets)#[:trin_data_end_index])
+            np.random.shuffle(lst_tweets)
+            valid_data = '<eos>'.join(lst_tweets[:trin_data_end_index])
 
         lst_test_data = []
         for item in lst_username_pair[:user_count]:
