@@ -149,7 +149,7 @@ class BestConfig(object):
     num_steps = 3
     hidden_size = 50
     max_epoch = 4
-    max_max_epoch = 10
+    max_max_epoch = 5
     keep_prob = 1.0
     lr_decay = 0.95
     batch_size = 20
