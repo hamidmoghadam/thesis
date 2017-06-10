@@ -114,7 +114,7 @@ with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encodin
 
             trin_data_end_index = int(np.round(len(lst_tweets) * 0.3))
 
-            train_data = '<eos>'.join(lst_tweets)#[:trin_data_end_index])
+            train_data = '<eos>'.join(lst_tweets)#[:trin_data_end_index]) somthing ...
             np.random.shuffle(lst_tweets)
             valid_data = '<eos>'.join(lst_tweets[:trin_data_end_index])
 
