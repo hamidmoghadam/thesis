@@ -80,15 +80,20 @@ def main(train_user, train_data, validation_data, lst_test_data, run_on_test):
                 m.set_lr(lr, session)
                 if TRAINING_MESSAGE_ON:
                     print("Epoch: %d Learning rate: %.3f" % (i + 1, lr))
+                    log.write("Epoch: %d Learning rate:( %.3f \n" % (i + 1, lr))
 
                 train_perplexity = m.run_epoch(session)
                 if TRAINING_MESSAGE_ON:
                     print("Epoch: %d Train Perplexity: %.3f" %
                           (i + 1, train_perplexity))
+                    log.write("Epoch: %d Train Perplexity: %.3f \n" %
+                          (i + 1, train_perplexity))
 
                 valid_perplexity = mvalid.run_epoch(session)
                 if TRAINING_MESSAGE_ON:
                     print("Epoch: %d Valid Perplexity: %.3f" %
+                          (i + 1, valid_perplexity))
+                    log.write("Epoch: %d Valid Perplexity: %.3f \n" %
                           (i + 1, valid_perplexity))
 
             if run_on_test:
