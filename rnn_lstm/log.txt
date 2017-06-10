@@ -1,69 +1,4 @@
 training starts for entertainmentweekly 
-training starts for entertainmentweekly 
-entertainmentweekly Test Perplexity : 17.252
-truthdogg Test Perplexity : 15.370
-training starts for entertainmentweekly 
-entertainmentweekly Test Perplexity : 10.474
-truthdogg Test Perplexity : 9.671
-training starts for entertainmentweekly 
-entertainmentweekly Test Perplexity : 11.061
-truthdogg Test Perplexity : 10.399
-rafi-dangelo Test Perplexity : 10.322
-prochoiceamerica Test Perplexity : 11.028
-bonniekristian Test Perplexity : 11.260
-empowerwomyn Test Perplexity : 10.878
-lolmythesis Test Perplexity : 15.514
-theliberaltony Test Perplexity : 11.768
-repmarktakano Test Perplexity : 38.232
-fullmarx Test Perplexity : 11.423
-keatonpatti Test Perplexity : 14.631
-dailykos Test Perplexity : 14.586
-animesocialistparty Test Perplexity : 12.182
-sagansense Test Perplexity : 10.881
-collegehumor Test Perplexity : 18.179
-training starts for entertainmentweekly 
-training starts for entertainmentweekly 
-entertainmentweekly Test Perplexity : 10.443
-truthdogg Test Perplexity : 9.849
-training starts for entertainmentweekly 
-entertainmentweekly Test Perplexity : 13.553
-truthdogg Test Perplexity : 12.466
-training starts for entertainmentweekly 
-entertainmentweekly Test Perplexity : 11.719
-truthdogg Test Perplexity : 10.533
-rafi-dangelo Test Perplexity : 10.791
-prochoiceamerica Test Perplexity : 11.850
-bonniekristian Test Perplexity : 11.681
-empowerwomyn Test Perplexity : 11.841
-lolmythesis Test Perplexity : 17.788
-theliberaltony Test Perplexity : 13.210
-training starts for entertainmentweekly 
-entertainmentweekly Test Perplexity : 16.545
-truthdogg Test Perplexity : 15.383
-training starts for entertainmentweekly 
-training starts for entertainmentweekly 
-training starts for entertainmentweekly 
-entertainmentweekly Test Perplexity : 11.174
-truthdogg Test Perplexity : 10.181
-training starts for entertainmentweekly 
-entertainmentweekly Test Perplexity : 13.343
-truthdogg Test Perplexity : 11.974
-training starts for entertainmentweekly 
-entertainmentweekly Test Perplexity : 10.862
-truthdogg Test Perplexity : 10.011
-rafi-dangelo Test Perplexity : 10.322
-prochoiceamerica Test Perplexity : 10.598
-training starts for entertainmentweekly 
-entertainmentweekly Test Perplexity : 10.913
-truthdogg Test Perplexity : 9.936
-rafi-dangelo Test Perplexity : 10.315
-prochoiceamerica Test Perplexity : 10.453
-bonniekristian Test Perplexity : 10.826
-empowerwomyn Test Perplexity : 10.909
-lolmythesis Test Perplexity : 14.135
-theliberaltony Test Perplexity : 11.179
-repmarktakano Test Perplexity : 37.026
-training starts for entertainmentweekly 
 entertainmentweekly Test Perplexity : 11.299
 truthdogg Test Perplexity : 10.417
 rafi-dangelo Test Perplexity : 10.769
@@ -2063,3 +1998,11 @@ magnusbaene Test Perplexity : 25.202
 fy-kihyun Test Perplexity : 17.095
 lol-biscuit Test Perplexity : 13.390
 ------------ lol-biscuit : pseudophan --------------
+training starts for entertainmentweekly 
+training starts for entertainmentweekly 
+training starts for entertainmentweekly 
+training starts for entertainmentweekly 
+training starts for truthdogg 
+training starts for truthdogg 
+training starts for truthdogg 
+training starts for truthdogg 
