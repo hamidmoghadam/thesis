@@ -2006,3 +2006,56 @@ training starts for truthdogg
 training starts for truthdogg 
 training starts for truthdogg 
 training starts for truthdogg 
+training starts for entertainmentweekly 
+Epoch: 1 Learning rate:( 1.000 
+Epoch: 1 Train Perplexity: 11.412 
+Epoch: 1 Valid Perplexity: 8.689 
+Epoch: 2 Learning rate:( 1.000 
+Epoch: 2 Train Perplexity: 7.893 
+Epoch: 2 Valid Perplexity: 8.205 
+Epoch: 3 Learning rate:( 1.000 
+Epoch: 3 Train Perplexity: 7.350 
+Epoch: 3 Valid Perplexity: 7.776 
+Epoch: 4 Learning rate:( 1.000 
+Epoch: 4 Train Perplexity: 7.093 
+Epoch: 4 Valid Perplexity: 7.489 
+Epoch: 5 Learning rate:( 0.950 
+Epoch: 5 Train Perplexity: 6.902 
+Epoch: 5 Valid Perplexity: 7.402 
+training starts for entertainmentweekly 
+Epoch: 1 Learning rate:( 1.000 
+Epoch: 1 Train Perplexity: 11.486 
+Epoch: 1 Valid Perplexity: 8.263 
+Epoch: 2 Learning rate:( 1.000 
+Epoch: 2 Train Perplexity: 7.965 
+Epoch: 2 Valid Perplexity: 7.609 
+Epoch: 3 Learning rate:( 1.000 
+Epoch: 3 Train Perplexity: 7.450 
+Epoch: 3 Valid Perplexity: 7.262 
+Epoch: 4 Learning rate:( 1.000 
+Epoch: 4 Train Perplexity: 7.195 
+Epoch: 4 Valid Perplexity: 7.079 
+Epoch: 5 Learning rate:( 0.950 
+Epoch: 5 Train Perplexity: 6.996 
+Epoch: 5 Valid Perplexity: 7.070 
+training starts for entertainmentweekly 
+Epoch: 1 Learning rate:( 1.000 
+Epoch: 1 Train Perplexity: 11.450 
+Epoch: 1 Valid Perplexity: 8.645 
+Epoch: 2 Learning rate:( 1.000 
+Epoch: 2 Train Perplexity: 7.948 
+Epoch: 2 Valid Perplexity: 7.737 
+Epoch: 3 Learning rate:( 1.000 
+Epoch: 3 Train Perplexity: 7.379 
+Epoch: 3 Valid Perplexity: 7.567 
+Epoch: 4 Learning rate:( 1.000 
+Epoch: 4 Train Perplexity: 7.114 
+Epoch: 4 Valid Perplexity: 7.332 
+Epoch: 5 Learning rate:( 0.950 
+Epoch: 5 Train Perplexity: 6.905 
+Epoch: 5 Valid Perplexity: 7.254 
+training starts for entertainmentweekly 
+Epoch: 1 Learning rate:( 1.000 
+Epoch: 1 Train Perplexity: 11.343 
+Epoch: 1 Valid Perplexity: 8.513 
+Epoch: 2 Learning rate:( 1.000 
