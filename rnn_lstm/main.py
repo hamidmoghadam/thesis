@@ -88,7 +88,7 @@ def main(train_user, train_data, validation_data, lst_test_data):
             log.flush()
     log.close()
 
-user_count = 50
+user_count = 2
 with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encoding='utf-8') as username_pair:
     reader = csv.reader(username_pair, delimiter=' ')
     lst_username_pair = []
@@ -101,7 +101,6 @@ with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encodin
             twitter_username)
 
         train_data = ''
-        valid_data = ''
 
         with open(tweets_path, 'r', encoding='utf-8') as tweets_file:
             tweet_reader = csv.reader(tweets_file, delimiter=' ')
@@ -112,13 +111,11 @@ with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encodin
             if len(lst_tweets) < 10:
                 continue
 
-            trin_data_end_index = int(np.round(len(lst_tweets) * 0.3))
-
-            train_data = '<eos>'.join(lst_tweets)#[:trin_data_end_index])
-            np.random.shuffle(lst_tweets)
-            valid_data = '<eos>'.join(lst_tweets[:trin_data_end_index])
+            train_data = '<eos>'.join(lst_tweets)
 
         lst_test_data = []
+        valid_data = ''
+
         for item in lst_username_pair[:user_count]:
             tumblr_username = item[0]
             posts_path = '../tumblr_twitter_scrapper/posts/{0}.csv'.format(
@@ -133,7 +130,20 @@ with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encodin
                         lst_posts.append(post[4])
                 if len(lst_posts) < 10:
                     continue
-            test_data = '<eos>'.join(lst_posts)
+            lst_posts = np.array(lst_posts)
+            
+            if item[1] == twitter_username:
+                validation_len = int(np.round(len(lst_posts) * 0.3))
+                shuffled_indices = range(len(lst_post))
+                validation_indices = shuffled_indices[:validation_len]
+                test_indices = shuffled_indices[validation_len:] 
+                np.sort(validation_indices)
+                np.sort(test_indices)
+                valid_data = '<eos>'.join(lst_posts[validation_indices])
+                test_data = '<eos>'.join(lst_posts[test_indices])
+            else :
+                test_data = '<eos>'.join(lst_posts)
+
             lst_test_data.append((tumblr_username, test_data))
 
         main(row[0], train_data, valid_data, lst_test_data)
