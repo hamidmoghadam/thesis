@@ -154,3 +154,18 @@ class BestConfig(object):
     lr_decay = 0.95
     batch_size = 20
     vocab_size = 8000
+
+class TestingConfig(object):
+    init_scale = 0.1
+    learning_rate = 1.0
+    max_grad_norm = 5
+    num_layers = 2
+    num_steps = 15
+    hidden_size = 80
+    max_epoch = 4
+    max_max_epoch = 7
+    keep_prob = 1.0
+    lr_decay = 0.75
+    batch_size = 5
+    vocab_size = 15000
+

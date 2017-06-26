@@ -18,8 +18,8 @@ def main(train_user, train_data, validation_data, lst_test_data):
     for test_data in lst_test_data:
         lst_raw_test_data.append(dp.file_to_word_ids(test_data[1], word_2_id))
 
-    config = lstm.BestConfig()
-    eval_config = lstm.BestConfig()
+    config = lstm.TestingConfig()
+    eval_config = lstm.TestingConfig()
     eval_config.batch_size = 1
     eval_config.num_steps = 1
 
@@ -94,7 +94,7 @@ with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encodin
     lst_username_pair = []
     for row in reader:
         lst_username_pair.append((row[0], row[2].replace(r'twitter.com/', '')))
-
+    #np.random.shuffle(lst_username_pair)
     for row in lst_username_pair[:user_count]:
         twitter_username = row[1]
         tweets_path = '../tumblr_twitter_scrapper/tweets/{0}.csv'.format(
@@ -134,7 +134,7 @@ with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encodin
             
             if item[1] == twitter_username:
                 validation_len = int(np.round(len(lst_posts) * 0.3))
-                shuffled_indices = range(len(lst_post))
+                shuffled_indices = range(len(lst_posts))
                 validation_indices = shuffled_indices[:validation_len]
                 test_indices = shuffled_indices[validation_len:] 
                 np.sort(validation_indices)
