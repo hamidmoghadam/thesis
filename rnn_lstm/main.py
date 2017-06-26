@@ -7,6 +7,7 @@ import codecs
 
 TRAINING_MESSAGE_ON = True
 
+
 def main(train_user, train_data, validation_data, lst_test_data):
     log = open('log.txt', 'a+')
     print('training starts for {0}'.format(train_user))
@@ -29,7 +30,7 @@ def main(train_user, train_data, validation_data, lst_test_data):
 
         with tf.name_scope("Train"):
             train_input = lstm.LSTMInput(
-                config=config, data= raw_train_data, name="TrainInput")
+                config=config, data=raw_train_data, name="TrainInput")
             with tf.variable_scope("Model", reuse=None, initializer=initializer):
                 m = lstm.LSTMNetwork(
                     is_training=True, config=config, input=train_input)
@@ -44,15 +45,24 @@ def main(train_user, train_data, validation_data, lst_test_data):
                     is_training=False, config=config, input=valid_input)
 
             #tf.summary.scalar("Validation Loss", mvalid.cost)
+        k = 0
+        for raw_test_data in lst_raw_test_data:
+            k += 1
+            with tf.name_scope("Test" + k):
+                test_input = lstm.LSTMInput(
+                    config=eval_config, data=raw_test_data, name="TestInput")
+                with tf.variable_scope("Model" + k, reuse=True, initializer=initializer):
+                    lst_mtest.append(lstm.LSTMNetwork(
+                        is_training=False, config=config, input=test_input))
 
-        with tf.name_scope("Test"):
+        '''with tf.name_scope("Test"):
             with tf.variable_scope("Model", reuse=True, initializer=initializer):
                 lst_mtest = []
                 for raw_test_data in lst_raw_test_data:
                     test_input = lstm.LSTMInput(
                         config=eval_config, data=raw_test_data, name="TestInput")
                     lst_mtest.append(lstm.LSTMNetwork(
-                        is_training=False, config=config, input=test_input))
+                        is_training=False, config=config, input=test_input))'''
 
         sv = tf.train.Supervisor()
         with sv.managed_session() as session:
@@ -66,11 +76,13 @@ def main(train_user, train_data, validation_data, lst_test_data):
 
                 train_perplexity = m.run_epoch(session)
                 if TRAINING_MESSAGE_ON:
-                    print("Epoch: %d Train Perplexity: %.3f" % (i + 1, train_perplexity))
+                    print("Epoch: %d Train Perplexity: %.3f" %
+                          (i + 1, train_perplexity))
 
                 valid_perplexity = mvalid.run_epoch(session)
                 if TRAINING_MESSAGE_ON:
-                    print("Epoch: %d Valid Perplexity: %.3f" % (i + 1, valid_perplexity))
+                    print("Epoch: %d Valid Perplexity: %.3f" %
+                          (i + 1, valid_perplexity))
             i = 0
             min_perplexity = 100
             min_perplexity_user = ''
@@ -79,14 +91,19 @@ def main(train_user, train_data, validation_data, lst_test_data):
                 if test_perplexity < min_perplexity:
                     min_perplexity = test_perplexity
                     min_perplexity_user = lst_test_data[i][0]
-                print([lst_test_data[i][0], "Test Perplexity : %.3f" % test_perplexity])
-                log.write(lst_test_data[i][0] + " Test Perplexity : %.3f" % test_perplexity + '\n')
+                print([lst_test_data[i][0], "Test Perplexity : %.3f" %
+                       test_perplexity])
+                log.write(
+                    lst_test_data[i][0] + " Test Perplexity : %.3f" % test_perplexity + '\n')
                 log.flush()
                 i += 1
-            print('------------ {0} : {1} --------------'.format(train_user, min_perplexity_user))
-            log.write('------------ {0} : {1} --------------\n'.format(train_user, min_perplexity_user))
+            print(
+                '------------ {0} : {1} --------------'.format(train_user, min_perplexity_user))
+            log.write(
+                '------------ {0} : {1} --------------\n'.format(train_user, min_perplexity_user))
             log.flush()
     log.close()
+
 
 user_count = 2
 with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encoding='utf-8') as username_pair:
@@ -131,17 +148,17 @@ with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encodin
                 if len(lst_posts) < 10:
                     continue
             lst_posts = np.array(lst_posts)
-            
+
             if item[1] == twitter_username:
                 validation_len = int(np.round(len(lst_posts) * 0.3))
                 shuffled_indices = range(len(lst_post))
                 validation_indices = shuffled_indices[:validation_len]
-                test_indices = shuffled_indices[validation_len:] 
+                test_indices = shuffled_indices[validation_len:]
                 np.sort(validation_indices)
                 np.sort(test_indices)
                 valid_data = '<eos>'.join(lst_posts[validation_indices])
                 test_data = '<eos>'.join(lst_posts[test_indices])
-            else :
+            else:
                 test_data = '<eos>'.join(lst_posts)
 
             lst_test_data.append((tumblr_username, test_data))
