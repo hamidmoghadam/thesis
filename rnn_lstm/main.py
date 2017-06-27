@@ -46,12 +46,13 @@ def main(train_user, train_data, validation_data, lst_test_data):
 
             #tf.summary.scalar("Validation Loss", mvalid.cost)
         k = 0
+        lst_mtest = []
         for raw_test_data in lst_raw_test_data:
             k += 1
-            with tf.name_scope("Test" + k):
+            with tf.name_scope("Test" + str(k)):
                 test_input = lstm.LSTMInput(
                     config=eval_config, data=raw_test_data, name="TestInput")
-                with tf.variable_scope("Model" + k, reuse=True, initializer=initializer):
+                with tf.variable_scope("Model", reuse=True, initializer=initializer):
                     lst_mtest.append(lstm.LSTMNetwork(
                         is_training=False, config=config, input=test_input))
 
@@ -143,7 +144,7 @@ with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encodin
                 for post in tumblr_reader:
                     if post[5] == 'True':
                         lst_posts.append(post[4])
-                if len(lst_posts) < 50:
+                if len(lst_posts) < 25:
                     continue
             lst_posts = np.array(lst_posts)
 
