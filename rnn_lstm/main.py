@@ -118,14 +118,13 @@ with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encodin
             twitter_username)
 
         train_data = ''
-
+        lst_posts = []
         with open(tweets_path, 'r', encoding='utf-8') as tweets_file:
             tweet_reader = csv.reader(tweets_file, delimiter=' ')
-            lst_tweets = []
             for item in tweet_reader:
                 if item[3] == 'True':
                     lst_tweets.append(item[1])
-            if len(lst_tweets) < 10:
+            if len(lst_tweets) < 100:
                 continue
 
             train_data = '<eos>'.join(lst_tweets)
@@ -138,14 +137,13 @@ with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encodin
             posts_path = '../tumblr_twitter_scrapper/posts/{0}.csv'.format(
                 tumblr_username)
             test_data = ''
-
+            lst_posts = []
             with open(posts_path, 'r', encoding='utf-8') as tumblr_file:
                 tumblr_reader = csv.reader(tumblr_file, delimiter=' ')
-                lst_posts = []
                 for post in tumblr_reader:
                     if post[5] == 'True':
                         lst_posts.append(post[4])
-                if len(lst_posts) < 10:
+                if len(lst_posts) < 50:
                     continue
             lst_posts = np.array(lst_posts)
 
