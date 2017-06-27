@@ -7,6 +7,7 @@ import codecs
 from bs4 import BeautifulSoup
 import re
 from nltk.corpus import stopwords
+from nltk.stem.porter import *
 
 TRAINING_MESSAGE_ON = True
 
@@ -38,10 +39,13 @@ def review_to_words( raw_review ):
     # 5. Remove stop words
     meaningful_words = [w for w in words if not w in stops]
     #
+    # 5.1 stemming
+    stemmer = PorterStemmer()
+    stemmed_words = [stemmer.stem(w) for w in meaningful_words]
     # 6. Join the words back into one string separated by space,
     # and return the result.
 
-    return( " ".join( meaningful_words ))
+    return( " ".join( stemmer))
 
 def main(train_user, train_data, validation_data, lst_test_data):
     log = open('log.txt', 'a+')
