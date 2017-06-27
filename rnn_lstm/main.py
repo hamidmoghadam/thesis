@@ -105,27 +105,27 @@ def main(train_user, train_data, validation_data, lst_test_data):
     log.close()
 
 
-#user_count = 2
+user_count = 2
 with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encoding='utf-8') as username_pair:
     reader = csv.reader(username_pair, delimiter=' ')
     lst_username_pair = []
     for row in reader:
         lst_username_pair.append((row[0], row[2].replace(r'twitter.com/', '')))
 
-    for row in lst_username_pair:#:user_count]:
+    for row in lst_username_pair[:user_count]:
         twitter_username = row[1]
         tweets_path = '../tumblr_twitter_scrapper/tweets/{0}.csv'.format(
             twitter_username)
 
         train_data = ''
-        lst_tweets = []
 
         with open(tweets_path, 'r', encoding='utf-8') as tweets_file:
             tweet_reader = csv.reader(tweets_file, delimiter=' ')
+            lst_tweets = []
             for item in tweet_reader:
                 if item[3] == 'True':
                     lst_tweets.append(item[1])
-            if len(lst_tweets) < 100:
+            if len(lst_tweets) < 10:
                 continue
 
             train_data = '<eos>'.join(lst_tweets)
@@ -138,14 +138,14 @@ with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encodin
             posts_path = '../tumblr_twitter_scrapper/posts/{0}.csv'.format(
                 tumblr_username)
             test_data = ''
-            
-            lst_posts = []
+
             with open(posts_path, 'r', encoding='utf-8') as tumblr_file:
                 tumblr_reader = csv.reader(tumblr_file, delimiter=' ')
+                lst_posts = []
                 for post in tumblr_reader:
                     if post[5] == 'True':
                         lst_posts.append(post[4])
-                if len(lst_posts) < 100:
+                if len(lst_posts) < 10:
                     continue
             lst_posts = np.array(lst_posts)
 
