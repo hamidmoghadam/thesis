@@ -30,7 +30,9 @@ def review_to_words( raw_review ):
     #letters_only = re.sub("[^a-zA-Z]", " ", raw_review)
     #
     # 3. Convert to lower case, split into individual words
-    words = raw_review.lower().split()
+    #words = raw_review.lower().split()
+    tokenizer = RegexpTokenizer(r'\w+')
+    words = tokenizer.tokenize(raw_review)
     #
     # 4. In Python, searching a set is much faster than searching
     #   a list, so convert the stop words to a set
