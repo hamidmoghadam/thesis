@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 import re
 from nltk.corpus import stopwords
 from nltk.stem.porter import *
+from nltk.tokenize import RegexpTokenizer
 
 TRAINING_MESSAGE_ON = True
 
