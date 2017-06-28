@@ -45,7 +45,7 @@ def review_to_words( raw_review ):
     # 6. Join the words back into one string separated by space,
     # and return the result.
 
-    return( " ".join( stemmer))
+    return( " ".join( stemmed_words))
 
 def main(train_user, train_data, validation_data, lst_test_data):
     log = open('log.txt', 'a+')
