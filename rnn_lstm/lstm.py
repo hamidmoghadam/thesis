@@ -161,11 +161,25 @@ class TestingConfig(object):
     max_grad_norm = 5
     num_layers = 2
     num_steps = 15
-    hidden_size = 80
+    hidden_size = 100
     max_epoch = 4
-    max_max_epoch = 7
+    max_max_epoch = 13
     keep_prob = 1.0
     lr_decay = 0.75
     batch_size = 5
+    vocab_size = 15000
+
+class TestingConfig2(object):
+    init_scale = 0.1
+    learning_rate = 1.0
+    max_grad_norm = 5
+    num_layers = 2
+    num_steps = 3
+    hidden_size = 200
+    max_epoch = 3
+    max_max_epoch = 20
+    keep_prob = 0.85
+    lr_decay = 0.85
+    batch_size = 1
     vocab_size = 15000
 
