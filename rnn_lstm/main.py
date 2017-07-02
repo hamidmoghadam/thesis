@@ -61,8 +61,8 @@ def main(train_user, train_data, validation_data, lst_test_data):
     for test_data in lst_test_data:
         lst_raw_test_data.append(dp.file_to_word_ids(test_data[1], word_2_id))
 
-    config = lstm.TestingConfig2()
-    eval_config = lstm.TestingConfig2()
+    config = lstm.BestConfig()
+    eval_config = lstm.BestConfig()
     eval_config.batch_size = 1
     eval_config.num_steps = 1
 
@@ -151,7 +151,7 @@ def main(train_user, train_data, validation_data, lst_test_data):
 
 
 user_count = 50
-with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encoding='utf-8') as username_pair:
+with open(r'../tumblr_twitter_scrapper/large_username_pairs_filtered.csv', 'r', encoding='utf-8') as username_pair:
     reader = csv.reader(username_pair, delimiter=' ')
     lst_username_pair = []
     for row in reader:
@@ -174,16 +174,16 @@ with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encodin
             if len(lst_tweets) < 10:
                 continue
 
-            trin_data_end_index = int(np.round(len(lst_tweets) * 0.3))
-
-            train_data = '<eos>'.join(lst_tweets)#[:trin_data_end_index]) somthing ...
+            trin_data_end_index = int(np.round(len(lst_tweets) * 0.7))
+			
             np.random.shuffle(lst_tweets)
-            valid_data = '<eos>'.join(lst_tweets[:trin_data_end_index])
+            train_data = '<eos>'.join(lst_tweets[:trin_data_end_index])
+            valid_data = '<eos>'.join(lst_tweets[trin_data_end_index:])
 
         lst_test_data = []
         for item in lst_username_pair[:user_count]:
             tumblr_username = item[0]
-            posts_path = '../tumblr_twitter_scrapper/posts/{0}.csv'.format(
+            posts_path = '../tumblr_twitter_scrapper/filtered_posts/{0}.csv'.format(
                 tumblr_username)
             test_data = ''
 
@@ -195,7 +195,8 @@ with open(r'../tumblr_twitter_scrapper/username_pair_filtered.csv', 'r', encodin
                         lst_posts.append(review_to_words(post[4]))
                 if len(lst_posts) < 10:
                     continue
-            test_data = '<eos>'.join(lst_posts)
+            np.random.shuffle(lst_posts)
+            test_data = '<eos>'.join(lst_posts[:10])
             lst_test_data.append((tumblr_username, test_data))
 
         main(row[0], train_data, valid_data, lst_test_data)
