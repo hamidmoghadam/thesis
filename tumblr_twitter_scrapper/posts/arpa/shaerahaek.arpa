@@ -1,0 +1,1386 @@
+\data\
+ngram 1=350
+ngram 2=485
+ngram 3=539
+
+\1-grams:
+-0.2185292	<unk>
+-inf	<s>	-0.04034326
+-3.3377461	</s>
+-2.7740426	chapter	-0.24790084
+-1.7315761	digit	-0.3775036
+-3.3377461	fandom	-0.04034326
+-2.7740426	haikyuu	-0.24790084
+-1.6858109	<eos>	-0.04034329
+-3.3377461	rate	-0.04034326
+-3.3377461	maturewarn	-0.04034323
+-3.3377461	graphic	-0.04034326
+-3.3377461	depict	-0.04034326
+-3.3377461	violencerelationship	-0.04034326
+-1.98691	sawamura	-0.38382873
+-2.2088509	daichi	-0.04034326
+-3.3377461	sugawara	-0.04034326
+-3.3377461	koushicharact	-0.04034326
+-3.3377461	koushi	-0.04034326
+-2.2088509	iwaizumi	-0.20773746
+-3.3377461	hajim	-0.04034326
+-1.98691	oikawa	-0.110140234
+-3.3377461	tooru	-0.04034323
+-3.3377461	kuroo	-0.04034326
+-3.3377461	tetsur	-0.04034326
+-3.3377461	aon	-0.04034326
+-3.3377461	takanobuaddit	-0.04034326
+-1.7315761	tag	-0.14119782
+-3.3377461	cameo	-0.04034326
+-2.2088509	charact	-0.04034326
+-3.3377461	dystopia	-0.04034326
+-2.7740426	au	-0.04034326
+-3.3377461	fighter	-0.04034326
+-2.3850574	trigger	-0.082798734
+-2.7740426	warn	-0.04034326
+-3.3377461	impli	-0.04034326
+-2.7740426	relationship	-0.04034326
+-2.7740426	self	-0.24790084
+-3.3377461	indulg	-0.04034326
+-3.3377461	get	-0.04034326
+-3.3377461	idea	-0.04034326
+-3.3377461	mind	-0.04034326
+-2.7740426	possibl	-0.04034326
+-3.3377461	slow	-0.04034326
+-3.3377461	updat	-0.04034326
+-3.3377461	nobodi	-0.04034326
+-3.3377461	realli	-0.04034326
+-3.3377461	die	-0.04034326
+-3.3377461	tho	-0.04034326
+-2.2088509	angst	-0.04034326
+-2.3850574	fluff	-0.04034323
+-3.3377461	import	-0.04034326
+-3.3377461	domest	-0.04034326
+-2.0838547	life	-0.04034326
+-3.3377461	wanna	-0.04034326
+-2.2088509	say	-0.04034326
+-2.7740426	it	-0.04034326
+-2.3850574	s	-0.04034323
+-3.3377461	horribl	-0.04034326
+-3.3377461	judg	-0.04034326
+-3.3377461	that	-0.04034326
+-3.3377461	intern	-0.04034326
+-3.3377461	conflict	-0.04034326
+-3.3377461	els	-0.04034326
+-2.7740426	dont	-0.24790084
+-2.7740426	know	-0.04034326
+-3.3377461	bad	-0.04034326
+-3.3377461	futur	-0.04034326
+-3.3377461	ausummari	-0.04034326
+-2.3850574	you	-0.082798734
+-3.3377461	smoke	-0.04034326
+-3.3377461	again	-0.04034326
+-3.3377461	messi	-0.04034326
+-3.3377461	ashen	-0.04034326
+-3.3377461	hair	-0.04034326
+-2.7740426	head	-0.04034326
+-3.3377461	peek	-0.04034326
+-3.3377461	out	-0.04034326
+-3.3377461	sleepi	-0.04034326
+-3.3377461	brown	-0.04034326
+-3.3377461	eye	-0.04034326
+-3.3377461	blink	-0.04034326
+-3.3377461	owlishli	-0.04034326
+-3.3377461	edg	-0.04034326
+-2.7740426	cover	-0.04034326
+-3.3377461	welcom	-0.04034326
+-3.3377461	home	-0.04034326
+-3.3377461	hum	-0.04034326
+-3.3377461	rest	-0.04034326
+-3.3377461	pillow	-0.04034326
+-3.3377461	eas	-0.04034326
+-3.3377461	guilt	-0.04034326
+-3.3377461	wash	-0.04034326
+-3.3377461	him	-0.04034326
+-3.3377461	move	-0.04034326
+-3.3377461	reveal	-0.04034326
+-3.3377461	face	-0.04034326
+-3.3377461	haunt	-0.04034326
+-3.3377461	dream	-0.04034326
+-2.2088509	i	-0.11193257
+-3.3377461	kill	-0.04034326
+-3.3377461	man	-0.04034326
+-3.3377461	today	-0.04034326
+-3.3377461	knowchapter	-0.04034326
+-3.3377461	distribut	-0.04034326
+-2.7740426	ﾉ	-0.04034326
+-3.3377461	ヮ	-0.04034326
+-3.3377461	ﾟyou	-0.04034326
+-3.3377461	re	-0.04034326
+-3.3377461	interest	-0.04034326
+-3.3377461	checkchapter	-0.04034326
+-2.3850574	kind	-0.13183883
+-2.7740426	slice	-0.04034326
+-2.7740426	of	-0.04034323
+-3.3377461	conflictsummari	-0.04034326
+-2.7740426	final	-0.04034326
+-3.3377461	fantasi	-0.04034326
+-3.3377461	xvrate	-0.04034326
+-3.3377461	teen	-0.04034326
+-3.3377461	audienceswarn	-0.04034326
+-2.3850574	archiv	-0.07178945
+-3.3377461	applyrelationship	-0.04034326
+-2.7740426	nocti	-0.24790084
+-2.7740426	luci	-0.04034326
+-3.3377461	caelum	-0.04034326
+-3.3377461	lunafreya	-0.04034326
+-3.3377461	nox	-0.04034326
+-3.3377461	fleuretcharact	-0.04034326
+-3.3377461	fleuret	-0.04034326
+-3.3377461	gladiolu	-0.04034326
+-3.3377461	amicitia	-0.04034326
+-2.7740426	igni	-0.04034326
+-3.3377461	scientia	-0.04034326
+-2.3850574	prompto	-0.04034323
+-3.3377461	argentum	-0.04034326
+-2.3850574	cor	-0.16718839
+-3.3377461	leonisaddit	-0.04034326
+-2.3850574	happi	-0.16718839
+-2.7740426	end	-0.04034326
+-3.3377461	spoileri	-0.04034326
+-3.3377461	altern	-0.04034326
+-3.3377461	univers	-0.04034326
+-3.3377461	canon	-0.04034326
+-3.3377461	diverg	-0.04034326
+-3.3377461	still	-0.04034326
+-3.3377461	denial	-0.04034326
+-2.7740426	cannot	-0.04034326
+-3.3377461	stop	-0.04034326
+-3.3377461	me	-0.04034326
+-2.3850574	vagu	-0.16718839
+-3.3377461	polit	-0.04034326
+-3.3377461	kingli	-0.04034326
+-3.3377461	matter	-0.04034326
+-3.3377461	gladio	-0.04034326
+-2.2088509	done	-0.07178945
+-2.3850574	everyth	-0.04034323
+-3.3377461	excit	-0.04034326
+-3.3377461	pure	-0.04034326
+-3.3377461	gold	-0.04034326
+-3.3377461	believ	-0.04034326
+-3.3377461	m	-0.04034326
+-3.3377461	write	-0.04034326
+-3.3377461	caviti	-0.04034326
+-2.7740426	mani	-0.04034323
+-3.3377461	them	-0.04034326
+-2.7740426	monica	-0.04034326
+-3.3377461	elshett	-0.04034326
+-2.2088509	freeform	-0.04034326
+-2.7740426	cindi	-0.04034326
+-3.3377461	aurum	-0.04034326
+-3.3377461	minor	-0.04034326
+-3.3377461	mention	-0.04034326
+-3.3377461	leoni	-0.04034326
+-3.3377461	elshettsummari	-0.04034326
+-2.3850574	ten	-0.082798734
+-3.3377461	year	-0.04034326
+-3.3377461	dark	-0.04034326
+-3.3377461	light	-0.04034326
+-3.3377461	shine	-0.04034326
+-3.3377461	land	-0.04034326
+-3.3377461	eo	-0.04034326
+-3.3377461	purg	-0.04034326
+-3.3377461	evil	-0.04034326
+-2.7740426	king	-0.04034326
+-3.3377461	ascend	-0.04034326
+-2.7740426	throne	-0.04034326
+-3.3377461	bring	-0.04034326
+-3.3377461	ultim	-0.04034326
+-3.3377461	sacrific	-0.04034326
+-3.3377461	remain	-0.04034326
+-3.3377461	unreward	-0.04034326
+-3.3377461	god	-0.04034326
+-3.3377461	kingdom	-0.04034326
+-3.3377461	prosper	-0.04034326
+-3.3377461	radiant	-0.04034326
+-3.3377461	wife	-0.04034326
+-3.3377461	side	-0.04034326
+-3.3377461	cope	-0.04034326
+-3.3377461	mechan	-0.04034326
+-2.7740426	spoiler	-0.04034326
+-3.3377461	upchapter	-0.04034326
+-2.7740426	hint	-0.04034326
+-3.3377461	holli	-0.04034326
+-3.3377461	camelia	-0.04034326
+-3.3377461	claustra	-0.04034326
+-3.3377461	argentumaddit	-0.04034326
+-3.3377461	themsummari	-0.04034326
+-3.3377461	ofchapter	-0.04034326
+-3.3377461	goldsummari	-0.04034326
+-2.2088509	ushijima	-0.07178945
+-3.3377461	wakatoshicharact	-0.04034326
+-3.3377461	wakatoshi	-0.04034323
+-2.3850574	tendou	-0.13183883
+-3.3377461	satori	-0.04034323
+-2.7740426	bokuto	-0.04034326
+-3.3377461	koutar	-0.04034326
+-3.3377461	utsui	-0.04034326
+-2.7740426	takashi	-0.04034326
+-3.3377461	akaashi	-0.04034326
+-3.3377461	keiji	-0.04034326
+-3.3377461	hanamaki	-0.04034326
+-3.3377461	takahiro	-0.04034326
+-3.3377461	matsukawa	-0.04034326
+-3.3377461	isseiaddit	-0.04034326
+-3.3377461	sort	-0.04034326
+-3.3377461	accord	-0.04034326
+-3.3377461	relev	-0.04034326
+-2.3850574	ad	-0.16718839
+-3.3377461	hey	-0.04034326
+-3.3377461	coz	-0.04034326
+-3.3377461	im	-0.04034326
+-3.3377461	tire	-0.04034326
+-3.3377461	read	-0.04034326
+-3.3377461	angsti	-0.04034326
+-3.3377461	abus	-0.04034326
+-3.3377461	ushioi	-0.04034326
+-3.3377461	love	-0.04034326
+-3.3377461	written	-0.04034326
+-3.3377461	base	-0.04034326
+-3.3377461	real	-0.04034326
+-3.3377461	observ	-0.04034326
+-3.3377461	smut	-0.04034326
+-3.3377461	preciou	-0.04034326
+-3.3377461	baguett	-0.04034326
+-2.7740426	ushi	-0.24790084
+-3.3377461	dad	-0.04034326
+-3.3377461	sorri	-0.04034326
+-3.3377461	advanc	-0.04034326
+-3.3377461	amput	-0.04034326
+-3.3377461	crisi	-0.04034326
+-3.3377461	edit	-0.04034326
+-3.3377461	fix	-0.04034326
+-3.3377461	name	-0.04034326
+-2.7740426	background	-0.04034326
+-3.3377461	bokuaka	-0.04034326
+-3.3377461	matsuhana	-0.04034326
+-3.3377461	freeformsummari	-0.04034326
+-3.3377461	said	-0.04034326
+-3.3377461	goodby	-0.04034326
+-3.3377461	peopl	-0.04034326
+-2.7740426	thing	-0.04034326
+-3.3377461	kept	-0.04034326
+-3.3377461	walk	-0.04034326
+-3.3377461	forward	-0.04034326
+-3.3377461	straight	-0.04034326
+-3.3377461	back	-0.04034326
+-3.3377461	strength	-0.04034326
+-3.3377461	keep	-0.04034326
+-3.3377461	feet	-0.04034326
+-3.3377461	model	-0.04034326
+-3.3377461	aunow	-0.04034326
+-3.3377461	complet	-0.04034326
+-3.3377461	holidaychapter	-0.04034326
+-3.3377461	¾fandom	-0.04034326
+-3.3377461	my	-0.04034326
+-3.3377461	mom	-0.04034326
+-2.7740426	use	-0.04034326
+-3.3377461	part	-0.04034326
+-3.3377461	too	-0.04034326
+-3.3377461	auchapter	-0.04034326
+-3.3377461	way	-0.04034326
+-3.3377461	tosummari	-0.04034326
+-3.3377461	creator	-0.04034326
+-3.3377461	chose	-0.04034326
+-3.3377461	major	-0.04034326
+-3.3377461	deathrelationship	-0.04034326
+-2.7740426	kyoutani	-0.24790084
+-3.3377461	kentar	-0.04034326
+-2.7740426	yahaba	-0.16718839
+-3.3377461	shigeru	-0.04034326
+-2.7740426	shirabu	-0.24790084
+-3.3377461	kenjir	-0.04034326
+-2.7740426	semi	-0.24790084
+-3.3377461	eita	-0.04034326
+-3.3377461	satoricharact	-0.04034326
+-3.3377461	ennoshita	-0.04034326
+-3.3377461	chikara	-0.04034326
+-3.3377461	tanaka	-0.04034326
+-3.3377461	ryuunosuk	-0.04034326
+-3.3377461	azuman	-0.04034326
+-3.3377461	asahi	-0.04034326
+-3.3377461	hinata	-0.04034326
+-3.3377461	shouyou	-0.04034326
+-3.3377461	kageyama	-0.04034326
+-3.3377461	tobio	-0.04034326
+-3.3377461	oohira	-0.04034326
+-3.3377461	reon	-0.04034326
+-3.3377461	goshiki	-0.04034326
+-3.3377461	tsutomuaddit	-0.04034326
+-3.3377461	slaver	-0.04034326
+-3.3377461	later	-0.04034326
+-3.3377461	avoid	-0.04034326
+-3.3377461	honestli	-0.04034326
+-3.3377461	thi	-0.04034326
+-3.3377461	violenc	-0.04034326
+-3.3377461	disturb	-0.04034326
+-3.3377461	theme	-0.04034326
+-3.3377461	gore	-0.04034326
+-3.3377461	past	-0.04034326
+-3.3377461	ushioisummari	-0.04034326
+-3.3377461	piec	-0.04034326
+-3.3377461	place	-0.04034326
+-3.3377461	did	-0.04034326
+-3.3377461	sole	-0.04034326
+-3.3377461	reach	-0.04034326
+-3.3377461	point	-0.04034326
+-3.3377461	won	-0.04034326
+-3.3377461	t	-0.04034326
+-3.3377461	fail	-0.04034326
+-2.7740426	now	-0.04034326
+-3.3377461	time	-0.04034326
+-3.3377461	touch	-0.04034326
+-3.3377461	sun	-0.04034326
+-3.3377461	burn	-0.04034326
+-3.3377461	grace	-0.04034326
+-3.3377461	a	-0.04034326
+-2.7740426	collect	-0.24790084
+-3.3377461	drabbl	-0.04034326
+-3.3377461	actual	-0.04034326
+-3.3377461	completchapter	-0.04034326
+-3.3377461	warningsrelationship	-0.04034326
+-3.3377461	endchapter	-0.04034326
+-3.3377461	shigerucharact	-0.04034326
+-3.3377461	tobioaddit	-0.04034326
+-3.3377461	angstsummari	-0.04034326
+-3.3377461	sorai	-0.04034326
+-3.3377461	koutarouaddit	-0.04034326
+-3.3377461	meati	-0.04034326
+-3.3377461	lifesummari	-0.04034326
+-3.3377461	feetchapter	-0.04034326
+-3.3377461	goresummari	-0.04034326
+
+\2-grams:
+-1.6459658	end </s>
+-1.0445867	<s> chapter	-0.6222634
+-1.5071956	of chapter	-0.110356286
+-0.3512323	chapter digit	-0.22430278
+-0.72623134	digit digit	-1
+-0.9762651	knowchapter digit	-0.22430278
+-0.9762651	checkchapter digit	-0.6222634
+-0.9762651	upchapter digit	-0.110356286
+-0.9762651	ofchapter digit	-0.6222634
+-0.9762651	auchapter digit	-0.6222634
+-0.9762651	completchapter digit	-0.6222634
+-0.9762651	endchapter digit	-0.6222634
+-0.9762651	feetchapter digit	-0.6222634
+-0.40391883	digit fandom	-1.146128
+-1.3382999	fandom haikyuu	-1.30103
+-1.0445867	¾fandom haikyuu	-0.6222634
+-0.3500978	haikyuu <eos>	-1.3424227
+-1.1996862	indulg <eos>	-0.90309
+-1.1996862	cover <eos>	-0.90309
+-0.9686068	him <eos>	-0.90309
+-1.1996862	dream <eos>	-0.7781512
+-0.9686068	god <eos>	-0.90309
+-0.9686068	back <eos>	-0.7781512
+-0.9686068	point <eos>	-0.90309
+-1.1996862	now <eos>	-0.90309
+-1.1996862	grace <eos>	-0.110356286
+-0.9686068	drabbl <eos>	-0.90309
+-2.0714388	<eos> rate	-1.3424227
+-1.0499837	rate maturewarn	-0.86530143
+-1.5230436	maturewarn graphic	-0.90309
+-1.0499837	graphic depict	-0.90309
+-1.0499837	depict violencerelationship	-0.90309
+-1.0083245	violencerelationship sawamura	-0.90309
+-1.0083245	koushicharact sawamura	-0.90309
+-1.0083245	deathrelationship sawamura	-0.6222634
+-1.0083245	satoricharact sawamura	-0.110356286
+-1.0083245	warningsrelationship sawamura	-0.7781512
+-1.0083245	shigerucharact sawamura	-0.110356286
+-0.22963102	sawamura daichi	-1.50515
+-1.0252877	fighter daichi	-0.110356286
+-1.0252877	home daichi	-0.90309
+-1.0252877	today daichi	-0.90309
+-1.7408686	daichi sugawara	-1.20412
+-1.3489783	sugawara koushicharact	-0.90309
+-1.3489783	sugawara koushi	-1.0791812
+-1.301128	koushi iwaizumi	-1.20412
+-1.6899697	tooru iwaizumi	-0.7781512
+-1.301128	applyrelationship iwaizumi	-0.7781512
+-1.0252877	asahi iwaizumi	-0.90309
+-0.41968057	iwaizumi hajim	-1.2552725
+-1.2696489	hajim oikawa	-1.4771212
+-1.6166029	tooru oikawa	-0.7781512
+-1.0083245	wakatoshicharact oikawa	-0.7781512
+-1.0083245	freeformsummari oikawa	-0.110356286
+-1.0083245	model oikawa	-0.6222634
+-1.0083245	lifesummari oikawa	-0.6222634
+-1.1264027	oikawa tooru	-0.845098
+-1.8180518	tooru kuroo	-0.90309
+-1.0499837	kuroo tetsur	-0.90309
+-1.0499837	tetsur aon	-0.90309
+-1.0499837	aon takanobuaddit	-0.90309
+-0.9762651	takanobuaddit tag	-0.90309
+-0.9762651	els tag	-0.110356286
+-1.212806	know tag	-0.46613878
+-0.9762651	leonisaddit tag	-0.110356286
+-0.9762651	argentumaddit tag	-0.110356286
+-0.9762651	isseiaddit tag	-0.110356286
+-0.9762651	tsutomuaddit tag	-0.110356286
+-1.212806	later tag	-0.90309
+-0.9762651	tobioaddit tag	-0.110356286
+-0.9762651	koutarouaddit tag	-0.6222634
+-2.075904	tag cameo	-0.90309
+-1.0252877	cameo charact	-0.90309
+-1.301128	au charact	-0.90309
+-1.0252877	minor charact	-0.110356286
+-1.0252877	major charact	-0.6222634
+-1.6459658	charact dystopia	-0.90309
+-1.0445867	dystopia au	-0.90309
+-1.0445867	slaver au	-0.90309
+-1.3489783	au fighter	-0.90309
+-1.6676252	daichi trigger	-0.110356286
+-1.6676252	life trigger	-0.110356286
+-1.0340245	thi trigger	-0.90309
+-0.7570374	trigger warn	-0.90309
+-0.8807094	archiv warn	-1.0346593
+-1.6459658	warn impli	-0.90309
+-1.0445867	impli relationship	-0.90309
+-1.0445867	love relationship	-0.7781512
+-1.3382999	relationship self	-0.90309
+-1.0445867	mechan self	-0.90309
+-0.36131746	self indulg	-0.90309
+-1.3489783	indulg get	-0.90309
+-1.0499837	get idea	-0.90309
+-1.0499837	idea mind	-0.90309
+-1.0445867	mind possibl	-0.90309
+-1.625056	freeform possibl	-0.7781512
+-1.3489783	possibl slow	-0.90309
+-1.0499837	slow updat	-0.90309
+-1.0499837	updat nobodi	-0.90309
+-1.0499837	nobodi realli	-0.90309
+-1.0499837	realli die	-0.90309
+-1.0499837	die tho	-0.90309
+-1.301128	possibl angst	-0.7781512
+-1.0252877	tho angst	-0.90309
+-1.0252877	distribut angst	-0.6222634
+-1.301128	gore angst	-0.110356286
+-1.5861584	angst fluff	-0.90309
+-1.4772323	fluff fluff	-0.90309
+-1.0340245	write fluff	-0.7781512
+-1.5230436	fluff import	-0.90309
+-1.0499837	import domest	-0.90309
+-1.0167233	domest life	-0.90309
+-1.4308286	of life	-0.110356286
+-1.0167233	real life	-0.7781512
+-1.0167233	amput life	-0.7781512
+-1.2851033	thing life	-0.7781512
+-1.7408686	life wanna	-0.90309
+-1.863331	<eos> say	-0.7781512
+-1.6312336	daichi say	-0.90309
+-1.0252877	wanna say	-0.90309
+-1.301128	use say	-0.110356286
+-1.625056	angst it	-0.7781512
+-1.625056	say it	-0.90309
+-1.3177668	it s	-0.90309
+-0.35925794	ushi s	-1
+-1.3177668	dad s	-0.110356286
+-1.5230436	s horribl	-0.90309
+-1.0499837	horribl judg	-0.90309
+-1.0499837	judg that	-0.90309
+-1.0499837	that intern	-0.7336293
+-1.3489783	intern conflict	-0.22430278
+-1.3489783	conflict els	-0.110356286
+-2.0324504	tag dont	-0.110356286
+-1.0445867	honestli dont	-0.90309
+-0.36062834	dont know	-1.0791812
+-1.7202832	i know	-0.6222634
+-2.075904	tag bad	-0.110356286
+-1.0499837	bad futur	-0.110356286
+-1.0499837	futur ausummari	-0.110356286
+-1.0340245	ausummari you	-0.110356286
+-1.0340245	conflictsummari you	-0.6222634
+-1.0340245	tosummari you	-0.6222634
+-0.7595535	you smoke	-0.90309
+-1.0499837	smoke again	-0.90309
+-1.0499837	again messi	-0.90309
+-1.0499837	messi ashen	-0.90309
+-1.0499837	ashen hair	-0.90309
+-1.0445867	hair head	-0.90309
+-1.0445867	rest head	-0.90309
+-1.3489783	head peek	-0.90309
+-1.0499837	peek out	-0.90309
+-1.0499837	out sleepi	-0.90309
+-1.0499837	sleepi brown	-0.90309
+-1.0499837	brown eye	-0.90309
+-1.0499837	eye blink	-0.90309
+-1.0499837	blink owlishli	-0.90309
+-1.0499837	owlishli edg	-0.90309
+-1.0445867	edg cover	-0.90309
+-1.0445867	move cover	-0.90309
+-2.0714388	<eos> welcom	-0.90309
+-1.0499837	welcom home	-0.90309
+-1.7408686	daichi hum	-0.90309
+-1.0499837	hum rest	-0.90309
+-1.3489783	head pillow	-0.90309
+-1.0499837	pillow eas	-0.90309
+-1.0499837	eas guilt	-0.90309
+-1.0499837	guilt wash	-0.90309
+-1.0499837	wash him	-0.90309
+-2.0714388	<eos> move	-0.90309
+-1.3489783	cover reveal	-0.90309
+-1.0499837	reveal face	-0.90309
+-1.0499837	face haunt	-0.90309
+-1.0499837	haunt dream	-0.7336293
+-1.863331	<eos> i	-0.7781512
+-1.555779	say i	-0.7336293
+-1.301128	dream i	-0.6222634
+-1.0252877	believ i	-0.7781512
+-0.75863117	i kill	-0.90309
+-1.0499837	kill man	-0.90309
+-1.0499837	man today	-0.90309
+-1.742393	i knowchapter	-0.7781512
+-1.3489783	know distribut	-0.6222634
+-1.625056	angst ﾉ	-0.6222634
+-1.0445867	ヮ ﾉ	-0.6222634
+-1.3489783	ﾉ ヮ	-0.6222634
+-1.3489783	ﾉ ﾟyou	-0.6222634
+-1.0499837	ﾟyou re	-0.6222634
+-1.0499837	re interest	-0.6222634
+-1.0499837	interest checkchapter	-0.6222634
+-1.6676252	daichi kind	-0.110356286
+-1.3177668	spoiler kind	-0.110356286
+-0.35925794	collect kind	-0.90309
+-1.6304239	kind slice	-0.110356286
+-1.0445867	meati slice	-0.6222634
+-0.6601333	kind of	-0.46613878
+-1.3382999	slice of	-0.110356286
+-1.3489783	intern conflictsummari	-0.6222634
+-1.3382999	fandom final	-0.90309
+-1.0445867	light final	-0.90309
+-1.3489783	final fantasi	-0.90309
+-1.0499837	fantasi xvrate	-0.90309
+-1.0499837	xvrate teen	-0.90309
+-1.0499837	teen audienceswarn	-0.90309
+-1.4772323	maturewarn archiv	-0.7781512
+-1.0340245	audienceswarn archiv	-0.90309
+-1.3177668	use archiv	-0.7336293
+-1.6459658	warn applyrelationship	-0.845098
+-1.3382999	applyrelationship nocti	-0.90309
+-1.0445867	fleuretcharact nocti	-0.90309
+-0.36062834	nocti luci	-1.20412
+-1.0445867	kingdom luci	-0.90309
+-1.3489783	luci caelum	-1.20412
+-1.0499837	caelum lunafreya	-1.20412
+-1.0499837	lunafreya nox	-0.90309
+-1.3489783	nox fleuretcharact	-0.90309
+-1.3489783	nox fleuret	-0.90309
+-1.0499837	fleuret gladiolu	-0.90309
+-1.0499837	gladiolu amicitia	-0.90309
+-1.0445867	amicitia igni	-0.90309
+-1.5071956	everyth igni	-0.90309
+-1.3489783	igni scientia	-0.110356286
+-1.3177668	scientia prompto	-0.110356286
+-1.4772323	everyth prompto	-0.90309
+-1.0340245	claustra prompto	-0.110356286
+-1.5230436	prompto argentum	-0.110356286
+-1.0340245	argentum cor	-0.110356286
+-1.3177668	mention cor	-0.6222634
+-1.0340245	holli cor	-0.6222634
+-1.5245823	cor leonisaddit	-0.110356286
+-1.0858914	tag happi	-0.90309
+-1.0340245	hey happi	-0.7781512
+-1.0340245	complet happi	-0.6222634
+-0.53595644	happi end	-0.845098
+-1.3382999	actual end	-0.6222634
+-1.6459658	end spoileri	-0.90309
+-1.0499837	spoileri altern	-0.90309
+-1.0499837	altern univers	-0.90309
+-1.0499837	univers canon	-0.90309
+-1.0499837	canon diverg	-0.90309
+-1.0499837	diverg still	-0.90309
+-1.0499837	still denial	-0.90309
+-1.0445867	denial cannot	-0.90309
+-1.0445867	gold cannot	-0.7781512
+-1.3489783	cannot stop	-0.90309
+-1.0499837	stop me	-0.90309
+-1.0340245	me vagu	-0.90309
+-1.3177668	observ vagu	-0.6222634
+-1.0340245	too vagu	-0.110356286
+-1.5245823	vagu polit	-0.90309
+-1.0499837	polit kingli	-0.90309
+-1.0499837	kingli matter	-0.90309
+-1.0499837	matter gladio	-0.90309
+-1.0252877	gladio done	-0.90309
+-1.0252877	ushioisummari done	-0.110356286
+-1.0252877	angstsummari done	-0.6222634
+-1.0252877	goresummari done	-0.6222634
+-1.5905731	done everyth	-0.90309
+-1.0340245	excit everyth	-0.90309
+-1.0340245	place everyth	-0.90309
+-1.5230436	prompto excit	-0.90309
+-1.3489783	igni pure	-0.7336293
+-1.3489783	pure gold	-0.7781512
+-1.3489783	cannot believ	-0.7781512
+-1.742393	i m	-0.7781512
+-1.0499837	m write	-0.7781512
+-1.5230436	fluff caviti	-0.7781512
+-1.0445867	caviti mani	-0.22430278
+-1.0445867	goodby mani	-0.7781512
+-1.5230436	mani them	-0.110356286
+-1.0445867	them monica	-0.110356286
+-1.0445867	leoni monica	-0.110356286
+-1.3489783	monica elshett	-0.110356286
+-1.0252877	elshett freeform	-0.110356286
+-1.0252877	aurum freeform	-0.110356286
+-1.4713817	ad freeform	-0.7781512
+-1.0252877	bokuaka freeform	-0.110356286
+-1.625056	freeform cindi	-0.110356286
+-1.3382999	hint cindi	-0.6222634
+-1.3489783	cindi aurum	-0.110356286
+-1.6459658	freeform minor	-0.110356286
+-1.6459658	charact mention	-0.6222634
+-0.53719985	cor leoni	-0.110356286
+-1.3489783	monica elshettsummari	-0.110356286
+-1.0340245	elshettsummari ten	-0.110356286
+-1.0340245	themsummari ten	-0.6222634
+-1.0340245	goldsummari ten	-0.6222634
+-0.7595535	ten year	-0.90309
+-1.0499837	year dark	-0.90309
+-1.0499837	dark light	-0.90309
+-1.3489783	final shine	-0.90309
+-1.0499837	shine land	-0.90309
+-1.0499837	land eo	-0.90309
+-1.0499837	eo purg	-0.90309
+-1.0499837	purg evil	-0.90309
+-1.0445867	evil king	-0.90309
+-1.0445867	prosper king	-0.90309
+-1.3489783	king ascend	-0.90309
+-1.3382999	king throne	-0.90309
+-1.0445867	ascend throne	-0.90309
+-1.3489783	throne bring	-0.90309
+-1.0499837	bring ultim	-0.90309
+-1.0499837	ultim sacrific	-0.90309
+-1.0499837	sacrific remain	-0.90309
+-1.0499837	remain unreward	-0.90309
+-1.0499837	unreward god	-0.90309
+-2.0714388	<eos> kingdom	-0.90309
+-1.3489783	luci prosper	-0.90309
+-1.3489783	throne radiant	-0.90309
+-1.0499837	radiant wife	-0.90309
+-1.0499837	wife side	-0.90309
+-1.0499837	side cope	-0.90309
+-1.0499837	cope mechan	-0.90309
+-2.0178294	<eos> spoiler	-0.90309
+-1.0445867	avoid spoiler	-0.90309
+-2.18515	digit upchapter	-0.110356286
+-1.625056	angst hint	-0.110356286
+-1.3382999	mention hint	-0.6222634
+-1.3489783	cindi holli	-0.6222634
+-1.3489783	scientia camelia	-0.110356286
+-1.0499837	camelia claustra	-0.110356286
+-1.5230436	prompto argentumaddit	-0.110356286
+-1.5230436	mani themsummari	-0.6222634
+-1.6474973	kind ofchapter	-0.110356286
+-1.3489783	pure goldsummari	-0.6222634
+-1.301128	hajim ushijima	-0.7781512
+-1.6899697	tooru ushijima	-0.7781512
+-1.301128	kenjir ushijima	-0.110356286
+-1.0252877	tobio ushijima	-0.110356286
+-1.6465284	ushijima wakatoshicharact	-0.7781512
+-0.88414395	ushijima wakatoshi	-0.28850102
+-1.4772323	wakatoshi tendou	-0.7781512
+-1.0340245	smut tendou	-0.7781512
+-1.0340245	eita tendou	-0.110356286
+-0.6619298	tendou satori	-0.1750833
+-1.5071956	satori bokuto	-0.110356286
+-1.3382999	takashi bokuto	-0.6222634
+-1.3489783	bokuto koutar	-0.110356286
+-1.0499837	koutar utsui	-0.110356286
+-1.0445867	utsui takashi	-0.110356286
+-1.0445867	sorai takashi	-0.6222634
+-1.3489783	takashi akaashi	-0.110356286
+-1.0499837	akaashi keiji	-0.110356286
+-1.0499837	keiji hanamaki	-0.110356286
+-1.0499837	hanamaki takahiro	-0.110356286
+-1.0499837	takahiro matsukawa	-0.110356286
+-1.0499837	matsukawa isseiaddit	-0.110356286
+-1.1001202	tag sort	-0.7781512
+-1.0499837	sort accord	-0.7781512
+-1.0499837	accord relev	-0.7781512
+-1.9569803	tag ad	-0.90309
+-1.5861584	charact ad	-0.90309
+-1.0340245	relev ad	-0.7781512
+-1.3489783	it hey	-0.7781512
+-1.6459658	end coz	-0.7781512
+-1.0499837	coz im	-0.7781512
+-1.0499837	im tire	-0.7781512
+-1.0499837	tire read	-0.7781512
+-1.0499837	read angsti	-0.7781512
+-1.0499837	angsti abus	-0.7781512
+-1.0499837	abus ushioi	-0.7781512
+-1.0499837	ushioi love	-0.7781512
+-1.3489783	relationship written	-0.7781512
+-1.0499837	written base	-0.7781512
+-1.0499837	base real	-0.7781512
+-1.7408686	life observ	-0.22430278
+-0.53719985	vagu smut	-0.7781512
+-1.6474973	tendou preciou	-0.7781512
+-1.0499837	preciou baguett	-0.7781512
+-1.0445867	baguett ushi	-0.7781512
+-1.0445867	fix ushi	-0.110356286
+-1.5230436	s dad	-0.38695753
+-1.3489783	dad sorri	-0.7781512
+-1.0499837	sorri advanc	-0.7781512
+-1.0499837	advanc amput	-0.7781512
+-1.7408686	life crisi	-0.22430278
+-1.3489783	crisi edit	-0.110356286
+-1.0499837	edit fix	-0.110356286
+-1.5230436	s name	-0.110356286
+-1.625056	freeform background	-0.110356286
+-1.0445867	name background	-0.110356286
+-1.3489783	background bokuaka	-0.110356286
+-1.3489783	background matsuhana	-0.110356286
+-1.0499837	matsuhana freeformsummari	-0.110356286
+-0.90440035	oikawa said	-0.7781512
+-1.0499837	said goodby	-0.7781512
+-1.5230436	mani peopl	-0.7781512
+-1.625056	say thing	-0.7781512
+-1.0445867	peopl thing	-0.7781512
+-1.7408686	life kept	-0.7781512
+-1.0499837	kept walk	-0.7781512
+-1.0499837	walk forward	-0.7781512
+-1.0499837	forward straight	-0.7781512
+-1.0499837	straight back	-0.7781512
+-1.3489783	thing strength	-0.7781512
+-1.0499837	strength keep	-0.22430278
+-1.3489783	keep feet	-0.110356286
+-1.0499837	feet model	-0.110356286
+-1.8850769	oikawa aunow	-0.6222634
+-1.0499837	aunow complet	-0.6222634
+-1.5245823	happi holidaychapter	-0.6222634
+-1.0499837	holidaychapter ¾fandom	-0.6222634
+-1.3489783	observ my	-0.110356286
+-1.0499837	my mom	-0.110356286
+-1.0445867	mom use	-0.110356286
+-1.0445867	chose use	-0.90309
+-1.6459658	say part	-0.110356286
+-1.0499837	part too	-0.110356286
+-1.8850769	oikawa auchapter	-0.6222634
+-1.3489783	conflict way	-0.6222634
+-1.0499837	way tosummari	-0.6222634
+-1.5230436	maturewarn creator	-0.90309
+-1.0499837	creator chose	-0.90309
+-1.6459658	warn major	-0.6222634
+-1.6459658	charact deathrelationship	-0.6222634
+-1.7873276	tooru kyoutani	-0.90309
+-1.3382999	shigeru kyoutani	-0.90309
+-0.36131746	kyoutani kentar	-0.90309
+-1.7873276	tooru yahaba	-0.90309
+-1.3382999	kentar yahaba	-0.110356286
+-0.53719985	yahaba shigeru	-0.46613878
+-1.5071956	wakatoshi shirabu	-0.110356286
+-1.3382999	shigeru shirabu	-0.110356286
+-0.36131746	shirabu kenjir	-0.110356286
+-1.5071956	wakatoshi semi	-0.110356286
+-1.0445867	reon semi	-0.110356286
+-0.36131746	semi eita	-0.90309
+-1.6474973	tendou satoricharact	-0.110356286
+-1.3489783	koushi ennoshita	-0.90309
+-1.0499837	ennoshita chikara	-0.90309
+-1.0499837	chikara tanaka	-0.90309
+-1.0499837	tanaka ryuunosuk	-0.90309
+-1.0499837	ryuunosuk azuman	-0.90309
+-1.0499837	azuman asahi	-0.90309
+-1.3489783	kentar hinata	-0.90309
+-1.0499837	hinata shouyou	-0.90309
+-1.0499837	shouyou kageyama	-0.110356286
+-1.3489783	kageyama tobio	-0.110356286
+-1.3489783	kenjir oohira	-0.110356286
+-1.0499837	oohira reon	-0.110356286
+-1.5230436	satori goshiki	-0.110356286
+-1.0499837	goshiki tsutomuaddit	-0.110356286
+-1.1001202	tag slaver	-0.90309
+-0.53719985	ad later	-0.90309
+-1.3489783	later avoid	-0.90309
+-1.3489783	spoiler honestli	-0.90309
+-2.075904	tag thi	-0.90309
+-1.6459658	warn violenc	-0.90309
+-1.0499837	violenc disturb	-0.90309
+-1.0499837	disturb theme	-0.7336293
+-1.3489783	theme gore	-0.22430278
+-1.3489783	hint past	-0.110356286
+-1.0499837	past ushioisummari	-0.110356286
+-0.88414395	done piec	-0.90309
+-1.0499837	piec place	-0.90309
+-1.5230436	everyth did	-0.90309
+-1.0499837	did sole	-0.90309
+-1.0499837	sole reach	-0.90309
+-1.0499837	reach point	-0.90309
+-2.0714388	<eos> won	-0.90309
+-1.0499837	won t	-0.90309
+-1.0499837	t fail	-0.90309
+-1.625056	end now	-0.6222634
+-1.0445867	fail now	-0.90309
+-2.0714388	<eos> time	-0.90309
+-1.0499837	time touch	-0.90309
+-1.0499837	touch sun	-0.90309
+-1.0499837	sun burn	-0.90309
+-1.0499837	burn grace	-0.110356286
+-1.3489783	grace a	-0.110356286
+-2.0178294	<eos> collect	-0.110356286
+-1.0445867	a collect	-0.110356286
+-1.5230436	of drabbl	-0.90309
+-2.0714388	<eos> actual	-0.110356286
+-1.3489783	now completchapter	-0.6222634
+-1.6465284	archiv warningsrelationship	-0.7781512
+-1.3489783	actual endchapter	-0.110356286
+-1.5245823	yahaba shigerucharact	-0.110356286
+-1.3489783	kageyama tobioaddit	-0.110356286
+-1.3489783	gore angstsummari	-0.6222634
+-1.5230436	satori sorai	-0.6222634
+-1.3489783	bokuto koutarouaddit	-0.6222634
+-1.3489783	crisi meati	-0.6222634
+-1.3489783	slice lifesummari	-0.6222634
+-1.3489783	keep feetchapter	-0.6222634
+-1.3489783	theme goresummari	-0.6222634
+
+\3-grams:
+-0.41332936	actual end </s>
+-1.068391	kind of chapter
+-0.06165216	<s> chapter digit
+-0.24423157	of chapter digit
+-0.43669477	chapter digit digit
+-0.43669477	knowchapter digit digit
+-0.37109503	ofchapter digit digit
+-0.09356416	completchapter digit digit
+-0.37109503	endchapter digit digit
+-0.07010301	i knowchapter digit
+-0.104263864	interest checkchapter digit
+-0.51384264	digit upchapter digit
+-0.51384264	kind ofchapter digit
+-0.104263864	oikawa auchapter digit
+-0.104263864	now completchapter digit
+-0.51384264	actual endchapter digit
+-0.104263864	keep feetchapter digit
+-0.027124912	digit digit fandom
+-0.41456437	knowchapter digit fandom
+-0.067773335	checkchapter digit fandom
+-0.27540314	upchapter digit fandom
+-0.32346067	ofchapter digit fandom
+-0.067773335	auchapter digit fandom
+-0.32346067	endchapter digit fandom
+-0.067773335	feetchapter digit fandom
+-0.16631171	digit fandom haikyuu
+-0.10629432	holidaychapter ¾fandom haikyuu
+-0.012186699	fandom haikyuu <eos>
+-0.061513007	¾fandom haikyuu <eos>
+-0.35125694	self indulg <eos>
+-0.05409209	edg cover <eos>
+-0.051373348	wash him <eos>
+-0.1960927	haunt dream <eos>
+-0.051373348	unreward god <eos>
+-0.06994321	straight back <eos>
+-0.051373348	reach point <eos>
+-0.05409209	fail now <eos>
+-0.7927217	burn grace <eos>
+-0.051373348	of drabbl <eos>
+-0.020027999	haikyuu <eos> rate
+-0.018364068	<eos> rate maturewarn
+-0.49177855	rate maturewarn graphic
+-0.052497137	maturewarn graphic depict
+-0.052497137	graphic depict violencerelationship
+-0.051947776	depict violencerelationship sawamura
+-0.051947776	sugawara koushicharact sawamura
+-0.10525529	charact deathrelationship sawamura
+-0.52218735	tendou satoricharact sawamura
+-0.07074277	archiv warningsrelationship sawamura
+-0.52218735	yahaba shigerucharact sawamura
+-0.022885747	violencerelationship sawamura daichi
+-0.022885747	koushicharact sawamura daichi
+-0.044792224	deathrelationship sawamura daichi
+-0.16653986	satoricharact sawamura daichi
+-0.0307904	warningsrelationship sawamura daichi
+-0.16653986	shigerucharact sawamura daichi
+-0.052177764	au fighter daichi
+-0.052177764	welcom home daichi
+-0.052177764	man today daichi
+-0.013533948	sawamura daichi sugawara
+-0.6545315	daichi sugawara koushicharact
+-0.14173459	daichi sugawara koushi
+-0.20123495	sugawara koushi iwaizumi
+-0.91376626	oikawa tooru iwaizumi
+-0.4385598	warn applyrelationship iwaizumi
+-0.052177764	azuman asahi iwaizumi
+-0.017150395	koushi iwaizumi hajim
+-0.04733111	tooru iwaizumi hajim
+-0.04733111	applyrelationship iwaizumi hajim
+-0.03500601	asahi iwaizumi hajim
+-0.092297696	iwaizumi hajim oikawa
+-0.91185886	oikawa tooru oikawa
+-0.07074277	ushijima wakatoshicharact oikawa
+-0.52218735	matsuhana freeformsummari oikawa
+-0.52218735	feet model oikawa
+-0.10525529	slice lifesummari oikawa
+-0.013605311	hajim oikawa tooru
+-0.07273683	tooru oikawa tooru
+-0.07273683	wakatoshicharact oikawa tooru
+-0.77252823	oikawa tooru kuroo
+-0.052497137	tooru kuroo tetsur
+-0.052497137	kuroo tetsur aon
+-0.052497137	tetsur aon takanobuaddit
+-0.05148819	aon takanobuaddit tag
+-0.51384264	conflict els tag
+-0.03537654	dont know tag
+-0.51384264	cor leonisaddit tag
+-0.51384264	prompto argentumaddit tag
+-0.51384264	matsukawa isseiaddit tag
+-0.51384264	goshiki tsutomuaddit tag
+-0.35148603	ad later tag
+-0.51384264	kageyama tobioaddit tag
+-0.104263864	bokuto koutarouaddit tag
+-0.057471316	takanobuaddit tag cameo
+-0.052177764	tag cameo charact
+-0.054901563	slaver au charact
+-0.5264206	freeform minor charact
+-0.10575184	warn major charact
+-0.05659228	cameo charact dystopia
+-0.052428875	charact dystopia au
+-0.052428875	tag slaver au
+-0.055222947	dystopia au fighter
+-0.88985527	fighter daichi trigger
+-0.61787015	of life trigger
+-0.05229282	tag thi trigger
+-0.44357964	daichi trigger warn
+-0.44357964	life trigger warn
+-0.047269918	thi trigger warn
+-0.067897566	maturewarn archiv warn
+-0.04990238	audienceswarn archiv warn
+-0.66828126	use archiv warn
+-0.35622713	trigger warn impli
+-0.052428875	warn impli relationship
+-0.071412735	ushioi love relationship
+-0.055154257	impli relationship self
+-0.052428875	cope mechan self
+-0.03179771	relationship self indulg
+-0.03179771	mechan self indulg
+-0.3535015	self indulg get
+-0.052497137	indulg get idea
+-0.052497137	get idea mind
+-0.052428875	idea mind possibl
+-0.07712664	ad freeform possibl
+-0.055222947	mind possibl slow
+-0.052497137	possibl slow updat
+-0.052497137	slow updat nobodi
+-0.052497137	updat nobodi realli
+-0.052497137	nobodi realli die
+-0.052497137	realli die tho
+-0.07486084	freeform possibl angst
+-0.052177764	die tho angst
+-0.10575184	know distribut angst
+-0.74613595	theme gore angst
+-0.056386024	tho angst fluff
+-0.055929318	angst fluff fluff
+-0.07122324	m write fluff
+-0.056135356	fluff fluff import
+-0.052497137	fluff import domest
+-0.05206277	import domest life
+-0.59662	slice of life
+-0.07090287	base real life
+-0.07090287	advanc amput life
+-0.07469928	peopl thing life
+-0.056866672	domest life wanna
+-0.07799307	back <eos> say
+-0.05654407	today daichi say
+-0.052177764	life wanna say
+-0.57977813	mom use say
+-0.07712664	possibl angst it
+-0.05652337	wanna say it
+-0.05501734	say it s
+-0.042770974	baguett ushi s
+-0.2490793	fix ushi s
+-0.9606155	s dad s
+-0.056135356	it s horribl
+-0.052497137	s horribl judg
+-0.052497137	horribl judg that
+-0.052497137	judg that intern
+-0.19841258	that intern conflict
+-0.75373363	intern conflict els
+-0.63528556	els tag dont
+-0.052428875	spoiler honestli dont
+-0.24990351	tag dont know
+-0.031757325	honestli dont know
+-0.71251804	say i know
+-1.1097636	know tag bad
+-0.5323647	tag bad futur
+-0.5323647	bad futur ausummari
+-0.52855283	futur ausummari you
+-0.10600034	intern conflictsummari you
+-0.10600034	way tosummari you
+-0.44452617	ausummari you smoke
+-0.095351234	conflictsummari you smoke
+-0.095351234	tosummari you smoke
+-0.052497137	you smoke again
+-0.052497137	smoke again messi
+-0.052497137	again messi ashen
+-0.052497137	messi ashen hair
+-0.052428875	ashen hair head
+-0.052428875	hum rest head
+-0.055222947	hair head peek
+-0.052497137	head peek out
+-0.052497137	peek out sleepi
+-0.052497137	out sleepi brown
+-0.052497137	sleepi brown eye
+-0.052497137	brown eye blink
+-0.052497137	eye blink owlishli
+-0.052497137	blink owlishli edg
+-0.052428875	owlishli edg cover
+-0.052428875	<eos> move cover
+-0.057465937	cover <eos> welcom
+-0.052497137	<eos> welcom home
+-0.056866672	home daichi hum
+-0.052497137	daichi hum rest
+-0.055222947	rest head pillow
+-0.052497137	head pillow eas
+-0.052497137	pillow eas guilt
+-0.052497137	eas guilt wash
+-0.052497137	guilt wash him
+-0.057465937	him <eos> move
+-0.055222947	move cover reveal
+-0.052497137	cover reveal face
+-0.052497137	reveal face haunt
+-0.052497137	face haunt dream
+-0.07799307	dream <eos> i
+-0.05626991	daichi say i
+-0.69990087	haunt dream i
+-0.07106302	cannot believ i
+-0.06429726	<eos> i kill
+-0.09530349	dream i kill
+-0.052497137	i kill man
+-0.052497137	kill man today
+-0.20180406	say i knowchapter
+-0.11235557	i know distribut
+-0.11519227	distribut angst ﾉ
+-0.10629432	ﾉ ヮ ﾉ
+-0.11235557	angst ﾉ ヮ
+-0.11235557	ヮ ﾉ ﾟyou
+-0.10644191	ﾉ ﾟyou re
+-0.10644191	ﾟyou re interest
+-0.10644191	re interest checkchapter
+-0.88985527	fighter daichi kind
+-0.05501734	<eos> spoiler kind
+-0.2490793	<eos> collect kind
+-0.2490793	a collect kind
+-0.61519194	daichi kind slice
+-0.10629432	crisi meati slice
+-0.5500162	spoiler kind of
+-0.044630453	collect kind of
+-0.5850588	kind slice of
+-0.70200163	that intern conflictsummari
+-0.596403	digit fandom final
+-0.052428875	dark light final
+-0.055222947	fandom final fantasi
+-0.052497137	final fantasi xvrate
+-0.052497137	fantasi xvrate teen
+-0.052497137	xvrate teen audienceswarn
+-0.6348547	rate maturewarn archiv
+-0.05229282	teen audienceswarn archiv
+-0.05501734	chose use archiv
+-0.08906291	archiv warn applyrelationship
+-0.29537302	warn applyrelationship nocti
+-0.052428875	nox fleuretcharact nocti
+-0.031757325	applyrelationship nocti luci
+-0.031757325	fleuretcharact nocti luci
+-0.052428875	<eos> kingdom luci
+-0.026734341	nocti luci caelum
+-0.025455825	luci caelum lunafreya
+-0.025455825	caelum lunafreya nox
+-0.3535015	lunafreya nox fleuretcharact
+-0.3535015	lunafreya nox fleuret
+-0.052497137	nox fleuret gladiolu
+-0.052497137	fleuret gladiolu amicitia
+-0.052428875	gladiolu amicitia igni
+-0.05606652	excit everyth igni
+-0.055222947	amicitia igni scientia
+-0.82533216	igni scientia prompto
+-0.055929318	done everyth prompto
+-0.52855283	camelia claustra prompto
+-0.60616356	scientia prompto argentum
+-0.52855283	prompto argentum cor
+-0.40653387	charact mention cor
+-0.10600034	cindi holli cor
+-0.60630786	argentum cor leonisaddit
+-0.5405582	leonisaddit tag happi
+-0.5405582	argentumaddit tag happi
+-0.07122324	it hey happi
+-0.10600034	aunow complet happi
+-0.040296875	tag happi end
+-0.05460522	hey happi end
+-0.8303667	<eos> actual end
+-0.2982352	happi end spoileri
+-0.052497137	end spoileri altern
+-0.052497137	spoileri altern univers
+-0.052497137	altern univers canon
+-0.052497137	univers canon diverg
+-0.052497137	canon diverg still
+-0.052497137	diverg still denial
+-0.052428875	still denial cannot
+-0.071412735	pure gold cannot
+-0.055222947	denial cannot stop
+-0.052497137	cannot stop me
+-0.05229282	stop me vagu
+-0.54899526	life observ vagu
+-0.52855283	part too vagu
+-0.056141924	me vagu polit
+-0.052497137	vagu polit kingli
+-0.052497137	polit kingli matter
+-0.052497137	kingli matter gladio
+-0.052177764	matter gladio done
+-0.5264206	past ushioisummari done
+-0.10575184	gore angstsummari done
+-0.10575184	theme goresummari done
+-0.056402236	gladio done everyth
+-0.05229282	prompto excit everyth
+-0.05229282	piec place everyth
+-0.056135356	everyth prompto excit
+-0.055222947	everyth igni pure
+-0.19841258	igni pure gold
+-0.07530958	gold cannot believ
+-0.07761221	believ i m
+-0.071507856	i m write
+-0.076584265	write fluff caviti
+-0.071412735	fluff caviti mani
+-0.071412735	said goodby mani
+-0.77602476	caviti mani them
+-0.5310875	mani them monica
+-0.5310875	cor leoni monica
+-0.5865053	them monica elshett
+-0.5264206	monica elshett freeform
+-0.5264206	cindi aurum freeform
+-0.076257296	relev ad freeform
+-0.5264206	background bokuaka freeform
+-0.61478764	elshett freeform cindi
+-0.11220598	mention hint cindi
+-0.5865053	freeform cindi aurum
+-0.61633676	aurum freeform minor
+-0.61633676	minor charact mention
+-0.0805912	mention cor leoni
+-0.0805912	holli cor leoni
+-0.5865053	leoni monica elshettsummari
+-0.52855283	monica elshettsummari ten
+-0.10600034	mani themsummari ten
+-0.10600034	pure goldsummari ten
+-0.44452617	elshettsummari ten year
+-0.095351234	themsummari ten year
+-0.095351234	goldsummari ten year
+-0.052497137	ten year dark
+-0.052497137	year dark light
+-0.055222947	light final shine
+-0.052497137	final shine land
+-0.052497137	shine land eo
+-0.052497137	land eo purg
+-0.052497137	eo purg evil
+-0.052428875	purg evil king
+-0.052428875	luci prosper king
+-0.055222947	evil king ascend
+-0.055154257	prosper king throne
+-0.052428875	king ascend throne
+-0.055222947	ascend throne bring
+-0.052497137	throne bring ultim
+-0.052497137	bring ultim sacrific
+-0.052497137	ultim sacrific remain
+-0.052497137	sacrific remain unreward
+-0.052497137	remain unreward god
+-0.057465937	god <eos> kingdom
+-0.055222947	kingdom luci prosper
+-0.055222947	king throne radiant
+-0.052497137	throne radiant wife
+-0.052497137	radiant wife side
+-0.052497137	wife side cope
+-0.052497137	side cope mechan
+-0.05739689	indulg <eos> spoiler
+-0.052428875	later avoid spoiler
+-0.81392473	chapter digit upchapter
+-0.61478764	gore angst hint
+-0.40712142	charact mention hint
+-0.11235557	hint cindi holli
+-0.8329144	igni scientia camelia
+-0.5323647	scientia camelia claustra
+-0.60616356	claustra prompto argentumaddit
+-0.5659429	caviti mani themsummari
+-0.8871979	spoiler kind ofchapter
+-0.70200163	igni pure goldsummari
+-0.84873426	iwaizumi hajim ushijima
+-0.91376626	oikawa tooru ushijima
+-0.8211194	shirabu kenjir ushijima
+-0.5264206	kageyama tobio ushijima
+-0.07722552	tooru ushijima wakatoshicharact
+-0.06798532	hajim ushijima wakatoshi
+-0.48723042	kenjir ushijima wakatoshi
+-0.48723042	tobio ushijima wakatoshi
+-0.42678833	ushijima wakatoshi tendou
+-0.07122324	vagu smut tendou
+-0.05229282	semi eita tendou
+-0.060663324	wakatoshi tendou satori
+-0.5510967	eita tendou satori
+-0.95648295	tendou satori bokuto
+-0.11220598	sorai takashi bokuto
+-0.5865053	satori bokuto koutar
+-0.5323647	bokuto koutar utsui
+-0.5310875	koutar utsui takashi
+-0.10629432	satori sorai takashi
+-0.5865053	utsui takashi akaashi
+-0.5323647	takashi akaashi keiji
+-0.5323647	akaashi keiji hanamaki
+-0.5323647	keiji hanamaki takahiro
+-0.5323647	hanamaki takahiro matsukawa
+-0.5323647	takahiro matsukawa isseiaddit
+-0.5436623	isseiaddit tag sort
+-0.10773062	koutarouaddit tag sort
+-0.071507856	tag sort accord
+-0.071507856	sort accord relev
+-0.05730747	later tag ad
+-0.056386024	au charact ad
+-0.07122324	accord relev ad
+-0.07530958	angst it hey
+-0.44325033	happi end coz
+-0.071507856	end coz im
+-0.071507856	coz im tire
+-0.071507856	im tire read
+-0.071507856	tire read angsti
+-0.071507856	read angsti abus
+-0.071507856	angsti abus ushioi
+-0.071507856	abus ushioi love
+-0.07530958	love relationship written
+-0.071507856	relationship written base
+-0.071507856	written base real
+-0.07760669	real life observ
+-0.0805912	observ vagu smut
+-0.34724626	too vagu smut
+-0.07722988	smut tendou preciou
+-0.071507856	tendou preciou baguett
+-0.071412735	preciou baguett ushi
+-0.5310875	edit fix ushi
+-0.044312797	ushi s dad
+-0.2853617	s dad sorri
+-0.071507856	dad sorri advanc
+-0.071507856	sorri advanc amput
+-0.07760669	amput life crisi
+-0.75373363	life crisi edit
+-0.5323647	crisi edit fix
+-0.60616356	dad s name
+-0.61478764	bokuaka freeform background
+-0.5310875	s name background
+-0.5865053	name background bokuaka
+-0.5865053	freeform background matsuhana
+-0.5323647	background matsuhana freeformsummari
+-0.49342912	freeformsummari oikawa said
+-0.1017668	lifesummari oikawa said
+-0.071507856	oikawa said goodby
+-0.076584265	goodby mani peopl
+-0.07712664	<eos> say thing
+-0.071412735	mani peopl thing
+-0.07760669	thing life kept
+-0.071507856	life kept walk
+-0.071507856	kept walk forward
+-0.071507856	walk forward straight
+-0.071507856	forward straight back
+-0.07530958	say thing strength
+-0.071507856	thing strength keep
+-0.75373363	strength keep feet
+-0.5323647	keep feet model
+-0.41590512	model oikawa aunow
+-0.10644191	oikawa aunow complet
+-0.11435914	complet happi holidaychapter
+-0.10644191	happi holidaychapter ¾fandom
+-0.75373363	life observ my
+-0.5323647	observ my mom
+-0.5310875	my mom use
+-0.052428875	creator chose use
+-0.61633676	use say part
+-0.5323647	say part too
+-0.41590512	model oikawa auchapter
+-0.55206615	intern conflict way
+-0.10644191	conflict way tosummari
+-0.49177855	rate maturewarn creator
+-0.052497137	maturewarn creator chose
+-1.0120803	archiv warn major
+-0.115342885	major charact deathrelationship
+-0.77211887	oikawa tooru kyoutani
+-0.2225579	yahaba shigeru kyoutani
+-0.03179771	tooru kyoutani kentar
+-0.03179771	shigeru kyoutani kentar
+-0.77211887	oikawa tooru yahaba
+-0.35336494	kyoutani kentar yahaba
+-0.04034644	tooru yahaba shigeru
+-0.47194484	kentar yahaba shigeru
+-1.0962697	ushijima wakatoshi shirabu
+-1.043427	yahaba shigeru shirabu
+-0.2503176	wakatoshi shirabu kenjir
+-0.2503176	shigeru shirabu kenjir
+-1.0962697	ushijima wakatoshi semi
+-0.5310875	oohira reon semi
+-0.2503176	wakatoshi semi eita
+-0.2503176	reon semi eita
+-0.8871979	eita tendou satoricharact
+-0.52959275	sugawara koushi ennoshita
+-0.052497137	koushi ennoshita chikara
+-0.052497137	ennoshita chikara tanaka
+-0.052497137	chikara tanaka ryuunosuk
+-0.052497137	tanaka ryuunosuk azuman
+-0.052497137	ryuunosuk azuman asahi
+-0.3535015	kyoutani kentar hinata
+-0.052497137	kentar hinata shouyou
+-0.052497137	hinata shouyou kageyama
+-0.8329144	shouyou kageyama tobio
+-0.8329144	shirabu kenjir oohira
+-0.5323647	kenjir oohira reon
+-0.9594189	tendou satori goshiki
+-0.5323647	satori goshiki tsutomuaddit
+-0.5436623	tsutomuaddit tag slaver
+-0.5436623	tobioaddit tag slaver
+-0.04034644	tag ad later
+-0.04034644	charact ad later
+-0.3535015	ad later avoid
+-0.055222947	avoid spoiler honestli
+-0.23195136	know tag thi
+-0.35622713	trigger warn violenc
+-0.052497137	warn violenc disturb
+-0.052497137	violenc disturb theme
+-0.19841258	disturb theme gore
+-0.5865053	angst hint past
+-0.5323647	hint past ushioisummari
+-0.48723042	ushioisummari done piec
+-0.10098798	angstsummari done piec
+-0.10098798	goresummari done piec
+-0.052497137	done piec place
+-0.056135356	place everyth did
+-0.052497137	everyth did sole
+-0.052497137	did sole reach
+-0.052497137	sole reach point
+-0.057465937	point <eos> won
+-0.052497137	<eos> won t
+-0.052497137	won t fail
+-0.41303027	actual end now
+-0.052428875	t fail now
+-0.057465937	now <eos> time
+-0.052497137	<eos> time touch
+-0.052497137	time touch sun
+-0.052497137	touch sun burn
+-0.052497137	sun burn grace
+-0.8329144	burn grace a
+-0.6348237	grace <eos> collect
+-0.5310875	grace a collect
+-0.22651668	kind of drabbl
+-0.057465937	drabbl <eos> actual
+-0.11235557	end now completchapter
+-0.20123392	use archiv warningsrelationship
+-0.8329144	<eos> actual endchapter
+-0.8684713	kentar yahaba shigerucharact
+-0.8329144	shouyou kageyama tobioaddit
+-0.55206615	theme gore angstsummari
+-0.7636855	tendou satori sorai
+-0.11235557	takashi bokuto koutarouaddit
+-0.55206615	life crisi meati
+-0.11235557	meati slice lifesummari
+-0.55206615	strength keep feetchapter
+-0.70200163	disturb theme goresummari
+
+\end\

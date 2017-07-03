@@ -1,18 +1,15 @@
 import csv
 
-n = 0
-flag = 0
-with open('username_pairs.csv', 'r') as f:
+lst_large_username = []
+with open('large_usernames.csv', 'r') as f:
     reader = csv.reader(f, delimiter=' ')
     for row in reader:
-        if flag == 0:
-            if -1 == int(row[3]):
-                flag = 1
-            print(row)
-            n += 1
-        if flag == 1:
-            if (int(row[3])/ len(row[0])) > 0.35:
-                print(row)
-                n += 1
+        lst_large_username.append(row[0])
 
-print(n)
+with open('large_username_pairs_filtered.csv', 'w') as w:
+    writer = csv.writer(w, delimiter=' ')
+    with open('username_pair_filtered.csv', 'r') as f:
+        reader = csv.reader(f, delimiter=' ')
+        for row in reader:
+            if row[0] in lst_large_username:
+                writer.writerow(row)
