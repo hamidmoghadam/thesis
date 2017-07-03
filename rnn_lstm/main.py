@@ -157,7 +157,7 @@ with open(r'../tumblr_twitter_scrapper/large_username_pairs_filtered.csv', 'r', 
     for row in reader:
         lst_username_pair.append((row[0], row[2].replace(r'twitter.com/', '')))
 
-    for row in lst_username_pair[:user_count]:
+    for row in lst_username_pair:
         twitter_username = row[1]
         tweets_path = '../tumblr_twitter_scrapper/tweets/{0}.csv'.format(
             twitter_username)
