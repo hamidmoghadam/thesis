@@ -64,7 +64,7 @@ test_set = []
 y_test_set = []
 
 for tumblr_username in lst_tumblr_username[:USER_COUNT]:
-    with open('../tumblr_twitter_scrapper/posts/{0}.csv'.format(tumblr_username), 'r') as f:
+    with open('../tumblr_twitter_scrapper/posts/{0}.csv'.format(tumblr_username), 'r', encoding='utf-8') as f:
         reader = csv.reader(f, delimiter=' ')
         for row in reader:
             item = TumblrItem(row)
