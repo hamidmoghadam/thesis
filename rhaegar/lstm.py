@@ -144,14 +144,14 @@ class SmallConfig(object):
 
 class BestConfig(object):
     init_scale = 0.1
-    learning_rate = 1.0
+    learning_rate = 0.1
     max_grad_norm = 5
     num_layers = 1
     num_steps = 40
-    hidden_size = 100
+    hidden_size = 200
     max_epoch = 1
-    max_max_epoch = 5
+    max_max_epoch = 8
     keep_prob = 1.0
-    lr_decay = 0.8
+    lr_decay = 0.98
     batch_size = 0
-    vocab_size = 49432#10000
+    vocab_size = 10000#49432#10000
