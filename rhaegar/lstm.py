@@ -74,16 +74,7 @@ class LSTMNetwork(object):
         softmax_b = tf.get_variable("softmax_b", [number_of_class], dtype=tf.float32)
         logits = tf.matmul(output, softmax_w) + softmax_b
 
-               
-        '''loss = tf.contrib.legacy_seq2seq.sequence_loss_by_example(
-            [logits],
-            [tf.reshape(self._input.targets, [-1,1])],
-            [tf.ones([batch_size], dtype=tf.float32)])'''
-        print(['-----target------', self._input.targets])
-        print(['-----logits------', logits])
         self._cost = tf.nn.softmax_cross_entropy_with_logits(logits= tf.reshape(logits,[1,-1]), labels=self._input.targets)
-        
-        #self._cost = loss# tf.reduce_sum(loss) / batch_size
         self._final_state = state
 
         if is_training:
@@ -92,15 +83,12 @@ class LSTMNetwork(object):
             self._new_lr = tf.placeholder(tf.float32, shape=[], name="new_lr")
             self._lr_update = tf.assign(self._lr, self._new_lr)
 
-            #grads, _ = tf.clip_by_global_norm(tf.gradients(self._cost, self._tvars), self._config.max_grad_norm)
-            #optimizer = tf.train.GradientDescentOptimizer(self._lr)
-            #self._train_op = optimizer.apply_gradients(zip(grads, self._tvars), global_step=tf.contrib.framework.get_or_create_global_step())
             self.optimizer = tf.train.AdamOptimizer(learning_rate=self._lr).minimize(self._cost)
             
 
             # Evaluate model
-            #correct_pred = tf.equal(tf.argmax(logits,1), tf.argmax(self._input,1))
-            #accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
+            self._correct_pred = tf.equal(tf.argmax(logits,1), tf.argmax(self._input,1))
+            self._accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
 
 
     def set_lr(self, lr, session):
@@ -114,7 +102,8 @@ class LSTMNetwork(object):
 
         fetches = {
             "cost": self._cost,
-            "final_state": self._final_state
+            "final_state": self._final_state,
+            "accuracy":self._accuracy
         }
 
         if self._is_training:
@@ -131,10 +120,11 @@ class LSTMNetwork(object):
             vals = session.run(fetches, feed_dict)
             cost = vals["cost"]
             state = vals["final_state"]
+            accuracy = vals["accuracy"]
             costs += cost
             iters += self._input.num_steps
 
-        return costs
+        return costs, accuracy
 
 
 class SmallConfig(object):
