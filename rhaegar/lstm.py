@@ -73,8 +73,8 @@ class LSTMNetwork(object):
         softmax_w = tf.get_variable("softmax_w", [size, number_of_class], dtype=tf.float32)
         softmax_b = tf.get_variable("softmax_b", [number_of_class], dtype=tf.float32)
         logits = tf.matmul(output, softmax_w) + softmax_b
-
-        self._cost = tf.nn.softmax_cross_entropy_with_logits(logits= tf.reshape(logits,[1,-1]), labels=self._input.targets)
+        logits = tf.reshape(logits,[1,-1])
+        self._cost = tf.nn.softmax_cross_entropy_with_logits(logits= logits, labels=self._input.targets)
         self._final_state = state
 
         if is_training:
@@ -87,7 +87,7 @@ class LSTMNetwork(object):
             
 
             # Evaluate model
-            self._correct_pred = tf.equal(tf.argmax(logits,1), tf.argmax(self._input,1))
+            correct_pred = tf.equal(tf.argmax(logits,1), tf.argmax(self._input.targets,1))
             self._accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
 
 
@@ -97,6 +97,7 @@ class LSTMNetwork(object):
     def run_epoch(self, session):
         """Runs the model on the given data."""
         start_time = time.time()
+        accuracies = 0.0
         costs = 0.0
         iters = 0
 
@@ -121,10 +122,11 @@ class LSTMNetwork(object):
             cost = vals["cost"]
             state = vals["final_state"]
             accuracy = vals["accuracy"]
+            accuracies += accuracy
             costs += cost
             iters += self._input.num_steps
 
-        return costs, accuracy
+        return costs/ self._input.epoch_size, accuracy / self._input.epoch_size
 
 
 class SmallConfig(object):
@@ -138,20 +140,20 @@ class SmallConfig(object):
     max_max_epoch = 5
     keep_prob = 1.0
     lr_decay = 0.95
-    batch_size = 20
+    batch_size = 5
     vocab_size = 8000
 
 
 class BestConfig(object):
     init_scale = 0.1
-    learning_rate = 0.1
+    learning_rate = 0.5
     max_grad_norm = 5
     num_layers = 1
     num_steps = 40
-    hidden_size = 200
+    hidden_size = 700
     max_epoch = 1
-    max_max_epoch = 8
+    max_max_epoch = 5
     keep_prob = 1.0
     lr_decay = 0.98
     batch_size = 0
-    vocab_size = 10000#49432#10000
+    vocab_size = 8000#49432#10000
