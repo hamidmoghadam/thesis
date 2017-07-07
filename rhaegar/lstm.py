@@ -77,8 +77,13 @@ class LSTMNetwork(object):
         
         #self._cost = tf.nn.softmax_cross_entropy_with_logits(logits= logits, labels=self._input.targets)
         self._cost = tf.reduce_mean(tf.squared_difference(logits, self._input.targets))
-        self.temp = (logits, self._input.targets)
+        #self.temp = (logits, self._input.targets)
         self._final_state = state
+
+        # Evaluate model
+        correct_pred = tf.equal(tf.argmax(logits,1), tf.argmax(self._input.targets,1))
+        self._accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
+
 
         if is_training:
             self._lr = tf.Variable(0.0, trainable=False)
@@ -89,10 +94,7 @@ class LSTMNetwork(object):
             self.optimizer = tf.train.AdamOptimizer(learning_rate=self._lr).minimize(self._cost)
             
 
-            # Evaluate model
-            correct_pred = tf.equal(tf.argmax(logits,1), tf.argmax(self._input.targets,1))
-            self._accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
-
+            
 
     def set_lr(self, lr, session):
         session.run(self._lr_update, feed_dict={self._new_lr: lr})
@@ -156,7 +158,7 @@ class BestConfig(object):
     max_grad_norm = 5
     num_layers = 1
     num_steps = 40
-    hidden_size = 10
+    hidden_size = 300
     max_epoch = 1
     max_max_epoch = 5
     keep_prob = 1.0
