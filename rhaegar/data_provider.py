@@ -87,7 +87,7 @@ def batch_producer(raw_data, y_raw_data, batch_size, num_steps, number_of_class,
         len_data = len(raw_data)
 
         raw_data = tf.convert_to_tensor(raw_data, name="raw_data", dtype=tf.int32)
-        y_raw_data = tf.convert_to_tensor(y_raw_data, name="y_raw_data", dtype=tf.int32)
+        y_raw_data = tf.convert_to_tensor(y_raw_data, name="y_raw_data", dtype=tf.float32)
 
         i = tf.train.range_input_producer(len_data, shuffle=False).dequeue()
 
@@ -96,6 +96,5 @@ def batch_producer(raw_data, y_raw_data, batch_size, num_steps, number_of_class,
 
         y = y_raw_data[i, :] #tf.slice(y_raw_data, [i,0], [i,3])
         y = tf.reshape(y, [1 ,number_of_class])
-
 
         return x, y, i
