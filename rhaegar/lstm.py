@@ -123,8 +123,8 @@ class LSTMNetwork(object):
                 feed_dict[h] = state[i].h
             vals = session.run(fetches, feed_dict)
             cost = vals["cost"]
-            print(cost)
-            print(session.run(self.temp))
+            #print(cost)
+            #print(session.run(self.temp))
             
             state = vals["final_state"]
             accuracy = vals["accuracy"]
