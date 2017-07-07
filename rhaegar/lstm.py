@@ -75,7 +75,8 @@ class LSTMNetwork(object):
 
         logits = tf.matmul(output, softmax_w) + softmax_b
         
-        self._cost = tf.nn.softmax_cross_entropy_with_logits(logits= logits, labels=self._input.targets)
+        #self._cost = tf.nn.softmax_cross_entropy_with_logits(logits= logits, labels=self._input.targets)
+        self._cost = tf.reduce_mean(tf.squared_difference(logits, self._input.targets))
         self.temp = (logits, self._input.targets)
         self._final_state = state
 
