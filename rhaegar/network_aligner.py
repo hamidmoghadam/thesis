@@ -24,7 +24,7 @@ y_train_set = []
 valid_set = []
 y_valid_set = []
 
-USER_COUNT = 3
+USER_COUNT = 2
 MAX_SENT_LENGTH = 40
 
 for twitter_username in lst_twitter_username[:USER_COUNT]:
@@ -124,7 +124,7 @@ with tf.Graph().as_default():
 
     with tf.name_scope("Train"):
         train_input = lstm.LSTMInput(
-            config=config, data=train_set, y_data=y_train_set, name="TrainInput")
+            config=config, data=train_set, y_data=y_train_set, number_of_class= USER_COUNT, name="TrainInput")
         with tf.variable_scope("Model", reuse=None, initializer=initializer):
             m = lstm.LSTMNetwork(is_training=True, config=config, input=train_input)
     '''    

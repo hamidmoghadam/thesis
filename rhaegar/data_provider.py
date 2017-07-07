@@ -80,24 +80,22 @@ def batch_produce(raw_data, y_raw_data, batch_size, num_steps, name=None):
         return x, y
 
 
-def batch_producer(raw_data, y_raw_data, batch_size, num_steps, name=None):
+def batch_producer(raw_data, y_raw_data, batch_size, num_steps, number_of_class, name=None):
     
     with tf.name_scope(name, "PTBProducer", [raw_data, y_raw_data, batch_size, num_steps]):
-        
+
         len_data = len(raw_data)
 
         raw_data = tf.convert_to_tensor(raw_data, name="raw_data", dtype=tf.int32)
         y_raw_data = tf.convert_to_tensor(y_raw_data, name="y_raw_data", dtype=tf.int32)
-        
+
         i = tf.train.range_input_producer(len_data, shuffle=False).dequeue()
 
         x = raw_data[i, :] #tf.slice(raw_data, [i, 0], [i, num_steps])
-        x = tf.reshape(x, [1,num_steps])
+        x = tf.reshape(x, [1, num_steps])
 
         y = y_raw_data[i, :] #tf.slice(y_raw_data, [i,0], [i,3])
-        y = tf.reshape(y, [1, 3])
+        y = tf.reshape(y, [1 ,number_of_class])
 
-        print(['-----x------', x])
-        print(['-----y------', y])
 
         return x, y, i

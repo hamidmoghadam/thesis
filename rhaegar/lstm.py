@@ -8,12 +8,12 @@ import inspect
 class LSTMInput(object):
     """The input data."""
 
-    def __init__(self, config, data, y_data, name=None):
+    def __init__(self, config, data, y_data, number_of_class, name=None):
         self.batch_size = batch_size = 1 #config.batch_size
         self.num_steps = num_steps = config.num_steps
         self.epoch_size = len(data)#((len(data) // batch_size) - 1) // num_steps
-        self.number_of_class = 3
-        self.input_data, self.targets, self.i = dp.batch_producer(data,y_data,self.batch_size, num_steps, name=name)
+        self.number_of_class = number_of_class
+        self.input_data, self.targets, self.i = dp.batch_producer(data,y_data,self.batch_size, num_steps, number_of_class, name=name)
 
 
 class LSTMNetwork(object):
@@ -57,7 +57,7 @@ class LSTMNetwork(object):
         
         self._initial_state = cell.zero_state(1, tf.float32)#batch_size
         state = self._initial_state
-        self.temp = []
+        
         with tf.variable_scope("RNN"):
             for time_step in range(num_steps):
                 if time_step > 0:
@@ -72,9 +72,11 @@ class LSTMNetwork(object):
 
         softmax_w = tf.get_variable("softmax_w", [size, number_of_class], dtype=tf.float32)
         softmax_b = tf.get_variable("softmax_b", [number_of_class], dtype=tf.float32)
+
         logits = tf.matmul(output, softmax_w) + softmax_b
-        logits = tf.reshape(logits,[1,-1])
+        
         self._cost = tf.nn.softmax_cross_entropy_with_logits(logits= logits, labels=self._input.targets)
+        self.temp = (logits, self._input.targets)
         self._final_state = state
 
         if is_training:
@@ -120,6 +122,9 @@ class LSTMNetwork(object):
                 feed_dict[h] = state[i].h
             vals = session.run(fetches, feed_dict)
             cost = vals["cost"]
+            print(cost)
+            print(session.run(self.temp))
+            
             state = vals["final_state"]
             accuracy = vals["accuracy"]
             accuracies += accuracy
@@ -150,7 +155,7 @@ class BestConfig(object):
     max_grad_norm = 5
     num_layers = 1
     num_steps = 40
-    hidden_size = 700
+    hidden_size = 10
     max_epoch = 1
     max_max_epoch = 5
     keep_prob = 1.0
