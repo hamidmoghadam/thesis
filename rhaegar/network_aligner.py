@@ -146,7 +146,7 @@ with tf.Graph().as_default():
 
             train_cost, accr = m.run_epoch(session)
             print("Epoch: %d Train cost: %.3f" %(i + 1, train_cost))
-            print("Accuracey is : {0}".format(accr))
+            print("Epoch %d Train accr: %3f"%(i+1, accr))
 
             '''            
             valid_cost = mvalid.run_epoch(session)
