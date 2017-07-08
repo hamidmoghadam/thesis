@@ -77,7 +77,7 @@ class LSTMNetwork(object):
         
         #self._cost = tf.nn.softmax_cross_entropy_with_logits(logits= logits, labels=self._input.targets)
         self._cost = tf.reduce_mean(tf.squared_difference(logits, self._input.targets))
-        #self.temp = (logits, self._input.targets)
+        #self.temp = (tf.argmax(logits,1), tf.argmax(self._input.targets,1))
         self._final_state = state
 
         # Evaluate model
@@ -125,16 +125,17 @@ class LSTMNetwork(object):
                 feed_dict[h] = state[i].h
             vals = session.run(fetches, feed_dict)
             cost = vals["cost"]
-            #print(cost)
-            #print(session.run(self.temp))
             
             state = vals["final_state"]
             accuracy = vals["accuracy"]
+            #print(accuracy)
+            #print(session.run(self.temp))
+
             accuracies += accuracy
             costs += cost
             iters += self._input.num_steps
 
-        return costs/ self._input.epoch_size, accuracy / self._input.epoch_size
+        return costs/ self._input.epoch_size, accuracies / self._input.epoch_size
 
 
 class SmallConfig(object):
@@ -154,14 +155,14 @@ class SmallConfig(object):
 
 class BestConfig(object):
     init_scale = 0.1
-    learning_rate = 0.5
+    learning_rate = 1.0
     max_grad_norm = 5
-    num_layers = 1
+    num_layers = 2
     num_steps = 40
-    hidden_size = 300
-    max_epoch = 1
-    max_max_epoch = 5
+    hidden_size = 500
+    max_epoch = 2
+    max_max_epoch = 7
     keep_prob = 1.0
-    lr_decay = 0.98
+    lr_decay = 0.8
     batch_size = 0
-    vocab_size = 8000#49432#10000
+    vocab_size = 50000#49432#10000

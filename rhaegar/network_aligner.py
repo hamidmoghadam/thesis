@@ -24,7 +24,7 @@ y_train_set = []
 valid_set = []
 y_valid_set = []
 
-USER_COUNT = 2
+USER_COUNT = 50
 MAX_SENT_LENGTH = 40
 
 for twitter_username in lst_twitter_username[:USER_COUNT]:
@@ -146,7 +146,7 @@ with tf.Graph().as_default():
 
             train_cost, accr = m.run_epoch(session)
             print("Epoch: %d Train cost: %.3f" %(i + 1, train_cost))
-            print("Epoch %d Train accr: %3f"%(i+1, accr))
+            print("Epoch: %d Train accr: %.3f"%(i+1, accr))
 
             '''            
             valid_cost = mvalid.run_epoch(session)
