@@ -24,7 +24,7 @@ y_train_set = []
 valid_set = []
 y_valid_set = []
 
-USER_COUNT = 50
+USER_COUNT = 5
 MAX_SENT_LENGTH = 40
 
 for twitter_username in lst_twitter_username[:USER_COUNT]:

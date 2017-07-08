@@ -159,10 +159,10 @@ class BestConfig(object):
     max_grad_norm = 5
     num_layers = 2
     num_steps = 40
-    hidden_size = 500
+    hidden_size = 200
     max_epoch = 2
     max_max_epoch = 7
     keep_prob = 1.0
     lr_decay = 0.8
     batch_size = 0
-    vocab_size = 50000#49432#10000
+    vocab_size = 15000#49432#10000
