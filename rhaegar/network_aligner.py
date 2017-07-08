@@ -127,13 +127,12 @@ with tf.Graph().as_default():
             config=config, data=train_set, y_data=y_train_set, number_of_class= USER_COUNT, name="TrainInput")
         with tf.variable_scope("Model", reuse=None, initializer=initializer):
             m = lstm.LSTMNetwork(is_training=True, config=config, input=train_input)
-    '''    
+        
     with tf.name_scope("Valid"):
         valid_input = lstm.LSTMInput(
-            config=config, data=valid_set, y_data= y_valid_set, name="ValidInput")
+            config=config, data=valid_set, y_data= y_valid_set, number_of_class= USER_COUNT, name="ValidInput")
         with tf.variable_scope("Model", reuse=True, initializer=initializer):
-            mvalid = lstm.LSTMNetwork(
-                is_training=False, config=config, input=valid_input)'''
+            mvalid = lstm.LSTMNetwork(is_training=False, config=config, input=valid_input)
     
 
     sv = tf.train.Supervisor()
@@ -148,8 +147,8 @@ with tf.Graph().as_default():
             print("Epoch: %d Train cost: %.3f" %(i + 1, train_cost))
             print("Epoch: %d Train accr: %.3f"%(i+1, accr))
 
-            '''            
-            valid_cost = mvalid.run_epoch(session)
-            print("Epoch: %d Valid Cost: %.3f" %
-                        (i + 1, valid_cost))
-        '''
+                        
+            valid_cost, valid_accr = mvalid.run_epoch(session)
+             
+            print("Epoch: %d Valid cost: %.3f" %(i + 1, valid_cost))
+            print("Epoch: %d Valid accr: %.3f"%(i+1, valid_accr))
