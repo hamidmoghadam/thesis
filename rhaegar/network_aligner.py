@@ -19,10 +19,10 @@ with open('../tumblr_twitter_scrapper/large_username_pairs_filtered.csv', 'r', e
         lst_twitter_username.append(row[2].replace(r'twitter.com/', ''))
         lst_tumblr_username.append(row[0])
 
-train_set = []
-y_train_set = []
-valid_set = []
-y_valid_set = []
+train_data = []
+y_train_data = []
+valid_data = []
+y_valid_data = []
 
 USER_COUNT = 5
 MAX_SENT_LENGTH = 40
@@ -39,8 +39,8 @@ for twitter_username in lst_twitter_username[:USER_COUNT]:
                 for i in range(len(sents)):
                     sents[i] = refine.stem(sents[i])
                 content = ' <eos> '.join(sents)
-                if len(content.split(' ')) > 2:
-                    temp_set.append(content)
+                #if len(content.split(' ')) > 2:
+                temp_set.append(content)
 
         random_set = np.zeros(len(temp_set))
         train_count = int(np.round(len(temp_set) * 0.7))
@@ -49,19 +49,19 @@ for twitter_username in lst_twitter_username[:USER_COUNT]:
 
         for i in range(len(temp_set)):
             if random_set[i] == 1:
-                train_set.append(temp_set[i])
+                train_data.append(temp_set[i])
                 k = lst_twitter_username.index(twitter_username)
                 label = [0 for x in range(USER_COUNT)]
                 label[k] = 1
-                y_train_set.append(label)
+                y_train_data.append(label)
             else:
-                valid_set.append(temp_set[i])
+                valid_data.append(temp_set[i])
                 k = lst_twitter_username.index(twitter_username)
                 label = [0 for x in range(USER_COUNT)]
                 label[k] = 1
-                y_valid_set.append(label)
-test_set = []
-y_test_set = []
+                y_valid_data.append(label)
+test_data = []
+y_test_data = []
 
 for tumblr_username in lst_tumblr_username[:USER_COUNT]:
     with open('../tumblr_twitter_scrapper/posts/{0}.csv'.format(tumblr_username), 'r', encoding='utf-8') as f:
@@ -72,31 +72,40 @@ for tumblr_username in lst_tumblr_username[:USER_COUNT]:
                 content = refine.clean(item.content)
                 for sent in refine.get_sentences(content):
                     if len(sent.split(' ')) > 2:
-                        test_set.append(refine.stem(sent))
+                        test_data.append(refine.stem(sent))
                         k = lst_tumblr_username.index(tumblr_username)
                         label = [0 for x in range(USER_COUNT)]
                         label[k] = 1
-                        y_test_set.append(label)
+                        y_test_data.append(label)
 
-word_2_id = data_provider.build_vocab(' '.join(train_set))
+word_2_id = data_provider.build_vocab(' '.join(train_data))
 
 max_tweet_len = 0
 max_tweet = ''
 lst_len = []
 
-for i in range(len(train_set)):
-    train_set[i] = data_provider.pad_word_ids(data_provider.text_to_word_ids(train_set[i], word_2_id), MAX_SENT_LENGTH)
-    lst_len.append(len(train_set[i]))
+
+train_set = []
+valid_set = []
+test_set = []
 
 
-for i in range(len(valid_set)):
-    valid_set[i] = data_provider.pad_word_ids(data_provider.text_to_word_ids(valid_set[i], word_2_id), MAX_SENT_LENGTH)
-    lst_len.append(len(valid_set[i]))
+for txt in train_data:
+    temp = data_provider.pad_word_ids(data_provider.text_to_word_ids(txt, word_2_id), MAX_SENT_LENGTH)
+    if np.sum(temp) > 0:
+        train_set.append(temp)
 
 
-for i in range(len(test_set)):
-    test_set[i] = data_provider.pad_word_ids(data_provider.text_to_word_ids(test_set[i], word_2_id), MAX_SENT_LENGTH)
-    lst_len.append(len(test_set[i]))
+for txt in valid_data:
+    temp = data_provider.pad_word_ids(data_provider.text_to_word_ids(txt, word_2_id), MAX_SENT_LENGTH)
+    if np.sum(temp) > 0:
+        valid_set.append(temp)
+
+
+for txt in test_data:
+    temp = data_provider.pad_word_ids(data_provider.text_to_word_ids(txt, word_2_id), MAX_SENT_LENGTH)
+    if np.sum(temp) > 0:
+        test_set.append(temp)
 
 
 '''
@@ -124,13 +133,13 @@ with tf.Graph().as_default():
 
     with tf.name_scope("Train"):
         train_input = lstm.LSTMInput(
-            config=config, data=train_set, y_data=y_train_set, number_of_class= USER_COUNT, name="TrainInput")
+            config=config, data=train_set, y_data=y_train_data, number_of_class= USER_COUNT, name="TrainInput")
         with tf.variable_scope("Model", reuse=None, initializer=initializer):
             m = lstm.LSTMNetwork(is_training=True, config=config, input=train_input)
         
     with tf.name_scope("Valid"):
         valid_input = lstm.LSTMInput(
-            config=config, data=valid_set, y_data= y_valid_set, number_of_class= USER_COUNT, name="ValidInput")
+            config=config, data=valid_set, y_data= y_valid_data, number_of_class= USER_COUNT, name="ValidInput")
         with tf.variable_scope("Model", reuse=True, initializer=initializer):
             mvalid = lstm.LSTMNetwork(is_training=False, config=config, input=valid_input)
     

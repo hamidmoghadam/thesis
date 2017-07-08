@@ -54,7 +54,7 @@ def pad_word_ids(word_ids, max_length):
         word_ids = np.lib.pad(word_ids, (max_length - data_len, 0), 'constant').tolist()
 
     return word_ids[:max_length]
-
+'''
 def batch_produce(raw_data, y_raw_data, batch_size, num_steps, name=None):
     with tf.name_scope(name, "PTBProducer", [raw_data, y_raw_data, batch_size, num_steps]):
         raw_data = tf.convert_to_tensor(raw_data, name="raw_data", dtype=tf.int32)
@@ -78,7 +78,7 @@ def batch_produce(raw_data, y_raw_data, batch_size, num_steps, name=None):
         print(['-----y------', y])
 
         return x, y
-
+'''
 
 def batch_producer(raw_data, y_raw_data, batch_size, num_steps, number_of_class, name=None):
     
