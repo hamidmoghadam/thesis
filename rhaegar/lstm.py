@@ -9,9 +9,9 @@ class LSTMInput(object):
     """The input data."""
 
     def __init__(self, config, data, y_data, number_of_class, name=None):
-        self.batch_size = batch_size = 1 #config.batch_size
+        self.batch_size = batch_size = config.batch_size
         self.num_steps = num_steps = config.num_steps
-        self.epoch_size = len(data)#((len(data) // batch_size) - 1) // num_steps
+        self.epoch_size = len(data) // batch_size #((len(data) // batch_size) - 1) // num_steps
         self.number_of_class = number_of_class
         self.input_data, self.targets, self.i = dp.batch_producer(data,y_data,self.batch_size, num_steps, number_of_class, name=name)
 
@@ -55,7 +55,7 @@ class LSTMNetwork(object):
 
         outputs = []
         
-        self._initial_state = cell.zero_state(1, tf.float32)#batch_size
+        self._initial_state = cell.zero_state(batch_size, tf.float32)#batch_size
         state = self._initial_state
         
         with tf.variable_scope("RNN"):
@@ -164,5 +164,5 @@ class BestConfig(object):
     max_max_epoch = 7
     keep_prob = 0.75
     lr_decay = 0.8
-    batch_size = 0
+    batch_size = 50
     vocab_size = 15000#49432#10000

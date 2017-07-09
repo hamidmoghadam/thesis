@@ -81,20 +81,30 @@ def batch_produce(raw_data, y_raw_data, batch_size, num_steps, name=None):
 '''
 
 def batch_producer(raw_data, y_raw_data, batch_size, num_steps, number_of_class, name=None):
-    
     with tf.name_scope(name, "PTBProducer", [raw_data, y_raw_data, batch_size, num_steps]):
-
+        
         len_data = len(raw_data)
+        number_of_batch = len_data //batch_size
+        
+        raw_data = tf.convert_to_tensor(raw_data[:batch_size * number_of_batch], name="raw_data", dtype=tf.int32)
+        y_raw_data = tf.convert_to_tensor(y_raw_data[:batch_size * number_of_batch], name="y_raw_data", dtype=tf.float32)
 
-        raw_data = tf.convert_to_tensor(raw_data, name="raw_data", dtype=tf.int32)
-        y_raw_data = tf.convert_to_tensor(y_raw_data, name="y_raw_data", dtype=tf.float32)
+        i = tf.train.range_input_producer(number_of_batch, shuffle=False).dequeue()
 
-        i = tf.train.range_input_producer(len_data, shuffle=False).dequeue()
+        data = tf.reshape(raw_data,[batch_size * number_of_batch , num_steps])
+        y_data = tf.reshape(y_raw_data, [batch_size * number_of_batch, number_of_class])
+        
+        print(data)
+        print(y_data)
+        
+        #x = raw_data[i * batch_size:(i+1) * batch_size, :]
+        #x = tf.reshape(x, [batch_size, num_steps])
+        x = tf.strided_slice(data, [i * batch_size, 0], [ (i+1) * batch_size, num_steps])
+        x.set_shape([batch_size, num_steps])
 
-        x = raw_data[i, :] #tf.slice(raw_data, [i, 0], [i, num_steps])
-        x = tf.reshape(x, [1, num_steps])
-
-        y = y_raw_data[i, :] #tf.slice(y_raw_data, [i,0], [i,3])
-        y = tf.reshape(y, [1 ,number_of_class])
-
+        #y = y_raw_data[i * batch_size:(i+1) * batch_size, :]
+        #y = tf.reshape(y, [batch_size, number_of_class])
+        y = tf.strided_slice(y_data, [i * batch_size, 0], [ (i+1) * batch_size, number_of_class])
+        y.set_shape([batch_size,number_of_class])
+        
         return x, y, i
