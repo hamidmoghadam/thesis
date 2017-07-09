@@ -75,8 +75,8 @@ class LSTMNetwork(object):
 
         logits = tf.matmul(output, softmax_w) + softmax_b
         
-        #self._cost = tf.nn.softmax_cross_entropy_with_logits(logits= logits, labels=self._input.targets)
-        self._cost = tf.reduce_mean(tf.squared_difference(logits, self._input.targets))
+        self._cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits= logits, labels=self._input.targets))
+        #self._cost = tf.reduce_mean(tf.squared_difference(logits, self._input.targets))
         #self.temp = (tf.argmax(logits,1), tf.argmax(self._input.targets,1))
         self._final_state = state
 
@@ -159,10 +159,10 @@ class BestConfig(object):
     max_grad_norm = 5
     num_layers = 2
     num_steps = 40
-    hidden_size = 200
+    hidden_size = 100
     max_epoch = 2
     max_max_epoch = 7
-    keep_prob = 1.0
+    keep_prob = 0.75
     lr_decay = 0.8
     batch_size = 0
     vocab_size = 15000#49432#10000
