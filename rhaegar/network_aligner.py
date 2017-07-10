@@ -24,8 +24,8 @@ y_train_data = []
 valid_data = []
 y_valid_data = []
 
-USER_COUNT = 5
-MAX_SENT_LENGTH = 40
+USER_COUNT = 10
+MAX_SENT_LENGTH = 30
 
 for twitter_username in lst_twitter_username[:USER_COUNT]:
     temp_set = []
@@ -34,7 +34,7 @@ for twitter_username in lst_twitter_username[:USER_COUNT]:
         for row in reader:
             item = TwitterItem(row)
             if item.is_owner == True:
-                content = refine.clean(item.content)
+                content = refine.clean(item.content, ignore_url= True)
                 sents = refine.get_sentences(content)
                 for i in range(len(sents)):
                     sents[i] = refine.stem(sents[i])
@@ -69,7 +69,7 @@ for tumblr_username in lst_tumblr_username[:USER_COUNT]:
         for row in reader:
             item = TumblrItem(row)
             if item.is_owner:
-                content = refine.clean(item.content)
+                content = refine.clean(item.content, ignore_url= True)
                 for sent in refine.get_sentences(content):
                     if len(sent.split(' ')) > 2:
                         test_data.append(refine.stem(sent))
@@ -150,6 +150,7 @@ with tf.Graph().as_default():
             lr_decay = config.lr_decay ** max(i + 1 - config.max_epoch, 0.0)
             lr = config.learning_rate * lr_decay
             m.set_lr(lr, session)
+            #lr = config.learning_rate
             print("Epoch: %d Learning rate: %.3f" % (i + 1, lr))
 
             train_cost, accr = m.run_epoch(session)
