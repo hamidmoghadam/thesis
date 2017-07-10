@@ -12,7 +12,7 @@ CHROME_DRIVER_PATH = '/Users/hamidmoghaddam/Documents/codes/tumblr_scrapper/chro
 
 
 twitter_urls = []
-with open('username_pairs.csv', 'r') as username_pair_file:
+with open('username_pair_filtered.csv', 'r') as username_pair_file:
     reader = csv.reader(username_pair_file, delimiter= ' ')
     for row in reader:
         twitter_urls.append(row[2])
