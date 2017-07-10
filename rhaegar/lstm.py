@@ -77,7 +77,7 @@ class LSTMNetwork(object):
         
         self._cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits= logits, labels=self._input.targets))
         #self._cost = tf.reduce_mean(tf.squared_difference(logits, self._input.targets))
-        #self.temp = (tf.argmax(logits,1), tf.argmax(self._input.targets,1))
+        #self.temp = (logits)
         self._final_state = state
 
         # Evaluate model
@@ -92,6 +92,7 @@ class LSTMNetwork(object):
             self._lr_update = tf.assign(self._lr, self._new_lr)
 
             self.optimizer = tf.train.AdamOptimizer(learning_rate=self._lr).minimize(self._cost)
+			
             
 
             
@@ -146,7 +147,7 @@ class SmallConfig(object):
     num_steps = 3
     hidden_size = 50
     max_epoch = 4
-    max_max_epoch = 5
+    max_max_epoch = 8
     keep_prob = 1.0
     lr_decay = 0.95
     batch_size = 5
@@ -155,14 +156,14 @@ class SmallConfig(object):
 
 class BestConfig(object):
     init_scale = 0.1
-    learning_rate = 1.0
+    learning_rate = 0.05
     max_grad_norm = 5
-    num_layers = 2
-    num_steps = 40
+    num_layers = 1
+    num_steps = 30
     hidden_size = 100
-    max_epoch = 2
+    max_epoch = 1
     max_max_epoch = 7
-    keep_prob = 0.75
-    lr_decay = 0.8
-    batch_size = 50
-    vocab_size = 15000#49432#10000
+    keep_prob = 0.9
+    lr_decay = 1.0
+    batch_size = 20
+    vocab_size = 30000#49432#10000
