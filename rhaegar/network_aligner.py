@@ -4,7 +4,7 @@ import refine
 import numpy as np
 import data_provider
 import tensorflow as tf
-import rnn
+import rnn as lstm
 import matplotlib.pyplot as plt
 
 
