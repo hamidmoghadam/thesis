@@ -94,16 +94,9 @@ def batch_producer(raw_data, y_raw_data, batch_size, num_steps, number_of_class,
         data = tf.reshape(raw_data,[batch_size * number_of_batch , num_steps])
         y_data = tf.reshape(y_raw_data, [batch_size * number_of_batch, number_of_class])
         
-        print(data)
-        print(y_data)
-        
-        #x = raw_data[i * batch_size:(i+1) * batch_size, :]
-        #x = tf.reshape(x, [batch_size, num_steps])
         x = tf.strided_slice(data, [i * batch_size, 0], [ (i+1) * batch_size, num_steps])
         x.set_shape([batch_size, num_steps])
 
-        #y = y_raw_data[i * batch_size:(i+1) * batch_size, :]
-        #y = tf.reshape(y, [batch_size, number_of_class])
         y = tf.strided_slice(y_data, [i * batch_size, 0], [ (i+1) * batch_size, number_of_class])
         y.set_shape([batch_size,number_of_class])
         

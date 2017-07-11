@@ -4,7 +4,7 @@ import refine
 import numpy as np
 import data_provider
 import tensorflow as tf
-import lstm
+import rnn
 import matplotlib.pyplot as plt
 
 
@@ -129,7 +129,7 @@ eval_config.batch_size = 1
 eval_config.num_steps = 1
 
 with tf.Graph().as_default():
-    initializer = tf.random_uniform_initializer(-1 * config.init_scale, config.init_scale)
+    initializer = tf.random_uniform_initializer(-config.init_scale, config.init_scale)
 
     with tf.name_scope("Train"):
         train_input = lstm.LSTMInput(
