@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 def run_epoch(session, model, eval_op=None, verbose=False):
     """Runs the model on the given data."""
-    start_time = time.time()
+    #start_time = time.time()
     costs = 0.0
     accrs = 0.0
     iters = 0
