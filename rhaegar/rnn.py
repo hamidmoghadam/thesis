@@ -16,7 +16,7 @@ class LSTMInput(object):
         self.input_data, self.targets, self.i = dp.batch_producer(data,y_data,self.batch_size, num_steps, number_of_class, name=name)
 
 
-class PTBModel(object):
+class LSTMNetwork(object):
     """The PTB model."""
 
     def __init__(self, is_training, config, input_):
@@ -221,7 +221,7 @@ class BestConfig(object):
     lr_decay = 1.0
     batch_size = 20
     vocab_size = 21000#49432#10000
-    
+
 def run_epoch(session, model, eval_op=None, verbose=False):
     """Runs the model on the given data."""
     start_time = time.time()
