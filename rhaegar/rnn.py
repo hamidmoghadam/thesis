@@ -81,9 +81,9 @@ class LSTMNetwork(object):
 
         
         softmax_w = tf.get_variable(
-            "softmax_w", [size, vocab_size], dtype=tf.float32)
+            "softmax_w", [size, number_of_class], dtype=tf.float32)
         softmax_b = tf.get_variable(
-            "softmax_b", [vocab_size], dtype=tf.float32)
+            "softmax_b", [number_of_class], dtype=tf.float32)
         logits = tf.matmul(output, softmax_w) + softmax_b
 
         self._cost = cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits= logits, labels=self._input.targets))
