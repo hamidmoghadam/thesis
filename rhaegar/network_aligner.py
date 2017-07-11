@@ -148,17 +148,17 @@ with tf.Graph().as_default():
     with sv.managed_session() as session:
         for i in range(config.max_max_epoch):
             lr_decay = config.lr_decay ** max(i + 1 - config.max_epoch, 0.0)
-            lr = config.learning_rate * lr_decay
-            m.set_lr(lr, session)
-            #lr = config.learning_rate
-            print("Epoch: %d Learning rate: %.3f" % (i + 1, lr))
+            m.assign_lr(session, config.learning_rate * lr_decay)   
+            #lr_decay = config.lr_decay ** max(i + 1 - config.max_epoch, 0.0)
+            #lr = config.learning_rate * lr_decay
+            #m.assign_lr(lr, session)
+            print("Epoch: %d Learning rate: %.3f" % (i + 1, session.run(m.lr)))
+            train_cost, trian_accr = run_epoch(session, m, eval_op=m.train_op, verbose=True)
 
-            train_cost, accr = m.run_epoch(session)
-            print("Epoch: %d Train cost: %.3f" %(i + 1, train_cost))
+            print("Epoch: %d Train Perplexity: %.3f" % (i + 1, train_perplexity))
             print("Epoch: %d Train accr: %.3f"%(i+1, accr))
 
-                        
-            valid_cost, valid_accr = mvalid.run_epoch(session)
-             
-            print("Epoch: %d Valid cost: %.3f" %(i + 1, valid_cost))
-            print("Epoch: %d Valid accr: %.3f"%(i+1, valid_accr))
+            valid_cost, valid_accr = run_epoch(session, mvalid)
+            print("Epoch: %d Valid Perplexity: %.3f" % (i + 1, valid_perplexity))
+            print("Epoch: %d Train accr: %.3f"%(i+1, accr))
+
