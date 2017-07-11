@@ -29,7 +29,7 @@ display_step = 10
 # Network Parameters
 n_input = 30 # MNIST data input (img shape: 28*28)
 n_steps = 28 # timesteps
-n_hidden = 128 # hidden layer num of features
+n_hidden = 100 # hidden layer num of features
 n_classes = 10 # MNIST total classes (0-9 digits)
 vocab_size = 18000
 # tf Graph input
@@ -84,7 +84,7 @@ init = tf.global_variables_initializer()
 with tf.Session() as sess:
     sess.run(init)
     # Keep training until reach max iterations
-    for i in range(1):
+    for i in range(13):
         print('epoch {0} :'.format(i))
         train_accr = 0.0
         valid_accr = 0.0
@@ -105,15 +105,14 @@ with tf.Session() as sess:
             step += 1
         
 
-        print("Loss = {:.3f}".format(train_cost/epoch_size) + ", Training Accuracy= {:.3f}".format(train_accr/epoch_size))
+        print("Training Loss = {:.3f}".format(train_cost/epoch_size) + ", Training Accuracy= {:.3f}".format(train_accr/epoch_size))
         
-        valid_data, valid_label = dp.get_next_valid_batch(100)
+        valid_data, valid_label = dp.get_next_valid_batch(dp.valid_size)
 
         acc = sess.run(accuracy, feed_dict={x: valid_data, y: valid_label})
         loss = sess.run(cost, feed_dict={x: valid_data, y: valid_label})
         
-        print("Loss = {:.3f}".format(loss) + ", Training Accuracy= {:.3f}".format(acc))
+        print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
+	
         
-    # Calculate accuracy for 128 mnist test images
-    #test_len = 128
     
