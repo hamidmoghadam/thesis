@@ -91,7 +91,8 @@ class LSTMNetwork(object):
             self._new_lr = tf.placeholder(tf.float32, shape=[], name="new_lr")
             self._lr_update = tf.assign(self._lr, self._new_lr)
 
-            self.optimizer = tf.train.AdamOptimizer(learning_rate=self._lr).minimize(self._cost)
+            #self.optimizer = tf.train.AdamOptimizer(learning_rate=self._lr).minimize(self._cost)
+            self.optimizer = tf.train.GradientDescentOptimizer(self._lr).minimize(self._cost)
 			
             
 
@@ -156,14 +157,14 @@ class SmallConfig(object):
 
 class BestConfig(object):
     init_scale = 0.1
-    learning_rate = 0.05
+    learning_rate = 0.1
     max_grad_norm = 5
     num_layers = 1
     num_steps = 30
     hidden_size = 100
     max_epoch = 1
-    max_max_epoch = 7
-    keep_prob = 0.9
+    max_max_epoch = 13
+    keep_prob = 0.85
     lr_decay = 1.0
     batch_size = 20
-    vocab_size = 30000#49432#10000
+    vocab_size = 21000#49432#10000

@@ -20,7 +20,7 @@ def clean(raw_review, ignore_digit = False, ignore_url= False, ignore_stopword =
     # 1.1 Remove Url
     if not ignore_url:
         GRUBER_URLINTEXT_PAT = r'(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:\'".,<>?\xab\xbb\u201c\u201d\u2018\u2019]))'
-        raw_review = re.sub(GRUBER_URLINTEXT_PAT, "<url>", raw_review)
+        raw_review = re.sub(GRUBER_URLINTEXT_PAT, " <url> ", raw_review)
     # 2. Remove number
     if not ignore_digit:
         raw_review = re.sub("\d+", "<digit>", raw_review)

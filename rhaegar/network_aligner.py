@@ -29,12 +29,12 @@ MAX_SENT_LENGTH = 30
 
 for twitter_username in lst_twitter_username[:USER_COUNT]:
     temp_set = []
-    with open('../tumblr_twitter_scrapper/tweets/{0}.csv'.format(twitter_username), 'r', encoding='utf-8') as f:
+    with open('../tumblr_twitter_scrapper/merged_tweets/{0}.csv'.format(twitter_username), 'r', encoding='utf-8') as f:
         reader = csv.reader(f, delimiter=' ')
         for row in reader:
             item = TwitterItem(row)
             if item.is_owner == True:
-                content = refine.clean(item.content, ignore_url= True)
+                content = refine.clean(item.content, ignore_url= False)
                 sents = refine.get_sentences(content)
                 for i in range(len(sents)):
                     sents[i] = refine.stem(sents[i])
@@ -64,12 +64,12 @@ test_data = []
 y_test_data = []
 
 for tumblr_username in lst_tumblr_username[:USER_COUNT]:
-    with open('../tumblr_twitter_scrapper/posts/{0}.csv'.format(tumblr_username), 'r', encoding='utf-8') as f:
+    with open('../tumblr_twitter_scrapper/merged_posts/{0}.csv'.format(tumblr_username), 'r', encoding='utf-8') as f:
         reader = csv.reader(f, delimiter=' ')
         for row in reader:
             item = TumblrItem(row)
             if item.is_owner:
-                content = refine.clean(item.content, ignore_url= True)
+                content = refine.clean(item.content, ignore_url= False)
                 for sent in refine.get_sentences(content):
                     if len(sent.split(' ')) > 2:
                         test_data.append(refine.stem(sent))
@@ -139,7 +139,7 @@ with tf.Graph().as_default():
         
     with tf.name_scope("Valid"):
         valid_input = lstm.LSTMInput(
-            config=config, data=valid_set, y_data= y_valid_data, number_of_class= USER_COUNT, name="ValidInput")
+            config=config, data=train_set, y_data= y_train_data, number_of_class= USER_COUNT, name="ValidInput")
         with tf.variable_scope("Model", reuse=True, initializer=initializer):
             mvalid = lstm.LSTMNetwork(is_training=False, config=config, input=valid_input)
     
