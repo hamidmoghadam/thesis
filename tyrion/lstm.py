@@ -84,8 +84,8 @@ init = tf.global_variables_initializer()
 with tf.Session() as sess:
     sess.run(init)
     # Keep training until reach max iterations
-    for i in range(13):
-        print('epoch {0} :'.format(i))
+    for i in range(7):
+        print('epoch {0} :'.format(i+1))
         train_accr = 0.0
         valid_accr = 0.0
         train_cost = 0.0
@@ -114,5 +114,11 @@ with tf.Session() as sess:
         
         print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
 	
+    test_data, test_label = dp.get_next_test_batch(dp.test_size)
+
+    acc = sess.run(accuracy, feed_dict={x: test_data, y: test_label})
+    loss = sess.run(cost, feed_dict={x: test_data, y: test_label})
         
+    print("Test Loss = {:.3f}".format(loss) + ", Test Accuracy= {:.3f}".format(acc))
+	
     
