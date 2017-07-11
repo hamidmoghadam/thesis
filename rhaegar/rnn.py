@@ -222,38 +222,5 @@ class BestConfig(object):
     batch_size = 20
     vocab_size = 21000#49432#10000
 
-def run_epoch(session, model, eval_op=None, verbose=False):
-    """Runs the model on the given data."""
-    start_time = time.time()
-    costs = 0.0
-    accrs = 0.0
-    iters = 0
-    state = session.run(model.initial_state)
-
-    fetches = {
-        "cost": model.cost,
-        "final_state": model.final_state,
-        "accuracy": model.accuracy
-    }
-
-    if eval_op is not None:
-        fetches["eval_op"] = eval_op
-
-    for step in range(model.input.epoch_size):
-        feed_dict = {}
-        for i, (c, h) in enumerate(model.initial_state):
-            feed_dict[c] = state[i].c
-            feed_dict[h] = state[i].h
-
-        vals = session.run(fetches, feed_dict)
-        cost = vals["cost"]
-        state = vals["final_state"]
-        accr = vals["accuracy"]
-
-        costs += cost
-        accrs += accr
-        #iters += model.input.num_steps
-        
-    return costs / model.input.epoch_size, accrs / model.input.epoch_size
 
 

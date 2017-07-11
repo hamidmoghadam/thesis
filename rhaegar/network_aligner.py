@@ -8,6 +8,42 @@ import rnn as lstm
 import matplotlib.pyplot as plt
 
 
+def run_epoch(session, model, eval_op=None, verbose=False):
+    """Runs the model on the given data."""
+    start_time = time.time()
+    costs = 0.0
+    accrs = 0.0
+    iters = 0
+    state = session.run(model.initial_state)
+
+    fetches = {
+        "cost": model.cost,
+        "final_state": model.final_state,
+        "accuracy": model.accuracy
+    }
+
+    if eval_op is not None:
+        fetches["eval_op"] = eval_op
+
+    for step in range(model.input.epoch_size):
+        feed_dict = {}
+        for i, (c, h) in enumerate(model.initial_state):
+            feed_dict[c] = state[i].c
+            feed_dict[h] = state[i].h
+
+        vals = session.run(fetches, feed_dict)
+        cost = vals["cost"]
+        state = vals["final_state"]
+        accr = vals["accuracy"]
+
+        costs += cost
+        accrs += accr
+        #iters += model.input.num_steps
+        
+    return costs / model.input.epoch_size, accrs / model.input.epoch_size
+
+
+
 lst_username = []
 lst_twitter_username = []
 lst_tumblr_username = []
@@ -155,10 +191,10 @@ with tf.Graph().as_default():
             print("Epoch: %d Learning rate: %.3f" % (i + 1, session.run(m.lr)))
             train_cost, trian_accr = run_epoch(session, m, eval_op=m.train_op, verbose=True)
 
-            print("Epoch: %d Train Perplexity: %.3f" % (i + 1, train_perplexity))
-            print("Epoch: %d Train accr: %.3f"%(i+1, accr))
+            print("Epoch: %d Train Perplexity: %.3f" % (i + 1, train_cost))
+            print("Epoch: %d Train accr: %.3f"%(i+1, trian_accr))
 
             valid_cost, valid_accr = run_epoch(session, mvalid)
-            print("Epoch: %d Valid Perplexity: %.3f" % (i + 1, valid_perplexity))
-            print("Epoch: %d Train accr: %.3f"%(i+1, accr))
+            print("Epoch: %d Valid Perplexity: %.3f" % (i + 1, valid_cost))
+            print("Epoch: %d Train accr: %.3f"%(i+1, valid_accr))
 
