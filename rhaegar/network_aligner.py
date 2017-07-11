@@ -135,13 +135,13 @@ with tf.Graph().as_default():
         train_input = lstm.LSTMInput(
             config=config, data=train_set, y_data=y_train_data, number_of_class= USER_COUNT, name="TrainInput")
         with tf.variable_scope("Model", reuse=None, initializer=initializer):
-            m = lstm.LSTMNetwork(is_training=True, config=config, input=train_input)
+            m = lstm.LSTMNetwork(is_training=True, config=config, input_=train_input)
         
     with tf.name_scope("Valid"):
         valid_input = lstm.LSTMInput(
             config=config, data=train_set, y_data= y_train_data, number_of_class= USER_COUNT, name="ValidInput")
         with tf.variable_scope("Model", reuse=True, initializer=initializer):
-            mvalid = lstm.LSTMNetwork(is_training=False, config=config, input=valid_input)
+            mvalid = lstm.LSTMNetwork(is_training=False, config=config, input_=valid_input)
     
 
     sv = tf.train.Supervisor()
