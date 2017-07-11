@@ -4,7 +4,7 @@ import time
 import numpy as np
 import tensorflow as tf
 
-import reader
+import data_provider as dp
 
 class LSTMInput(object):
     """The input data."""
