@@ -52,10 +52,10 @@ class LSTMNetwork(object):
         cell = tf.contrib.rnn.MultiRNNCell(
             [attn_cell() for _ in range(config.num_layers)], state_is_tuple=True)
 
-        self._initial_state = cell.zero_state(batch_size, data_type())
+        self._initial_state = cell.zero_state(batch_size, tf.float32)
         with tf.device("/cpu:0"):
             embedding = tf.get_variable(
-                "embedding", [vocab_size, size], dtype=data_type())
+                "embedding", [vocab_size, size], dtype=tf.float32
             inputs = tf.nn.embedding_lookup(embedding, input_.input_data)
 
         if is_training and config.keep_prob < 1:
@@ -81,9 +81,9 @@ class LSTMNetwork(object):
 
         
         softmax_w = tf.get_variable(
-            "softmax_w", [size, vocab_size], dtype=data_type())
+            "softmax_w", [size, vocab_size], dtype=tf.float32)
         softmax_b = tf.get_variable(
-            "softmax_b", [vocab_size], dtype=data_type())
+            "softmax_b", [vocab_size], dtype=tf.float32)
         logits = tf.matmul(output, softmax_w) + softmax_b
 
         self._cost = cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits= logits, labels=self._input.targets))
