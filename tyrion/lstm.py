@@ -21,20 +21,20 @@ handle 28 sequences of 28 steps for every sample.
 '''
 
 # Parameters
-learning_rate = 0.001
-training_iters = 100000
+learning_rate = 0.0007
 batch_size = 100
-display_step = 10
 
 # Network Parameters
 n_input = 30 # MNIST data input (img shape: 28*28)
 n_steps = 28 # timesteps
-n_hidden = 100 # hidden layer num of features
+n_hidden = 80 # hidden layer num of features
 n_classes = 10 # MNIST total classes (0-9 digits)
 vocab_size = 18000
+training = True
 # tf Graph input
 x = tf.placeholder(tf.int32, [None, n_input])
 y = tf.placeholder(tf.float32, [None, n_classes])
+dropout = tf.placeholder(tf.float32, shape=())
 
 # Define weights
 weights = {
@@ -45,12 +45,13 @@ biases = {
 }
 
 
-def RNN(x, weights, biases):
+def RNN(x, weights, biases, dropout):
 
     # Prepare data shape to match `rnn` function requirements
     # Current data input shape: (batch_size, n_steps, n_input)
     # Required shape: 'n_steps' tensors list of shape (batch_size, n_input)
-
+    x = tf.nn.dropout(x, dropout)
+    
     # Unstack to get a list of 'n_steps' tensors of shape (batch_size, n_input)
     x = tf.unstack(x, n_input, 1)
 
@@ -59,15 +60,17 @@ def RNN(x, weights, biases):
 
     # Get lstm cell output
     outputs, states = rnn.static_rnn(lstm_cell, x, dtype=tf.float32)
-
+    output = outputs[0]
+    for i in range(1, len(outputs)):
+        output = tf.maximum(output, outputs[i])
     # Linear activation, using rnn inner loop last output
-    return tf.matmul(outputs[-1], weights['out']) + biases['out']
+    return tf.matmul(output, weights['out']) + biases['out']
 
 with tf.device("/cpu:0"):
         embedding = tf.get_variable("embedding", [vocab_size, n_hidden], dtype=tf.float32)
         inputs = tf.nn.embedding_lookup(embedding, x)
 
-pred = RNN(inputs, weights, biases)
+pred = RNN(inputs, weights, biases, dropout)
 
 # Define loss and optimizer
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=pred, labels=y))
@@ -84,7 +87,7 @@ init = tf.global_variables_initializer()
 with tf.Session() as sess:
     sess.run(init)
     # Keep training until reach max iterations
-    for i in range(7):
+    for i in range(28):
         print('epoch {0} :'.format(i+1))
         train_accr = 0.0
         valid_accr = 0.0
@@ -96,11 +99,11 @@ with tf.Session() as sess:
         while step < epoch_size:
             batch_x, batch_y = dp.get_next_train_batch(batch_size)
 
-            acc = sess.run(accuracy, feed_dict={x: batch_x, y: batch_y})
+            acc = sess.run(accuracy, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
             train_accr += acc
-            loss = sess.run(cost, feed_dict={x: batch_x, y: batch_y})
+            loss = sess.run(cost, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
             train_cost += loss
-            sess.run(optimizer, feed_dict={x: batch_x, y: batch_y})
+            sess.run(optimizer, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
 
             step += 1
         
@@ -109,15 +112,15 @@ with tf.Session() as sess:
         
         valid_data, valid_label = dp.get_next_valid_batch(dp.valid_size)
 
-        acc = sess.run(accuracy, feed_dict={x: valid_data, y: valid_label})
-        loss = sess.run(cost, feed_dict={x: valid_data, y: valid_label})
+        acc = sess.run(accuracy, feed_dict={x: valid_data, y: valid_label, dropout: 1.0})
+        loss = sess.run(cost, feed_dict={x: valid_data, y: valid_label, dropout: 1.0})
         
         print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
-	
+    
     test_data, test_label = dp.get_next_test_batch(dp.test_size)
 
-    acc = sess.run(accuracy, feed_dict={x: test_data, y: test_label})
-    loss = sess.run(cost, feed_dict={x: test_data, y: test_label})
+    acc = sess.run(accuracy, feed_dict={x: test_data, y: test_label, dropout: 1.0})
+    loss = sess.run(cost, feed_dict={x: test_data, y: test_label, dropout: 1.0})
         
     print("Test Loss = {:.3f}".format(loss) + ", Test Accuracy= {:.3f}".format(acc))
 	

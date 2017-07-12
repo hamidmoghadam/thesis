@@ -3,6 +3,7 @@ import numpy as np
 from schema import *
 import refine
 import collections
+import plotlib
 
 class data_provider(object):
     def __init__(self, size = 10, sent_max_len = 30):
@@ -82,6 +83,7 @@ class data_provider(object):
         max_tweet_len = 0
         max_tweet = ''
         lst_len = []
+        lst_len_test = []
 
 
         self.train_set = []
@@ -90,28 +92,32 @@ class data_provider(object):
 
 
         for txt in train_data:
+            lst_len.append(len(txt.split(' ')))
             temp = self.pad_word_ids(self.text_to_word_ids(txt, word_2_id), sent_max_len)
             if np.sum(temp) > 0:
                 self.train_set.append(temp)
 
 
         for txt in valid_data:
+            lst_len.append(len(txt.split(' ')))
             temp = self.pad_word_ids(self.text_to_word_ids(txt, word_2_id), sent_max_len)
             if np.sum(temp) > 0:
                 self.valid_set.append(temp)
 
 
         for txt in test_data:
+            lst_len_test.append(len(txt.split(' ')))
             temp = self.pad_word_ids(self.text_to_word_ids(txt, word_2_id), sent_max_len)
             if np.sum(temp) > 0:
                 self.test_set.append(temp)
-
+        
+        
         self.train_size = len(self.train_set)
         self.valid_size = len(self.valid_set)
         self.test_size = len(self.test_set)
 
     def get_next_train_batch(self, batch_size):
-        if(self.train_batch_counter > self.train_size // batch_size):
+        if(self.train_batch_counter >= self.train_size // batch_size):
             self.train_batch_counter = 0
 
         train = self.train_set[self.train_batch_counter * batch_size: (self.train_batch_counter+1) * batch_size]
@@ -122,7 +128,7 @@ class data_provider(object):
         return (train, y_train)
     
     def get_next_valid_batch(self, batch_size):
-        if(self.valid_batch_counter > self.valid_size // batch_size):
+        if(self.valid_batch_counter >= self.valid_size // batch_size):
             self.valid_batch_counter = 0
             
         valid = self.valid_set[self.valid_batch_counter * batch_size: (self.valid_batch_counter+1) * batch_size]
@@ -133,7 +139,7 @@ class data_provider(object):
         return (valid, y_valid)
 
     def get_next_test_batch(self, batch_size):
-        if(self.test_batch_counter > self.test_size // batch_size):
+        if(self.test_batch_counter >= self.test_size // batch_size):
             self.test_batch_counter = 0
             
         test = self.test_set[self.test_batch_counter * batch_size: (self.test_batch_counter+1) * batch_size]
