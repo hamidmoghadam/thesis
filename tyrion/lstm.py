@@ -132,11 +132,9 @@ with tf.Session() as sess:
     print("Test Loss = {:.3f}".format(loss) + ", Test Accuracy= {:.3f}".format(acc))
 	
     
-    plt.hist(lst_train_cost,normed=1, histtype='step', cumulative=True, label='train cost')
-    plt.hist(lst_valid_cost,normed=1, histtype='step', cumulative=True, label='valid cost')
+    plt.plot(range(len(lst_train_cost)), lst_train_cost, 'g--', range(len(lst_valid_cost)), lst_valid_cost, 'b--')
     plt.figure()
-    plt.hist(lst_train_accr,normed=1, histtype='step', cumulative=True, label='train accr')
-    plt.hist(lst_valid_accr,normed=1, histtype='step', cumulative=True, label='valid accr')
+    plt.plot(range(len(lst_train_accr)), lst_train_accr, 'g--', range(len(lst_valid_accr)), lst_valid_accr, 'b--')
     plt.show()
 
 
