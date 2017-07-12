@@ -3,7 +3,8 @@ import numpy as np
 from schema import *
 import refine
 import collections
-import plotlib
+import matplotlib.pyplot as plt
+
 
 class data_provider(object):
     def __init__(self, size = 10, sent_max_len = 30):
@@ -62,7 +63,7 @@ class data_provider(object):
                         self.y_valid_data.append(label)
         test_data = []
         self.y_test_data = []
-
+        
         for tumblr_username in lst_tumblr_username[:size]:
             with open('../tumblr_twitter_scrapper/merged_posts/{0}.csv'.format(tumblr_username), 'r', encoding='utf-8') as f:
                 reader = csv.reader(f, delimiter=' ')
@@ -70,13 +71,25 @@ class data_provider(object):
                     item = TumblrItem(row)
                     if item.is_owner:
                         content = refine.clean(item.content, ignore_url= False)
-                        for sent in refine.get_sentences(content):
-                            if len(sent.split(' ')) > 2:
+                        content_count = len(content.split(' '))
+                        if(content_count < 3):
+                            continue
+                        if content_count > sent_max_len:
+                            for sent in refine.get_sentences(content):
                                 test_data.append(refine.stem(sent))
                                 k = lst_tumblr_username.index(tumblr_username)
                                 label = [0 for x in range(size)]
                                 label[k] = 1
                                 self.y_test_data.append(label)
+                        else: 
+                            sents = []
+                            for sent in refine.get_sentences(content):
+                                sents.append(refine.stem(sent))
+                            test_data.append(' <eos> '.join(sents))
+                            k = lst_tumblr_username.index(tumblr_username)
+                            label = [0 for x in range(size)]
+                            label[k] = 1
+                            self.y_test_data.append(label)
 
         word_2_id = self.build_vocab(' '.join(train_data))
 
@@ -110,7 +123,18 @@ class data_provider(object):
             temp = self.pad_word_ids(self.text_to_word_ids(txt, word_2_id), sent_max_len)
             if np.sum(temp) > 0:
                 self.test_set.append(temp)
+
+        '''        
+        t = sent_max_len
+
+        plt.hist([x for x in lst_len if x <= t], facecolor='g')
+        plt.figure()
+        plt.hist([x for x in lst_len_test if x <= t], facecolor='b')
+        plt.figure()
+        plt.boxplot([[x for x in lst_len if x <= t], [x for x in lst_len_test if x <= t]])
         
+        plt.show()
+        '''
         
         self.train_size = len(self.train_set)
         self.valid_size = len(self.valid_set)

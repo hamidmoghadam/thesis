@@ -5,14 +5,14 @@ Long Short Term Memory paper: http://deeplearning.cs.cmu.edu/pdfs/Hochreiter97_l
 Author: Aymeric Damien
 Project: https://github.com/aymericdamien/TensorFlow-Examples/
 '''
-
+import matplotlib.pyplot as plt
 import tensorflow as tf
 from tensorflow.contrib import rnn
 
 # Import MNIST data
 from data_provider import data_provider
 #mnist = input_data.read_data_sets("/tmp/data/", one_hot=True)
-dp = data_provider()
+
 
 '''
 To classify images using a recurrent neural network, we consider every image
@@ -25,12 +25,13 @@ learning_rate = 0.0007
 batch_size = 100
 
 # Network Parameters
-n_input = 30 # MNIST data input (img shape: 28*28)
+n_input = 75 # MNIST data input (img shape: 28*28)
 n_steps = 28 # timesteps
 n_hidden = 80 # hidden layer num of features
 n_classes = 10 # MNIST total classes (0-9 digits)
 vocab_size = 18000
 training = True
+dp = data_provider(sent_max_len = n_input)
 # tf Graph input
 x = tf.placeholder(tf.int32, [None, n_input])
 y = tf.placeholder(tf.float32, [None, n_classes])
@@ -83,6 +84,11 @@ accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
 # Initializing the variables
 init = tf.global_variables_initializer()
 
+lst_train_cost = []
+lst_valid_cost = []
+
+lst_train_accr = []
+lst_valid_accr = []
 # Launch the graph
 with tf.Session() as sess:
     sess.run(init)
@@ -107,13 +113,14 @@ with tf.Session() as sess:
 
             step += 1
         
-
+        lst_train_cost.append(train_cost/epoch_size)
         print("Training Loss = {:.3f}".format(train_cost/epoch_size) + ", Training Accuracy= {:.3f}".format(train_accr/epoch_size))
         
         valid_data, valid_label = dp.get_next_valid_batch(dp.valid_size)
 
         acc = sess.run(accuracy, feed_dict={x: valid_data, y: valid_label, dropout: 1.0})
         loss = sess.run(cost, feed_dict={x: valid_data, y: valid_label, dropout: 1.0})
+        lst_valid_cost.append(loss)
         
         print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
     
@@ -124,4 +131,14 @@ with tf.Session() as sess:
         
     print("Test Loss = {:.3f}".format(loss) + ", Test Accuracy= {:.3f}".format(acc))
 	
+    
+    plt.hist(lst_train_cost,normed=1, histtype='step', cumulative=True, label='train cost')
+    plt.hist(lst_valid_cost,normed=1, histtype='step', cumulative=True, label='valid cost')
+    plt.figure()
+    plt.hist(lst_train_accr,normed=1, histtype='step', cumulative=True, label='train accr')
+    plt.hist(lst_valid_accr,normed=1, histtype='step', cumulative=True, label='valid accr')
+    plt.show()
+
+
+
     
