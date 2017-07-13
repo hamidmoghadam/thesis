@@ -22,10 +22,10 @@ handle 28 sequences of 28 steps for every sample.
 
 # Parameters
 learning_rate = 0.0007
-batch_size = 100
+batch_size = 200
 
 # Network Parameters
-n_input = 75 # MNIST data input (img shape: 28*28)
+n_input = 400 # MNIST data input (img shape: 28*28)
 n_steps = 28 # timesteps
 n_hidden = 80 # hidden layer num of features
 n_classes = 10 # MNIST total classes (0-9 digits)
@@ -114,6 +114,7 @@ with tf.Session() as sess:
             step += 1
         
         lst_train_cost.append(train_cost/epoch_size)
+        lst_train_accr.append(train_accr/epoch_size)
         print("Training Loss = {:.3f}".format(train_cost/epoch_size) + ", Training Accuracy= {:.3f}".format(train_accr/epoch_size))
         
         valid_data, valid_label = dp.get_next_valid_batch(dp.valid_size)
@@ -121,6 +122,7 @@ with tf.Session() as sess:
         acc = sess.run(accuracy, feed_dict={x: valid_data, y: valid_label, dropout: 1.0})
         loss = sess.run(cost, feed_dict={x: valid_data, y: valid_label, dropout: 1.0})
         lst_valid_cost.append(loss)
+        lst_valid_accr.append(acc)
         
         print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
     
