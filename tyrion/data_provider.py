@@ -37,11 +37,12 @@ class data_provider(object):
                     item = TwitterItem(row)
                     if item.is_owner == True:
                         content = refine.clean(item.content, ignore_url= False)
-                        sents = refine.get_sentences(content)
-                        for i in range(len(sents)):
-                            sents[i] = refine.stem(sents[i])
-                        content = ' <eos> '.join(sents)
-                        temp_set.append(content)
+                        if len(content.split(' ')) > 2:
+                            sents = refine.get_sentences(content)
+                            for i in range(len(sents)):
+                                sents[i] = refine.stem(sents[i])
+                            content = ' <eos> '.join(sents)
+                            temp_set.append(content)
 
                 random_set = np.zeros(len(temp_set))
                 train_count = int(np.round(len(temp_set) * 0.7))

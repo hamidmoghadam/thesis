@@ -25,7 +25,7 @@ learning_rate = 0.0007
 batch_size = 200
 
 # Network Parameters
-n_input = 400 # MNIST data input (img shape: 28*28)
+n_input = 100 # MNIST data input (img shape: 28*28)
 n_steps = 28 # timesteps
 n_hidden = 80 # hidden layer num of features
 n_classes = 10 # MNIST total classes (0-9 digits)
