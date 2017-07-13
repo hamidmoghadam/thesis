@@ -29,6 +29,7 @@ n_input = 100 # MNIST data input (img shape: 28*28)
 n_steps = 28 # timesteps
 n_hidden = 80 # hidden layer num of features
 n_classes = 10 # MNIST total classes (0-9 digits)
+num_layers = 2
 vocab_size = 44000
 training = True
 dp = data_provider(sent_max_len = n_input)
@@ -57,7 +58,11 @@ def RNN(x, weights, biases, dropout):
     x = tf.unstack(x, n_input, 1)
 
     # Define a lstm cell with tensorflow
-    lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0)
+    #lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0)
+    def lstm_cell():
+            return tf.contrib.rnn.BasicLSTMCell(size, forget_bias=1.0)
+
+    lstm_cell = tf.contrib.rnn.MultiRNNCell([lstm_cell() for _ in range(num_layers)])
 
     # Get lstm cell output
     outputs, states = rnn.static_rnn(lstm_cell, x, dtype=tf.float32)
