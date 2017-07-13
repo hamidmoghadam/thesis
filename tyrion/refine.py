@@ -21,9 +21,14 @@ def clean(raw_review, ignore_digit = False, ignore_url= False, ignore_stopword =
     if not ignore_url:
         GRUBER_URLINTEXT_PAT = r'(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:\'".,<>?\xab\xbb\u201c\u201d\u2018\u2019]))'
         raw_review = re.sub(GRUBER_URLINTEXT_PAT, " <url> ", raw_review)
+        #insensitive = re.compile(re.escape(url[0]), re.IGNORECASE)
+        #parsed_uri = urlparse(url[0])
+        #domain = '{uri.scheme}://{uri.netloc}/'.format(uri=parsed_uri)
+        #raw_review = insensitive.sub(domain, raw_review)
+
     # 2. Remove number
     if not ignore_digit:
-        raw_review = re.sub("\d+", "<digit>", raw_review)
+        raw_review = re.sub(" \d+", " <digit> ", raw_review)
     #letters_only = re.sub("[^a-zA-Z]", " ", raw_review)
     #
     # 3. Convert to lower case, split into individual words
