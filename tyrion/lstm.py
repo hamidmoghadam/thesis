@@ -29,7 +29,7 @@ n_input = 100 # MNIST data input (img shape: 28*28)
 n_steps = 28 # timesteps
 n_hidden = 80 # hidden layer num of features
 n_classes = 10 # MNIST total classes (0-9 digits)
-vocab_size = 18000
+vocab_size = 44000
 training = True
 dp = data_provider(sent_max_len = n_input)
 # tf Graph input

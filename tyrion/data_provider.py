@@ -36,11 +36,11 @@ class data_provider(object):
                 for row in reader:
                     item = TwitterItem(row)
                     if item.is_owner == True:
-                        content = refine.clean(item.content, ignore_url= False)
+                        content = refine.clean(item.content, ignore_url= False, ignore_stopword=False)
                         if len(content.split(' ')) > 2:
                             sents = refine.get_sentences(content)
-                            for i in range(len(sents)):
-                                sents[i] = refine.stem(sents[i])
+                            #for i in range(len(sents)):
+                            #    sents[i] = refine.stem(sents[i])
                             content = ' <eos> '.join(sents)
                             temp_set.append(content)
 
@@ -71,13 +71,13 @@ class data_provider(object):
                 for row in reader:
                     item = TumblrItem(row)
                     if item.is_owner:
-                        content = refine.clean(item.content, ignore_url= False)
+                        content = refine.clean(item.content, ignore_url= False,ignore_stopword=False)
                         content_count = len(content.split(' '))
                         if(content_count < 3):
                             continue
                         if content_count > sent_max_len:
                             for sent in refine.get_sentences(content):
-                                test_data.append(refine.stem(sent))
+                                test_data.append(sent)#refine.stem(sent))
                                 k = lst_tumblr_username.index(tumblr_username)
                                 label = [0 for x in range(size)]
                                 label[k] = 1
@@ -85,7 +85,7 @@ class data_provider(object):
                         else: 
                             sents = []
                             for sent in refine.get_sentences(content):
-                                sents.append(refine.stem(sent))
+                                sents.append(sent)#refine.stem(sent))
                             test_data.append(' <eos> '.join(sents))
                             k = lst_tumblr_username.index(tumblr_username)
                             label = [0 for x in range(size)]
