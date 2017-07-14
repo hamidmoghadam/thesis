@@ -95,7 +95,7 @@ lst_valid_accr = []
 with tf.Session() as sess:
     sess.run(init)
     # Keep training until reach max iterations
-    for i in range(1):
+    for i in range(28):
         print('epoch {0} :'.format(i+1))
         train_accr = 0.0
         valid_accr = 0.0
@@ -112,7 +112,7 @@ with tf.Session() as sess:
             loss = sess.run(cost, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
             train_cost += loss
             sess.run(optimizer, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
-            break
+            
             step += 1
         
         lst_train_cost.append(train_cost/epoch_size)
