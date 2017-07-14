@@ -21,12 +21,12 @@ handle 28 sequences of 28 steps for every sample.
 '''
 
 # Parameters
-learning_rate = 0.0007
+learning_rate = 0.0005
 batch_size = 200
 
 # Network Parameters
 n_input = 100 # MNIST data input (img shape: 28*28)
-n_hidden = 150 # hidden layer num of features
+n_hidden = 70 # hidden layer num of features
 n_classes = 10 # MNIST total classes (0-9 digits)
 
 #vocab_size = 58000
@@ -57,9 +57,9 @@ def RNN(x, weights, biases, dropout):
     x = tf.unstack(x, n_input, 1)
 
     # Define a lstm cell with tensorflow
-    lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=0.0)
+    lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0)
 	
-    lstm_cell = tf.contrib.rnn.DropoutWrapper(lstm_cell, output_keep_prob = dropout)
+    #lstm_cell = tf.contrib.rnn.DropoutWrapper(lstm_cell, output_keep_prob = dropout)
     # Get lstm cell output
     outputs, states = rnn.static_rnn(lstm_cell, x, dtype=tf.float32)
     output = outputs[0]
@@ -94,7 +94,7 @@ lst_valid_accr = []
 with tf.Session() as sess:
     sess.run(init)
     # Keep training until reach max iterations
-    for i in range(28):
+    for i in range(15):
         print('epoch {0} :'.format(i+1))
         train_accr = 0.0
         valid_accr = 0.0
