@@ -8,6 +8,7 @@ Project: https://github.com/aymericdamien/TensorFlow-Examples/
 import matplotlib.pyplot as plt
 import tensorflow as tf
 from tensorflow.contrib import rnn
+import numpy as np
 
 # Import MNIST data
 from data_provider import data_provider
@@ -73,7 +74,7 @@ with tf.device("/cpu:0"):
         inputs = tf.nn.embedding_lookup(embedding, x)
 
 pred = RNN(inputs, weights, biases, dropout)
-
+softmax_pred = tf.nn.softmax(pred)
 # Define loss and optimizer
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=pred, labels=y))
 optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
@@ -94,7 +95,7 @@ lst_valid_accr = []
 with tf.Session() as sess:
     sess.run(init)
     # Keep training until reach max iterations
-    for i in range(20):
+    for i in range(30):
         print('epoch {0} :'.format(i+1))
         train_accr = 0.0
         valid_accr = 0.0
@@ -129,12 +130,14 @@ with tf.Session() as sess:
     
 
 
-    for i in range(n_classes):
+    for i in range(30):#n_classes):
         print('for class number {0}'.format(i))
         test_data, test_label = dp.get_next_test_batch()
-
-        acc = sess.run(accuracy, feed_dict={x: test_data, y: test_label, dropout: 1.0})
-        loss = sess.run(cost, feed_dict={x: test_data, y: test_label, dropout: 1.0})
+        loss, acc, prediction = sess.run([cost, accuracy, softmax_pred], feed_dict={x: test_data, y: test_label, dropout: 1.0})
+        result = np.sum(prediction, axis=0)/np.sum(np.sum(prediction, axis=0))
+        print('  '.join([str(k) for k in result]))
+        #acc = sess.run(accuracy, feed_dict={x: test_data, y: test_label, dropout: 1.0})
+        #loss = sess.run(cost, feed_dict={x: test_data, y: test_label, dropout: 1.0})
 
         print("Test Loss = {:.3f}".format(loss) + ", Test Accuracy= {:.3f}".format(acc))
 
