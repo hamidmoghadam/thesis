@@ -12,6 +12,8 @@ class data_provider(object):
         self.valid_batch_counter = 0
         self.test_batch_counter = 0
 
+        self.size = size
+
         lst_username = []
         lst_twitter_username = []
         lst_tumblr_username = []
@@ -24,9 +26,9 @@ class data_provider(object):
                 lst_tumblr_username.append(row[0])
 
         train_data = []
-        self.y_train_data = []
+        y_train_data = []
         valid_data = []
-        self.y_valid_data = []
+        y_valid_data = []
 
 
         for twitter_username in lst_twitter_username[:size]:
@@ -55,15 +57,15 @@ class data_provider(object):
                         k = lst_twitter_username.index(twitter_username)
                         label = [0 for x in range(size)]
                         label[k] = 1
-                        self.y_train_data.append(label)
+                        y_train_data.append(label)
                     else:
                         valid_data.append(temp_set[i])
                         k = lst_twitter_username.index(twitter_username)
                         label = [0 for x in range(size)]
                         label[k] = 1
-                        self.y_valid_data.append(label)
+                        y_valid_data.append(label)
         test_data = []
-        self.y_test_data = []
+        y_test_data = []
         
         for tumblr_username in lst_tumblr_username[:size]:
             with open('../tumblr_twitter_scrapper/merged_posts/{0}.csv'.format(tumblr_username), 'r', encoding='utf-8') as f:
@@ -81,7 +83,7 @@ class data_provider(object):
                                 k = lst_tumblr_username.index(tumblr_username)
                                 label = [0 for x in range(size)]
                                 label[k] = 1
-                                self.y_test_data.append(label)
+                                y_test_data.append(label)
                         else: 
                             sents = []
                             for sent in refine.get_sentences(content):
@@ -90,7 +92,7 @@ class data_provider(object):
                             k = lst_tumblr_username.index(tumblr_username)
                             label = [0 for x in range(size)]
                             label[k] = 1
-                            self.y_test_data.append(label)
+                            y_test_data.append(label)
 
         word_2_id = self.build_vocab(' '.join(train_data))
         self.vocab_size = len(word_2_id) + 1
@@ -105,26 +107,36 @@ class data_provider(object):
         self.valid_set = []
         self.test_set = []
 
+        self.y_train_set = []
+        self.y_valid_set = []
+        self.y_test_set = []
 
-        for txt in train_data:
+
+        for i in range(len(train_data)):
+            txt = train_data[i]
             lst_len.append(len(txt.split(' ')))
             temp = self.pad_word_ids(self.text_to_word_ids(txt, word_2_id), sent_max_len)
             if np.sum(temp) > 0:
                 self.train_set.append(temp)
+                self.y_train_set.append(y_train_data[i])
 
 
-        for txt in valid_data:
+        for i in range(len(valid_data)):
+            txt = valid_data[i]
             lst_len.append(len(txt.split(' ')))
             temp = self.pad_word_ids(self.text_to_word_ids(txt, word_2_id), sent_max_len)
             if np.sum(temp) > 0:
                 self.valid_set.append(temp)
+                self.y_valid_set.append(y_valid_data[i])
 
 
-        for txt in test_data:
+        for i in range(len(test_data)):
+            txt = test_data[i]
             lst_len_test.append(len(txt.split(' ')))
             temp = self.pad_word_ids(self.text_to_word_ids(txt, word_2_id), sent_max_len)
             if np.sum(temp) > 0:
                 self.test_set.append(temp)
+                self.y_test_set.append(y_test_data[i])
 
         '''        
         t = sent_max_len
@@ -147,7 +159,7 @@ class data_provider(object):
             self.train_batch_counter = 0
 
         train = self.train_set[self.train_batch_counter * batch_size: (self.train_batch_counter+1) * batch_size]
-        y_train = self.y_train_data[self.train_batch_counter * batch_size: (self.train_batch_counter+1) * batch_size]
+        y_train = self.y_train_set[self.train_batch_counter * batch_size: (self.train_batch_counter+1) * batch_size]
        
         self.train_batch_counter += 1
 
@@ -158,22 +170,27 @@ class data_provider(object):
             self.valid_batch_counter = 0
             
         valid = self.valid_set[self.valid_batch_counter * batch_size: (self.valid_batch_counter+1) * batch_size]
-        y_valid = self.y_valid_data[self.valid_batch_counter * batch_size: (self.valid_batch_counter+1) * batch_size]
+        y_valid = self.y_valid_set[self.valid_batch_counter * batch_size: (self.valid_batch_counter+1) * batch_size]
        
         self.valid_batch_counter += 1
 
         return (valid, y_valid)
 
-    def get_next_test_batch(self, batch_size):
-        if(self.test_batch_counter >= self.test_size // batch_size):
+    def get_next_test_batch(self):
+        label = [0 for x in range(self.size)]
+        label[self.test_batch_counter] = 1
+        indices = [label == i for i in self.y_test_set]
+        batch_size = len(indices)
+
+        if(self.test_batch_counter == self.size):
             self.test_batch_counter = 0
-            
-        test = self.test_set[self.test_batch_counter * batch_size: (self.test_batch_counter+1) * batch_size]
-        y_test = self.y_test_data[self.test_batch_counter * batch_size: (self.test_batch_counter+1) * batch_size]
+
+        test = np.array(self.test_set)[indices]
+        y_test = np.array(self.y_test_set)[indices]
        
         self.test_batch_counter += 1
 
-        return (test, y_test)
+        return (test.tolist(), y_test.tolist())
 
     def build_vocab(self,data):
         #data = _read_words(filename)

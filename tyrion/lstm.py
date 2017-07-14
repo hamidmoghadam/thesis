@@ -94,7 +94,7 @@ lst_valid_accr = []
 with tf.Session() as sess:
     sess.run(init)
     # Keep training until reach max iterations
-    for i in range(15):
+    for i in range(20):
         print('epoch {0} :'.format(i+1))
         train_accr = 0.0
         valid_accr = 0.0
@@ -127,16 +127,20 @@ with tf.Session() as sess:
         
         print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
     
-    test_data, test_label = dp.get_next_test_batch(dp.test_size)
 
-    acc = sess.run(accuracy, feed_dict={x: test_data, y: test_label, dropout: 1.0})
-    loss = sess.run(cost, feed_dict={x: test_data, y: test_label, dropout: 1.0})
-        
-    print("Test Loss = {:.3f}".format(loss) + ", Test Accuracy= {:.3f}".format(acc))
-	
-    
+
+    for i in range(n_classes):
+        print('for class number {0}'.format(i))
+        test_data, test_label = dp.get_next_test_batch()
+
+        acc = sess.run(accuracy, feed_dict={x: test_data, y: test_label, dropout: 1.0})
+        loss = sess.run(cost, feed_dict={x: test_data, y: test_label, dropout: 1.0})
+
+        print("Test Loss = {:.3f}".format(loss) + ", Test Accuracy= {:.3f}".format(acc))
+
     plt.plot(range(len(lst_train_cost)), lst_train_cost, 'g--', range(len(lst_valid_cost)), lst_valid_cost, 'b--')
     plt.figure()
+
     plt.plot(range(len(lst_train_accr)), lst_train_accr, 'g--', range(len(lst_valid_accr)), lst_valid_accr, 'b--')
     plt.show()
 
