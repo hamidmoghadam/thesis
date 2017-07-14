@@ -28,10 +28,10 @@ batch_size = 200
 # Network Parameters
 n_input = 100 # MNIST data input (img shape: 28*28)
 n_hidden = 70 # hidden layer num of features
-n_classes = 10 # MNIST total classes (0-9 digits)
+n_classes = 20 # MNIST total classes (0-9 digits)
 
 #vocab_size = 58000
-dp = data_provider(sent_max_len = n_input)
+dp = data_provider(size=n_classes, sent_max_len = n_input)
 
 # tf Graph input
 x = tf.placeholder(tf.int32, [None, n_input])
@@ -95,7 +95,7 @@ lst_valid_accr = []
 with tf.Session() as sess:
     sess.run(init)
     # Keep training until reach max iterations
-    for i in range(30):
+    for i in range(18):
         print('epoch {0} :'.format(i+1))
         train_accr = 0.0
         valid_accr = 0.0
@@ -130,7 +130,7 @@ with tf.Session() as sess:
     
 
 
-    for i in range(30):#n_classes):
+    for i in range(n_classes):
         print('for class number {0}'.format(i))
         test_data, test_label = dp.get_next_test_batch()
         loss, acc, prediction = sess.run([cost, accuracy, softmax_pred], feed_dict={x: test_data, y: test_label, dropout: 1.0})
