@@ -95,7 +95,7 @@ lst_valid_accr = []
 with tf.Session() as sess:
     sess.run(init)
     # Keep training until reach max iterations
-    for i in range(18):
+    for i in range(1):
         print('epoch {0} :'.format(i+1))
         train_accr = 0.0
         valid_accr = 0.0
@@ -112,7 +112,7 @@ with tf.Session() as sess:
             loss = sess.run(cost, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
             train_cost += loss
             sess.run(optimizer, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
-
+            break
             step += 1
         
         lst_train_cost.append(train_cost/epoch_size)
@@ -134,11 +134,11 @@ with tf.Session() as sess:
         print('for class number {0}'.format(i))
         test_data, test_label = dp.get_next_test_batch()
         loss, acc, prediction = sess.run([cost, accuracy, softmax_pred], feed_dict={x: test_data, y: test_label, dropout: 1.0})
-        result = np.sum(prediction, axis=0)/np.sum(np.sum(prediction, axis=0))
-        print('  '.join([str(k) for k in result]))
-        #acc = sess.run(accuracy, feed_dict={x: test_data, y: test_label, dropout: 1.0})
-        #loss = sess.run(cost, feed_dict={x: test_data, y: test_label, dropout: 1.0})
-
+        result = (np.sum(prediction, axis=0)/np.sum(np.sum(prediction, axis=0))).tolist()
+        temp = result[i]
+        result.sort()
+        max_index = result.index(temp)
+        print('  '.join([str(k) for k in result[:(max_index+1)]]))
         print("Test Loss = {:.3f}".format(loss) + ", Test Accuracy= {:.3f}".format(acc))
 
     plt.plot(range(len(lst_train_cost)), lst_train_cost, 'g--', range(len(lst_valid_cost)), lst_valid_cost, 'b--')
