@@ -36,7 +36,7 @@ class data_provider(object):
                 for row in reader:
                     item = TwitterItem(row)
                     if item.is_owner == True:
-                        content = refine.clean(item.content, ignore_url= False, ignore_stopword=False)
+                        content = refine.clean(item.content, ignore_url= True, ignore_stopword=False)
                         if len(content.split(' ')) > 2:
                             sents = refine.get_sentences(content)
                             #for i in range(len(sents)):
@@ -71,7 +71,7 @@ class data_provider(object):
                 for row in reader:
                     item = TumblrItem(row)
                     if item.is_owner:
-                        content = refine.clean(item.content, ignore_url= False,ignore_stopword=False)
+                        content = refine.clean(item.content, ignore_url= True,ignore_stopword=False)
                         content_count = len(content.split(' '))
                         if(content_count < 3):
                             continue
