@@ -93,6 +93,7 @@ class data_provider(object):
                             self.y_test_data.append(label)
 
         word_2_id = self.build_vocab(' '.join(train_data))
+        self.vocab_size = len(word_2_id) + 1
 
         max_tweet_len = 0
         max_tweet = ''
