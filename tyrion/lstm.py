@@ -149,8 +149,9 @@ with tf.Session() as sess:
         print("Test Loss = {:.3f}".format(loss) + ", Test Accuracy= {:.3f}".format(acc))
     
     for i in range(n_classes) :
-        lst_recall.append(confiusion_matrix[i , i] / np.sum(confiusion_matrix[i, :], axis=0))
-        lst_precision.append(confiusion_matrix[i , i] / np.sum(confiusion_matrix[:, i], axis=0)) 
+        lst_recall.append(confiusion_matrix[i , i] / max(np.sum(confiusion_matrix[i, :], axis=0), 1))
+        lst_precision.append(confiusion_matrix[i , i] / max(np.sum(confiusion_matrix[:, i], axis=0),1)) 
+    
     
     print('precision is {0}'.format(sum(lst_precision) / n_classes))
     print('recall is {0}'.format(sum(lst_recall)/ n_classes))
