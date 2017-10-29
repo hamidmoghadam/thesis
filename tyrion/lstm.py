@@ -28,7 +28,7 @@ batch_size = 200
 # Network Parameters
 n_input = 100 # MNIST data input (img shape: 28*28)
 n_hidden = 70 # hidden layer num of features
-n_classes = 20 # MNIST total classes (0-9 digits)
+n_classes = 2 # MNIST total classes (0-9 digits)
 
 #vocab_size = 58000
 dp = data_provider(size=n_classes, sent_max_len = n_input)
@@ -129,17 +129,31 @@ with tf.Session() as sess:
         print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
     
 
-
+    confiusion_matrix = np.zeros(n_classes, n_classes)
+    lst_precision = []
+    lst_recall = []
     for i in range(n_classes):
         print('for class number {0}'.format(i))
         test_data, test_label = dp.get_next_test_batch()
         loss, acc, prediction = sess.run([cost, accuracy, softmax_pred], feed_dict={x: test_data, y: test_label, dropout: 1.0})
+        for row in prediction:
+            j = row.argmax(axis=0)
+            confiusion_matrix[i][j] += 1
+        
+
         result = (np.sum(prediction, axis=0)/np.sum(np.sum(prediction, axis=0))).tolist()
         temp = result[i]
         result.sort(reverse=True)
         max_index = result.index(temp)
         print('  '.join([str(k) for k in result[:(max_index+1)]]))
         print("Test Loss = {:.3f}".format(loss) + ", Test Accuracy= {:.3f}".format(acc))
+    
+    for i in range(n_classes) :
+        lst_recall.append(confiusion_matrix[i , i] / np.sum(confiusion_matrix[i, :], axis=0))
+        lst_precision.append(confiusion_matrix[i , i] / np.sum(confiusion_matrix[:, i], axis=0)) 
+    
+    print('precision is {0}'.format(sum(lst_precision) / n_classes))
+    print('recall is {0}'.format(sum(lst_recall)/ n_classes))
 
     plt.plot(range(len(lst_train_cost)), lst_train_cost, 'g--', range(len(lst_valid_cost)), lst_valid_cost, 'b--')
     plt.figure()
