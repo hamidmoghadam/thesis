@@ -129,7 +129,7 @@ with tf.Session() as sess:
         print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
     
 
-    confiusion_matrix = np.zeros(n_classes, n_classes)
+    confiusion_matrix = np.zeros((n_classes, n_classes))
     lst_precision = []
     lst_recall = []
     for i in range(n_classes):
