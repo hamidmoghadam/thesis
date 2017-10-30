@@ -139,7 +139,7 @@ with tf.Session() as sess:
             test_data, test_label = dp.get_next_test_batch(num_msg_per_user, i)
             loss, acc, prediction = sess.run([cost, accuracy, softmax_pred], feed_dict={x: test_data, y: test_label, dropout: 1.0})
                     
-            result = np.multiply.reduce(prediction, 0)
+            result = np.sum(np.log10(prediction), axis=0)
             max_idx = result.argmax(axis=0)
             if max_idx == i :
                 accr += 1
