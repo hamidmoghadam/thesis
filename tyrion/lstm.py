@@ -132,30 +132,28 @@ with tf.Session() as sess:
         
         #print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
     
+    for num_msg_per_user in range(number_of_sent_per_user, 105, 5):
+        accr = 0
+        for i in range(n_classes):
+            #print('for class number {0}'.format(i))
+            test_data, test_label = dp.get_next_test_batch(num_msg_per_user, i)
+            loss, acc, prediction = sess.run([cost, accuracy, softmax_pred], feed_dict={x: test_data, y: test_label, dropout: 1.0})
+                    
+            result = np.multiply.reduce(prediction, 0)
+            max_idx = result.argmax(axis=0)
+            if max_idx == i :
+                accr += 1
+            
 
-    accr = 0
-    for i in range(n_classes):
-        #print('for class number {0}'.format(i))
-        test_data, test_label = dp.get_next_test_batch(number_of_sent_per_user)
-        loss, acc, prediction = sess.run([cost, accuracy, softmax_pred], feed_dict={x: test_data, y: test_label, dropout: 1.0})
-                
-        result = np.multiply.reduce(prediction, 0)
-        max_idx = result.argmax(axis=0)
-        if max_idx == i :
-            accr += 1
+            #result = (np.sum(prediction, axis=0)/np.sum(np.sum(prediction, axis=0))).tolist()
+            #temp = result[i]
+            #result.sort(reverse=True)
+            #max_index = result.index(temp)
+            #print('  '.join([str(k) for k in result[:(max_index+1)]]))
+            #print("Test Loss = {:.3f}".format(loss) + ", Test Accuracy= {:.3f}".format(acc))
         
-
-        #result = (np.sum(prediction, axis=0)/np.sum(np.sum(prediction, axis=0))).tolist()
-        #temp = result[i]
-        #result.sort(reverse=True)
-        #max_index = result.index(temp)
-        #print('  '.join([str(k) for k in result[:(max_index+1)]]))
-        #print("Test Loss = {:.3f}".format(loss) + ", Test Accuracy= {:.3f}".format(acc))
-    
-    
-    
-    print('accr is {:.3f}'.format(accr / n_classes))
-    
+        print('accr {0:3d}  is {1:.3f}'.format(num_msg_per_user, accr / n_classes))
+        
     #plt.plot(range(len(lst_train_cost)), lst_train_cost, 'g--', range(len(lst_valid_cost)), lst_valid_cost, 'b--')
     #plt.figure()
 
