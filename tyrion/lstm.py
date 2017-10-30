@@ -100,7 +100,7 @@ with tf.Session() as sess:
     sess.run(init)
     # Keep training until reach max iterations
     for i in range(train_iteration):
-        #print('epoch {0} :'.format(i+1))
+        print('epoch {0} :'.format(i+1))
         train_accr = 0.0
         valid_accr = 0.0
         train_cost = 0.0
@@ -121,7 +121,7 @@ with tf.Session() as sess:
         
         lst_train_cost.append(train_cost/epoch_size)
         lst_train_accr.append(train_accr/epoch_size)
-        #print("Training Loss = {:.3f}".format(train_cost/epoch_size) + ", Training Accuracy= {:.3f}".format(train_accr/epoch_size))
+        print("Training Loss = {:.3f}".format(train_cost/epoch_size) + ", Training Accuracy= {:.3f}".format(train_accr/epoch_size))
         
         valid_data, valid_label = dp.get_next_valid_batch(dp.valid_size)
 
@@ -130,7 +130,7 @@ with tf.Session() as sess:
         lst_valid_cost.append(loss)
         lst_valid_accr.append(acc)
         
-        #print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
+        print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
     
     for num_msg_per_user in range(number_of_sent_per_user, 105, 5):
         accr = 0
