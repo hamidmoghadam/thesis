@@ -217,7 +217,7 @@ class data_provider(object):
 
         words, _ = list(zip(*count_pairs))
         word_to_id = dict(zip(words, range(1, len(words)+1)))
-        print("vocab size is {0}".format(len(word_to_id)))
+        #print("vocab size is {0}".format(len(word_to_id)))
         return word_to_id
 
 

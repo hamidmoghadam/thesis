@@ -5,15 +5,17 @@ Long Short Term Memory paper: http://deeplearning.cs.cmu.edu/pdfs/Hochreiter97_l
 Author: Aymeric Damien
 Project: https://github.com/aymericdamien/TensorFlow-Examples/
 '''
+import os
 import matplotlib.pyplot as plt
 import tensorflow as tf
 from tensorflow.contrib import rnn
 import numpy as np
-
+import sys
 # Import MNIST data
 from data_provider import data_provider
 #mnist = input_data.read_data_sets("/tmp/data/", one_hot=True)
 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 
 '''
 To classify images using a recurrent neural network, we consider every image
@@ -24,12 +26,13 @@ handle 28 sequences of 28 steps for every sample.
 # Parameters
 learning_rate = 0.0005
 batch_size = 200
-number_of_sent_per_user = 5
+number_of_sent_per_user = int(sys.argv[2])
+train_iteration = int(sys.argv[3])
 
 # Network Parameters
 n_input = 100 # MNIST data input (img shape: 28*28)
 n_hidden = 70 # hidden layer num of features
-n_classes = 2 # MNIST total classes (0-9 digits)
+n_classes = int(sys.argv[1]) # MNIST total classes (0-9 digits)
 
 #vocab_size = 58000
 dp = data_provider(size=n_classes, sent_max_len = n_input)
@@ -96,8 +99,8 @@ lst_valid_accr = []
 with tf.Session() as sess:
     sess.run(init)
     # Keep training until reach max iterations
-    for i in range(25):
-        print('epoch {0} :'.format(i+1))
+    for i in range(train_iteration):
+        #print('epoch {0} :'.format(i+1))
         train_accr = 0.0
         valid_accr = 0.0
         train_cost = 0.0
@@ -118,7 +121,7 @@ with tf.Session() as sess:
         
         lst_train_cost.append(train_cost/epoch_size)
         lst_train_accr.append(train_accr/epoch_size)
-        print("Training Loss = {:.3f}".format(train_cost/epoch_size) + ", Training Accuracy= {:.3f}".format(train_accr/epoch_size))
+        #print("Training Loss = {:.3f}".format(train_cost/epoch_size) + ", Training Accuracy= {:.3f}".format(train_accr/epoch_size))
         
         valid_data, valid_label = dp.get_next_valid_batch(dp.valid_size)
 
@@ -127,12 +130,12 @@ with tf.Session() as sess:
         lst_valid_cost.append(loss)
         lst_valid_accr.append(acc)
         
-        print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
+        #print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
     
 
     accr = 0
     for i in range(n_classes):
-        print('for class number {0}'.format(i))
+        #print('for class number {0}'.format(i))
         test_data, test_label = dp.get_next_test_batch(number_of_sent_per_user)
         loss, acc, prediction = sess.run([cost, accuracy, softmax_pred], feed_dict={x: test_data, y: test_label, dropout: 1.0})
                 
