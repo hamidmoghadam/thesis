@@ -24,11 +24,12 @@ handle 28 sequences of 28 steps for every sample.
 # Parameters
 learning_rate = 0.0005
 batch_size = 200
+number_of_sent_per_user = 5
 
 # Network Parameters
 n_input = 100 # MNIST data input (img shape: 28*28)
 n_hidden = 70 # hidden layer num of features
-n_classes = 6 # MNIST total classes (0-9 digits)
+n_classes = 2 # MNIST total classes (0-9 digits)
 
 #vocab_size = 58000
 dp = data_provider(size=n_classes, sent_max_len = n_input)
@@ -129,33 +130,29 @@ with tf.Session() as sess:
         print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
     
 
-    confiusion_matrix = np.zeros((n_classes, n_classes))
-    lst_precision = []
-    lst_recall = []
+    accr = 0
     for i in range(n_classes):
         print('for class number {0}'.format(i))
-        test_data, test_label = dp.get_next_test_batch()
+        test_data, test_label = dp.get_next_test_batch(number_of_sent_per_user)
         loss, acc, prediction = sess.run([cost, accuracy, softmax_pred], feed_dict={x: test_data, y: test_label, dropout: 1.0})
-        for row in prediction:
-            j = row.argmax(axis=0)
-            confiusion_matrix[i][j] += 1
+                
+        result = np.multiply.reduce(prediction, 0)
+        max_idx = result.argmax(axis=0)
+        if max_idx == i :
+            accr += 1
         
 
-        result = (np.sum(prediction, axis=0)/np.sum(np.sum(prediction, axis=0))).tolist()
-        temp = result[i]
-        result.sort(reverse=True)
-        max_index = result.index(temp)
-        print('  '.join([str(k) for k in result[:(max_index+1)]]))
-        print("Test Loss = {:.3f}".format(loss) + ", Test Accuracy= {:.3f}".format(acc))
-    
-    for i in range(n_classes) :
-        lst_recall.append(confiusion_matrix[i , i] / max(np.sum(confiusion_matrix[i, :], axis=0), 1))
-        lst_precision.append(confiusion_matrix[i , i] / max(np.sum(confiusion_matrix[:, i], axis=0),1)) 
+        #result = (np.sum(prediction, axis=0)/np.sum(np.sum(prediction, axis=0))).tolist()
+        #temp = result[i]
+        #result.sort(reverse=True)
+        #max_index = result.index(temp)
+        #print('  '.join([str(k) for k in result[:(max_index+1)]]))
+        #print("Test Loss = {:.3f}".format(loss) + ", Test Accuracy= {:.3f}".format(acc))
     
     
-    print('precision is {:.3f}'.format(sum(lst_precision) / n_classes))
-    print('recall is {:.3f}'.format(sum(lst_recall)/ n_classes))
-
+    
+    print('accr is {:.3f}'.format(accr / n_classes))
+    
     #plt.plot(range(len(lst_train_cost)), lst_train_cost, 'g--', range(len(lst_valid_cost)), lst_valid_cost, 'b--')
     #plt.figure()
 

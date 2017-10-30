@@ -192,6 +192,23 @@ class data_provider(object):
 
         return (test.tolist(), y_test.tolist())
 
+    def get_next_test_batch(self, n):
+        label = [0 for x in range(self.size)]
+        label[self.test_batch_counter] = 1
+        indices = [label == i for i in self.y_test_set]
+        batch_size = len(indices)
+
+        if(self.test_batch_counter == self.size):
+            self.test_batch_counter = 0
+
+        test = np.array(self.test_set)[indices]
+        y_test = np.array(self.y_test_set)[indices]
+       
+        self.test_batch_counter += 1
+
+        return (test[:n].tolist(), y_test[:n].tolist())
+
+
     def build_vocab(self,data):
         #data = _read_words(filename)
 
