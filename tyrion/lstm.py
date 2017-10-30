@@ -28,7 +28,7 @@ batch_size = 200
 # Network Parameters
 n_input = 100 # MNIST data input (img shape: 28*28)
 n_hidden = 70 # hidden layer num of features
-n_classes = 2 # MNIST total classes (0-9 digits)
+n_classes = 6 # MNIST total classes (0-9 digits)
 
 #vocab_size = 58000
 dp = data_provider(size=n_classes, sent_max_len = n_input)
@@ -153,14 +153,14 @@ with tf.Session() as sess:
         lst_precision.append(confiusion_matrix[i , i] / max(np.sum(confiusion_matrix[:, i], axis=0),1)) 
     
     
-    print('precision is {0}'.format(sum(lst_precision) / n_classes))
-    print('recall is {0}'.format(sum(lst_recall)/ n_classes))
+    print('precision is {:.3f}'.format(sum(lst_precision) / n_classes))
+    print('recall is {:.3f}'.format(sum(lst_recall)/ n_classes))
 
-    plt.plot(range(len(lst_train_cost)), lst_train_cost, 'g--', range(len(lst_valid_cost)), lst_valid_cost, 'b--')
-    plt.figure()
+    #plt.plot(range(len(lst_train_cost)), lst_train_cost, 'g--', range(len(lst_valid_cost)), lst_valid_cost, 'b--')
+    #plt.figure()
 
-    plt.plot(range(len(lst_train_accr)), lst_train_accr, 'g--', range(len(lst_valid_accr)), lst_valid_accr, 'b--')
-    plt.show()
+    #plt.plot(range(len(lst_train_accr)), lst_train_accr, 'g--', range(len(lst_valid_accr)), lst_valid_accr, 'b--')
+    #plt.show()
 
 
 
