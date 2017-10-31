@@ -31,7 +31,12 @@ class data_provider(object):
         y_valid_data = []
 
 
-        for twitter_username in lst_twitter_username[:size]:
+        user_selection_idx = np.random.permutation([x for x in range(31)])[:size]
+
+        lst_tumblr_username = (np.array(lst_tumblr_username)[user_selection_idx]).tolist()
+        lst_twitter_username = (np.array(lst_twitter_username)[user_selection_idx]).tolist()
+
+        for twitter_username in lst_twitter_username:
             temp_set = []
             with open('../tumblr_twitter_scrapper/merged_tweets/{0}.csv'.format(twitter_username), 'r', encoding='utf-8') as f:
                 reader = csv.reader(f, delimiter=' ')
@@ -67,7 +72,7 @@ class data_provider(object):
         test_data = []
         y_test_data = []
         
-        for tumblr_username in lst_tumblr_username[:size]:
+        for tumblr_username in lst_tumblr_username:
             with open('../tumblr_twitter_scrapper/merged_posts/{0}.csv'.format(tumblr_username), 'r', encoding='utf-8') as f:
                 reader = csv.reader(f, delimiter=' ')
                 for row in reader:
