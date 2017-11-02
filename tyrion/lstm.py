@@ -25,7 +25,7 @@ handle 28 sequences of 28 steps for every sample.
 '''
 
 # Parameters
-learning_rate = 0.0005
+learning_rate = 0.005
 batch_size = 200
 number_of_sent_per_user = int(sys.argv[2])
 train_iteration = int(sys.argv[3])
@@ -88,8 +88,7 @@ def loadGloVe(filename):
         if len(row[1:]) == 50:
             vocab.append(row[0])
             embd.append([float(i) for i in row[1:]])
-        else :
-            print(len(row[1:]))
+
     file.close()
     return vocab,embd
 
@@ -105,13 +104,6 @@ with tf.device("/cpu:0"):
     embedding_placeholder = tf.placeholder(tf.float32, [vocab_size, embedding_dim])
     embedding_init = W.assign(embedding_placeholder)
     inputs = tf.nn.embedding_lookup(W, x)
-#init vocab processor
-#vocab_processor = learn.preprocessing.VocabularyProcessor(n_input)
-#fit the vocab from glove
-#pretrain = vocab_processor.fit(vocab)
-#transform inputs
-#x = np.array(list(vocab_processor.transform(x)))
-
 
 #with tf.device("/cpu:0"):
 #        embedding = tf.get_variable("embedding", [dp.vocab_size, n_hidden], dtype=tf.float32)
@@ -138,7 +130,6 @@ lst_valid_accr = []
 # Launch the graph
 with tf.Session() as sess:
     sess.run(init)
-    print(embedding.shape)
     sess.run(embedding_init, feed_dict={embedding_placeholder: embedding})
     
     # Keep training until reach max iterations
