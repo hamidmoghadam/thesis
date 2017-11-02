@@ -25,7 +25,7 @@ handle 28 sequences of 28 steps for every sample.
 '''
 
 # Parameters
-learning_rate = 0.005
+learning_rate = 0.0005
 batch_size = 200
 number_of_sent_per_user = int(sys.argv[2])
 train_iteration = int(sys.argv[3])
@@ -85,7 +85,7 @@ def loadGloVe(filename):
     for line in file.readlines():
         row = line.strip().split(' ')
         
-        if len(row[1:]) == 50:
+        if len(row[1:]) == n_hidden:
             vocab.append(row[0])
             embd.append([float(i) for i in row[1:]])
 
@@ -95,13 +95,17 @@ def loadGloVe(filename):
 vocab,embd = loadGloVe(filename)
 vocab_size = len(vocab)
 embedding_dim = len(embd[0])
+if embedding_dim != n_hidden : 
+    print("FUCK")
+    return
 
 embedding = np.array(embd)
-embedding.reshape((vocab_size, embedding_dim))
 
 with tf.device("/cpu:0"):
-    W = tf.Variable(tf.constant(0.0, shape=[vocab_size, embedding_dim]), trainable=False, name="W")
-    embedding_placeholder = tf.placeholder(tf.float32, [vocab_size, embedding_dim])
+    print(dp.vocab_size)
+    print(vocab_size)
+    W = tf.Variable(tf.constant(0.0, shape=[vocab_size, n_hidden]), trainable=False, name="W")
+    embedding_placeholder = tf.placeholder(tf.float32, [vocab_size, n_hidden])
     embedding_init = W.assign(embedding_placeholder)
     inputs = tf.nn.embedding_lookup(W, x)
 
