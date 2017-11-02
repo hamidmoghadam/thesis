@@ -91,13 +91,13 @@ def loadGloVe(filename):
 
     file.close()
     return vocab,embd
-
+'''
 vocab,embd = loadGloVe(filename)
 vocab_size = len(vocab)
 embedding_dim = len(embd[0])
 if embedding_dim != n_hidden : 
     print("FUCK")
-    
+
 
 embedding = np.array(embd)
 
@@ -108,10 +108,10 @@ with tf.device("/cpu:0"):
     embedding_placeholder = tf.placeholder(tf.float32, [vocab_size, n_hidden])
     embedding_init = W.assign(embedding_placeholder)
     inputs = tf.nn.embedding_lookup(W, x)
-
-#with tf.device("/cpu:0"):
-#        embedding = tf.get_variable("embedding", [dp.vocab_size, n_hidden], dtype=tf.float32)
-#        inputs = tf.nn.embedding_lookup(embedding, x)
+'''
+with tf.device("/cpu:0"):
+        embedding = tf.get_variable("embedding", [dp.vocab_size, n_hidden], dtype=tf.float32)
+        inputs = tf.nn.embedding_lookup(embedding, x)
 
 pred = RNN(inputs, weights, biases, dropout)
 softmax_pred = tf.nn.softmax(pred)
@@ -134,7 +134,7 @@ lst_valid_accr = []
 # Launch the graph
 with tf.Session() as sess:
     sess.run(init)
-    sess.run(embedding_init, feed_dict={embedding_placeholder: embedding})
+    #sess.run(embedding_init, feed_dict={embedding_placeholder: embedding})
     
     # Keep training until reach max iterations
     for i in range(train_iteration):
