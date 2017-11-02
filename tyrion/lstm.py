@@ -97,7 +97,7 @@ vocab_size = len(vocab)
 embedding_dim = len(embd[0])
 if embedding_dim != n_hidden : 
     print("FUCK")
-    return
+    
 
 embedding = np.array(embd)
 
