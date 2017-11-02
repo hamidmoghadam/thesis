@@ -13,6 +13,7 @@ import numpy as np
 import sys
 # Import MNIST data
 from data_provider import data_provider
+from tensorflow.contrib import learn
 #mnist = input_data.read_data_sets("/tmp/data/", one_hot=True)
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
@@ -31,7 +32,7 @@ train_iteration = int(sys.argv[3])
 
 # Network Parameters
 n_input = 100 # MNIST data input (img shape: 28*28)
-n_hidden = 70 # hidden layer num of features
+n_hidden = 50 # hidden layer num of features
 n_classes = int(sys.argv[1]) # MNIST total classes (0-9 digits)
 
 #vocab_size = 58000
@@ -73,9 +74,50 @@ def RNN(x, weights, biases, dropout):
     # Linear activation, using rnn inner loop last output
     return tf.matmul(output, weights['out']) + biases['out']
 
+
+filename = '../../glove.twitter.27B/glove.twitter.27B.50d.txt'
+
+
+def loadGloVe(filename):
+    vocab = []
+    embd = []
+    file = open(filename,'r')
+    for line in file.readlines():
+        row = line.strip().split(' ')
+        
+        if len(row[1:]) == 50:
+            vocab.append(row[0])
+            embd.append([float(i) for i in row[1:]])
+        else :
+            print(len(row[1:]))
+    print('Loaded GloVe!')
+    file.close()
+    return vocab,embd
+
+vocab,embd = loadGloVe(filename)
+vocab_size = len(vocab)
+embedding_dim = len(embd[0])
+print(vocab_size, embedding_dim)
+embedding = np.array(embd)
+print(embedding.shape)
+embedding.reshape((vocab_size, embedding_dim))
+
 with tf.device("/cpu:0"):
-        embedding = tf.get_variable("embedding", [dp.vocab_size, n_hidden], dtype=tf.float32)
-        inputs = tf.nn.embedding_lookup(embedding, x)
+    W = tf.Variable(tf.constant(0.0, shape=[vocab_size, embedding_dim]), trainable=False, name="W")
+    embedding_placeholder = tf.placeholder(tf.float32, [vocab_size, embedding_dim])
+    embedding_init = W.assign(embedding_placeholder)
+    inputs = tf.nn.embedding_lookup(W, x)
+#init vocab processor
+#vocab_processor = learn.preprocessing.VocabularyProcessor(n_input)
+#fit the vocab from glove
+#pretrain = vocab_processor.fit(vocab)
+#transform inputs
+#x = np.array(list(vocab_processor.transform(x)))
+
+
+#with tf.device("/cpu:0"):
+#        embedding = tf.get_variable("embedding", [dp.vocab_size, n_hidden], dtype=tf.float32)
+#        inputs = tf.nn.embedding_lookup(embedding, x)
 
 pred = RNN(inputs, weights, biases, dropout)
 softmax_pred = tf.nn.softmax(pred)
@@ -98,6 +140,9 @@ lst_valid_accr = []
 # Launch the graph
 with tf.Session() as sess:
     sess.run(init)
+    print(embedding.shape)
+    sess.run(embedding_init, feed_dict={embedding_placeholder: embedding})
+    
     # Keep training until reach max iterations
     for i in range(train_iteration):
         #print('epoch {0} :'.format(i+1))
