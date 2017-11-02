@@ -90,16 +90,14 @@ def loadGloVe(filename):
             embd.append([float(i) for i in row[1:]])
         else :
             print(len(row[1:]))
-    print('Loaded GloVe!')
     file.close()
     return vocab,embd
 
 vocab,embd = loadGloVe(filename)
 vocab_size = len(vocab)
 embedding_dim = len(embd[0])
-print(vocab_size, embedding_dim)
+
 embedding = np.array(embd)
-print(embedding.shape)
 embedding.reshape((vocab_size, embedding_dim))
 
 with tf.device("/cpu:0"):
@@ -166,7 +164,7 @@ with tf.Session() as sess:
         
         lst_train_cost.append(train_cost/epoch_size)
         lst_train_accr.append(train_accr/epoch_size)
-        #print("Training Loss = {:.3f}".format(train_cost/epoch_size) + ", Training Accuracy= {:.3f}".format(train_accr/epoch_size))
+        print("Training Loss = {:.3f}".format(train_cost/epoch_size) + ", Training Accuracy= {:.3f}".format(train_accr/epoch_size))
         
         valid_data, valid_label = dp.get_next_valid_batch(dp.valid_size)
 
@@ -175,7 +173,7 @@ with tf.Session() as sess:
         lst_valid_cost.append(loss)
         lst_valid_accr.append(acc)
         
-        #print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
+        print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
     
     
     accr = 0
