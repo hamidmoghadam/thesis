@@ -39,7 +39,7 @@ n_classes = int(sys.argv[1]) # MNIST total classes (0-9 digits)
 dp = data_provider(size=n_classes, sent_max_len = n_input, number_of_post_per_user = number_of_post_per_user)
 
 # tf Graph input
-x = tf.placeholder(tf.int32, [None, n_input])
+x = tf.placeholder(tf.string, [None, n_input])
 y = tf.placeholder(tf.float32, [None, n_classes])
 dropout = tf.placeholder(tf.float32, shape=())
 
