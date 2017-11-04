@@ -95,7 +95,7 @@ embedding_dim = len(embd[0])
 if embedding_dim != n_hidden : 
     print("FUCK")
 
-dp = data_provider(size=n_classes, sent_max_len = n_input, number_of_post_per_user = number_of_post_per_user, vocab=vocab)
+dp = data_provider(vocab, size=n_classes, sent_max_len = n_input, number_of_post_per_user = number_of_post_per_user)
 
 embedding = np.array(embd)
 

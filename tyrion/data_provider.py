@@ -8,7 +8,7 @@ from tensorflow.contrib import learn
 
 
 class data_provider(object):
-    def __init__(self, size = 10, sent_max_len = 30, number_of_post_per_user = 50, vocab):
+    def __init__(self, vocab, size = 10, sent_max_len = 30, number_of_post_per_user = 50):
         self.train_batch_counter = 0
         self.valid_batch_counter = 0
         self.test_batch_counter = 0
