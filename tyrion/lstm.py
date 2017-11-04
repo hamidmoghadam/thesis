@@ -172,11 +172,19 @@ with tf.Session() as sess:
     
     
     accr = 0
+    accr_per_post = 0
+
+    int number_of_post = 0
     for i in range(n_classes):
         #print('for class number {0}'.format(i))
         test_data, test_label = dp.get_next_test_batch(number_of_sent_per_user, i)
         loss, acc, prediction = sess.run([cost, accuracy, softmax_pred], feed_dict={x: test_data, y: test_label, dropout: 1.0})
-                
+
+        for predict in prediction:
+            number_of_post += 1
+            if predict.argmax(axis=0) == i:
+                accr_per_post += 1
+
         result = np.sum(np.log10(prediction), axis=0)
         max_idx = result.argmax(axis=0)
         if max_idx == i :
@@ -191,6 +199,7 @@ with tf.Session() as sess:
         #print("Test Loss = {:.3f}".format(loss) + ", Test Accuracy= {:.3f}".format(acc))
     
     print('accr is {0:.3f}'.format(accr / n_classes))
+    print('accr per post is {0:.3f}'.format(accr_per_post/number_of_post))
     
     #plt.plot(range(len(lst_train_cost)), lst_train_cost, 'g--', range(len(lst_valid_cost)), lst_valid_cost, 'b--')
     #plt.figure()
