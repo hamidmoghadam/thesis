@@ -132,7 +132,7 @@ lst_valid_accr = []
 # Launch the graph
 with tf.Session() as sess:
     sess.run(init)
-    #sess.run(embedding_init, feed_dict={embedding_placeholder: embedding})
+    sess.run(embedding_init, feed_dict={embedding_placeholder: embedding})
     
     # Keep training until reach max iterations
     for i in range(train_iteration):
