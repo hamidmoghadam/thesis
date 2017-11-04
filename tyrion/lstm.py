@@ -145,7 +145,7 @@ with tf.Session() as sess:
         valid_cost = 0.0
 
         step = 0
-        epoch_size = dp.train_size // batch_size
+        epoch_size = max(dp.train_size // batch_size, 1)
         while step < epoch_size:
             batch_x, batch_y = dp.get_next_train_batch(batch_size)
 
