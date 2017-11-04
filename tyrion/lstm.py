@@ -27,7 +27,7 @@ handle 28 sequences of 28 steps for every sample.
 # Parameters
 learning_rate = 0.0005
 batch_size = 200
-number_of_sent_per_user = int(sys.argv[2])
+number_of_post_per_user = int(sys.argv[2])
 train_iteration = int(sys.argv[3])
 
 # Network Parameters
@@ -36,7 +36,7 @@ n_hidden = int(sys.argv[4]) # hidden layer num of features
 n_classes = int(sys.argv[1]) # MNIST total classes (0-9 digits)
 
 #vocab_size = 58000
-dp = data_provider(size=n_classes, sent_max_len = n_input)
+dp = data_provider(size=n_classes, sent_max_len = n_input, number_of_post_per_user = number_of_post_per_user)
 
 # tf Graph input
 x = tf.placeholder(tf.int32, [None, n_input])
@@ -177,7 +177,7 @@ with tf.Session() as sess:
     number_of_post = 0
     for i in range(n_classes):
         #print('for class number {0}'.format(i))
-        test_data, test_label = dp.get_next_test_batch(number_of_sent_per_user, i)
+        test_data, test_label = dp.get_next_test_batch(i)
         loss, acc, prediction = sess.run([cost, accuracy, softmax_pred], feed_dict={x: test_data, y: test_label, dropout: 1.0})
 
         for predict in prediction:

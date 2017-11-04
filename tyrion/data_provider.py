@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 
 class data_provider(object):
-    def __init__(self, size = 10, sent_max_len = 30):
+    def __init__(self, size = 10, sent_max_len = 30, number_of_post_per_user = 50):
         self.train_batch_counter = 0
         self.valid_batch_counter = 0
         self.test_batch_counter = 0
@@ -46,29 +46,27 @@ class data_provider(object):
                         content = refine.clean(item.content, ignore_url= True, ignore_stopword=False)
                         if len(content.split(' ')) > 2:
                             sents = refine.get_sentences(content)
-                            #for i in range(len(sents)):
-                            #    sents[i] = refine.stem(sents[i])
                             content = ' <eos> '.join(sents)
                             temp_set.append(content)
 
-                random_set = np.zeros(len(temp_set))
-                train_count = int(np.round(len(temp_set) * 0.7))
-                random_set[:train_count] = 1
-                np.random.shuffle(random_set)
+            random_set = np.zeros(len(temp_set))
+            train_count = int(np.round(len(temp_set) * 0.7))
+            random_set[:min(train_count, number_of_post_per_user)] = 1
+            np.random.shuffle(random_set)
 
-                for i in range(len(temp_set)):
-                    if random_set[i] == 1:
-                        train_data.append(temp_set[i])
-                        k = lst_twitter_username.index(twitter_username)
-                        label = [0 for x in range(size)]
-                        label[k] = 1
-                        y_train_data.append(label)
-                    else:
-                        valid_data.append(temp_set[i])
-                        k = lst_twitter_username.index(twitter_username)
-                        label = [0 for x in range(size)]
-                        label[k] = 1
-                        y_valid_data.append(label)
+            for i in range(len(temp_set)):
+                if random_set[i] == 1:
+                    train_data.append(temp_set[i])
+                    k = lst_twitter_username.index(twitter_username)
+                    label = [0 for x in range(size)]
+                    label[k] = 1
+                    y_train_data.append(label)
+                else:
+                    valid_data.append(temp_set[i])
+                    k = lst_twitter_username.index(twitter_username)
+                    label = [0 for x in range(size)]
+                    label[k] = 1
+                    y_valid_data.append(label)
         test_data = []
         y_test_data = []
         
@@ -92,12 +90,19 @@ class data_provider(object):
                         else: 
                             sents = []
                             for sent in refine.get_sentences(content):
-                                sents.append(sent)#refine.stem(sent))
+                                sents.append(sent)
                             test_data.append(' <eos> '.join(sents))
                             k = lst_tumblr_username.index(tumblr_username)
                             label = [0 for x in range(size)]
                             label[k] = 1
                             y_test_data.append(label)
+        
+        random_set = np.zeros(len(test_data), dtype=bool)
+        random_set[:number_of_post_per_user] = True
+        np.random.shuffle(random_set)
+
+        test_data = np.array(test_data)[random_set]
+        y_test_data = np.array(y_test_data)[random_set]
 
         word_2_id = self.build_vocab(' '.join(train_data))
         self.vocab_size = len(word_2_id) + 1
@@ -197,7 +202,7 @@ class data_provider(object):
 
         return (test.tolist(), y_test.tolist())
 
-    def get_next_test_batch(self, n, class_id):
+    def get_next_test_batch(self, class_id):
         label = [0 for x in range(self.size)]
         label[class_id] = 1
         indices = [label == i for i in self.y_test_set]
@@ -206,7 +211,7 @@ class data_provider(object):
         test = np.array(self.test_set)[indices]
         y_test = np.array(self.y_test_set)[indices]
 
-        return (test[:n].tolist(), y_test[:n].tolist())
+        return (test.tolist(), y_test.tolist())
 
 
     def build_vocab(self,data):
