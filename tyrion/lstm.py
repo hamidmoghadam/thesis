@@ -91,7 +91,7 @@ def loadGloVe(filename):
 
     file.close()
     return vocab,embd
-'''
+
 vocab,embd = loadGloVe(filename)
 vocab_size = len(vocab)
 embedding_dim = len(embd[0])
@@ -102,16 +102,14 @@ if embedding_dim != n_hidden :
 embedding = np.array(embd)
 
 with tf.device("/cpu:0"):
-    print(dp.vocab_size)
-    print(vocab_size)
     W = tf.Variable(tf.constant(0.0, shape=[vocab_size, n_hidden]), trainable=False, name="W")
     embedding_placeholder = tf.placeholder(tf.float32, [vocab_size, n_hidden])
     embedding_init = W.assign(embedding_placeholder)
     inputs = tf.nn.embedding_lookup(W, x)
-'''
-with tf.device("/cpu:0"):
-        embedding = tf.get_variable("embedding", [dp.vocab_size, n_hidden], dtype=tf.float32)
-        inputs = tf.nn.embedding_lookup(embedding, x)
+
+#with tf.device("/cpu:0"):
+#        embedding = tf.get_variable("embedding", [dp.vocab_size, n_hidden], dtype=tf.float32)
+#        inputs = tf.nn.embedding_lookup(embedding, x)
 
 pred = RNN(inputs, weights, biases, dropout)
 softmax_pred = tf.nn.softmax(pred)

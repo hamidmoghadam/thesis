@@ -110,8 +110,8 @@ class data_provider(object):
                 test_data.extend((np.array(temp_set)[random_set]).tolist())
                 y_test_data.extend((np.array(y_temp_set)[random_set]).tolist())
 
-        word_2_id = self.build_vocab(' '.join(train_data))
-        self.vocab_size = len(word_2_id) + 1
+        #word_2_id = self.build_vocab(' '.join(train_data))
+        #self.vocab_size = len(word_2_id) + 1
 
         max_tweet_len = 0
         max_tweet = ''
@@ -131,8 +131,8 @@ class data_provider(object):
         for i in range(len(train_data)):
             txt = train_data[i]
             lst_len.append(len(txt.split(' ')))
-            temp = self.pad_word_ids(self.text_to_word_ids(txt, word_2_id), sent_max_len)
-            if np.sum(temp) > 0:
+            temp = self.pad_words(txt.split(' '), sent_max_len)
+            if np.sum([x != '' for x in temp]) > 0:
                 self.train_set.append(temp)
                 self.y_train_set.append(y_train_data[i])
 
@@ -140,8 +140,8 @@ class data_provider(object):
         for i in range(len(valid_data)):
             txt = valid_data[i]
             lst_len.append(len(txt.split(' ')))
-            temp = self.pad_word_ids(self.text_to_word_ids(txt, word_2_id), sent_max_len)
-            if np.sum(temp) > 0:
+            temp = self.pad_words(txt.split(' '), sent_max_len)
+            if np.sum([x != '' for x in temp]) > 0:
                 self.valid_set.append(temp)
                 self.y_valid_set.append(y_valid_data[i])
 
@@ -149,8 +149,8 @@ class data_provider(object):
         for i in range(len(test_data)):
             txt = test_data[i]
             lst_len_test.append(len(txt.split(' ')))
-            temp = self.pad_word_ids(self.text_to_word_ids(txt, word_2_id), sent_max_len)
-            if np.sum(temp) > 0:
+            temp = self.pad_words(txt.split(' '), sent_max_len)
+            if np.sum([x != '' for x in temp]) > 0:
                 self.test_set.append(temp)
                 self.y_test_set.append(y_test_data[i])
 
@@ -243,3 +243,10 @@ class data_provider(object):
             word_ids = np.lib.pad(word_ids, (max_length - data_len, 0), 'constant').tolist()
 
         return word_ids[:max_length]
+    
+    def pad_words(self, words, length):
+        line_len = len(words)
+
+        if line_len < length:
+            words = np.lib.pad(words, (0, length - line_len), 'constant').tolist()
+        return words[:length]
