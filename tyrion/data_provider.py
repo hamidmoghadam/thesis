@@ -146,14 +146,14 @@ class data_provider(object):
         for i in range(len(valid_data)):
             txt = valid_data[i]
             if len(txt.split(' ')) > 2 :
-                self.valid_set.append(np.array(list(vocab_processor.transform(txt)))
+                self.valid_set.append(np.array(list(vocab_processor.transform(txt))))
                 self.y_valid_set.append(y_valid_data[i])
             
 
         for i in range(len(test_data)):
             txt = test_data[i]
             if len(txt.split(' ')) > 2 :
-                self.test_set.append(np.array(list(vocab_processor.transform(txt)))
+                self.test_set.append(np.array(list(vocab_processor.transform(txt))))
                 self.y_test_set.append(y_test_data[i])
 
         '''        
