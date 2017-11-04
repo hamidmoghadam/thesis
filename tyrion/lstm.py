@@ -174,7 +174,7 @@ with tf.Session() as sess:
     accr = 0
     accr_per_post = 0
 
-    int number_of_post = 0
+    number_of_post = 0
     for i in range(n_classes):
         #print('for class number {0}'.format(i))
         test_data, test_label = dp.get_next_test_batch(number_of_sent_per_user, i)
