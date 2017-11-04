@@ -4,10 +4,11 @@ from schema import *
 import refine
 import collections
 import matplotlib.pyplot as plt
+from tensorflow.contrib import learn
 
 
 class data_provider(object):
-    def __init__(self, size = 10, sent_max_len = 30, number_of_post_per_user = 50):
+    def __init__(self, size = 10, sent_max_len = 30, number_of_post_per_user = 50, vocab):
         self.train_batch_counter = 0
         self.valid_batch_counter = 0
         self.test_batch_counter = 0
@@ -128,30 +129,30 @@ class data_provider(object):
         self.y_test_set = []
 
 
+        #init vocab processor
+        vocab_processor = learn.preprocessing.VocabularyProcessor(sent_max_len)
+        #fit the vocab from glove
+        pretrain = vocab_processor.fit(vocab)
+        #transform inputs
+        
+
         for i in range(len(train_data)):
             txt = train_data[i]
-            lst_len.append(len(txt.split(' ')))
-            temp = self.pad_words(txt.split(' '), sent_max_len)
-            if np.sum([x != '' for x in temp]) > 0:
-                self.train_set.append(temp)
+            if len(txt.split(' ')) > 2 :
+                self.train_set.append(np.array(list(vocab_processor.transform(txt.split(' ')))))
                 self.y_train_set.append(y_train_data[i])
-
 
         for i in range(len(valid_data)):
             txt = valid_data[i]
-            lst_len.append(len(txt.split(' ')))
-            temp = self.pad_words(txt.split(' '), sent_max_len)
-            if np.sum([x != '' for x in temp]) > 0:
-                self.valid_set.append(temp)
+            if len(txt.split(' ')) > 2 :
+                self.valid_set.append(np.array(list(vocab_processor.transform(txt.split(' ')))))
                 self.y_valid_set.append(y_valid_data[i])
-
+            
 
         for i in range(len(test_data)):
             txt = test_data[i]
-            lst_len_test.append(len(txt.split(' ')))
-            temp = self.pad_words(txt.split(' '), sent_max_len)
-            if np.sum([x != '' for x in temp]) > 0:
-                self.test_set.append(temp)
+            if len(txt.split(' ')) > 2 :
+                self.test_set.append(np.array(list(vocab_processor.transform(txt.split(' ')))))
                 self.y_test_set.append(y_test_data[i])
 
         '''        

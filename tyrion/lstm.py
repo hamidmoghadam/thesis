@@ -35,11 +35,8 @@ n_input = 100 # MNIST data input (img shape: 28*28)
 n_hidden = int(sys.argv[4]) # hidden layer num of features
 n_classes = int(sys.argv[1]) # MNIST total classes (0-9 digits)
 
-#vocab_size = 58000
-dp = data_provider(size=n_classes, sent_max_len = n_input, number_of_post_per_user = number_of_post_per_user)
-
 # tf Graph input
-x = tf.placeholder(tf.string, [None, n_input])
+x = tf.placeholder(tf.int32, [None, n_input])
 y = tf.placeholder(tf.float32, [None, n_classes])
 dropout = tf.placeholder(tf.float32, shape=())
 
@@ -98,6 +95,7 @@ embedding_dim = len(embd[0])
 if embedding_dim != n_hidden : 
     print("FUCK")
 
+dp = data_provider(size=n_classes, sent_max_len = n_input, number_of_post_per_user = number_of_post_per_user, vocab=vocab)
 
 embedding = np.array(embd)
 
