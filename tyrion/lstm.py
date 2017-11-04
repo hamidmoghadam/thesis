@@ -198,9 +198,8 @@ with tf.Session() as sess:
         #print('  '.join([str(k) for k in result[:(max_index+1)]]))
         #print("Test Loss = {:.3f}".format(loss) + ", Test Accuracy= {:.3f}".format(acc))
     
-    print('accr is {0:.3f}'.format(accr / n_classes))
-    print('accr per post is {0:.3f}'.format(accr_per_post/number_of_post))
-    
+    print('accr is {0:.3f} accr per post is {1:.3f}'.format(accr / n_classes, accr_per_post/number_of_post))
+
     #plt.plot(range(len(lst_train_cost)), lst_train_cost, 'g--', range(len(lst_valid_cost)), lst_valid_cost, 'b--')
     #plt.figure()
 
