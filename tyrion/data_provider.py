@@ -103,7 +103,7 @@ class data_provider(object):
                             #y_test_data.append(label)
                             y_temp_set.append(label)
         
-                random_set = np.zeros(len(test_data), dtype=bool)
+                random_set = np.zeros(len(temp_set), dtype=bool)
                 random_set[:number_of_post_per_user] = True
                 np.random.shuffle(random_set)
 
