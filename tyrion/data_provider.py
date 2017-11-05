@@ -85,31 +85,31 @@ class data_provider(object):
                             continue
                         if content_count > sent_max_len:
                             for sent in refine.get_sentences(content):
-                                #test_data.append(sent)
-                                temp_set.append(sent)
+                                test_data.append(sent)
+                                #temp_set.append(sent)
                                 k = lst_tumblr_username.index(tumblr_username)
                                 label = [0 for x in range(size)]
                                 label[k] = 1
-                                y_temp_set.append(label)
-                                #y_test_data.append(label)
+                                #y_temp_set.append(label)
+                                y_test_data.append(label)
                         else: 
                             sents = []
                             for sent in refine.get_sentences(content):
                                 sents.append(sent)
-                            #test_data.append(' <eos> '.join(sents))
-                            temp_set.append(' <eos> '.join(sents))
+                            test_data.append(' <eos> '.join(sents))
+                            #temp_set.append(' <eos> '.join(sents))
                             k = lst_tumblr_username.index(tumblr_username)
                             label = [0 for x in range(size)]
                             label[k] = 1
-                            #y_test_data.append(label)
-                            y_temp_set.append(label)
+                            y_test_data.append(label)
+                            #y_temp_set.append(label)
         
-                random_set = np.zeros(len(temp_set), dtype=bool)
-                random_set[:number_of_post_per_user] = True
-                np.random.shuffle(random_set)
+                #random_set = np.zeros(len(temp_set), dtype=bool)
+                #random_set[:number_of_post_per_user] = True
+                #np.random.shuffle(random_set)
 
-                test_data.extend((np.array(temp_set)[random_set]).tolist())
-                y_test_data.extend((np.array(y_temp_set)[random_set]).tolist())
+                #test_data.extend((np.array(temp_set)[random_set]).tolist())
+                #y_test_data.extend((np.array(y_temp_set)[random_set]).tolist())
 
         #word_2_id = self.build_vocab(' '.join(train_data))
         #self.vocab_size = len(word_2_id) + 1
