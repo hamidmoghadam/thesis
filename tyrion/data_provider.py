@@ -139,8 +139,9 @@ class data_provider(object):
         for i in range(len(train_data)):
             txt = train_data[i]
             if len(txt.split(' ')) > 2 :
-                print(np.array(list(vocab_processor.transform(txt))))
-                self.train_set.append(np.array(list(vocab_processor.transform(txt))))
+                tt = np.array(list(vocab_processor.transform(txt)))
+                print(tt.shape)
+                self.train_set.append(tt)
                 self.y_train_set.append(y_train_data[i])
 
         for i in range(len(valid_data)):
