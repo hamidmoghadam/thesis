@@ -92,12 +92,14 @@ def loadGloVe(filename):
 vocab,embd = loadGloVe(filename)
 vocab_size = len(vocab)
 embedding_dim = len(embd[0])
+
 if embedding_dim != n_hidden : 
     print("FUCK")
 
 dp = data_provider(vocab, size=n_classes, sent_max_len = n_input, number_of_post_per_user = number_of_post_per_user)
 
 embedding = np.array(embd)
+print(embedding.shape)
 
 with tf.device("/cpu:0"):
     W = tf.Variable(tf.constant(0.0, shape=[vocab_size, n_hidden]), trainable=False, name="W")
