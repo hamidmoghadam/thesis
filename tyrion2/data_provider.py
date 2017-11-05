@@ -34,7 +34,7 @@ class data_provider(object):
         y_valid_data = []
 
 
-        user_selection_idx = np.random.permutation([x for x in range(31)])[:size]
+        user_selection_idx = np.random.permutation([x for x in range(len(lst_username))])[:size]
 
         lst_tumblr_username = (np.array(lst_tumblr_username)[user_selection_idx]).tolist()
         lst_twitter_username = (np.array(lst_twitter_username)[user_selection_idx]).tolist()
