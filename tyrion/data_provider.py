@@ -162,7 +162,7 @@ class data_provider(object):
             if len(txt.split(' ')) > 2 :
                 self.test_set.append(np.array(list(vocab_processor.transform([txt]))))
                 self.y_test_set.append(y_test_data[i])
-
+'''
         '''        
         t = sent_max_len
 
