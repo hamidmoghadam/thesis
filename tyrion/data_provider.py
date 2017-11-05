@@ -135,8 +135,16 @@ class data_provider(object):
         pretrain = vocab_processor.fit(vocab)
         #transform inputs
         
+        self.train_set = np.array(list(vocab_processor.transform(train_data)))
+        self.y_train_set = y_train_data
 
-        for i in range(len(train_data)):
+        self.valid_set = np.array(list(vocab_processor.transform(valid_data)))
+        self.y_valid_set = y_valid_data
+
+        self.test_set = np.array(list(vocab_processor.transform(test_data)))
+        self.y_test_set = y_test_data
+
+        '''for i in range(len(train_data)):
             txt = train_data[i]
             if len(txt.split(' ')) > 2 :
                 self.train_set.append(np.array(list(vocab_processor.transform([txt]))))
