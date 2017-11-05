@@ -25,8 +25,9 @@ class data_provider(object):
                     lst_twitter_username.append(row[2].replace(r'twitter.com/', ''))
                     lst_tumblr_username.append(row[0])
 
-        if self.size < len(lst_username):
+        if self.size > len(lst_username):
             raise Exception('We can find this size of users with this size of data!') 
+            
         train_data = []
         y_train_data = []
         valid_data = []
