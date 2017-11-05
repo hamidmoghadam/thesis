@@ -54,22 +54,23 @@ class data_provider(object):
 
             random_set = np.zeros(len(temp_set))
             train_count = int(np.round(len(temp_set) * 0.7))
-            random_set[:min(train_count, number_of_post_per_user)] = 1
+            #random_set[:min(train_count, number_of_post_per_user)] = 1
+            random_set[:number_of_post_per_user] = 1
             np.random.shuffle(random_set)
 
             for i in range(len(temp_set)):
-                if random_set[i] == 1:
-                    train_data.append(temp_set[i])
-                    k = lst_twitter_username.index(twitter_username)
-                    label = [0 for x in range(size)]
-                    label[k] = 1
-                    y_train_data.append(label)
-                else:
-                    valid_data.append(temp_set[i])
-                    k = lst_twitter_username.index(twitter_username)
-                    label = [0 for x in range(size)]
-                    label[k] = 1
-                    y_valid_data.append(label)
+                #if random_set[i] == 1:
+                train_data.append(temp_set[i])
+                k = lst_twitter_username.index(twitter_username)
+                label = [0 for x in range(size)]
+                label[k] = 1
+                y_train_data.append(label)
+                #else:
+                valid_data.append(temp_set[i])
+                k = lst_twitter_username.index(twitter_username)
+                label = [0 for x in range(size)]
+                label[k] = 1
+                y_valid_data.append(label)
         test_data = []
         y_test_data = []
         
