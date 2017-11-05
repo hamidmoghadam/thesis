@@ -59,18 +59,18 @@ class data_provider(object):
             np.random.shuffle(random_set)
 
             for i in range(len(temp_set)):
-                #if random_set[i] == 1:
-                train_data.append(temp_set[i])
-                k = lst_twitter_username.index(twitter_username)
-                label = [0 for x in range(size)]
-                label[k] = 1
-                y_train_data.append(label)
-                #else:
-                valid_data.append(temp_set[i])
-                k = lst_twitter_username.index(twitter_username)
-                label = [0 for x in range(size)]
-                label[k] = 1
-                y_valid_data.append(label)
+                if random_set[i] == 1:
+                    train_data.append(temp_set[i])
+                    k = lst_twitter_username.index(twitter_username)
+                    label = [0 for x in range(size)]
+                    label[k] = 1
+                    y_train_data.append(label)
+                else:
+                    valid_data.append(temp_set[i])
+                    k = lst_twitter_username.index(twitter_username)
+                    label = [0 for x in range(size)]
+                    label[k] = 1
+                    y_valid_data.append(label)
         test_data = []
         y_test_data = []
         
