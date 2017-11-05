@@ -72,7 +72,7 @@ def RNN(x, weights, biases, dropout):
     return tf.matmul(output, weights['out']) + biases['out']
 
 
-filename = '../../glove.twitter.27B/glove.twitter.27B.50d.txt'
+filename = '../../glove.twitter.27B/glove.twitter.27B.100d.txt'
 
 
 def loadGloVe(filename):
