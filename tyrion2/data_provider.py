@@ -20,11 +20,13 @@ class data_provider(object):
         with open('../tumblr_twitter_scrapper/large_username_pairs_filtered.csv', 'r', encoding='utf-8') as f:
             reader = csv.reader(f, delimiter=' ')
             for row in reader:
-                lst_username.append(
-                    {'tumblr': row[0], 'twitter': row[2].replace(r'twitter.com/', '')})
-                lst_twitter_username.append(row[2].replace(r'twitter.com/', ''))
-                lst_tumblr_username.append(row[0])
+                if int(row[4]) >= number_of_post_per_user :
+                    lst_username.append({'tumblr': row[0], 'twitter': row[2].replace(r'twitter.com/', '')})
+                    lst_twitter_username.append(row[2].replace(r'twitter.com/', ''))
+                    lst_tumblr_username.append(row[0])
 
+        if self.size < len(lst_username):
+            raise Exception('We can find this size of users with this size of data!') 
         train_data = []
         y_train_data = []
         valid_data = []
