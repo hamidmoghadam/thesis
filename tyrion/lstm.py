@@ -25,7 +25,7 @@ handle 28 sequences of 28 steps for every sample.
 '''
 
 # Parameters
-learning_rate = 0.01
+learning_rate = 0.0005
 batch_size = 200
 number_of_post_per_user = int(sys.argv[2])
 train_iteration = int(sys.argv[3])
@@ -147,11 +147,13 @@ with tf.Session() as sess:
         while step < epoch_size:
             batch_x, batch_y = dp.get_next_train_batch(batch_size)
 
-            acc = sess.run(accuracy, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
-            train_accr += acc
-            loss = sess.run(cost, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
-            train_cost += loss
-            sess.run(optimizer, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
+            fetches = { "accuracy" : accuracy, "cost": cost, "optimizer":optimizer}
+
+            vals = sess.run(fetches, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
+            train_accr += vals['accuracy']
+            #loss = sess.run(cost, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
+            train_cost += vals['cost']
+            #sess.run(optimizer, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
 
             step += 1
         
