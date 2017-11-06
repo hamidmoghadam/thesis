@@ -21,10 +21,10 @@ class data_provider(object):
         with open('../tumblr_twitter_scrapper/large_username_pairs_filtered.csv', 'r', encoding='utf-8') as f:
             reader = csv.reader(f, delimiter=' ')
             for row in reader:
-                lst_username.append(
-                    {'tumblr': row[0], 'twitter': row[2].replace(r'twitter.com/', '')})
-                lst_twitter_username.append(row[2].replace(r'twitter.com/', ''))
-                lst_tumblr_username.append(row[0])
+                if int(row[4]) > number_of_post_per_user :
+                    lst_username.append({'tumblr': row[0], 'twitter': row[2].replace(r'twitter.com/', '')})
+                    lst_twitter_username.append(row[2].replace(r'twitter.com/', ''))
+                    lst_tumblr_username.append(row[0])
 
         train_data = []
         y_train_data = []
@@ -32,7 +32,7 @@ class data_provider(object):
         y_valid_data = []
 
 
-        user_selection_idx = np.random.permutation([x for x in range(31)])[:size]
+        user_selection_idx = np.random.permutation([x for x in range(len(lst_username))])[:size]
 
         lst_tumblr_username = (np.array(lst_tumblr_username)[user_selection_idx]).tolist()
         lst_twitter_username = (np.array(lst_twitter_username)[user_selection_idx]).tolist()
