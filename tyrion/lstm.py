@@ -34,6 +34,7 @@ train_iteration = int(sys.argv[3])
 n_input = 100 # MNIST data input (img shape: 28*28)
 n_hidden = int(sys.argv[4]) # hidden layer num of features
 n_classes = int(sys.argv[1]) # MNIST total classes (0-9 digits)
+n_middle = 10
 
 # tf Graph input
 x = tf.placeholder(tf.int32, [None, n_input])
@@ -42,9 +43,11 @@ dropout = tf.placeholder(tf.float32, shape=())
 
 # Define weights
 weights = {
-    'out': tf.Variable(tf.random_normal([n_hidden, n_classes]))
+    'middle': tf.Variable(tf.random_normal([n_hidden, n_middle]))
+    'out': tf.Variable(tf.random_normal([n_middle, n_classes]))
 }
 biases = {
+    'middle': tf.Variable(tf.random_normal([n_middle]))
     'out': tf.Variable(tf.random_normal([n_classes]))
 }
 
@@ -68,6 +71,8 @@ def RNN(x, weights, biases, dropout):
     output = outputs[0]
     for i in range(1, len(outputs)):
         output = tf.maximum(output, outputs[i])
+
+    #middle = tf.matmul(output, weights['middle']) + biases['middle']
     # Linear activation, using rnn inner loop last output
     return tf.matmul(output, weights['out']) + biases['out']
 

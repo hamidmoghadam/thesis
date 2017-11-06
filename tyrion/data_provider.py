@@ -129,6 +129,32 @@ class data_provider(object):
         self.y_valid_set = []
         self.y_test_set = []
 
+        for i in range(len(train_data)):
+            txt = train_data[i]
+            lst_len.append(len(txt.split(' ')))
+            temp = self.pad_word_ids(self.text_to_word_ids(txt, vocab), sent_max_len)
+            if np.sum(temp) > 0:
+                self.train_set.append(temp)
+                self.y_train_set.append(y_train_data[i])
+
+
+        for i in range(len(valid_data)):
+            txt = valid_data[i]
+            lst_len.append(len(txt.split(' ')))
+            temp = self.pad_word_ids(self.text_to_word_ids(txt, vocab), sent_max_len)
+            if np.sum(temp) > 0:
+                self.valid_set.append(temp)
+                self.y_valid_set.append(y_valid_data[i])
+
+
+        for i in range(len(test_data)):
+            txt = test_data[i]
+            lst_len_test.append(len(txt.split(' ')))
+            temp = self.pad_word_ids(self.text_to_word_ids(txt, vocab), sent_max_len)
+            if np.sum(temp) > 0:
+                self.test_set.append(temp)
+                self.y_test_set.append(y_test_data[i])
+        '''
         #init vocab processor
         vocab_processor = learn.preprocessing.VocabularyProcessor(sent_max_len)
         #fit the vocab from glove
@@ -143,7 +169,7 @@ class data_provider(object):
 
         self.test_set = np.array(list(vocab_processor.transform(test_data)))
         self.y_test_set = y_test_data
-
+        '''
               
         self.train_size = len(self.train_set)
         self.valid_size = len(self.valid_set)
@@ -211,9 +237,10 @@ class data_provider(object):
         return word_to_id
 
 
-    def text_to_word_ids(self,data, word_to_id):
+    def text_to_word_ids(self,data, vocab):
         #data = _read_words(filename)
-        return [word_to_id[word] for word in data.split(' ') if word in word_to_id]
+        return [vocab.index(word) if word in vocab else 0 for word in data.split(' ')]
+    
 
     def pad_word_ids(self, word_ids, max_length):
         data_len = len(word_ids)
