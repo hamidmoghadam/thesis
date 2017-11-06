@@ -43,11 +43,11 @@ dropout = tf.placeholder(tf.float32, shape=())
 
 # Define weights
 weights = {
-    'middle': tf.Variable(tf.random_normal([n_hidden, n_middle]))
+    'middle': tf.Variable(tf.random_normal([n_hidden, n_middle])),
     'out': tf.Variable(tf.random_normal([n_middle, n_classes]))
 }
 biases = {
-    'middle': tf.Variable(tf.random_normal([n_middle]))
+    'middle': tf.Variable(tf.random_normal([n_middle])),
     'out': tf.Variable(tf.random_normal([n_classes]))
 }
 
