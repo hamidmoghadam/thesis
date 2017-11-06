@@ -84,13 +84,17 @@ def loadGloVe(filename):
     vocab = dict()
     i = 1
     vocab['UNK'] = 0
-    embd = [[0 for x in range(n_hidden)]]
+    embd = []
+    embd.append([0 for x in range(n_hidden)])
     file = open(filename,'r')
     for line in file.readlines():
-        row = line.strip().split(' ')
+        row = line.split(' ')
         
         vocab[row[0]] = i
-        embd.append([float(i) for i in row[1:]])
+        if len(row[1:]) == n_hidden:
+            embd.append([float(i) for i in row[1:]])
+        else :
+            print(line)
         i = i + 1
 
     file.close()
