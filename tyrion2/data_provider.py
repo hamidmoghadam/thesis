@@ -54,8 +54,8 @@ class data_provider(object):
 
             random_set = np.zeros(len(temp_set))
             train_count = int(np.round(len(temp_set) * 0.7))
-            random_set[:train_count] = 1
-            #random_set[:number_of_post_per_user] = 1
+            #random_set[:train_count] = 1
+            random_set[:number_of_post_per_user] = 1
             np.random.shuffle(random_set)
 
             for i in range(len(temp_set)):
@@ -243,6 +243,6 @@ class data_provider(object):
         data_len = len(word_ids)
             
         if data_len < max_length:
-            word_ids = np.lib.pad(word_ids, (max_length - data_len, 0), 'constant').tolist()
+            word_ids = np.lib.pad(word_ids, (0, max_length - data_len), 'constant').tolist()
 
         return word_ids[:max_length]

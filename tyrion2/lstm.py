@@ -74,38 +74,6 @@ def RNN(x, weights, biases, dropout):
     # Linear activation, using rnn inner loop last output
     return tf.matmul(output, weights['out']) + biases['out']
 
-
-filename = '../../glove.twitter.27B/glove.twitter.27B.50d.txt'
-
-
-def loadGloVe(filename):
-    vocab = []
-    embd = []
-    file = open(filename,'r')
-    for line in file.readlines():
-        row = line.strip().split(' ')
-        
-        if len(row[1:]) == n_hidden:
-            vocab.append(row[0])
-            embd.append([float(i) for i in row[1:]])
-
-    file.close()
-    return vocab,embd
-'''
-vocab,embd = loadGloVe(filename)
-vocab_size = len(vocab)
-embedding_dim = len(embd[0])
-if embedding_dim != n_hidden : 
-    print("FUCK")
-embedding = np.array(embd)
-with tf.device("/cpu:0"):
-    print(dp.vocab_size)
-    print(vocab_size)
-    W = tf.Variable(tf.constant(0.0, shape=[vocab_size, n_hidden]), trainable=False, name="W")
-    embedding_placeholder = tf.placeholder(tf.float32, [vocab_size, n_hidden])
-    embedding_init = W.assign(embedding_placeholder)
-    inputs = tf.nn.embedding_lookup(W, x)
-'''
 with tf.device("/cpu:0"):
         embedding = tf.get_variable("embedding", [dp.vocab_size, n_hidden], dtype=tf.float32)
         inputs = tf.nn.embedding_lookup(embedding, x)
@@ -156,7 +124,7 @@ with tf.Session() as sess:
         
         lst_train_cost.append(train_cost/epoch_size)
         lst_train_accr.append(train_accr/epoch_size)
-        print("Training Loss = {:.3f}".format(train_cost/epoch_size) + ", Training Accuracy= {:.3f}".format(train_accr/epoch_size))
+        #print("Training Loss = {:.3f}".format(train_cost/epoch_size) + ", Training Accuracy= {:.3f}".format(train_accr/epoch_size))
         
         valid_data, valid_label = dp.get_next_valid_batch(dp.valid_size)
 
@@ -165,7 +133,7 @@ with tf.Session() as sess:
         lst_valid_cost.append(loss)
         lst_valid_accr.append(acc)
         
-        print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
+        #print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
     
     
     accr = 0
