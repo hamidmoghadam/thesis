@@ -25,7 +25,7 @@ handle 28 sequences of 28 steps for every sample.
 '''
 
 # Parameters
-learning_rate = 0.0001
+learning_rate = 0.0005
 batch_size = 200
 number_of_post_per_user = int(sys.argv[2])
 train_iteration = int(sys.argv[3])
@@ -76,8 +76,8 @@ filename = '../../glove.twitter.27B/glove.twitter.27B.'+str(n_hidden)+'d.txt'
 
 
 def loadGloVe(filename):
-    vocab = []
-    embd = []
+    vocab = ['UNK']
+    embd = [[0 for x in range(n_hidden)]]
     file = open(filename,'r')
     for line in file.readlines():
         row = line.strip().split(' ')
