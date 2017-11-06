@@ -154,8 +154,9 @@ with tf.Session() as sess:
             #loss = sess.run(cost, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
             train_cost += vals['cost']
             #sess.run(optimizer, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
-            print(batch_x[:2])
-            print(sess.run(inputs)[:2])
+            print(sess.run(inputs))
+        
+            
             step += 1
         
         lst_train_cost.append(train_cost/epoch_size)
