@@ -165,7 +165,6 @@ with tf.Session() as sess:
             #loss = sess.run(cost, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
             train_cost += vals['cost']
             #sess.run(optimizer, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
-            print(sess.run(inputs))
         
             
             step += 1
