@@ -69,7 +69,7 @@ def RNN(x, weights, biases, dropout):
     for i in range(1, len(outputs)):
         output = tf.maximum(output, outputs[i])
     # Linear activation, using rnn inner loop last output
-    return tf.matmul(output, weights['out']) + biases['out']
+    return tf.matmul(outputs[len[outputs]], weights['out']) + biases['out']
 
 
 filename = '../../glove.twitter.27B/glove.twitter.27B.'+str(n_hidden)+'d.txt'
