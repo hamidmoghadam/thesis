@@ -51,9 +51,9 @@ class data_provider(object):
                             temp_set.append(content)
 
             random_set = np.zeros(len(temp_set))
-            #train_count = int(np.round(len(temp_set) * 0.7))
-            #random_set[:min(train_count, number_of_post_per_user)] = 1
-            random_set[:number_of_post_per_user] = 1
+            train_count = int(np.round(len(temp_set) * 0.7))
+            random_set[:train_count] = 1
+            #random_set[:number_of_post_per_user] = 1
             np.random.shuffle(random_set)
 
             for i in range(len(temp_set)):
