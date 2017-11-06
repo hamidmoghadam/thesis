@@ -34,7 +34,7 @@ train_iteration = int(sys.argv[3])
 n_input = 100 # MNIST data input (img shape: 28*28)
 n_hidden = int(sys.argv[4]) # hidden layer num of features
 n_classes = int(sys.argv[1]) # MNIST total classes (0-9 digits)
-n_middle = 10
+n_middle = 50
 
 # tf Graph input
 x = tf.placeholder(tf.int32, [None, n_input])
