@@ -154,22 +154,7 @@ class data_provider(object):
             if np.sum(temp) > 0:
                 self.test_set.append(temp)
                 self.y_test_set.append(y_test_data[i])
-        '''
-        #init vocab processor
-        vocab_processor = learn.preprocessing.VocabularyProcessor(sent_max_len)
-        #fit the vocab from glove
-        pretrain = vocab_processor.fit(vocab)
-        #transform inputs
-        
-        self.train_set = np.array(list(vocab_processor.transform(train_data)))
-        self.y_train_set = y_train_data
-
-        self.valid_set = np.array(list(vocab_processor.transform(valid_data)))
-        self.y_valid_set = y_valid_data
-
-        self.test_set = np.array(list(vocab_processor.transform(test_data)))
-        self.y_test_set = y_test_data
-        '''
+   
               
         self.train_size = len(self.train_set)
         self.valid_size = len(self.valid_set)
@@ -246,7 +231,7 @@ class data_provider(object):
         data_len = len(word_ids)
             
         if data_len < max_length:
-            word_ids = np.lib.pad(word_ids, (max_length - data_len, 0), 'constant').tolist()
+            word_ids = np.lib.pad(word_ids, (0, max_length - data_len), 'constant').tolist()
 
         return word_ids[:max_length]
     
