@@ -107,7 +107,7 @@ with tf.device("/cpu:0"):
     inputs = tf.nn.embedding_lookup(W, x)
 '''
 with tf.device("/cpu:0"):
-        embedding = tf.get_variable("embedding", [dp.vocab_size, n_hidden], dtype=tf.float32, trainable=False)
+        embedding = tf.get_variable("embedding", [dp.vocab_size, n_hidden], dtype=tf.float32, trainable=False, initializer=tf.random_uniform_initializer(-3, 3))
         inputs = tf.nn.embedding_lookup(embedding, x)
 
 pred = RNN(inputs, weights, biases, dropout)
