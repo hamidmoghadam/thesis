@@ -139,7 +139,6 @@ lst_valid_accr = []
 # Launch the graph
 with tf.Session() as sess:
     sess.run(init)
-    print(embedding[0:2])
     sess.run(embedding_init, feed_dict={embedding_placeholder: embedding})
     
     # Keep training until reach max iterations
@@ -154,6 +153,8 @@ with tf.Session() as sess:
         epoch_size = max(dp.train_size // batch_size, 1)
         while step < epoch_size:
             batch_x, batch_y = dp.get_next_train_batch(batch_size)
+
+            print(batch_x)
 
             fetches = { "accuracy" : accuracy, "cost": cost, "optimizer":optimizer, "inputs":inputs}
             
