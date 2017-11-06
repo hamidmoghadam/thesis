@@ -44,7 +44,7 @@ dropout = tf.placeholder(tf.float32, shape=())
 # Define weights
 weights = {
     'middle': tf.Variable(tf.random_normal([n_hidden, n_middle])),
-    'out': tf.Variable(tf.random_normal([n_hidden, n_classes]))
+    'out': tf.Variable(tf.random_normal([n_middle, n_classes]))
 }
 biases = {
     'middle': tf.Variable(tf.random_normal([n_middle])),
@@ -72,9 +72,9 @@ def RNN(x, weights, biases, dropout):
     for i in range(1, len(outputs)):
         output = tf.maximum(output, outputs[i])
 
-    #middle = tf.matmul(output, weights['middle']) + biases['middle']
+    middle = tf.matmul(output, weights['middle']) + biases['middle']
     # Linear activation, using rnn inner loop last output
-    return tf.matmul(output, weights['out']) + biases['out']
+    return tf.matmul(middle, weights['out']) + biases['out']
 
 
 filename = '../../glove.twitter.27B/glove.twitter.27B.'+str(n_hidden)+'d.txt'
@@ -91,10 +91,8 @@ def loadGloVe(filename):
         row = line.split(' ')
         
         vocab[row[0]] = i
-        if len(row[1:]) == n_hidden:
-            embd.append([float(i) for i in row[1:]])
-        else :
-            print(line)
+        embd.append([float(i) for i in row[1:]])
+        
         i = i + 1
 
     file.close()
@@ -104,8 +102,6 @@ vocab,embd = loadGloVe(filename)
 vocab_size = len(vocab)
 embedding_dim = len(embd[0])
 
-if embedding_dim != n_hidden : 
-    print("FUCK")
 
 dp = data_provider(vocab, size=n_classes, sent_max_len = n_input, number_of_post_per_user = number_of_post_per_user)
 
@@ -113,7 +109,7 @@ embedding = np.array(embd)
 print(embedding.shape)
 
 with tf.device("/cpu:0"):
-    W = tf.Variable(tf.constant(0.0, shape=[vocab_size, n_hidden]), trainable=False, name="W")
+    W = tf.Variable(tf.constant(0.0, shape=[vocab_size, n_hidden]), trainable=False, name="W", dtype=tf.float32)
     embedding_placeholder = tf.placeholder(tf.float32, [vocab_size, n_hidden])
     embedding_init = W.assign(embedding_placeholder)
     inputs = tf.nn.embedding_lookup(W, x)
