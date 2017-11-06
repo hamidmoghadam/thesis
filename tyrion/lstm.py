@@ -108,15 +108,15 @@ dp = data_provider(vocab, size=n_classes, sent_max_len = n_input, number_of_post
 embedding = np.array(embd)
 print(embedding.shape)
 
-#with tf.device("/cpu:0"):
-#    W = tf.Variable(tf.constant(0.0, shape=[vocab_size, n_hidden]), trainable=False, name="W", dtype=tf.float32)
-#    embedding_placeholder = tf.placeholder(tf.float32, [vocab_size, n_hidden])
-#    embedding_init = W.assign(embedding_placeholder)
-#    inputs = tf.nn.embedding_lookup(W, x)
-
 with tf.device("/cpu:0"):
-        embedding = tf.get_variable("embedding", [vocab_size, n_hidden], dtype=tf.float32 , initializer=tf.random_uniform_initializer(-4,4), trainable=False)
-        inputs = tf.nn.embedding_lookup(embedding, x)
+    W = tf.Variable(tf.constant(0.0, shape=[vocab_size, n_hidden]), trainable=False, name="W", dtype=tf.float32)
+    embedding_placeholder = tf.placeholder(tf.float32, [vocab_size, n_hidden])
+    embedding_init = W.assign(embedding_placeholder)
+    inputs = tf.nn.embedding_lookup(W, x)
+
+#with tf.device("/cpu:0"):
+#        embedding = tf.get_variable("embedding", [vocab_size, n_hidden], dtype=tf.float32 , initializer=tf.random_uniform_initializer(-4,4), trainable=False)
+#        inputs = tf.nn.embedding_lookup(embedding, x)
 
 pred = RNN(inputs, weights, biases, dropout)
 softmax_pred = tf.nn.softmax(pred)
@@ -139,7 +139,8 @@ lst_valid_accr = []
 # Launch the graph
 with tf.Session() as sess:
     sess.run(init)
-    #sess.run(embedding_init, feed_dict={embedding_placeholder: embedding})
+    print(embedding[0])
+    sess.run(embedding_init, feed_dict={embedding_placeholder: embedding})
     
     # Keep training until reach max iterations
     for i in range(train_iteration):
@@ -157,11 +158,10 @@ with tf.Session() as sess:
             fetches = { "accuracy" : accuracy, "cost": cost, "optimizer":optimizer}
             
             vals = sess.run(fetches, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
+            data = sess.run(inputs)
+            print(data[0])
             train_accr += vals['accuracy']
-            #loss = sess.run(cost, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
             train_cost += vals['cost']
-            #sess.run(optimizer, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
-        
             
             step += 1
         
