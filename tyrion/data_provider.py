@@ -239,7 +239,7 @@ class data_provider(object):
 
     def text_to_word_ids(self,data, vocab):
         #data = _read_words(filename)
-        return [vocab.index(word) if word in vocab else 0 for word in data.split(' ')]
+        return [vocab[word] if word in vocab else 0 for word in data.split(' ')]
     
 
     def pad_word_ids(self, word_ids, max_length):

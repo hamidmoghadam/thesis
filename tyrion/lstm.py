@@ -81,15 +81,17 @@ filename = '../../glove.twitter.27B/glove.twitter.27B.'+str(n_hidden)+'d.txt'
 
 
 def loadGloVe(filename):
-    vocab = ['UNK']
+    vocab = dict()
+    i = 1
+    vocab['UNK'] = 0
     embd = [[0 for x in range(n_hidden)]]
     file = open(filename,'r')
     for line in file.readlines():
         row = line.strip().split(' ')
         
-        if len(row[1:]) == n_hidden:
-            vocab.append(row[0])
-            embd.append([float(i) for i in row[1:]])
+        vocab[row[0]] = i
+        embd.append([float(i) for i in row[1:]])
+        i = i + 1
 
     file.close()
     return vocab,embd
