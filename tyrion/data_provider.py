@@ -51,7 +51,7 @@ class data_provider(object):
                             temp_set.append(content)
 
             random_set = np.zeros(len(temp_set))
-            train_count = int(np.round(len(temp_set) * 0.7))
+            #train_count = int(np.round(len(temp_set) * 0.7))
             #random_set[:min(train_count, number_of_post_per_user)] = 1
             random_set[:number_of_post_per_user] = 1
             np.random.shuffle(random_set)
@@ -129,7 +129,6 @@ class data_provider(object):
         self.y_valid_set = []
         self.y_test_set = []
 
-
         #init vocab processor
         vocab_processor = learn.preprocessing.VocabularyProcessor(sent_max_len)
         #fit the vocab from glove
@@ -145,37 +144,7 @@ class data_provider(object):
         self.test_set = np.array(list(vocab_processor.transform(test_data)))
         self.y_test_set = y_test_data
 
-        '''for i in range(len(train_data)):
-            txt = train_data[i]
-            if len(txt.split(' ')) > 2 :
-                self.train_set.append(np.array(list(vocab_processor.transform([txt]))))
-                self.y_train_set.append(y_train_data[i])
-
-        for i in range(len(valid_data)):
-            txt = valid_data[i]
-            if len(txt.split(' ')) > 2 :
-                self.valid_set.append(np.array(list(vocab_processor.transform([txt]))))
-                self.y_valid_set.append(y_valid_data[i])
-            
-
-        for i in range(len(test_data)):
-            txt = test_data[i]
-            if len(txt.split(' ')) > 2 :
-                self.test_set.append(np.array(list(vocab_processor.transform([txt]))))
-                self.y_test_set.append(y_test_data[i])
-'''
-        '''        
-        t = sent_max_len
-
-        plt.hist([x for x in lst_len if x <= t], facecolor='g')
-        plt.figure()
-        plt.hist([x for x in lst_len_test if x <= t], facecolor='b')
-        plt.figure()
-        plt.boxplot([[x for x in lst_len if x <= t], [x for x in lst_len_test if x <= t]])
-        
-        plt.show()
-        '''
-        
+              
         self.train_size = len(self.train_set)
         self.valid_size = len(self.valid_set)
         self.test_size = len(self.test_set)
