@@ -109,8 +109,8 @@ class data_provider(object):
                 random_set[:valid_count] = True
                 np.random.shuffle(random_set)
 
-                test_data.extend((np.array(temp_set)[random_set]).tolist())
-                y_test_data.extend((np.array(y_temp_set)[random_set]).tolist())
+                test_data.extend((np.array(temp_set)).tolist())
+                y_test_data.extend((np.array(y_temp_set)).tolist())
                 random_set = np.logical_not(random_set)
                 valid_data.extend((np.array(temp_set)[random_set]).tolist())
                 y_valid_data.extend((np.array(y_temp_set)[random_set]).tolist())
