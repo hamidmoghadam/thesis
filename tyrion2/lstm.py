@@ -42,6 +42,7 @@ dp = data_provider(size=n_classes, sent_max_len = n_input, number_of_post_per_us
 x = tf.placeholder(tf.int32, [None, n_input])
 y = tf.placeholder(tf.float32, [None, n_classes])
 dropout = tf.placeholder(tf.float32, shape=())
+is_training = tf.placeholder(tf.bool)
 
 # Define weights
 weights = {
@@ -52,12 +53,13 @@ biases = {
 }
 
 
-def RNN(x, weights, biases, dropout):
+def RNN(x, weights, biases, dropout, is_training):
 
     # Prepare data shape to match `rnn` function requirements
     # Current data input shape: (batch_size, n_steps, n_input)
     # Required shape: 'n_steps' tensors list of shape (batch_size, n_input)
-    x = tf.nn.dropout(x, dropout)
+    if is_training:
+        x = tf.nn.dropout(x, dropout)
     
     # Unstack to get a list of 'n_steps' tensors of shape (batch_size, n_input)
     x = tf.unstack(x, n_input, 1)
@@ -65,7 +67,6 @@ def RNN(x, weights, biases, dropout):
     # Define a lstm cell with tensorflow
     lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0)
 	
-    #lstm_cell = tf.contrib.rnn.DropoutWrapper(lstm_cell, output_keep_prob = dropout)
     # Get lstm cell output
     outputs, states = rnn.static_rnn(lstm_cell, x, dtype=tf.float32)
     output = outputs[0]
@@ -78,10 +79,10 @@ with tf.device("/cpu:0"):
         embedding = tf.get_variable("embedding", [dp.vocab_size, n_hidden], dtype=tf.float32)
         inputs = tf.nn.embedding_lookup(embedding, x)
 
-pred = RNN(inputs, weights, biases, dropout)
+pred = RNN(inputs, weights, biases, dropout, is_training)
 softmax_pred = tf.nn.softmax(pred)
 # Define loss and optimizer
-cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=pred, labels=y))
+cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=softmax_pred, labels=y))
 optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
 
 # Evaluate model
@@ -114,11 +115,11 @@ with tf.Session() as sess:
         while step < epoch_size:
             batch_x, batch_y = dp.get_next_train_batch(batch_size)
 
-            acc = sess.run(accuracy, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
+            acc = sess.run(accuracy, feed_dict={x: batch_x, y: batch_y, dropout: 0.5, is_training: True})
             train_accr += acc
-            loss = sess.run(cost, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
+            loss = sess.run(cost, feed_dict={x: batch_x, y: batch_y, dropout: 0.5, is_training: True})
             train_cost += loss
-            sess.run(optimizer, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
+            sess.run(optimizer, feed_dict={x: batch_x, y: batch_y, dropout: 0.5, is_training: True})
 
             step += 1
         
@@ -128,8 +129,8 @@ with tf.Session() as sess:
         
         valid_data, valid_label = dp.get_next_valid_batch(dp.valid_size)
 
-        acc = sess.run(accuracy, feed_dict={x: valid_data, y: valid_label, dropout: 1.0})
-        loss = sess.run(cost, feed_dict={x: valid_data, y: valid_label, dropout: 1.0})
+        acc = sess.run(accuracy, feed_dict={x: valid_data, y: valid_label, dropout: 1.0, is_training:False})
+        loss = sess.run(cost, feed_dict={x: valid_data, y: valid_label, dropout: 1.0, is_training:False})
         lst_valid_cost.append(loss)
         lst_valid_accr.append(acc)
         
@@ -143,7 +144,7 @@ with tf.Session() as sess:
     for i in range(n_classes):
         #print('for class number {0}'.format(i))
         test_data, test_label = dp.get_next_test_batch(i)
-        loss, acc, prediction = sess.run([cost, accuracy, softmax_pred], feed_dict={x: test_data, y: test_label, dropout: 1.0})
+        loss, acc, prediction = sess.run([cost, accuracy, softmax_pred], feed_dict={x: test_data, y: test_label, dropout: 1.0, is_training:False})
 
         for predict in prediction:
             number_of_post += 1
