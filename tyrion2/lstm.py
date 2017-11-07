@@ -46,7 +46,7 @@ is_training = tf.placeholder(tf.bool)
 
 # Define weights
 weights = {
-    'out': tf.Variable(tf.random_normal([n_hidden, n_classes]))
+    'out': tf.Variable(tf.random_normal([2*n_hidden, n_classes]))
 }
 biases = {
     'out': tf.Variable(tf.random_normal([n_classes]))
@@ -66,10 +66,15 @@ def RNN(x, weights, biases, dropout, is_training):
     x = tf.unstack(x, n_input, 1)
 
     # Define a lstm cell with tensorflow
-    lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0)
+    fw_lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0)
+    bw_lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0)
 	
     # Get lstm cell output
-    outputs, states = rnn.static_rnn(lstm_cell, x, dtype=tf.float32)
+    #outputs, states = rnn.static_rnn(lstm_cell, x, dtype=tf.float32)
+
+    outputs, states, _ = rnn.static_bidirectional_rnn(fw_lstm_cell, bw_lstm_cell, x, dtype=tf.float32)
+
+
     output = outputs[0]
     for i in range(1, len(outputs)):
         output = tf.maximum(output, outputs[i])
@@ -83,7 +88,7 @@ with tf.device("/cpu:0"):
 pred = RNN(inputs, weights, biases, dropout, is_training)
 softmax_pred = tf.nn.softmax(pred)
 # Define loss and optimizer
-cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=softmax_pred, labels=y))
+cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=pred, labels=y))
 optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
 
 # Evaluate model
