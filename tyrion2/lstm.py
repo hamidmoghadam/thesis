@@ -58,8 +58,9 @@ def RNN(x, weights, biases, dropout, is_training):
     # Prepare data shape to match `rnn` function requirements
     # Current data input shape: (batch_size, n_steps, n_input)
     # Required shape: 'n_steps' tensors list of shape (batch_size, n_input)
-    if is_training:
-        x = tf.nn.dropout(x, dropout)
+    x = tf.cond(tf.equal(is_training, tf.constant(True)), lambda: tf.nn.dropout(x, dropout), lambda:x)
+    #if is_training:
+    #    x = tf.nn.dropout(x, dropout)
     
     # Unstack to get a list of 'n_steps' tensors of shape (batch_size, n_input)
     x = tf.unstack(x, n_input, 1)
