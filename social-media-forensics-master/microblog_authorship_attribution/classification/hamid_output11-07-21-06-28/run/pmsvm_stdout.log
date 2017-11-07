@@ -1,0 +1,106 @@
+Dataset loaded in 13 msec.
+*.
+optimization finished, #iter = 6
+nSV = 619
+*.
+optimization finished, #iter = 6
+nSV = 669
+*.
+optimization finished, #iter = 6
+nSV = 717
+*.
+optimization finished, #iter = 6
+nSV = 652
+*.
+optimization finished, #iter = 8
+nSV = 652
+*.
+optimization finished, #iter = 6
+nSV = 668
+*.
+optimization finished, #iter = 6
+nSV = 681
+*.
+optimization finished, #iter = 7
+nSV = 734
+*.
+optimization finished, #iter = 6
+nSV = 682
+*.
+optimization finished, #iter = 6
+nSV = 641
+*.
+optimization finished, #iter = 6
+nSV = 745
+*.
+optimization finished, #iter = 6
+nSV = 748
+*.
+optimization finished, #iter = 6
+nSV = 608
+*.
+optimization finished, #iter = 6
+nSV = 692
+*.
+optimization finished, #iter = 6
+nSV = 763
+*.
+optimization finished, #iter = 6
+nSV = 626
+*.
+optimization finished, #iter = 6
+nSV = 663
+*.
+optimization finished, #iter = 6
+nSV = 658
+*.
+optimization finished, #iter = 6
+nSV = 512
+*.
+optimization finished, #iter = 6
+nSV = 698
+*.
+optimization finished, #iter = 6
+nSV = 651
+*.
+optimization finished, #iter = 6
+nSV = 731
+*.
+optimization finished, #iter = 6
+nSV = 700
+*.
+optimization finished, #iter = 6
+nSV = 632
+*.
+optimization finished, #iter = 6
+nSV = 610
+Finished in 82 msec.
+Dataset loaded in 13 msec.
+Finished in 6 msec.
+0/50=0%
+14/50=28%
+7/50=14%
+27/50=54%
+29/50=58%
+8/50=16%
+6/50=12%
+5/50=10%
+8/50=16%
+12/50=24%
+7/50=14%
+35/50=70%
+2/38=5.26316%
+14/50=28%
+3/50=6%
+2/50=4%
+10/50=20%
+13/50=26%
+10/50=20%
+12/50=24%
+4/44=9.09091%
+4/50=8%
+15/50=30%
+32/50=64%
+22/39=56.4103%
+Overall accuracy = 24.6519
+Average accuracy = 24.6706

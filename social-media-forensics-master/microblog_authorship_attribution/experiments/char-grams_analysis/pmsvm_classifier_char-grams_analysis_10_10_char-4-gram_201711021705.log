@@ -1,0 +1,18 @@
+/Library/anaconda/lib/python3.6/site-packages/sklearn/cross_validation.py:41: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
+  "This module will be removed in 0.20.", DeprecationWarning)
+[2017-11-02 17:05:46,483] - INFO - Starting the Power Mean SVM classification ...
+	source directory data = /Users/hamidmoghaddam/Documents/thesis/social-media-forensics-master/microblog_authorship_attribution/dataset/datasetPOS_retweets_filtered_4_words_english_tagged_thiagos_approach_ngrams-char-grams-analysis
+	output directory = /Users/hamidmoghaddam/Documents/thesis/social-media-forensics-master/microblog_authorship_attribution/experiments/char-grams_analysis/pmsvm_classifier_char-grams_analysis_10_10_char-4-gram_201711021705
+	number of folds in cross validation = 10
+	number of repetitions = 10
+	features = ['char-4-gram']
+	debug = True
+[2017-11-02 17:05:46,483] - INFO - Creating output directory ...
+[2017-11-02 17:05:46,484] - INFO - Compiling PmSVM classifier ...
+[2017-11-02 17:05:47,179] - INFO - Run 1
+[2017-11-02 17:05:47,179] - DEBUG - /Users/hamidmoghaddam/Documents/thesis/social-media-forensics-master/microblog_authorship_attribution/dataset/datasetPOS_retweets_filtered_4_words_english_tagged_thiagos_approach_ngrams-char-grams-analysis/run_001
+[2017-11-02 17:05:47,180] - DEBUG - 	Folding the dataset ...
+Traceback (most recent call last):
+  File "/Users/hamidmoghaddam/Documents/thesis/social-media-forensics-master/microblog_authorship_attribution/char-grams_analysis/pmsvm_classifier_char-grams.py", line 263, in <module>
+    tweets_per_author = len(tweets_sampled[tweets_sampled.keys()[0]])
+TypeError: 'dict_keys' object does not support indexing
