@@ -120,13 +120,11 @@ with tf.Session() as sess:
         epoch_size = max(dp.train_size // batch_size, 1)
         while step < epoch_size:
             batch_x, batch_y = dp.get_next_train_batch(batch_size)
-
-            acc = sess.run(accuracy, feed_dict={x: batch_x, y: batch_y, dropout: 0.5, is_training: True})
-            train_accr += acc
-            loss = sess.run(cost, feed_dict={x: batch_x, y: batch_y, dropout: 0.5, is_training: True})
+            
+            acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: batch_x, y: batch_y, dropout: 0.5, is_training: True})
+            train_accr += acc 
             train_cost += loss
-            sess.run(optimizer, feed_dict={x: batch_x, y: batch_y, dropout: 0.5, is_training: True})
-
+            
             step += 1
         
         lst_train_cost.append(train_cost/epoch_size)
