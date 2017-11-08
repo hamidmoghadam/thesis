@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 
 class data_provider(object):
-    def __init__(self, size = 10, sent_max_len = 30, number_of_post_per_user = 50):
+    def __init__(self, size = 10, sent_max_len = 30, sent_max_char_len = 200, number_of_post_per_user = 50):
         self.train_batch_counter = 0
         self.valid_batch_counter = 0
         self.test_batch_counter = 0
@@ -116,7 +116,10 @@ class data_provider(object):
                 y_valid_data.extend((np.array(y_temp_set)[random_set]).tolist())
 
         word_2_id = self.build_vocab(' '.join(train_data))
+        letter_2_id = self.build_letter_dic(' '.join(train_data))
+
         self.vocab_size = len(word_2_id) + 1
+        self.letter_dic_size = len(letter_2_id) +1 
 
         max_tweet_len = 0
         max_tweet = ''
@@ -128,17 +131,26 @@ class data_provider(object):
         self.valid_set = []
         self.test_set = []
 
+        self.train_char_set = []
+        self.valid_char_set = []
+        self.test_char_set = []
+
+
         self.y_train_set = []
         self.y_valid_set = []
         self.y_test_set = []
+        
 
 
         for i in range(len(train_data)):
             txt = train_data[i]
             lst_len.append(len(txt.split(' ')))
             temp = self.pad_word_ids(self.text_to_word_ids(txt, word_2_id), sent_max_len)
+            temp2 = self.pad_letter_ids(self.text_to_letter_ids(txt, letter_2_id), sent_max_char_len)
+
             if np.sum(temp) > 0:
                 self.train_set.append(temp)
+                self.train_char_set.append(temp2)
                 self.y_train_set.append(y_train_data[i])
 
 
@@ -146,8 +158,11 @@ class data_provider(object):
             txt = valid_data[i]
             lst_len.append(len(txt.split(' ')))
             temp = self.pad_word_ids(self.text_to_word_ids(txt, word_2_id), sent_max_len)
+            temp2 = self.pad_letter_ids(self.text_to_letter_ids(txt, letter_2_id), sent_max_char_len)
+
             if np.sum(temp) > 0:
                 self.valid_set.append(temp)
+                self.valid_char_set.append(temp2)
                 self.y_valid_set.append(y_valid_data[i])
 
 
@@ -155,8 +170,11 @@ class data_provider(object):
             txt = test_data[i]
             lst_len_test.append(len(txt.split(' ')))
             temp = self.pad_word_ids(self.text_to_word_ids(txt, word_2_id), sent_max_len)
+            temp2 = self.pad_letter_ids(self.text_to_letter_ids(txt, letter_2_id), sent_max_char_len)
+
             if np.sum(temp) > 0:
                 self.test_set.append(temp)
+                self.test_char_set.append(temp2)
                 self.y_test_set.append(y_test_data[i])
 
         '''        
@@ -179,22 +197,26 @@ class data_provider(object):
             self.train_batch_counter = 0
 
         train = self.train_set[self.train_batch_counter * batch_size: (self.train_batch_counter+1) * batch_size]
+        train_char = self.train_char_set[self.train_batch_counter * batch_size: (self.train_batch_counter+1) * batch_size]
         y_train = self.y_train_set[self.train_batch_counter * batch_size: (self.train_batch_counter+1) * batch_size]
+
+    
        
         self.train_batch_counter += 1
 
-        return (train, y_train)
+        return (train, y_train, train_char)
     
     def get_next_valid_batch(self, batch_size):
         if(self.valid_batch_counter >= self.valid_size // batch_size):
             self.valid_batch_counter = 0
             
         valid = self.valid_set[self.valid_batch_counter * batch_size: (self.valid_batch_counter+1) * batch_size]
+        valid_char = self.valid_char_set[self.valid_batch_counter * batch_size: (self.valid_batch_counter+1) * batch_size]
         y_valid = self.y_valid_set[self.valid_batch_counter * batch_size: (self.valid_batch_counter+1) * batch_size]
        
         self.valid_batch_counter += 1
 
-        return (valid, y_valid)
+        return (valid, y_valid, valid_char)
 
     def get_next_test_batch(self):
         label = [0 for x in range(self.size)]
@@ -219,9 +241,10 @@ class data_provider(object):
         batch_size = len(indices)
 
         test = np.array(self.test_set)[indices]
+        test_char = np.array(self.test_char)[indices]
         y_test = np.array(self.y_test_set)[indices]
 
-        return (test.tolist(), y_test.tolist())
+        return (test.tolist(), y_test.tolist(), test_char.tolist())
 
 
     def build_vocab(self,data):
@@ -235,10 +258,18 @@ class data_provider(object):
         #print("vocab size is {0}".format(len(word_to_id)))
         return word_to_id
 
+    def build_letter_dic(self, data):
+        chars = set(data)
+
+        letter_2_id = dict((c, i+1) for i, c in enumerate(chars))
+        return letter_2_id
 
     def text_to_word_ids(self,data, word_to_id):
         #data = _read_words(filename)
         return [word_to_id[word] for word in data.split(' ') if word in word_to_id]
+
+    def text_to_letter_ids(self, data, letter_2_id):
+        return [letter_2_id[letter] if letter in letter_2_id else 0 for letter in data]
 
     def pad_word_ids(self, word_ids, max_length):
         data_len = len(word_ids)
@@ -247,3 +278,9 @@ class data_provider(object):
             word_ids = np.lib.pad(word_ids, (0, max_length - data_len), 'constant').tolist()
 
         return word_ids[:max_length]
+
+    def pad_letter_ids(self, letter_id_array, max_length):
+        data_len = len(letter_id_array)
+        if data_len < max_length:
+            letter_id_array = np.lib.pad(letter_id_array, (0, max_length - data_len), 'constant').tolist()
+        return letter_id_array[:max_length]
