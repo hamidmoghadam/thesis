@@ -218,21 +218,6 @@ class data_provider(object):
 
         return (valid, y_valid, valid_char)
 
-    def get_next_test_batch(self):
-        label = [0 for x in range(self.size)]
-        label[self.test_batch_counter] = 1
-        indices = [label == i for i in self.y_test_set]
-        batch_size = len(indices)
-
-        if(self.test_batch_counter == self.size):
-            self.test_batch_counter = 0
-
-        test = np.array(self.test_set)[indices]
-        y_test = np.array(self.y_test_set)[indices]
-       
-        self.test_batch_counter += 1
-
-        return (test.tolist(), y_test.tolist())
 
     def get_next_test_batch(self, class_id):
         label = [0 for x in range(self.size)]
@@ -241,7 +226,7 @@ class data_provider(object):
         batch_size = len(indices)
 
         test = np.array(self.test_set)[indices]
-        test_char = np.array(self.test_char)[indices]
+        test_char = np.array(self.test_char_set)[indices]
         y_test = np.array(self.y_test_set)[indices]
 
         return (test.tolist(), y_test.tolist(), test_char.tolist())
