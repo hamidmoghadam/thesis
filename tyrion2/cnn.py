@@ -56,7 +56,7 @@ def conv_net(x, n_classes, dropout, is_training):
     #batch * sent_char_size * n_hidden|embedding
     #x = tf.unstack(x, n_input, 0)
 
-    x = tf.reshape(x, shape=[-1, n_input, n_hidden, 1])
+    x = tf.reshape(x, shape=[-1, n_input//4, n_hidden*4, 1])
     #batch (sentsie * n_hidden|embedding)
     # Convolution Layer with 32 filters and a kernel size of 5
     conv1 = tf.layers.conv2d(x, 32, 5, activation=tf.nn.relu)
