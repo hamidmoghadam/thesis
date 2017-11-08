@@ -111,7 +111,7 @@ pred_exact_match = ExactMatch(inputs, weights, biases)
 
 
 alpha = tf.Variable(tf.random_uniform([n_classes, n_classes], maxval=0.001), tf.float32)
-alpha = tf.cond(tf.equal(is_training, tf.constant(True)), lambda: tf.nn.dropout(alpha, dropout), lambda:alpha)
+alpha = tf.cond(tf.equal(is_training, tf.constant(True)), lambda: tf.nn.dropout(alpha, 0.1), lambda:alpha)
 
 #pred_w = tf.Variable(tf.random_normal(n_hidden, n_classes))
 #pred_bias = tf.Variable(tf.random_normal([n_classes]))
