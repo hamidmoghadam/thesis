@@ -31,12 +31,12 @@ number_of_post_per_user = int(sys.argv[2])
 train_iteration = int(sys.argv[3])
 
 # Network Parameters
-n_input = 100 # MNIST data input (img shape: 28*28)
+n_input = 200 # MNIST data input (img shape: 28*28)
 n_hidden = int(sys.argv[4]) # hidden layer num of features
 n_classes = int(sys.argv[1]) # MNIST total classes (0-9 digits)
 
 #vocab_size = 58000
-dp = data_provider(size=n_classes, sent_max_len = n_input, number_of_post_per_user = number_of_post_per_user)
+dp = data_provider(size=n_classes, sent_max_char_len = n_input, number_of_post_per_user = number_of_post_per_user)
 
 # tf Graph input
 x = tf.placeholder(tf.int32, [None, n_input])
@@ -53,7 +53,7 @@ biases = {
 }
 
 def conv_net(x, n_classes, dropout, is_training):
-    #batch * sentsize * n_hidden|embedding
+    #batch * sent_char_size * n_hidden|embedding
     #x = tf.unstack(x, n_input, 0)
 
     x = tf.reshape(x, shape=[-1, n_input, n_hidden, 1])
@@ -105,7 +105,7 @@ def RNN(x, weights, biases, dropout, is_training):
     return tf.matmul(output, weights['out']) + biases['out']
 
 with tf.device("/cpu:0"):
-        embedding = tf.get_variable("embedding", [dp.vocab_size, n_hidden], dtype=tf.float32)
+        embedding = tf.get_variable("embedding", [dp.letter_dic_size, n_hidden], dtype=tf.float32)
         inputs = tf.nn.embedding_lookup(embedding, x)
 
 #pred = RNN(inputs, weights, biases, dropout, is_training)
@@ -143,9 +143,10 @@ with tf.Session() as sess:
         step = 0
         epoch_size = max(dp.train_size // batch_size, 1)
         while step < epoch_size:
-            batch_x, batch_y = dp.get_next_train_batch(batch_size)
+            batch_x, batch_y, batch_char_x = dp.get_next_train_batch(batch_size)
+            #print(np.array(batch_char_x).shape)
             
-            acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: batch_x, y: batch_y, dropout: 0.5, is_training: True})
+            acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: batch_char_x, y: batch_y, dropout: 0.5, is_training: True})
             train_accr += acc 
             train_cost += loss
             
@@ -156,10 +157,9 @@ with tf.Session() as sess:
         #'''
         print("Training Loss = {:.3f}".format(train_cost/epoch_size) + ", Training Accuracy= {:.3f}".format(train_accr/epoch_size))
         
-        valid_data, valid_label = dp.get_next_valid_batch(dp.valid_size)
-
-        acc = sess.run(accuracy, feed_dict={x: valid_data, y: valid_label, dropout: 1.0, is_training:False})
-        loss = sess.run(cost, feed_dict={x: valid_data, y: valid_label, dropout: 1.0, is_training:False})
+        valid_data, valid_label, valid_char = dp.get_next_valid_batch(dp.valid_size)
+        #print(np.array(valid_char).shape)
+        acc, loss = sess.run([accuracy, cost], feed_dict={x: valid_char, y: valid_label, dropout: 1.0, is_training:False})
         lst_valid_cost.append(loss)
         lst_valid_accr.append(acc)
         
@@ -172,8 +172,8 @@ with tf.Session() as sess:
     number_of_post = 0
     for i in range(n_classes):
         #print('for class number {0}'.format(i))
-        test_data, test_label = dp.get_next_test_batch(i)
-        loss, acc, prediction = sess.run([cost, accuracy, softmax_pred], feed_dict={x: test_data, y: test_label, dropout: 1.0, is_training:False})
+        test_data, test_label, test_char = dp.get_next_test_batch(i)
+        loss, acc, prediction = sess.run([cost, accuracy, softmax_pred], feed_dict={x: test_char, y: test_label, dropout: 1.0, is_training:False})
 
         for predict in prediction:
             number_of_post += 1
@@ -185,13 +185,6 @@ with tf.Session() as sess:
         if max_idx == i :
             accr += 1
         
-
-        #result = (np.sum(prediction, axis=0)/np.sum(np.sum(prediction, axis=0))).tolist()
-        #temp = result[i]
-        #result.sort(reverse=True)
-        #max_index = result.index(temp)
-        #print('  '.join([str(k) for k in result[:(max_index+1)]]))
-        #print("Test Loss = {:.3f}".format(loss) + ", Test Accuracy= {:.3f}".format(acc))
     
     print('accr is {0:.3f} accr per post is {1:.3f}'.format(accr / n_classes, accr_per_post/number_of_post))
 
