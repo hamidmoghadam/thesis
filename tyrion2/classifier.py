@@ -110,7 +110,7 @@ pred = RNN(inputs, weights, biases, dropout, is_training)
 pred_exact_match = ExactMatch(inputs, weights, biases)
 
 
-alpha = tf.Variable(tf.random_uniform([n_classes, n_classes]), tf.float32)
+alpha = tf.Variable(tf.random_uniform([n_classes, n_classes], maxval=0.01), tf.float32)
 
 #pred_w = tf.Variable(tf.random_normal(n_hidden, n_classes))
 #pred_bias = tf.Variable(tf.random_normal([n_classes]))
