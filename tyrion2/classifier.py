@@ -34,7 +34,7 @@ train_iteration = int(sys.argv[3])
 # Network Parameters
 n_input = 100 # MNIST data input (img shape: 28*28)
 n_hidden = int(sys.argv[4]) # hidden layer num of features
-n_hidden_1 = 20
+n_hidden_1 = 10
 n_classes = int(sys.argv[1]) # MNIST total classes (0-9 digits)
 
 #vocab_size = 58000
@@ -110,7 +110,8 @@ pred = RNN(inputs, weights, biases, dropout, is_training)
 pred_exact_match = ExactMatch(inputs, weights, biases)
 
 
-alpha = tf.Variable(tf.random_uniform([n_classes, n_classes], maxval=0.01), tf.float32)
+alpha = tf.Variable(tf.random_uniform([n_classes, n_classes], maxval=0.001), tf.float32)
+alpha = tf.cond(tf.equal(is_training, tf.constant(True)), lambda: tf.nn.dropout(alpha, dropout), lambda:alpha)
 
 #pred_w = tf.Variable(tf.random_normal(n_hidden, n_classes))
 #pred_bias = tf.Variable(tf.random_normal([n_classes]))
