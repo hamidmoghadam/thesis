@@ -153,12 +153,12 @@ with tf.Session() as sess:
         while step < epoch_size:
             batch_x, batch_y = dp.get_next_train_batch(batch_size)
             
-            acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: batch_x, y: batch_y, dropout: 0.5, is_training: True})
+            acc, loss, _, alpha_param = sess.run([accuracy, cost, optimizer, alpha], feed_dict={x: batch_x, y: batch_y, dropout: 0.5, is_training: True})
             train_accr += acc 
             train_cost += loss
             
             step += 1
-        
+        print(alpha_param)
         lst_train_cost.append(train_cost/epoch_size)
         lst_train_accr.append(train_accr/epoch_size)
         #'''
@@ -170,7 +170,7 @@ with tf.Session() as sess:
         loss = sess.run(cost, feed_dict={x: valid_data, y: valid_label, dropout: 1.0, is_training:False})
         lst_valid_cost.append(loss)
         lst_valid_accr.append(acc)
-        print(sess.run(alpha))
+    
         print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
         #'''
     
