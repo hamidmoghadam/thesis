@@ -158,7 +158,7 @@ with tf.Session() as sess:
             train_cost += loss
             
             step += 1
-        print(alpha_param)
+        print("hey = {0}".format(alpha_param))
         lst_train_cost.append(train_cost/epoch_size)
         lst_train_accr.append(train_accr/epoch_size)
         #'''
