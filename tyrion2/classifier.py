@@ -170,7 +170,7 @@ with tf.Session() as sess:
         loss = sess.run(cost, feed_dict={x: valid_data, y: valid_label, dropout: 1.0, is_training:False})
         lst_valid_cost.append(loss)
         lst_valid_accr.append(acc)
-        
+        print(sess.run(alpha))
         print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
         #'''
     
@@ -182,7 +182,7 @@ with tf.Session() as sess:
         #print('for class number {0}'.format(i))
         test_data, test_label = dp.get_next_test_batch(i)
         loss, acc, prediction = sess.run([cost, accuracy, softmax_pred], feed_dict={x: test_data, y: test_label, dropout: 1.0, is_training:False})
-
+        
         for predict in prediction:
             number_of_post += 1
             if predict.argmax(axis=0) == i:
