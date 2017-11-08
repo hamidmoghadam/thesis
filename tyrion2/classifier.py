@@ -110,12 +110,12 @@ pred = RNN(inputs, weights, biases, dropout, is_training)
 pred_exact_match = ExactMatch(inputs, weights, biases)
 
 
-alpha = tf.Variable(0.01, tf.float32)
+alpha = tf.Variable(tf.random_uniform([n_classes, n_classes]), tf.float32)
 
 #pred_w = tf.Variable(tf.random_normal(n_hidden, n_classes))
 #pred_bias = tf.Variable(tf.random_normal([n_classes]))
 
-pred = tf.add(pred, tf.scalar_mul(alpha, pred_exact_match))
+pred = tf.add(pred, tf.matmul(pred_exact_match, alpha))
 
 
 softmax_pred = tf.nn.softmax(pred)
@@ -158,7 +158,7 @@ with tf.Session() as sess:
             train_cost += loss
             
             step += 1
-        print("hey = {0}".format(alpha_param))
+        
         lst_train_cost.append(train_cost/epoch_size)
         lst_train_accr.append(train_accr/epoch_size)
         #'''
