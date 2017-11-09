@@ -62,12 +62,12 @@ def conv_net(x, n_classes, dropout, is_training):
 
     #batch (sentsie * n_hidden|embedding)
     # Convolution Layer with 32 filters and a kernel size of 5
-    conv1 = tf.layers.conv2d(x, 32, (2, 2), activation=tf.nn.relu, padding='same')
+    conv1 = tf.layers.conv2d(x, 32, (2, 2), activation=tf.nn.relu, padding='same', trainable=False)
     # Max Pooling (down-sampling) with strides of 1 and kernel size of 2
     conv1 = tf.layers.max_pooling2d(conv1, 2, (2,2))
     
     # Convolution Layer with 64 filters and a kernel size of 3
-    conv2 = tf.layers.conv2d(conv1, 64, (3,1), activation=tf.nn.relu, padding='same')
+    conv2 = tf.layers.conv2d(conv1, 64, (3,1), activation=tf.nn.relu, padding='same', trainable=False)
 
     # Max Pooling (down-sampling) with strides of 2 and kernel size of 2
     conv2 = tf.layers.max_pooling2d(conv2, 1, (3, 1))
@@ -75,10 +75,11 @@ def conv_net(x, n_classes, dropout, is_training):
     #out = tf.layers.average_pooling2d(conv1, 5, (5,1))
     #out = tf.reduce_mean(conv1, [2,3])
 
+    
+
     # Flatten the data to a 1-D vector for the fully connected layer
     fc1 = tf.contrib.layers.flatten(conv2)
     
-
     # Fully connected layer (in tf contrib folder for now)
     fc1 = tf.layers.dense(fc1, 128)
 
