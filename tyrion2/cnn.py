@@ -31,7 +31,7 @@ number_of_post_per_user = int(sys.argv[2])
 train_iteration = int(sys.argv[3])
 
 # Network Parameters
-n_input = 225 # MNIST data input (img shape: 28*28)
+n_input = 625 # MNIST data input (img shape: 28*28)
 n_hidden = int(sys.argv[4]) # hidden layer num of features
 n_classes = int(sys.argv[1]) # MNIST total classes (0-9 digits)
 
@@ -58,7 +58,7 @@ def conv_net(x, n_classes, dropout, is_training):
     #batch * sent_char_size * n_hidden|embedding
     #x = tf.unstack(x, n_input, 0)
 
-    x = tf.reshape(x, shape=[-1, 15, 15, n_hidden])
+    x = tf.reshape(x, shape=[-1, 25, 25, n_hidden])
     #batch (sentsie * n_hidden|embedding)
     # Convolution Layer with 32 filters and a kernel size of 5
     conv1 = tf.layers.conv2d(x, 32, 4, activation=tf.nn.relu, padding='same')

@@ -148,7 +148,7 @@ class data_provider(object):
             temp = self.pad_word_ids(self.text_to_word_ids(txt, word_2_id), sent_max_len)
             temp2 = self.pad_letter_ids(self.text_to_letter_ids(txt, letter_2_id), sent_max_char_len)
 
-            if np.sum(temp) > 0:
+            if len(txt) > 10 and len(set(txt)) > 3:
                 self.train_set.append(temp)
                 self.train_char_set.append(temp2)
                 self.y_train_set.append(y_train_data[i])
@@ -160,7 +160,7 @@ class data_provider(object):
             temp = self.pad_word_ids(self.text_to_word_ids(txt, word_2_id), sent_max_len)
             temp2 = self.pad_letter_ids(self.text_to_letter_ids(txt, letter_2_id), sent_max_char_len)
 
-            if np.sum(temp) > 0:
+            if len(txt) > 10 and len(set(txt)) > 3:
                 self.valid_set.append(temp)
                 self.valid_char_set.append(temp2)
                 self.y_valid_set.append(y_valid_data[i])
@@ -172,7 +172,7 @@ class data_provider(object):
             temp = self.pad_word_ids(self.text_to_word_ids(txt, word_2_id), sent_max_len)
             temp2 = self.pad_letter_ids(self.text_to_letter_ids(txt, letter_2_id), sent_max_char_len)
 
-            if np.sum(temp) > 0:
+            if len(txt) > 10 and len(set(txt)) > 3: 
                 self.test_set.append(temp)
                 self.test_char_set.append(temp2)
                 self.y_test_set.append(y_test_data[i])
@@ -266,6 +266,8 @@ class data_provider(object):
 
     def pad_letter_ids(self, letter_id_array, max_length):
         data_len = len(letter_id_array)
+       
+
         if data_len < max_length:
             letter_id_array = np.lib.pad(letter_id_array, (0, max_length - data_len), 'constant').tolist()
         return letter_id_array[:max_length]
