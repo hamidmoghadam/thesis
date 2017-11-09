@@ -58,21 +58,21 @@ def conv_net(x, n_classes, dropout, is_training):
     #batch * sent_char_size * n_hidden|embedding
     #x = tf.unstack(x, n_input, 0)
 
-    x = tf.reshape(x, shape=[-1, 25, 25, n_hidden])
+    x = tf.reshape(x, shape=[-1, n_input, 1, n_hidden])
     #batch (sentsie * n_hidden|embedding)
     # Convolution Layer with 32 filters and a kernel size of 5
-    conv1 = tf.layers.conv2d(x, 32, 4, activation=tf.nn.relu, padding='same')
-    
+    conv1 = tf.layers.conv2d(x, 32, (4, 1), activation=tf.nn.relu, padding='same')
+    print(conv1)
     # Max Pooling (down-sampling) with strides of 1 and kernel size of 2
-    conv1 = tf.layers.max_pooling2d(conv1, 1, 2)
+    conv1 = tf.layers.max_pooling2d(conv1, 1, (2,1))
     
     # Convolution Layer with 64 filters and a kernel size of 3
-    conv2 = tf.layers.conv2d(conv1, 64, 4, activation=tf.nn.relu, padding='same')
+    #conv2 = tf.layers.conv2d(conv1, 64, 4, activation=tf.nn.relu)
     # Max Pooling (down-sampling) with strides of 2 and kernel size of 2
-    conv2 = tf.layers.max_pooling2d(conv2, 2, 2)
+    #conv2 = tf.layers.max_pooling2d(conv2, 2, 2)
 
     # Flatten the data to a 1-D vector for the fully connected layer
-    fc1 = tf.contrib.layers.flatten(conv2)
+    fc1 = tf.contrib.layers.flatten(conv1)
     
 
     # Fully connected layer (in tf contrib folder for now)
