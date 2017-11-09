@@ -25,7 +25,7 @@ handle 28 sequences of 28 steps for every sample.
 '''
 
 # Parameters
-learning_rate = 0.0005
+learning_rate = 0.001
 batch_size = 200
 number_of_post_per_user = int(sys.argv[2])
 train_iteration = int(sys.argv[3])
@@ -56,18 +56,24 @@ def conv_net(x, n_classes, dropout, is_training):
     #batch * sent_char_size * n_hidden|embedding
     #x = tf.unstack(x, n_input, 0)
 
-    x = tf.reshape(x, shape=[-1, n_input//4, n_hidden*4, 1])
+    x = tf.reshape(x, shape=[-1, n_input//10, n_hidden*10, 1])
     #batch (sentsie * n_hidden|embedding)
     # Convolution Layer with 32 filters and a kernel size of 5
     conv1 = tf.layers.conv2d(x, 32, 5, activation=tf.nn.relu)
+    
     # Max Pooling (down-sampling) with strides of 2 and kernel size of 2
-    conv1 = tf.layers.max_pooling2d(conv1, 2, 2)
+    conv1 = tf.layers.max_pooling2d(conv1, 1, 2)
+
+    # Convolution Layer with 64 filters and a kernel size of 3
+    conv2 = tf.layers.conv2d(conv1, 64, 3, activation=tf.nn.relu)
+    # Max Pooling (down-sampling) with strides of 2 and kernel size of 2
+    conv2 = tf.layers.max_pooling2d(conv2, 2, 2)
 
     # Flatten the data to a 1-D vector for the fully connected layer
-    fc1 = tf.contrib.layers.flatten(conv1)
+    fc1 = tf.contrib.layers.flatten(conv2)
 
     # Fully connected layer (in tf contrib folder for now)
-    fc1 = tf.layers.dense(fc1, 1024)
+    fc1 = tf.layers.dense(fc1, 64)
     # Apply Dropout (if is_training is False, dropout is not applied)
     fc1 = tf.layers.dropout(fc1, rate=dropout, training=is_training)
 
@@ -146,7 +152,7 @@ with tf.Session() as sess:
             batch_x, batch_y, batch_char_x = dp.get_next_train_batch(batch_size)
             #print(np.array(batch_char_x).shape)
             
-            acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: batch_char_x, y: batch_y, dropout: 0.5, is_training: True})
+            acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: batch_char_x, y: batch_y, dropout: 0.8, is_training: True})
             train_accr += acc 
             train_cost += loss
             
