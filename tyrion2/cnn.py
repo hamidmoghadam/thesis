@@ -24,6 +24,11 @@ row as a sequence of pixels. Because MNIST image shape is 28*28px, we will then
 handle 28 sequences of 28 steps for every sample.
 '''
 
+def miror_data(x, y):
+     x = np.concatenate((np.array(x), np.fliplr(x)), axis=0)
+     y = np.concatenate((np.array(y), np.array(y)), axis=0)
+     return x, y
+
 # Parameters
 learning_rate = float(sys.argv[5])#0.0007
 batch_size = 200
@@ -153,9 +158,11 @@ with tf.Session() as sess:
         epoch_size = max(dp.train_size // batch_size, 1)
         while step < epoch_size:
             batch_x, batch_y, batch_char_x = dp.get_next_train_batch(batch_size)
+
             batch_char_x = np.concatenate((np.array(batch_char_x), np.fliplr(batch_char_x)), axis=0)
-            
             batch_y = np.concatenate((np.array(batch_y), np.array(batch_y)), axis=0)
+
+            miror_data(batch_char_x, batch_y)
             
             acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: np.array(batch_char_x, dtype='float32'), y: batch_y, dropout: 0.5, is_training: True})
             train_accr += acc 
@@ -169,6 +176,7 @@ with tf.Session() as sess:
         print("Training Loss = {:.3f}".format(train_cost/epoch_size) + ", Training Accuracy= {:.3f}".format(train_accr/epoch_size))
         
         valid_data, valid_label, valid_char = dp.get_next_valid_batch(dp.valid_size)
+        miror_data(valid_char, valid_label)
         #print(np.array(valid_char).shape)
         acc, loss = sess.run([accuracy, cost], feed_dict={x: valid_char, y: valid_label, dropout: 1.0, is_training:False})
         lst_valid_cost.append(loss)
@@ -204,5 +212,4 @@ with tf.Session() as sess:
 
     #plt.plot(range(len(lst_train_accr)), lst_train_accr, 'g--', range(len(lst_valid_accr)), lst_valid_accr, 'b--')
     #plt.show()
-
 
