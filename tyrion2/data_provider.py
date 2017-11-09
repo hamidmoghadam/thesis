@@ -245,7 +245,7 @@ class data_provider(object):
 
     def build_letter_dic(self, data):
         chars = set(data)
-
+        print(len(chars))
         letter_2_id = dict((c, i+1) for i, c in enumerate(chars))
         return letter_2_id
 
@@ -266,7 +266,7 @@ class data_provider(object):
 
     def pad_letter_ids(self, letter_id_array, max_length):
         data_len = len(letter_id_array)
-       
+        
 
         if data_len < max_length:
             letter_id_array = np.lib.pad(letter_id_array, (0, max_length - data_len), 'constant').tolist()

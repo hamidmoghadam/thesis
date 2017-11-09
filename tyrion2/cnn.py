@@ -34,7 +34,7 @@ learning_rate = float(sys.argv[5])#0.0007
 batch_size = 200
 number_of_post_per_user = int(sys.argv[2])
 train_iteration = int(sys.argv[3])
-
+n_fully_connected = int(sys.argv[6])
 # Network Parameters
 n_input = 600 # MNIST data input (img shape: 28*28)
 n_hidden = int(sys.argv[4]) # hidden layer num of features
@@ -44,7 +44,7 @@ n_classes = int(sys.argv[1]) # MNIST total classes (0-9 digits)
 dp = data_provider(size=n_classes, sent_max_char_len = n_input, number_of_post_per_user = number_of_post_per_user)
 
 # tf Graph input
-x = tf.placeholder(tf.float32, [None, n_input])
+x = tf.placeholder(tf.int32, [None, n_input])
 y = tf.placeholder(tf.float32, [None, n_classes])
 dropout = tf.placeholder(tf.float32, shape=())
 is_training = tf.placeholder(tf.bool)
@@ -58,20 +58,21 @@ biases = {
 }
 
 def conv_net(x, n_classes, dropout, is_training):
-    x = tf.reshape(x, shape=[-1, n_input//2, 2, 1])
-
+    x = tf.reshape(x, shape=[-1, n_input//4, 4, n_hidden])
+    print(x)
     #batch (sentsie * n_hidden|embedding)
     # Convolution Layer with 32 filters and a kernel size of 5
-    conv1 = tf.layers.conv2d(x, 32, (2, 2), activation=tf.nn.relu, padding='same', trainable=False)
+    conv1 = tf.layers.conv2d(x, 32, (1, 4), activation=tf.nn.relu)
+    print(conv1)
     # Max Pooling (down-sampling) with strides of 1 and kernel size of 2
-    conv1 = tf.layers.max_pooling2d(conv1, 2, (2,2))
-    
+    conv1 = tf.layers.max_pooling2d(conv1, strides = 1, pool_size= (2,1))
+    print(conv1)
     # Convolution Layer with 64 filters and a kernel size of 3
-    conv2 = tf.layers.conv2d(conv1, 64, (3,1), activation=tf.nn.relu, padding='same', trainable=False)
-
+    conv2 = tf.layers.conv2d(conv1, 64, (3,1), activation=tf.nn.relu, padding='same')
+    print(conv2)
     # Max Pooling (down-sampling) with strides of 2 and kernel size of 2
-    conv2 = tf.layers.max_pooling2d(conv2, 1, (3, 1))
-
+    conv2 = tf.layers.max_pooling2d(conv2, strides= 2, pool_size = (3, 1))
+    print(conv2)
     #out = tf.layers.average_pooling2d(conv1, 5, (5,1))
     #out = tf.reduce_mean(conv1, [2,3])
 
@@ -81,7 +82,7 @@ def conv_net(x, n_classes, dropout, is_training):
     fc1 = tf.contrib.layers.flatten(conv2)
     
     # Fully connected layer (in tf contrib folder for now)
-    fc1 = tf.layers.dense(fc1, 128)
+    fc1 = tf.layers.dense(fc1, n_fully_connected)
 
     # Apply Dropout (if is_training is False, dropout is not applied)
     fc1 = tf.layers.dropout(fc1, rate=dropout, training=is_training)
@@ -118,13 +119,13 @@ def RNN(x, weights, biases, dropout, is_training):
         output = tf.maximum(output, outputs[i])
     # Linear activation, using rnn inner loop last output
     return tf.matmul(output, weights['out']) + biases['out']
-'''
+
 with tf.device("/cpu:0"):
         embedding = tf.get_variable("embedding", [dp.letter_dic_size, n_hidden], dtype=tf.float32)
         inputs = tf.nn.embedding_lookup(embedding, x)
-'''
+
 #pred = RNN(inputs, weights, biases, dropout, is_training)
-pred = conv_net(x, n_classes, dropout, is_training)
+pred = conv_net(inputs, n_classes, dropout, is_training)
 softmax_pred = tf.nn.softmax(pred)
 # Define loss and optimizer
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=pred, labels=y))
@@ -165,7 +166,7 @@ with tf.Session() as sess:
 
             miror_data(batch_char_x, batch_y)
             
-            acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: np.array(batch_char_x, dtype='float32'), y: batch_y, dropout: 0.5, is_training: True})
+            acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: batch_char_x , y: batch_y, dropout: 0.5, is_training: True})
             train_accr += acc 
             train_cost += loss
             
