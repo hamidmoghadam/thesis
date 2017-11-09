@@ -58,20 +58,20 @@ biases = {
 }
 
 def conv_net(x, n_classes, dropout, is_training):
-    x = tf.reshape(x, shape=[-1, n_input//4, 4, n_hidden])
+    x = tf.reshape(x, shape=[-1, n_input, 1, n_hidden])
     print(x)
     #batch (sentsie * n_hidden|embedding)
     # Convolution Layer with 32 filters and a kernel size of 5
-    conv1 = tf.layers.conv2d(x, 32, (1, 4), activation=tf.nn.relu)
+    conv1 = tf.layers.conv2d(x, 32, (4, 1), activation=tf.nn.relu, padding='same')
     print(conv1)
     # Max Pooling (down-sampling) with strides of 1 and kernel size of 2
-    conv1 = tf.layers.max_pooling2d(conv1, strides = 1, pool_size= (2,1))
+    conv1 = tf.layers.max_pooling2d(conv1, strides = 2, pool_size= (2,1))
     print(conv1)
     # Convolution Layer with 64 filters and a kernel size of 3
-    conv2 = tf.layers.conv2d(conv1, 64, (3,1), activation=tf.nn.relu, padding='same')
+    conv2 = tf.layers.conv2d(conv1, 64, (2,1), activation=tf.nn.relu, padding='same')
     print(conv2)
     # Max Pooling (down-sampling) with strides of 2 and kernel size of 2
-    conv2 = tf.layers.max_pooling2d(conv2, strides= 2, pool_size = (3, 1))
+    conv2 = tf.layers.max_pooling2d(conv2, strides= 2, pool_size = (2, 1))
     print(conv2)
     #out = tf.layers.average_pooling2d(conv1, 5, (5,1))
     #out = tf.reduce_mean(conv1, [2,3])
