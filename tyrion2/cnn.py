@@ -79,7 +79,7 @@ def conv_net(x, n_classes, dropout, is_training):
     fc1 = tf.layers.dense(fc1, n_fully_connect)
 
     # Apply Dropout (if is_training is False, dropout is not applied)
-    #fc1 = tf.layers.dropout(fc1, rate=dropout, training=is_training)
+    fc1 = tf.layers.dropout(fc1, rate=dropout, training=is_training)
 
     # Output layer, class prediction
     out = tf.layers.dense(fc1, n_classes)
@@ -156,7 +156,7 @@ with tf.Session() as sess:
             batch_x, batch_y, batch_char_x = dp.get_next_train_batch(batch_size)
             #print(np.array(batch_char_x).shape)
             
-            acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: batch_char_x, y: batch_y, dropout: 0.8, is_training: True})
+            acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: batch_char_x, y: batch_y, dropout: 0.5, is_training: True})
             train_accr += acc 
             train_cost += loss
             
