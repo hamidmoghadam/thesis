@@ -73,23 +73,24 @@ def conv_net(x, n_classes, dropout, is_training):
     # Max Pooling (down-sampling) with strides of 2 and kernel size of 2
     conv2 = tf.layers.max_pooling2d(conv2, strides= 2, pool_size = (2, 1))
     print(conv2)
-    #out = tf.layers.average_pooling2d(conv1, 5, (5,1))
-    #out = tf.reduce_mean(conv1, [2,3])
 
     
+    out = tf.reduce_mean(conv2, [2])
+    out = tf.layers.average_pooling1d(out, strides=15, pool_size = (15))
+    out = tf.reduce_mean(out, [2])
 
     # Flatten the data to a 1-D vector for the fully connected layer
-    fc1 = tf.contrib.layers.flatten(conv2)
+    #fc1 = tf.contrib.layers.flatten(conv2)
     
     # Fully connected layer (in tf contrib folder for now)
-    fc1 = tf.layers.dense(fc1, n_fully_connected)
+    #fc1 = tf.layers.dense(fc1, n_fully_connected)
 
     # Apply Dropout (if is_training is False, dropout is not applied)
-    fc1 = tf.layers.dropout(fc1, rate=dropout, training=is_training)
+    #fc1 = tf.layers.dropout(fc1, rate=dropout, training=is_training)
 
     # Output layer, class prediction
-    out = tf.layers.dense(fc1, n_classes)
-
+    #out = tf.layers.dense(fc1, n_classes)
+    print(out)
     return out
 
 def RNN(x, weights, biases, dropout, is_training):
