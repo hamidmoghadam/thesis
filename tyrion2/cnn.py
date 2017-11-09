@@ -73,7 +73,7 @@ def conv_net(x, n_classes, dropout, is_training):
     fc1 = tf.contrib.layers.flatten(conv2)
 
     # Fully connected layer (in tf contrib folder for now)
-    fc1 = tf.layers.dense(fc1, 1024)
+    fc1 = tf.layers.dense(fc1, 32)
     # Apply Dropout (if is_training is False, dropout is not applied)
     fc1 = tf.layers.dropout(fc1, rate=dropout, training=is_training)
 
