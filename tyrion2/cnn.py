@@ -31,7 +31,7 @@ number_of_post_per_user = int(sys.argv[2])
 train_iteration = int(sys.argv[3])
 
 # Network Parameters
-n_input = 625 # MNIST data input (img shape: 28*28)
+n_input = 500 # MNIST data input (img shape: 28*28)
 n_hidden = int(sys.argv[4]) # hidden layer num of features
 n_classes = int(sys.argv[1]) # MNIST total classes (0-9 digits)
 
@@ -64,7 +64,7 @@ def conv_net(x, n_classes, dropout, is_training):
     conv1 = tf.layers.conv2d(x, 32, (4, 1), activation=tf.nn.relu, padding='same')
     #print(conv1)
     # Max Pooling (down-sampling) with strides of 1 and kernel size of 2
-    conv1 = tf.layers.max_pooling2d(conv1, 1, (125,1))
+    conv1 = tf.layers.max_pooling2d(conv1, 1, (50,1))
     
     # Convolution Layer with 64 filters and a kernel size of 3
     #conv2 = tf.layers.conv2d(conv1, 64, 4, activation=tf.nn.relu)
