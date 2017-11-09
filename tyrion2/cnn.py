@@ -75,7 +75,7 @@ def conv_net(x, n_classes, dropout, is_training):
     print(conv2)
 
     
-    fc1 = tf.reduce_mean(conv2, [3])
+    fc1 = tf.reduce_max(conv2, [3])
 
     fc1 = tf.contrib.layers.flatten(fc1)
     
