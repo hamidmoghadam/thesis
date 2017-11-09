@@ -57,6 +57,27 @@ biases = {
     'out': tf.Variable(tf.random_normal([n_classes]))
 }
 
+def conv_net_2(x, n_classes, dropout, is_training):
+    x = tf.reshape(x, shape=[-1, n_input, 1, n_hidden])
+    conv1 = tf.layers.conv2d(x, 1, (4, 1), activation=tf.nn.relu)
+    conv3 = tf.layers.conv2d(x, 1, (3, 1), activation=tf.nn.relu)
+    conv2 = tf.layers.conv2d(x, 1, (2, 1), activation=tf.nn.relu)
+    
+    conv1 = tf.layers.max_pooling2d(conv1, strides=1, pool_size=(597, 1))
+    conv3 = tf.layers.max_pooling2d(conv3, strides=1, pool_size=(598, 1))
+    conv2 = tf.layers.max_pooling2d(conv2, strides=1, pool_size=(599, 1))
+
+    conv1 = tf.contrib.layers.flatten(conv1)
+    conv2 = tf.contrib.layers.flatten(conv2)
+    conv3 = tf.contrib.layers.flatten(conv3)
+
+    fc1 = tf.concat([conv1, conv2, conv3], 1)
+    print(fc1)
+
+    fc1 = tf.layers.dropout(fc1, rate=dropout, training=is_training)
+    out = tf.layers.dense(fc1, n_classes)
+    return out
+
 def conv_net(x, n_classes, dropout, is_training):
     x = tf.reshape(x, shape=[-1, n_input, 1, n_hidden])
     print(x)
@@ -70,6 +91,9 @@ def conv_net(x, n_classes, dropout, is_training):
     # Convolution Layer with 64 filters and a kernel size of 3
     conv2 = tf.layers.conv2d(conv1, 64, (2,1), activation=tf.nn.relu, padding='same')
     print(conv2)
+
+    temp = tf.layers.max_pooling2d(conv2, strides = 1,pool_size = (300, 1))
+    print(temp)
     # Max Pooling (down-sampling) with strides of 2 and kernel size of 2
     conv2 = tf.layers.max_pooling2d(conv2, strides= 2, pool_size = (2, 1))
     print(conv2)
@@ -127,7 +151,7 @@ with tf.device("/cpu:0"):
         inputs = tf.nn.embedding_lookup(embedding, x)
 
 #pred = RNN(inputs, weights, biases, dropout, is_training)
-pred = conv_net(inputs, n_classes, dropout, is_training)
+pred = conv_net_2(inputs, n_classes, dropout, is_training)
 softmax_pred = tf.nn.softmax(pred)
 # Define loss and optimizer
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=pred, labels=y))
