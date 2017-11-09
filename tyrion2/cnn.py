@@ -31,17 +31,15 @@ number_of_post_per_user = int(sys.argv[2])
 train_iteration = int(sys.argv[3])
 
 # Network Parameters
-n_input = 500 # MNIST data input (img shape: 28*28)
+n_input = 600 # MNIST data input (img shape: 28*28)
 n_hidden = int(sys.argv[4]) # hidden layer num of features
 n_classes = int(sys.argv[1]) # MNIST total classes (0-9 digits)
-
-n_fully_connect = int(sys.argv[6])
 
 #vocab_size = 58000
 dp = data_provider(size=n_classes, sent_max_char_len = n_input, number_of_post_per_user = number_of_post_per_user)
 
 # tf Graph input
-x = tf.placeholder(tf.int32, [None, n_input])
+x = tf.placeholder(tf.float32, [None, n_input])
 y = tf.placeholder(tf.float32, [None, n_classes])
 dropout = tf.placeholder(tf.float32, shape=())
 is_training = tf.placeholder(tf.bool)
@@ -55,40 +53,35 @@ biases = {
 }
 
 def conv_net(x, n_classes, dropout, is_training):
-    #batch * sent_char_size * n_hidden|embedding
-    #x = tf.unstack(x, n_input, 0)
+    x = tf.reshape(x, shape=[-1, n_input//2, 2, 1])
 
-    x = tf.reshape(x, shape=[-1, n_input, 1, n_hidden])
     #batch (sentsie * n_hidden|embedding)
     # Convolution Layer with 32 filters and a kernel size of 5
-    conv1 = tf.layers.conv2d(x, 32, (4, 1), activation=tf.nn.relu, padding='same')
-    #print(conv1)
+    conv1 = tf.layers.conv2d(x, 32, (2, 2), activation=tf.nn.relu, padding='same')
     # Max Pooling (down-sampling) with strides of 1 and kernel size of 2
-    conv1 = tf.layers.max_pooling2d(conv1, 1, (50,1))
+    conv1 = tf.layers.max_pooling2d(conv1, 2, (2,2))
     
     # Convolution Layer with 64 filters and a kernel size of 3
-    #conv2 = tf.layers.conv2d(conv1, 64, 4, activation=tf.nn.relu)
+    conv2 = tf.layers.conv2d(conv1, 64, (3,1), activation=tf.nn.relu, padding='same')
+
     # Max Pooling (down-sampling) with strides of 2 and kernel size of 2
-    #conv2 = tf.layers.max_pooling2d(conv2, 2, 2)
+    conv2 = tf.layers.max_pooling2d(conv2, 1, (3, 1))
 
-    #print(conv1)
+    #out = tf.layers.average_pooling2d(conv1, 5, (5,1))
+    #out = tf.reduce_mean(conv1, [2,3])
 
-    out = tf.reduce_mean(conv1, [2,3])
-
-    
-    #print(out)
     # Flatten the data to a 1-D vector for the fully connected layer
-    #fc1 = tf.contrib.layers.flatten(conv1)
+    fc1 = tf.contrib.layers.flatten(conv2)
     
 
     # Fully connected layer (in tf contrib folder for now)
-    #fc1 = tf.layers.dense(fc1, n_fully_connect)
+    fc1 = tf.layers.dense(fc1, 128)
 
     # Apply Dropout (if is_training is False, dropout is not applied)
-    #fc1 = tf.layers.dropout(fc1, rate=dropout, training=is_training)
+    fc1 = tf.layers.dropout(fc1, rate=dropout, training=is_training)
 
     # Output layer, class prediction
-    #out = tf.layers.dense(fc1, n_classes)
+    out = tf.layers.dense(fc1, n_classes)
 
     return out
 
@@ -119,13 +112,13 @@ def RNN(x, weights, biases, dropout, is_training):
         output = tf.maximum(output, outputs[i])
     # Linear activation, using rnn inner loop last output
     return tf.matmul(output, weights['out']) + biases['out']
-
+'''
 with tf.device("/cpu:0"):
         embedding = tf.get_variable("embedding", [dp.letter_dic_size, n_hidden], dtype=tf.float32)
         inputs = tf.nn.embedding_lookup(embedding, x)
-
+'''
 #pred = RNN(inputs, weights, biases, dropout, is_training)
-pred = conv_net(inputs, n_classes, dropout, is_training)
+pred = conv_net(x, n_classes, dropout, is_training)
 softmax_pred = tf.nn.softmax(pred)
 # Define loss and optimizer
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=pred, labels=y))
@@ -160,9 +153,11 @@ with tf.Session() as sess:
         epoch_size = max(dp.train_size // batch_size, 1)
         while step < epoch_size:
             batch_x, batch_y, batch_char_x = dp.get_next_train_batch(batch_size)
-            #print(np.array(batch_char_x).shape)
+            batch_char_x = np.concatenate((np.array(batch_char_x), np.fliplr(batch_char_x)), axis=0)
             
-            acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: batch_char_x, y: batch_y, dropout: 0.5, is_training: True})
+            batch_y = np.concatenate((np.array(batch_y), np.array(batch_y)), axis=0)
+            
+            acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: np.array(batch_char_x, dtype='float32'), y: batch_y, dropout: 0.5, is_training: True})
             train_accr += acc 
             train_cost += loss
             
