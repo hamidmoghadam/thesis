@@ -67,10 +67,10 @@ def conv_net_2(x, n_classes, dropout, is_training):
     conv3 = tf.layers.conv2d(x, 1, (3, 1), activation=tf.nn.relu)
     conv2 = tf.layers.conv2d(x, 1, (2, 1), activation=tf.nn.relu)
     
-    conv5 = tf.layers.max_pooling2d(conv5, strides=10, pool_size=(596, n_hidden))
-    conv4 = tf.layers.max_pooling2d(conv4, strides=10, pool_size=(597, n_hidden))
-    conv3 = tf.layers.max_pooling2d(conv3, strides=10, pool_size=(598, n_hidden))
-    conv2 = tf.layers.max_pooling2d(conv2, strides=10, pool_size=(599, n_hidden))
+    conv5 = tf.layers.max_pooling2d(conv5, strides=30, pool_size=(596, n_hidden))
+    conv4 = tf.layers.max_pooling2d(conv4, strides=30, pool_size=(597, n_hidden))
+    conv3 = tf.layers.max_pooling2d(conv3, strides=30, pool_size=(598, n_hidden))
+    conv2 = tf.layers.max_pooling2d(conv2, strides=30, pool_size=(599, n_hidden))
 
     conv5 = tf.contrib.layers.flatten(conv5)
     conv4 = tf.contrib.layers.flatten(conv4)
@@ -80,7 +80,7 @@ def conv_net_2(x, n_classes, dropout, is_training):
     fc1 = tf.concat([conv4, conv2, conv3, conv5], 1)
     print(fc1)
 
-    fc2 = tf.layers.dense(fc1, 512)
+    fc2 = tf.layers.dense(fc1, 1024)
     print(fc2)
     fc2 = tf.layers.dropout(fc2, rate=dropout, training=is_training)
     
