@@ -152,14 +152,14 @@ def RNN(x, weights, biases, dropout, is_training):
         output = tf.maximum(output, outputs[i])
     # Linear activation, using rnn inner loop last output
     return tf.matmul(output, weights['out']) + biases['out']
-
+'''
 with tf.device("/cpu:0"):
         embedding = tf.constant(dp.letter_embedding, name="embedding", dtype=tf.float32)
         #embedding = tf.get_variable("embedding", [dp.letter_dic_size, n_hidden], dtype=tf.float32)
         inputs = tf.nn.embedding_lookup(embedding, x)
-
+'''
 #pred = RNN(inputs, weights, biases, dropout, is_training)
-pred = conv_net_2(inputs, n_classes, dropout, is_training)
+pred = conv_net_2(x, n_classes, dropout, is_training)
 softmax_pred = tf.nn.softmax(pred)
 # Define loss and optimizer
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=pred, labels=y))
