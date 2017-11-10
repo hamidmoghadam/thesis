@@ -36,7 +36,7 @@ number_of_post_per_user = int(sys.argv[2])
 train_iteration = int(sys.argv[3])
 # Network Parameters
 n_input = 600 # MNIST data input (img shape: 28*28)
-n_hidden = 69 # hidden layer num of features
+n_hidden = 2 # hidden layer num of features
 n_classes = int(sys.argv[1]) # MNIST total classes (0-9 digits)
 
 #vocab_size = 58000
@@ -61,15 +61,15 @@ def conv_net_2(x, n_classes, dropout, is_training):
 
     x = tf.reshape(x, shape=[-1, n_input, n_hidden, 1])
     print(x)
-    conv5 = tf.layers.conv2d(x, 10, (5, 1), activation=tf.nn.relu)
-    conv4 = tf.layers.conv2d(x, 10, (4, 1), activation=tf.nn.relu)
-    conv3 = tf.layers.conv2d(x, 10, (3, 1), activation=tf.nn.relu)
-    conv2 = tf.layers.conv2d(x, 10, (2, 1), activation=tf.nn.relu)
+    conv5 = tf.layers.conv2d(x, 1, (5, 1), activation=tf.nn.relu)
+    conv4 = tf.layers.conv2d(x, 1, (4, 1), activation=tf.nn.relu)
+    conv3 = tf.layers.conv2d(x, 1, (3, 1), activation=tf.nn.relu)
+    conv2 = tf.layers.conv2d(x, 1, (2, 1), activation=tf.nn.relu)
     
-    conv5 = tf.layers.max_pooling2d(conv5, strides=1, pool_size=(596, n_hidden))
-    conv4 = tf.layers.max_pooling2d(conv4, strides=1, pool_size=(597, n_hidden))
-    conv3 = tf.layers.max_pooling2d(conv3, strides=1, pool_size=(598, n_hidden))
-    conv2 = tf.layers.max_pooling2d(conv2, strides=1, pool_size=(599, n_hidden))
+    conv5 = tf.layers.max_pooling2d(conv5, strides=10, pool_size=(596, n_hidden))
+    conv4 = tf.layers.max_pooling2d(conv4, strides=10, pool_size=(597, n_hidden))
+    conv3 = tf.layers.max_pooling2d(conv3, strides=10, pool_size=(598, n_hidden))
+    conv2 = tf.layers.max_pooling2d(conv2, strides=10, pool_size=(599, n_hidden))
 
     conv5 = tf.contrib.layers.flatten(conv5)
     conv4 = tf.contrib.layers.flatten(conv4)
@@ -154,8 +154,8 @@ def RNN(x, weights, biases, dropout, is_training):
     return tf.matmul(output, weights['out']) + biases['out']
 
 with tf.device("/cpu:0"):
-        embedding = tf.constant(np.identity(dp.letter_dic_size), name="embedding", dtype=tf.float32)
-        #embedding = tf.get_variable("embedding", [dp.letter_dic_size, n_hidden], dtype=tf.float32)
+        #embedding = tf.constant(np.identity(dp.letter_dic_size), name="embedding", dtype=tf.float32)
+        embedding = tf.get_variable("embedding",  dtype=tf.float32, initializer=tf.random_uniform([dp.letter_dic_size, n_hidden], minval= -0.1, maxval= 0.1), trainable=False)
         inputs = tf.nn.embedding_lookup(embedding, x)
 
 #pred = RNN(inputs, weights, biases, dropout, is_training)
@@ -201,6 +201,7 @@ with tf.Session() as sess:
             miror_data(batch_char_x, batch_y)
             
             acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: batch_char_x , y: batch_y, dropout: 0.5, is_training: True})
+           
             train_accr += acc 
             train_cost += loss
             
