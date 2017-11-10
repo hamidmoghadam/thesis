@@ -97,7 +97,7 @@ vocab_size = len(vocab)
 dp = data_provider(vocab, size=n_classes, sent_max_len = n_input, number_of_post_per_user = number_of_post_per_user)
 
 with tf.device("/cpu:0"):
-    W = tf.Variable(tf.constant(0.0, shape=[vocab_size, n_embedding]), name="W", dtype=tf.float32, trainable=False)
+    W = tf.Variable(tf.constant(0.0, shape=[vocab_size, n_embedding]), name="W", dtype=tf.float32, trainable=True)
     embedding_placeholder = tf.placeholder(tf.float32, [vocab_size, n_embedding])
     embedding_init = W.assign(embedding_placeholder)
     inputs = tf.nn.embedding_lookup(W, x)
