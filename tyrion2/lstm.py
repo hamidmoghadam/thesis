@@ -29,6 +29,7 @@ learning_rate = 0.0005
 batch_size = 200
 number_of_post_per_user = int(sys.argv[2])
 train_iteration = int(sys.argv[3])
+n_embedding = int(sys.argv[5])
 
 # Network Parameters
 n_input = 100 # MNIST data input (img shape: 28*28)
@@ -66,7 +67,7 @@ def RNN(x, weights, biases, dropout, is_training):
     x = tf.unstack(x, n_input, 1)
 
     # Define a lstm cell with tensorflow
-    fw_lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0)
+    fw_lstm_cell = rnn.BasicLSTMCell(n_hidden , forget_bias=1.0)
     bw_lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0)
 	
     # Get lstm cell output
@@ -82,7 +83,7 @@ def RNN(x, weights, biases, dropout, is_training):
     return tf.matmul(output, weights['out']) + biases['out']
 
 with tf.device("/cpu:0"):
-        embedding = tf.get_variable("embedding", [dp.vocab_size, n_hidden], dtype=tf.float32)
+        embedding = tf.get_variable("embedding", [dp.vocab_size, n_embedding], dtype=tf.float32)
         inputs = tf.nn.embedding_lookup(embedding, x)
 
 pred = RNN(inputs, weights, biases, dropout, is_training)
@@ -119,7 +120,7 @@ with tf.Session() as sess:
         step = 0
         epoch_size = max(dp.train_size // batch_size, 1)
         while step < epoch_size:
-            batch_x, batch_y = dp.get_next_train_batch(batch_size)
+            batch_x, batch_y= dp.get_next_train_batch(batch_size)
             
             acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: batch_x, y: batch_y, dropout: 0.5, is_training: True})
             train_accr += acc 
@@ -148,7 +149,7 @@ with tf.Session() as sess:
     number_of_post = 0
     for i in range(n_classes):
         #print('for class number {0}'.format(i))
-        test_data, test_label = dp.get_next_test_batch(i)
+        test_data, test_label= dp.get_next_test_batch(i)
         loss, acc, prediction = sess.run([cost, accuracy, softmax_pred], feed_dict={x: test_data, y: test_label, dropout: 1.0, is_training:False})
 
         for predict in prediction:
