@@ -117,9 +117,12 @@ class data_provider(object):
 
         word_2_id = self.build_vocab(' '.join(train_data))
         letter_2_id = self.build_letter_dic(' '.join(train_data))
+        self.letter_embedding = self.build_letter_embdedding(letter_2_id)
 
         self.vocab_size = len(word_2_id) + 1
         self.letter_dic_size = len(letter_2_id) +1 
+
+        print(self.letter_embedding.shape)
 
         max_tweet_len = 0
         max_tweet = ''
@@ -244,10 +247,16 @@ class data_provider(object):
         return word_to_id
 
     def build_letter_dic(self, data):
-        chars = set(data)
-        print(len(chars))
-        letter_2_id = dict((c, i+1) for i, c in enumerate(chars))
+        letter_dic = 'abcdefghijklmnopqrstuvwxyz0123456789-,;.!?:’’’/\|_@#$%ˆ&*˜‘+-=<>()[]{}\n'
+        #chars = set(data)
+
+        letter_2_id = dict((c, i+1) for i, c in enumerate(letter_dic))
         return letter_2_id
+    def build_letter_embdedding(self, letter_2_id):
+        embedding = np.identity(len(letter_2_id))
+        return np.vstack(([0]* len(letter_2_id), embedding))
+
+
 
     def text_to_word_ids(self,data, word_to_id):
         #data = _read_words(filename)
@@ -266,8 +275,7 @@ class data_provider(object):
 
     def pad_letter_ids(self, letter_id_array, max_length):
         data_len = len(letter_id_array)
-        
-
+    
         if data_len < max_length:
             letter_id_array = np.lib.pad(letter_id_array, (0, max_length - data_len), 'constant').tolist()
         return letter_id_array[:max_length]
