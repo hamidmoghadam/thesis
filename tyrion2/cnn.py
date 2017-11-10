@@ -79,7 +79,8 @@ def conv_net_2(x, n_classes, dropout, is_training):
     fc1 = tf.concat([conv4, conv2, conv3, conv5], 1)
     print(fc1)
 
-    fc2 = tf.layers.dense(fc1, 64)
+    fc2 = tf.layers.dense(fc1, 512)
+    print(fc2)
     fc2 = tf.layers.dropout(fc2, rate=dropout, training=is_training)
     
     out = tf.layers.dense(fc2, n_classes)
