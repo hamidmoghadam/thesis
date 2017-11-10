@@ -244,7 +244,7 @@ class data_provider(object):
     def build_letter_dic(self, data):
         letter_dic = 'abcdefghijklmnopqrstuvwxyz0123456789-,;.!?:’’’/\|_@#$%ˆ&*˜‘+-=<>()[]{}\n'
 
-        letter_2_id = dict((c, i) for i, c in enumerate(letter_dic))
+        letter_2_id = dict((c, i) for i, c in enumerate(set(letter_dic)))
         return letter_2_id
 
 
