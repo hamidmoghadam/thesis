@@ -59,19 +59,23 @@ biases = {
 
 def conv_net_2(x, n_classes, dropout, is_training):
     x = tf.reshape(x, shape=[-1, n_input, n_hidden, 1])
-    conv4 = tf.layers.conv2d(x, 2, (4, 1), activation=tf.nn.relu)
-    conv3 = tf.layers.conv2d(x, 2, (3, 1), activation=tf.nn.relu)
-    conv2 = tf.layers.conv2d(x, 2, (2, 1), activation=tf.nn.relu)
+
+    conv5 = tf.layers.conv2d(x, 100, (5, 1), activation=tf.nn.relu)
+    conv4 = tf.layers.conv2d(x, 100, (4, 1), activation=tf.nn.relu)
+    conv3 = tf.layers.conv2d(x, 100, (3, 1), activation=tf.nn.relu)
+    conv2 = tf.layers.conv2d(x, 100, (2, 1), activation=tf.nn.relu)
     
+    conv5 = tf.layers.max_pooling2d(conv5, strides=1, pool_size=(597, n_hidden))
     conv4 = tf.layers.max_pooling2d(conv4, strides=1, pool_size=(597, n_hidden))
     conv3 = tf.layers.max_pooling2d(conv3, strides=1, pool_size=(598, n_hidden))
     conv2 = tf.layers.max_pooling2d(conv2, strides=1, pool_size=(599, n_hidden))
 
+    conv5 = tf.contrib.layers.flatten(conv5)
     conv4 = tf.contrib.layers.flatten(conv4)
     conv2 = tf.contrib.layers.flatten(conv2)
     conv3 = tf.contrib.layers.flatten(conv3)
 
-    fc1 = tf.concat([conv4, conv2, conv3], 1)
+    fc1 = tf.concat([conv4, conv2, conv3, conv5], 1)
     print(fc1)
 
     fc1 = tf.layers.dropout(fc1, rate=dropout, training=is_training)
