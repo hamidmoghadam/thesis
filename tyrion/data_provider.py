@@ -28,8 +28,7 @@ class data_provider(object):
 
         train_data = []
         y_train_data = []
-        valid_data = []
-        y_valid_data = []
+        
 
 
         user_selection_idx = np.random.permutation([x for x in range(len(lst_username))])[:size]
@@ -51,9 +50,7 @@ class data_provider(object):
                             temp_set.append(content)
 
             random_set = np.zeros(len(temp_set))
-            train_count = int(np.round(len(temp_set) * 0.7))
-            random_set[:train_count] = 1
-            #random_set[:number_of_post_per_user] = 1
+            random_set[:number_of_post_per_user] = 1
             np.random.shuffle(random_set)
 
             for i in range(len(temp_set)):
@@ -63,14 +60,12 @@ class data_provider(object):
                     label = [0 for x in range(size)]
                     label[k] = 1
                     y_train_data.append(label)
-                else:
-                    valid_data.append(temp_set[i])
-                    k = lst_twitter_username.index(twitter_username)
-                    label = [0 for x in range(size)]
-                    label[k] = 1
-                    y_valid_data.append(label)
+                
         test_data = []
         y_test_data = []
+
+        valid_data = []
+        y_valid_data = []
         
         for tumblr_username in lst_tumblr_username:
             with open('../tumblr_twitter_scrapper/merged_posts/{0}.csv'.format(tumblr_username), 'r', encoding='utf-8') as f:
@@ -86,31 +81,32 @@ class data_provider(object):
                             continue
                         if content_count > sent_max_len:
                             for sent in refine.get_sentences(content):
-                                test_data.append(sent)
-                                #temp_set.append(sent)
+                                temp_set.append(sent)
                                 k = lst_tumblr_username.index(tumblr_username)
                                 label = [0 for x in range(size)]
                                 label[k] = 1
-                                #y_temp_set.append(label)
-                                y_test_data.append(label)
+                                y_temp_set.append(label)
+                                
                         else: 
                             sents = []
                             for sent in refine.get_sentences(content):
                                 sents.append(sent)
-                            test_data.append(' <eos> '.join(sents))
-                            #temp_set.append(' <eos> '.join(sents))
+                            temp_set.append(' <eos> '.join(sents))
                             k = lst_tumblr_username.index(tumblr_username)
                             label = [0 for x in range(size)]
                             label[k] = 1
-                            y_test_data.append(label)
-                            #y_temp_set.append(label)
+                            y_temp_set.append(label)
         
-                #random_set = np.zeros(len(temp_set), dtype=bool)
-                #random_set[:number_of_post_per_user] = True
-                #np.random.shuffle(random_set)
+                random_set = np.zeros(len(temp_set), dtype=bool)
+                valid_count = int(np.round(len(temp_set) * 0.5))
+                random_set[:valid_count] = True
+                np.random.shuffle(random_set)
 
-                #test_data.extend((np.array(temp_set)[random_set]).tolist())
-                #y_test_data.extend((np.array(y_temp_set)[random_set]).tolist())
+                test_data.extend((np.array(temp_set)).tolist())
+                y_test_data.extend((np.array(y_temp_set)).tolist())
+                
+                valid_data.extend((np.array(temp_set)[random_set]).tolist())
+                y_valid_data.extend((np.array(y_temp_set)[random_set]).tolist())
 
         #word_2_id = self.build_vocab(' '.join(train_data))
         #self.vocab_size = len(word_2_id) + 1

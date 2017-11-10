@@ -11,6 +11,7 @@ import tensorflow as tf
 from tensorflow.contrib import rnn
 import numpy as np
 import sys
+import gensim
 # Import MNIST data
 from data_provider import data_provider
 from tensorflow.contrib import learn
@@ -33,6 +34,7 @@ train_iteration = int(sys.argv[3])
 # Network Parameters
 n_input = 100 # MNIST data input (img shape: 28*28)
 n_hidden = int(sys.argv[4]) # hidden layer num of features
+n_embedding = int(sys.argv[5])
 n_classes = int(sys.argv[1]) # MNIST total classes (0-9 digits)
 n_middle = 50
 
@@ -43,11 +45,9 @@ dropout = tf.placeholder(tf.float32, shape=())
 
 # Define weights
 weights = {
-    'middle': tf.Variable(tf.random_normal([n_hidden, n_middle])),
-    'out': tf.Variable(tf.random_normal([n_hidden, n_classes]))
+    'out': tf.Variable(tf.random_normal([n_hidden*2, n_classes]))
 }
 biases = {
-    'middle': tf.Variable(tf.random_normal([n_middle])),
     'out': tf.Variable(tf.random_normal([n_classes]))
 }
 
@@ -63,11 +63,14 @@ def RNN(x, weights, biases, dropout):
     x = tf.unstack(x, n_input, 1)
 
     # Define a lstm cell with tensorflow
-    lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0)
+    # Define a lstm cell with tensorflow
+    fw_lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0)
+    bw_lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0)
 	
-    #lstm_cell = tf.contrib.rnn.DropoutWrapper(lstm_cell, output_keep_prob = dropout)
     # Get lstm cell output
-    outputs, states = rnn.static_rnn(lstm_cell, x, dtype=tf.float32)
+    #outputs, states = rnn.static_rnn(lstm_cell, x, dtype=tf.float32)
+
+    outputs, states, _ = rnn.static_bidirectional_rnn(fw_lstm_cell, bw_lstm_cell, x, dtype=tf.float32)
     output = outputs[0]
     for i in range(1, len(outputs)):
         output = tf.maximum(output, outputs[i])
@@ -77,51 +80,33 @@ def RNN(x, weights, biases, dropout):
     return tf.matmul(output, weights['out']) + biases['out']
 
 
-filename = '../../glove.twitter.27B/glove.twitter.27B.'+str(n_hidden)+'d.txt'
+filename = 'preTrainedEmbedding.txt'
 
+# project part of vocab, 10K of 300 dimension
+model = gensim.models.Word2Vec.load(filename)
+w2v_10K = np.zeros((len(model.wv.vocab)+1,n_embedding))
+vocab = dict()
+vocab['<unk>'] = [0]* n_embedding
+for i,word in enumerate(model.wv.index2word):
+    w2v_10K[i+1] = model[word]
+    vocab[word] = i+1
 
-def loadGloVe(filename):
-    vocab = dict()
-    i = 1
-    vocab['UNK'] = 0
-    embd = []
-    embd.append([0 for x in range(n_hidden)])
-    file = open(filename,'r')
-    for line in file.readlines():
-        row = line.split(' ')
-        
-        vocab[row[0]] = i
-        embd.append([float(i) for i in row[1:]])
-        
-        i = i + 1
-
-    file.close()
-    return vocab,embd
-
-vocab,embd = loadGloVe(filename)
 vocab_size = len(vocab)
-embedding_dim = len(embd[0])
 
 
 dp = data_provider(vocab, size=n_classes, sent_max_len = n_input, number_of_post_per_user = number_of_post_per_user)
 
-embedding = np.array(embd)
-print(embedding.shape)
-
 with tf.device("/cpu:0"):
-    W = tf.Variable(tf.constant(0.0, shape=[vocab_size, n_hidden]), trainable=False, name="W", dtype=tf.float32)
-    embedding_placeholder = tf.placeholder(tf.float32, [vocab_size, n_hidden])
+    W = tf.Variable(tf.constant(0.0, shape=[vocab_size, n_embedding]), name="W", dtype=tf.float32, trainable=False)
+    embedding_placeholder = tf.placeholder(tf.float32, [vocab_size, n_embedding])
     embedding_init = W.assign(embedding_placeholder)
     inputs = tf.nn.embedding_lookup(W, x)
 
-#with tf.device("/cpu:0"):
-#        embedding = tf.get_variable("embedding", [vocab_size, n_hidden], dtype=tf.float32 , initializer=tf.random_uniform_initializer(-4,4), trainable=False)
-#        inputs = tf.nn.embedding_lookup(embedding, x)
 
 pred = RNN(inputs, weights, biases, dropout)
 softmax_pred = tf.nn.softmax(pred)
 # Define loss and optimizer
-cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=softmax_pred, labels=y))
+cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=pred, labels=y))
 optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
 
 # Evaluate model
@@ -139,7 +124,7 @@ lst_valid_accr = []
 # Launch the graph
 with tf.Session() as sess:
     sess.run(init)
-    sess.run(embedding_init, feed_dict={embedding_placeholder: embedding})
+    sess.run(embedding_init, feed_dict={embedding_placeholder: w2v_10K})
     
     # Keep training until reach max iterations
     for i in range(train_iteration):
@@ -154,15 +139,11 @@ with tf.Session() as sess:
         while step < epoch_size:
             batch_x, batch_y = dp.get_next_train_batch(batch_size)
 
-            print(batch_x)
-
             fetches = { "accuracy" : accuracy, "cost": cost, "optimizer":optimizer, "inputs":inputs}
             
             vals = sess.run(fetches, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
             train_accr += vals['accuracy']
             train_cost += vals['cost']
-
-            print(vals['inputs'])
             
             step += 1
         
