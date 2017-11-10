@@ -25,9 +25,10 @@ handle 28 sequences of 28 steps for every sample.
 '''
 
 def miror_data(x, y):
-     x = np.concatenate((np.array(x), np.fliplr(x)), axis=0)
-     y = np.concatenate((np.array(y), np.array(y)), axis=0)
-     return x, y
+    return x, y
+     #x = np.concatenate((np.array(x), np.fliplr(x)), axis=0)
+     #y = np.concatenate((np.array(y), np.array(y)), axis=0)
+     #return x, y
 
 # Parameters
 learning_rate = float(sys.argv[4])#0.0007
