@@ -30,14 +30,13 @@ def miror_data(x, y):
      return x, y
 
 # Parameters
-learning_rate = float(sys.argv[5])#0.0007
+learning_rate = float(sys.argv[4])#0.0007
 batch_size = 200
 number_of_post_per_user = int(sys.argv[2])
 train_iteration = int(sys.argv[3])
-n_fully_connected = int(sys.argv[6])
 # Network Parameters
 n_input = 600 # MNIST data input (img shape: 28*28)
-n_hidden = int(sys.argv[4]) # hidden layer num of features
+n_hidden = 68 # hidden layer num of features
 n_classes = int(sys.argv[1]) # MNIST total classes (0-9 digits)
 
 #vocab_size = 58000
@@ -58,8 +57,10 @@ biases = {
 }
 
 def conv_net_2(x, n_classes, dropout, is_training):
-    x = tf.reshape(x, shape=[-1, n_input, n_hidden, 1])
+    print(x)
 
+    x = tf.reshape(x, shape=[-1, n_input, n_hidden, 1])
+    print(x)
     conv5 = tf.layers.conv2d(x, 100, (5, 1), activation=tf.nn.relu)
     conv4 = tf.layers.conv2d(x, 100, (4, 1), activation=tf.nn.relu)
     conv3 = tf.layers.conv2d(x, 100, (3, 1), activation=tf.nn.relu)
@@ -83,6 +84,8 @@ def conv_net_2(x, n_classes, dropout, is_training):
     return out
 
 def conv_net(x, n_classes, dropout, is_training):
+    print('hello')
+    print(x)
     x = tf.reshape(x, shape=[-1, n_input, 1, n_hidden])
     print(x)
     #batch (sentsie * n_hidden|embedding)
@@ -151,7 +154,8 @@ def RNN(x, weights, biases, dropout, is_training):
     return tf.matmul(output, weights['out']) + biases['out']
 
 with tf.device("/cpu:0"):
-        embedding = tf.get_variable("embedding", [dp.letter_dic_size, n_hidden], dtype=tf.float32)
+        embedding = tf.constant(dp.letter_embedding, name="embedding", dtype=tf.float32)
+        #embedding = tf.get_variable("embedding", [dp.letter_dic_size, n_hidden], dtype=tf.float32)
         inputs = tf.nn.embedding_lookup(embedding, x)
 
 #pred = RNN(inputs, weights, biases, dropout, is_training)
