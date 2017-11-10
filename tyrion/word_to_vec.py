@@ -31,5 +31,5 @@ for twitter_username in lst_twitter_username:
                     for sent in sents:
                         temp_set.append(sent.split(' '))
 
-model = gensim.models.Word2Vec(temp_set, size=7, window=5, min_count=0)
+model = gensim.models.Word2Vec(temp_set, size=70, window=1, min_count=0)
 model.save('preTrainedEmbedding.txt')
