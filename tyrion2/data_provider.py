@@ -238,7 +238,7 @@ class data_provider(object):
 
     def text_to_word_ids(self,data, word_to_id):
         #data = _read_words(filename)
-        return [word_to_id[word] for word in data.split(' ') if word in word_to_id]
+        return [word_to_id[word] if word in word_to_id else 0 for word in data.split(' ') if word in word_to_id]
 
     def pad_word_ids(self, word_ids, max_length):
         data_len = len(word_ids)
