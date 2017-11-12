@@ -140,7 +140,7 @@ with tf.Session() as sess:
 
             fetches = { "accuracy" : accuracy, "cost": cost, "optimizer":optimizer, "inputs":inputs}
             
-            vals = sess.run(fetches, feed_dict={x: batch_x, y: batch_y, dropout: 0.5})
+            vals = sess.run(fetches, feed_dict={x: batch_x, y: batch_y, dropout: 0.1})
             train_accr += vals['accuracy']
             train_cost += vals['cost']
             
