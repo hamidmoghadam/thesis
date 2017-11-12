@@ -64,8 +64,8 @@ def RNN(x, weights, biases, dropout):
 
     # Define a lstm cell with tensorflow
     # Define a lstm cell with tensorflow
-    fw_lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0 ,activation=tf.nn.relu)
-    bw_lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0 ,activation=tf.nn.relu)
+    fw_lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0 ,activation=tf.nn.tanh)
+    bw_lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0 ,activation=tf.nn.tanh)
 	
     # Get lstm cell output
     #outputs, states = rnn.static_rnn(lstm_cell, x, dtype=tf.float32)
@@ -148,7 +148,6 @@ with tf.Session() as sess:
         
         lst_train_cost.append(train_cost/epoch_size)
         lst_train_accr.append(train_accr/epoch_size)
-        print("Training Loss = {:.3f}".format(train_cost/epoch_size) + ", Training Accuracy= {:.3f}".format(train_accr/epoch_size))
         
         valid_data, valid_label = dp.get_next_valid_batch(dp.valid_size)
 
@@ -157,9 +156,8 @@ with tf.Session() as sess:
         lst_valid_cost.append(loss)
         lst_valid_accr.append(acc)
         
-        print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
-    
-    
+        print(str(i) + ": Train Loss = {:.3f}".format(train_cost/epoch_size) + ", Train Accr= {:.3f}".format(train_accr/epoch_size) + ", Valid Loss = {:.3f}".format(loss) + ", Valid Accr= {:.3f}".format(acc))
+        
     accr = 0
     accr_per_post = 0
 
