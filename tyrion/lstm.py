@@ -64,8 +64,8 @@ def RNN(x, weights, biases, dropout):
 
     # Define a lstm cell with tensorflow
     # Define a lstm cell with tensorflow
-    fw_lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0)
-    bw_lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0)
+    fw_lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0 ,activation=tf.nn.relu)
+    bw_lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0 ,activation=tf.nn.relu)
 	
     # Get lstm cell output
     #outputs, states = rnn.static_rnn(lstm_cell, x, dtype=tf.float32)
@@ -74,8 +74,7 @@ def RNN(x, weights, biases, dropout):
     output = outputs[0]
     for i in range(1, len(outputs)):
         output = tf.maximum(output, outputs[i])
-
-    #middle = tf.matmul(output, weights['middle']) + biases['middle']
+    
     # Linear activation, using rnn inner loop last output
     return tf.matmul(output, weights['out']) + biases['out']
 
