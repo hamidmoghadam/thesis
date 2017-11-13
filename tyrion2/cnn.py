@@ -64,10 +64,10 @@ def conv_net_2(x, n_classes, dropout, is_training):
     x = tf.reshape(x, shape=[-1, n_input, n_embedding, 1])
     print(x)
     #conv5 = tf.layers.conv2d(x, 128, (5, n_embedding), activation=tf.nn.relu)
-    conv4 = tf.layers.conv2d(x, 64, (4, n_embedding), activation=tf.nn.relu)
+    conv4 = tf.layers.conv2d(x, 32, (4, n_embedding), activation=tf.nn.relu)
     #conv3 = tf.layers.conv2d(x, 128, (3, n_embedding), activation=tf.nn.relu)
     #conv2 = tf.layers.conv2d(x, 128, (2, n_embedding), activation=tf.nn.relu)
-    conv1 = tf.layers.conv2d(x, 64, (1, n_embedding), activation=tf.nn.relu)
+    conv1 = tf.layers.conv2d(x, 32, (1, n_embedding), activation=tf.nn.relu)
     
 
 
