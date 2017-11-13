@@ -175,7 +175,8 @@ pred = conv_net_2(inputs, n_classes, dropout, is_training)
 softmax_pred = tf.nn.softmax(pred)
 # Define loss and optimizer
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=pred, labels=y))
-optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
+#optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
+optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01).minimize(cost)
 
 # Evaluate model
 correct_pred = tf.equal(tf.argmax(pred,1), tf.argmax(y,1))
@@ -206,9 +207,6 @@ with tf.Session() as sess:
         epoch_size = max(dp.train_size // batch_size, 1)
         while step < epoch_size:
             batch_x, batch_y, batch_char_x = dp.get_next_train_batch(batch_size)
-
-            batch_char_x = np.concatenate((np.array(batch_char_x), np.fliplr(batch_char_x)), axis=0)
-            batch_y = np.concatenate((np.array(batch_y), np.array(batch_y)), axis=0)
 
             miror_data(batch_char_x, batch_y)
             
