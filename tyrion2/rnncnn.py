@@ -11,7 +11,8 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 
 # Parameters
-learning_rate = 0.0005
+learning_rate = float(sys.argv[8])
+my_droup_out = float(sys.argv[9])
 batch_size = 200
 number_of_post_per_user = int(sys.argv[2])
 train_iteration = int(sys.argv[3])
@@ -60,34 +61,31 @@ def RNN(x, u, weights, biases, dropout, is_training):
 
     with tf.variable_scope("letter"):
         u = tf.reshape(u, shape=[-1, n_sent_letters, n_letter_embedding, 1])
+
         conv1 = tf.layers.conv2d(u, n_letter_hidden, (4, n_letter_embedding), activation=tf.nn.relu)
         conv2 = tf.layers.conv2d(u, n_letter_hidden, (3, n_letter_embedding), activation=tf.nn.relu)
         conv3 = tf.layers.conv2d(u, n_letter_hidden, (2, n_letter_embedding), activation=tf.nn.relu)
+        conv4 = tf.layers.conv2d(u, n_letter_hidden, (5, n_letter_embedding), activation=tf.nn.relu)
 
         conv1 = tf.layers.max_pooling2d(conv1, strides=1, pool_size=(597, 1))
         conv2 = tf.layers.max_pooling2d(conv2, strides=1, pool_size=(598, 1))
         conv3 = tf.layers.max_pooling2d(conv3, strides=1, pool_size=(599, 1))
-        print(conv1)
-        conv_final = tf.layers.max_pooling2d(tf.concat([conv1, conv2, conv3], 1), strides=1, pool_size = (3, 1))
-        print(conv_final)
+        conv4 = tf.layers.max_pooling2d(conv4, strides=1, pool_size=(596, 1))
+        
+        conv_final = tf.layers.max_pooling2d(tf.concat([conv1, conv2, conv3, conv4], 1), strides=1, pool_size = (4, 1))
+        
         output_letter = tf.contrib.layers.flatten(conv_final)
     
-
     max_output = outputs[0]
-
-    print(max_output)
-    print(output_letter)
 
     for i in range(1, len(outputs)):
         max_output = tf.maximum(max_output, outputs[i])
    
     final_output = tf.concat((max_output, output_letter), 1)
 
-    print(final_output)
-
+    
     # Linear activation, using rnn inner loop last output
     return tf.matmul(final_output, weights['out']) + biases['out']
-
 
 
 with tf.device("/cpu:0"):
@@ -136,7 +134,7 @@ with tf.Session() as sess:
         while step < epoch_size:
             batch_x, batch_y, batch_char_u= dp.get_next_train_batch(batch_size)
             
-            acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: batch_x, y: batch_y, u: batch_char_u, word_dropout: 0.5, is_training: True})
+            acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: batch_x, y: batch_y, u: batch_char_u, word_dropout: my_droup_out, is_training: True})
             train_accr += acc 
             train_cost += loss
             
@@ -153,7 +151,7 @@ with tf.Session() as sess:
         lst_valid_cost.append(loss)
         lst_valid_accr.append(acc)
 
-        print(str(i) + "TrainLoss = {:.3f}".format(train_cost/epoch_size) + ", TrainAccr= {:.3f}".format(train_accr/epoch_size) + ", ValidLoss = {:.3f}".format(loss) + ", ValidAccr= {:.3f}".format(acc))
+        print(str(i) + "-TrainLoss = {:.3f}".format(train_cost/epoch_size) + ", TrainAccr= {:.3f}".format(train_accr/epoch_size) + ", ValidLoss = {:.3f}".format(loss) + ", ValidAccr= {:.3f}".format(acc))
         
     
     accr = 0
