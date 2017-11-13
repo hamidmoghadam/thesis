@@ -63,17 +63,19 @@ def conv_net_2(x, n_classes, dropout, is_training):
 
     x = tf.reshape(x, shape=[-1, n_input, n_embedding, 1])
     print(x)
-    conv5 = tf.layers.conv2d(x, 20, (5, 1), activation=tf.nn.relu)
-    conv4 = tf.layers.conv2d(x, 20, (4, 1), activation=tf.nn.relu)
-    conv3 = tf.layers.conv2d(x, 20, (3, 1), activation=tf.nn.relu)
-    conv2 = tf.layers.conv2d(x, 20, (2, 1), activation=tf.nn.relu)
+    conv5 = tf.layers.conv2d(x, 1, (5, 1), activation=tf.nn.relu)
+    conv4 = tf.layers.conv2d(x, 1, (4, 1), activation=tf.nn.relu)
+    conv3 = tf.layers.conv2d(x, 1, (3, 1), activation=tf.nn.relu)
+    conv2 = tf.layers.conv2d(x, 1, (2, 1), activation=tf.nn.relu)
 
     print(conv4)
     
-    conv5 = tf.layers.max_pooling2d(conv5, strides=20, pool_size=(596, n_embedding))
-    conv4 = tf.layers.max_pooling2d(conv4, strides=20, pool_size=(597, n_embedding))
-    conv3 = tf.layers.max_pooling2d(conv3, strides=20, pool_size=(598, n_embedding))
-    conv2 = tf.layers.max_pooling2d(conv2, strides=20, pool_size=(599, n_embedding))
+    conv5 = tf.layers.max_pooling2d(conv5, strides=1, pool_size=(596, n_embedding))
+    conv4 = tf.layers.max_pooling2d(conv4, strides=1, pool_size=(597, n_embedding))
+    conv3 = tf.layers.max_pooling2d(conv3, strides=1, pool_size=(598, n_embedding))
+    conv2 = tf.layers.max_pooling2d(conv2, strides=1, pool_size=(599, n_embedding))
+
+    
 
     print(conv4)
     #conv5 = tf.contrib.layers.flatten(conv5)
@@ -82,26 +84,15 @@ def conv_net_2(x, n_classes, dropout, is_training):
     #conv3 = tf.contrib.layers.flatten(conv3)
 
     u = tf.concat([conv4, conv2, conv3, conv5], 1)
-    print(u)
-    #u = tf.unstack(u, axis=3)
-    print('hey')
-    print(u)
-
+    
     conv_final = tf.layers.max_pooling2d(u, strides=1, pool_size = (4, 1))
 
     conv_final = tf.contrib.layers.flatten(conv_final)
 
-
-    print(conv_final)
-
-    #fc1 = tf.concat([conv4, conv2, conv3, conv5], 1)
-    #print(fc1)
-
-    fc1 = tf.layers.dense(conv_final, 1024)
-    #print(fc2)
-    fc1 = tf.layers.dropout(fc1, rate=dropout, training=is_training)
+    fc1 = tf.layers.dropout(conv_final, rate=dropout, training=is_training)
     
-    out = tf.layers.dense(fc1, n_classes)
+    out = tf.layers.dense(fc1, n_classes, activation=tf.nn.relu)
+
     return out
 
 def conv_net(x, n_classes, dropout, is_training):
@@ -221,7 +212,7 @@ with tf.Session() as sess:
 
             miror_data(batch_char_x, batch_y)
             
-            acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: batch_char_x , y: batch_y, dropout: 0.5, is_training: True})
+            acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: batch_char_x , y: batch_y, dropout: 0.7, is_training: True})
            
             train_accr += acc 
             train_cost += loss
