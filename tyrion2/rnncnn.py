@@ -54,8 +54,8 @@ def RNN(x, u, weights, biases, dropout, is_training):
         # Unstack to get a list of 'n_steps' tensors of shape (batch_size, n_sent_words)
         x = tf.unstack(x, n_sent_words, 1)
         # Define a lstm cell with tensorflow
-        fw_lstm_cell = rnn.BasicLSTMCell(n_word_hidden ,forget_bias=0.0)
-        bw_lstm_cell = rnn.BasicLSTMCell(n_word_hidden, forget_bias=0.0)
+        fw_lstm_cell = rnn.BasicLSTMCell(n_word_hidden)
+        bw_lstm_cell = rnn.BasicLSTMCell(n_word_hidden)
 
         outputs, states, _= rnn.static_bidirectional_rnn(fw_lstm_cell, bw_lstm_cell, x, dtype=tf.float32)
 
