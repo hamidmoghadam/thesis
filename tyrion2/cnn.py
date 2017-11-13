@@ -63,17 +63,17 @@ def conv_net_2(x, n_classes, dropout, is_training):
 
     x = tf.reshape(x, shape=[-1, n_input, n_embedding, 1])
     print(x)
-    conv5 = tf.layers.conv2d(x, 1, (5, 1), activation=tf.nn.relu)
-    conv4 = tf.layers.conv2d(x, 1, (4, 1), activation=tf.nn.relu)
-    conv3 = tf.layers.conv2d(x, 1, (3, 1), activation=tf.nn.relu)
-    conv2 = tf.layers.conv2d(x, 1, (2, 1), activation=tf.nn.relu)
+    conv5 = tf.layers.conv2d(x, 10, (5, 1), activation=tf.nn.relu)
+    conv4 = tf.layers.conv2d(x, 10, (4, 1), activation=tf.nn.relu)
+    conv3 = tf.layers.conv2d(x, 10, (3, 1), activation=tf.nn.relu)
+    conv2 = tf.layers.conv2d(x, 10, (2, 1), activation=tf.nn.relu)
 
     print(conv4)
     
-    conv5 = tf.layers.max_pooling2d(conv5, strides=1, pool_size=(596, n_embedding))
-    conv4 = tf.layers.max_pooling2d(conv4, strides=1, pool_size=(597, n_embedding))
-    conv3 = tf.layers.max_pooling2d(conv3, strides=1, pool_size=(598, n_embedding))
-    conv2 = tf.layers.max_pooling2d(conv2, strides=1, pool_size=(599, n_embedding))
+    conv5 = tf.layers.max_pooling2d(conv5, strides=10, pool_size=(596, n_embedding))
+    conv4 = tf.layers.max_pooling2d(conv4, strides=10, pool_size=(597, n_embedding))
+    conv3 = tf.layers.max_pooling2d(conv3, strides=10, pool_size=(598, n_embedding))
+    conv2 = tf.layers.max_pooling2d(conv2, strides=10, pool_size=(599, n_embedding))
 
     print(conv4)
     #conv5 = tf.contrib.layers.flatten(conv5)
