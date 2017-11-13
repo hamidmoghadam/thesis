@@ -12,7 +12,7 @@ from tensorflow.contrib import rnn
 import numpy as np
 import sys
 # Import MNIST data
-from data_provider import data_provider
+from data_provider2 import data_provider
 from tensorflow.contrib import learn
 #mnist = input_data.read_data_sets("/tmp/data/", one_hot=True)
 
@@ -31,13 +31,14 @@ def miror_data(x, y):
      #return x, y
 
 # Parameters
-learning_rate = float(sys.argv[4])#0.0007
+learning_rate = 0.0005
 batch_size = 200
 number_of_post_per_user = int(sys.argv[2])
 train_iteration = int(sys.argv[3])
 # Network Parameters
 n_input = 600 # MNIST data input (img shape: 28*28)
-n_hidden = 2 # hidden layer num of features
+n_hidden = 10 # hidden layer num of features
+n_embedding = 3
 n_classes = int(sys.argv[1]) # MNIST total classes (0-9 digits)
 
 #vocab_size = 58000
@@ -60,31 +61,45 @@ biases = {
 def conv_net_2(x, n_classes, dropout, is_training):
     print(x)
 
-    x = tf.reshape(x, shape=[-1, n_input, n_hidden, 1])
+    x = tf.reshape(x, shape=[-1, n_input, n_embedding, 1])
     print(x)
     conv5 = tf.layers.conv2d(x, 1, (5, 1), activation=tf.nn.relu)
     conv4 = tf.layers.conv2d(x, 1, (4, 1), activation=tf.nn.relu)
     conv3 = tf.layers.conv2d(x, 1, (3, 1), activation=tf.nn.relu)
     conv2 = tf.layers.conv2d(x, 1, (2, 1), activation=tf.nn.relu)
+
+    print(conv4)
     
-    conv5 = tf.layers.max_pooling2d(conv5, strides=30, pool_size=(596, n_hidden))
-    conv4 = tf.layers.max_pooling2d(conv4, strides=30, pool_size=(597, n_hidden))
-    conv3 = tf.layers.max_pooling2d(conv3, strides=30, pool_size=(598, n_hidden))
-    conv2 = tf.layers.max_pooling2d(conv2, strides=30, pool_size=(599, n_hidden))
+    conv5 = tf.layers.max_pooling2d(conv5, strides=1, pool_size=(596, n_embedding))
+    conv4 = tf.layers.max_pooling2d(conv4, strides=1, pool_size=(597, n_embedding))
+    conv3 = tf.layers.max_pooling2d(conv3, strides=1, pool_size=(598, n_embedding))
+    conv2 = tf.layers.max_pooling2d(conv2, strides=1, pool_size=(599, n_embedding))
 
-    conv5 = tf.contrib.layers.flatten(conv5)
-    conv4 = tf.contrib.layers.flatten(conv4)
-    conv2 = tf.contrib.layers.flatten(conv2)
-    conv3 = tf.contrib.layers.flatten(conv3)
+    print(conv4)
+    #conv5 = tf.contrib.layers.flatten(conv5)
+    #conv4 = tf.contrib.layers.flatten(conv4)
+    #conv2 = tf.contrib.layers.flatten(conv2)
+    #conv3 = tf.contrib.layers.flatten(conv3)
 
-    fc1 = tf.concat([conv4, conv2, conv3, conv5], 1)
-    print(fc1)
+    u = tf.concat([conv4, conv2, conv3, conv5], 1)
+    print(u)
+    #u = tf.unstack(u, axis=3)
+    print('hey')
+    print(u)
 
-    fc2 = tf.layers.dense(fc1, 1024)
-    print(fc2)
-    fc2 = tf.layers.dropout(fc2, rate=dropout, training=is_training)
+    conv_final = tf.layers.max_pooling2d(u, strides=1, pool_size = (4, 1))
+
+    conv_final = tf.contrib.layers.flatten(conv_final)
+    print(conv_final)
+
+    #fc1 = tf.concat([conv4, conv2, conv3, conv5], 1)
+    #print(fc1)
+
+    #fc2 = tf.layers.dense(conv_final, 1024)
+    #print(fc2)
+    #fc2 = tf.layers.dropout(fc2, rate=dropout, training=is_training)
     
-    out = tf.layers.dense(fc2, n_classes)
+    out = tf.layers.dense(conv_final, n_classes)
     return out
 
 def conv_net(x, n_classes, dropout, is_training):
@@ -159,7 +174,7 @@ def RNN(x, weights, biases, dropout, is_training):
 
 with tf.device("/cpu:0"):
         #embedding = tf.constant(np.identity(dp.letter_dic_size), name="embedding", dtype=tf.float32)
-        embedding = tf.get_variable("embedding",  dtype=tf.float32, initializer=tf.random_uniform([dp.letter_dic_size, n_hidden], minval= -0.1, maxval= 0.1), trainable=True)
+        embedding = tf.get_variable("embedding",  dtype=tf.float32, initializer=tf.random_uniform([dp.letter_dic_size, n_embedding], minval= -0.1, maxval= 0.1), trainable=True)
         inputs = tf.nn.embedding_lookup(embedding, x)
 
 #pred = RNN(inputs, weights, biases, dropout, is_training)
