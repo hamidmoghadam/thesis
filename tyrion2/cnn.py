@@ -90,16 +90,18 @@ def conv_net_2(x, n_classes, dropout, is_training):
     conv_final = tf.layers.max_pooling2d(u, strides=1, pool_size = (4, 1))
 
     conv_final = tf.contrib.layers.flatten(conv_final)
+
+
     print(conv_final)
 
     #fc1 = tf.concat([conv4, conv2, conv3, conv5], 1)
     #print(fc1)
 
-    #fc2 = tf.layers.dense(conv_final, 1024)
+    fc1 = tf.layers.dense(conv_final, 1024)
     #print(fc2)
-    #fc2 = tf.layers.dropout(fc2, rate=dropout, training=is_training)
+    fc1 = tf.layers.dropout(fc1, rate=dropout, training=is_training)
     
-    out = tf.layers.dense(conv_final, n_classes)
+    out = tf.layers.dense(fc1, n_classes)
     return out
 
 def conv_net(x, n_classes, dropout, is_training):
