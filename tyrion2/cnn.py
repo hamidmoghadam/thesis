@@ -74,8 +74,13 @@ def conv_net_2(x, n_classes, dropout, is_training):
     conv4 = tf.layers.max_pooling2d(conv4, strides=1, pool_size=(597, 1))
     conv3 = tf.layers.max_pooling2d(conv3, strides=1, pool_size=(598, 1))
     conv2 = tf.layers.max_pooling2d(conv2, strides=1, pool_size=(599, 1))
-
     
+    print(conv4)
+    conv5 = tf.layers.conv2d(x, 1, (1, 32), activation=tf.nn.relu)
+    conv4 = tf.layers.conv2d(x, 1, (1, 128), activation=tf.nn.relu)
+    conv3 = tf.layers.conv2d(x, 1, (1, 64), activation=tf.nn.relu)
+    conv2 = tf.layers.conv2d(x, 1, (1, 64), activation=tf.nn.relu)
+
 
     print(conv4)
     #conv5 = tf.contrib.layers.flatten(conv5)
