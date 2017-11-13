@@ -4,7 +4,7 @@ do
     echo 15 $i 100 3
     for((j = 0; j<5; j++))
     do
-        python rnn_cnn.py 10 1000 15 $i 100 3  
+        python rnn_cnn.py 20 1000 15 $i 100 3  
     done
 done
 
@@ -13,7 +13,7 @@ do
     echo 15 85 $i 3
     for((j = 0; j<5; j++))
     do
-        python rnn_cnn.py 10 1000 15 85 $i 3  
+        python rnn_cnn.py 20 1000 15 85 $i 3  
     done
 done
 
