@@ -1,97 +1,27 @@
-echo "lstm.py num_user=5 num_post=50 num_epoch=25 hidden=50"  
-python lstm.py 5 50 25 50
-python lstm.py 5 50 25 50
-python lstm.py 5 50 25 50
-python lstm.py 5 50 25 50
-python lstm.py 5 50 25 50
-python lstm.py 5 50 25 50
-python lstm.py 5 50 25 50
-echo "lstm.py num_user=5 num_post=100 num_epoch=25 hidden=50"  
-python lstm.py 5 100 25 50
-python lstm.py 5 100 25 50
-python lstm.py 5 100 25 50
-python lstm.py 5 100 25 50
-python lstm.py 5 100 25 50
-python lstm.py 5 100 25 50
-python lstm.py 5 100 25 50
-echo "lstm.py num_user=5 num_post=300 num_epoch=25 hidden=50"  
-python lstm.py 5 300 25 50
-python lstm.py 5 300 25 50
-python lstm.py 5 300 25 50
-python lstm.py 5 300 25 50
-python lstm.py 5 300 25 50
-python lstm.py 5 300 25 50
-python lstm.py 5 300 25 50
-echo "lstm.py num_user=5 num_post=600 num_epoch=25 hidden=50"  
-python lstm.py 5 600 25 50
-python lstm.py 5 600 25 50
-python lstm.py 5 600 25 50
-python lstm.py 5 600 25 50
-python lstm.py 5 600 25 50
-python lstm.py 5 600 25 50
-python lstm.py 5 600 25 50
-echo "lstm.py num_user=5 num_post=1000 num_epoch=25 hidden=50"  
-python lstm.py 5 1000 25 50
-python lstm.py 5 1000 25 50
-python lstm.py 5 1000 25 50
-python lstm.py 5 1000 25 50
-python lstm.py 5 1000 25 50
-python lstm.py 5 1000 25 50
-python lstm.py 5 1000 25 50
-echo "lstm.py num_user=5 num_post=1500 num_epoch=25 hidden=50"  
-python lstm.py 5 1500 25 50
-python lstm.py 5 1500 25 50
-python lstm.py 5 1500 25 50
-python lstm.py 5 1500 25 50
-python lstm.py 5 1500 25 50
-python lstm.py 5 1500 25 50
-python lstm.py 5 1500 25 50
-echo "lstm.py num_user=5 num_post=1800 num_epoch=25 hidden=50"  
-python lstm.py 5 1800 25 50
-python lstm.py 5 1800 25 50
-python lstm.py 5 1800 25 50
-python lstm.py 5 1800 25 50
-python lstm.py 5 1800 25 50
-python lstm.py 5 1800 25 50
-python lstm.py 5 1800 25 50
-echo "lstm.py num_user=5 num_post=2000 num_epoch=25 hidden=50"  
-python lstm.py 5 2000 25 50
-python lstm.py 5 2000 25 50
-python lstm.py 5 2000 25 50
-python lstm.py 5 2000 25 50
-python lstm.py 5 2000 25 50
-python lstm.py 5 2000 25 50
-python lstm.py 5 2000 25 50
-echo "lstm.py num_user=5 num_post=2500 num_epoch=25 hidden=50"  
-python lstm.py 5 2500 25 50
-python lstm.py 5 2500 25 50
-python lstm.py 5 2500 25 50
-python lstm.py 5 2500 25 50
-python lstm.py 5 2500 25 50
-python lstm.py 5 2500 25 50
-python lstm.py 5 2500 25 50
-echo "lstm.py num_user=5 num_post=3000 num_epoch=25 hidden=50"  
-python lstm.py 5 3000 25 50
-python lstm.py 5 3000 25 50
-python lstm.py 5 3000 25 50
-python lstm.py 5 3000 25 50
-python lstm.py 5 3000 25 50
-python lstm.py 5 3000 25 50
-python lstm.py 5 3000 25 50
-echo "lstm.py num_user=5 num_post=3200 num_epoch=25 hidden=50"  
-python lstm.py 5 3200 25 50
-python lstm.py 5 3200 25 50
-python lstm.py 5 3200 25 50
-python lstm.py 5 3200 25 50
-python lstm.py 5 3200 25 50
-python lstm.py 5 3200 25 50
-python lstm.py 5 3200 25 50
-echo "lstm.py num_user=5 num_post=3500 num_epoch=25 hidden=50"  
-python lstm.py 5 3500 25 50
-python lstm.py 5 3500 25 50
-python lstm.py 5 3500 25 50
-python lstm.py 5 3500 25 50
-python lstm.py 5 3500 25 50
-python lstm.py 5 3500 25 50
-python lstm.py 5 3500 25 50
+echo 70 15 85 3
+python hybrid_classifier.py 10 1000 20 70 15 85 3
+python hybrid_classifier.py 10 1000 20 70 15 85 3
+
+echo 50 10 100 4
+python hybrid_classifier.py 10 1000 20 50 10 100 3
+python hybrid_classifier.py 10 1000 20 50 10 100 3
+
+echo 85 70 85 5
+python hybrid_classifier.py 10 1000 20 50 10 85 5
+python hybrid_classifier.py 10 1000 20 50 10 85 5
+
+echo 85 70 50 3
+python hybrid_classifier.py 10 1000 20 85 70 50 3
+python hybrid_classifier.py 10 1000 20 85 70 50 3
+
+echo 30 7 100 5
+python hybrid_classifier.py 10 1000 20 30 7 100 5
+python hybrid_classifier.py 10 1000 20 30 7 100 5
+
+echo 90 70 90 5
+python hybrid_classifier.py 10 1000 20 90 70 90 5
+python hybrid_classifier.py 10 1000 20 90 70 90 5
+
+
+
 
