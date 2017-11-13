@@ -63,10 +63,10 @@ def conv_net_2(x, n_classes, dropout, is_training):
 
     x = tf.reshape(x, shape=[-1, n_input, n_embedding, 1])
     print(x)
-    conv5 = tf.layers.conv2d(x, 1, (5, 1), activation=tf.nn.relu)
-    conv4 = tf.layers.conv2d(x, 1, (4, 1), activation=tf.nn.relu)
-    conv3 = tf.layers.conv2d(x, 1, (3, 1), activation=tf.nn.relu)
-    conv2 = tf.layers.conv2d(x, 1, (2, 1), activation=tf.nn.relu)
+    conv5 = tf.layers.conv2d(x, 30, (5, 1), activation=tf.nn.relu)
+    conv4 = tf.layers.conv2d(x, 30, (4, 1), activation=tf.nn.relu)
+    conv3 = tf.layers.conv2d(x, 30, (3, 1), activation=tf.nn.relu)
+    conv2 = tf.layers.conv2d(x, 30, (2, 1), activation=tf.nn.relu)
 
     print(conv4)
     
@@ -91,7 +91,7 @@ def conv_net_2(x, n_classes, dropout, is_training):
 
     fc1 = tf.layers.dropout(conv_final, rate=dropout, training=is_training)
     
-    out = tf.layers.dense(fc1, n_classes, activation=tf.nn.relu)
+    out = tf.layers.dense(fc1, n_classes)
 
     return out
 
