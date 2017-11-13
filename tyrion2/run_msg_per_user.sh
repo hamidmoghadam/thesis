@@ -1,14 +1,21 @@
 
-for((i = 5; i<26; i=i+5))
+for((i = 40; i<85; i=i+5))
 do
-    echo 70 $i 85 3
+    echo 15 $i 100 3
     for((j = 0; j<5; j++))
     do
-        python hybrid_classifier.py 10 1000 20 70 $i 85 3 
-        python hybrid_classifier.py 10 1000 20 70 $i 85 3 
+        python rnn_cnn.py 10 1000 15 $i 100 3  
     done
 done
 
+for((i = 50; i<120; i=i+5))
+do
+    echo 15 85 $i 3
+    for((j = 0; j<5; j++))
+    do
+        python rnn_cnn.py 10 1000 15 85 $i 3  
+    done
+done
 
 
 
