@@ -75,6 +75,7 @@ def RNN(x, u, weights, biases, dropout, is_training):
         conv_final = tf.layers.max_pooling2d(tf.concat([conv1, conv2, conv3, conv4], 1), strides=1, pool_size = (4, 1))
         
         output_letter = tf.contrib.layers.flatten(conv_final)
+        output_letter = tf.layers.dropout(output_letter, rate=dropout, training=is_training)
     
     max_output = outputs[0]
 
