@@ -31,7 +31,7 @@ def miror_data(x, y):
      #return x, y
 
 # Parameters
-learning_rate = 0.0001
+learning_rate = 0.0005
 batch_size = 200
 number_of_post_per_user = int(sys.argv[2])
 train_iteration = int(sys.argv[3])
@@ -210,7 +210,7 @@ with tf.Session() as sess:
 
             miror_data(batch_char_x, batch_y)
             
-            acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: batch_char_x , y: batch_y, dropout: 0.7, is_training: True})
+            acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: batch_char_x , y: batch_y, dropout: 0.5, is_training: True})
            
             train_accr += acc 
             train_cost += loss
