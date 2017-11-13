@@ -1,5 +1,5 @@
 
-for((i = 5; i<=25; i=i+5))
+for((i = 5; i<26; i=i+5))
 do
     echo 70 $i 85 3
     for((j = 0; j<5; j++))
