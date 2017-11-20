@@ -1,6 +1,5 @@
 
 import csv
-from bs4 import BeautifulSoup
 import time
 import tweepy
 import json
