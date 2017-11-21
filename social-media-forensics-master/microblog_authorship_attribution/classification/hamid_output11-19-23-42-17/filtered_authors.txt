@@ -1,0 +1,14 @@
+/Users/hamidmoghaddam/Documents/thesis/social-media-forensics-master/microblog_authorship_attribution/dataset/out_train/3247_chartier
+/Users/hamidmoghaddam/Documents/thesis/social-media-forensics-master/microblog_authorship_attribution/dataset/out_train/3091_jbuffyangel
+/Users/hamidmoghaddam/Documents/thesis/social-media-forensics-master/microblog_authorship_attribution/dataset/out_train/3125_BTS_Trans
+/Users/hamidmoghaddam/Documents/thesis/social-media-forensics-master/microblog_authorship_attribution/dataset/out_train/5412_buzzfeed
+/Users/hamidmoghaddam/Documents/thesis/social-media-forensics-master/microblog_authorship_attribution/dataset/out_train/4545_pointlesslettrs
+/Users/hamidmoghaddam/Documents/thesis/social-media-forensics-master/microblog_authorship_attribution/dataset/out_train/3002_flynneware
+/Users/hamidmoghaddam/Documents/thesis/social-media-forensics-master/microblog_authorship_attribution/dataset/out_train/3236_netlex
+/Users/hamidmoghaddam/Documents/thesis/social-media-forensics-master/microblog_authorship_attribution/dataset/out_train/3187_alohaspaceman
+/Users/hamidmoghaddam/Documents/thesis/social-media-forensics-master/microblog_authorship_attribution/dataset/out_train/4669_ew
+/Users/hamidmoghaddam/Documents/thesis/social-media-forensics-master/microblog_authorship_attribution/dataset/out_train/3738_RafiDAngelo
+/Users/hamidmoghaddam/Documents/thesis/social-media-forensics-master/microblog_authorship_attribution/dataset/out_train/3159_la_liberty
+/Users/hamidmoghaddam/Documents/thesis/social-media-forensics-master/microblog_authorship_attribution/dataset/out_train/3123_Gotham
+/Users/hamidmoghaddam/Documents/thesis/social-media-forensics-master/microblog_authorship_attribution/dataset/out_train/3931_explorer
+/Users/hamidmoghaddam/Documents/thesis/social-media-forensics-master/microblog_authorship_attribution/dataset/out_train/3056_KeatonPatti

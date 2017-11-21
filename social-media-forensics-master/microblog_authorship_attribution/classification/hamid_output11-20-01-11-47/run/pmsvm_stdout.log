@@ -1,0 +1,126 @@
+Dataset loaded in 79 msec.
+*.
+optimization finished, #iter = 6
+nSV = 28015
+*.
+optimization finished, #iter = 7
+nSV = 25162
+*.
+optimization finished, #iter = 6
+nSV = 22129
+*.
+optimization finished, #iter = 6
+nSV = 22698
+*.
+optimization finished, #iter = 7
+nSV = 29047
+*.
+optimization finished, #iter = 6
+nSV = 26487
+*.
+optimization finished, #iter = 6
+nSV = 25983
+*.
+optimization finished, #iter = 6
+nSV = 28681
+*.
+optimization finished, #iter = 6
+nSV = 25367
+*.
+optimization finished, #iter = 6
+nSV = 21588
+*.
+optimization finished, #iter = 6
+nSV = 24048
+*.
+optimization finished, #iter = 6
+nSV = 28927
+*.
+optimization finished, #iter = 6
+nSV = 25749
+*.
+optimization finished, #iter = 6
+nSV = 28170
+*.
+optimization finished, #iter = 6
+nSV = 25745
+*.
+optimization finished, #iter = 6
+nSV = 24863
+*.
+optimization finished, #iter = 7
+nSV = 25636
+*.
+optimization finished, #iter = 7
+nSV = 25090
+*.
+optimization finished, #iter = 7
+nSV = 21622
+*.
+optimization finished, #iter = 6
+nSV = 22594
+*.
+optimization finished, #iter = 6
+nSV = 27901
+*.
+optimization finished, #iter = 7
+nSV = 25945
+*.
+optimization finished, #iter = 7
+nSV = 30618
+*.
+optimization finished, #iter = 6
+nSV = 20198
+*.
+optimization finished, #iter = 6
+nSV = 28248
+*.
+optimization finished, #iter = 6
+nSV = 20767
+*.
+optimization finished, #iter = 6
+nSV = 26869
+*.
+optimization finished, #iter = 6
+nSV = 29746
+*.
+optimization finished, #iter = 6
+nSV = 30610
+*.
+optimization finished, #iter = 6
+nSV = 22344
+Finished in 2683 msec.
+Dataset loaded in 15 msec.
+Finished in 6 msec.
+57/84=67.8571%
+67/173=38.7283%
+25/248=10.0806%
+37/48=77.0833%
+28/78=35.8974%
+5/79=6.32911%
+21/156=13.4615%
+75/410=18.2927%
+19/39=48.7179%
+112/963=11.6303%
+44/154=28.5714%
+48/523=9.17782%
+43/68=63.2353%
+178/547=32.5411%
+90/121=74.3802%
+11/93=11.828%
+23/44=52.2727%
+52/79=65.8228%
+26/131=19.8473%
+4/21=19.0476%
+43/205=20.9756%
+84/237=35.443%
+24/73=32.8767%
+97/561=17.2906%
+645/2000=32.25%
+85/201=42.2886%
+225/458=49.1266%
+245/950=25.7895%
+58/292=19.863%
+33/449=7.34967%
+Overall accuracy = 26.3996
+Average accuracy = 32.9352

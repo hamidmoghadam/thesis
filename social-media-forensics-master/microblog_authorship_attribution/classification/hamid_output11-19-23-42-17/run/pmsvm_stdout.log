@@ -1,0 +1,26 @@
+Dataset loaded in 19 msec.
+*.
+optimization finished, #iter = 6
+nSV = 9897
+*.
+optimization finished, #iter = 6
+nSV = 11887
+*.
+optimization finished, #iter = 6
+nSV = 11068
+*.
+optimization finished, #iter = 6
+nSV = 11809
+*.
+optimization finished, #iter = 6
+nSV = 10865
+Finished in 63 msec.
+Dataset loaded in 1 msec.
+Finished in 0 msec.
+76/154=49.3506%
+184/523=35.1816%
+52/156=33.3333%
+58/78=74.359%
+46/79=58.2278%
+Overall accuracy = 42.0202
+Average accuracy = 50.0905
