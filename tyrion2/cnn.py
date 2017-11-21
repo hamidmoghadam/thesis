@@ -164,7 +164,6 @@ def RNN(x, weights, biases, dropout, is_training):
     return tf.matmul(output, weights['out']) + biases['out']
 
 with tf.device("/cpu:0"):
-        #embedding = tf.constant(np.identity(dp.letter_dic_size), name="embedding", dtype=tf.float32)
         embedding = tf.get_variable("embedding",  dtype=tf.float32, initializer=tf.random_uniform([dp.letter_dic_size, n_embedding], minval= -0.1, maxval= 0.1), trainable=True)
         inputs = tf.nn.embedding_lookup(embedding, x)
 

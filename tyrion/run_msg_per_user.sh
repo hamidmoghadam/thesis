@@ -1,4 +1,6 @@
+echo "lstm.py 20 5 25"  
 python lstm.py 20 5 25
+Echo "lstm.py 20 10 25"
 python lstm.py 20 10 25
 python lstm.py 20 15 25
 python lstm.py 20 20 25

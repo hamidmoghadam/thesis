@@ -3,6 +3,11 @@ import numpy as np
 from schema import *
 import refine
 
+
+print(np.random.randint(10,size=1)[0])
+
+'''
+
 lst_username = []
 lst_twitter_username = []
 lst_tumblr_username = []
@@ -36,4 +41,4 @@ for twitter_username in lst_twitter_username[:1]:
                 if i == 10:
                     break
 
-        
+        '''
