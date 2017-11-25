@@ -1,0 +1,145 @@
+0-TrainLoss = 3.352, TrainAccr= 0.097, ValidLoss = 3.387, ValidAccr= 0.020
+1-TrainLoss = 3.084, TrainAccr= 0.071, ValidLoss = 3.447, ValidAccr= 0.021
+2-TrainLoss = 2.818, TrainAccr= 0.132, ValidLoss = 4.553, ValidAccr= 0.021
+3-TrainLoss = 2.392, TrainAccr= 0.342, ValidLoss = 3.340, ValidAccr= 0.071
+4-TrainLoss = 1.774, TrainAccr= 0.458, ValidLoss = 2.746, ValidAccr= 0.131
+5-TrainLoss = 1.145, TrainAccr= 0.661, ValidLoss = 3.140, ValidAccr= 0.125
+6-TrainLoss = 0.819, TrainAccr= 0.759, ValidLoss = 2.928, ValidAccr= 0.141
+7-TrainLoss = 0.509, TrainAccr= 0.852, ValidLoss = 5.330, ValidAccr= 0.051
+8-TrainLoss = 0.336, TrainAccr= 0.910, ValidLoss = 3.187, ValidAccr= 0.134
+9-TrainLoss = 0.498, TrainAccr= 0.852, ValidLoss = 2.919, ValidAccr= 0.216
+10-TrainLoss = 0.310, TrainAccr= 0.923, ValidLoss = 2.660, ValidAccr= 0.275
+11-TrainLoss = 0.154, TrainAccr= 0.969, ValidLoss = 2.650, ValidAccr= 0.303
+12-TrainLoss = 0.119, TrainAccr= 0.974, ValidLoss = 2.602, ValidAccr= 0.315
+13-TrainLoss = 0.215, TrainAccr= 0.933, ValidLoss = 2.910, ValidAccr= 0.301
+14-TrainLoss = 0.166, TrainAccr= 0.953, ValidLoss = 2.627, ValidAccr= 0.288
+15-TrainLoss = 0.073, TrainAccr= 0.984, ValidLoss = 2.702, ValidAccr= 0.289
+16-TrainLoss = 0.043, TrainAccr= 0.992, ValidLoss = 2.719, ValidAccr= 0.310
+17-TrainLoss = 0.032, TrainAccr= 0.995, ValidLoss = 2.701, ValidAccr= 0.337
+18-TrainLoss = 0.036, TrainAccr= 0.993, ValidLoss = 2.743, ValidAccr= 0.330
+19-TrainLoss = 0.021, TrainAccr= 0.997, ValidLoss = 2.804, ValidAccr= 0.321
+20-TrainLoss = 0.014, TrainAccr= 0.998, ValidLoss = 2.843, ValidAccr= 0.323
+21-TrainLoss = 0.011, TrainAccr= 0.999, ValidLoss = 2.888, ValidAccr= 0.321
+22-TrainLoss = 0.009, TrainAccr= 0.999, ValidLoss = 2.943, ValidAccr= 0.321
+23-TrainLoss = 0.007, TrainAccr= 0.999, ValidLoss = 2.983, ValidAccr= 0.322
+24-TrainLoss = 0.006, TrainAccr= 0.999, ValidLoss = 3.012, ValidAccr= 0.319
+accr is 0.750 accr per post is 0.323
+
+
+
+0-TrainLoss = 3.332, TrainAccr= 0.105, ValidLoss = 3.686, ValidAccr= 0.015
+1-TrainLoss = 3.571, TrainAccr= 0.262, ValidLoss = 18.018, ValidAccr= 0.015
+2-TrainLoss = 3.182, TrainAccr= 0.191, ValidLoss = 3.441, ValidAccr= 0.032
+3-TrainLoss = 2.274, TrainAccr= 0.229, ValidLoss = 3.599, ValidAccr= 0.049
+4-TrainLoss = 1.728, TrainAccr= 0.414, ValidLoss = 3.576, ValidAccr= 0.070
+5-TrainLoss = 1.259, TrainAccr= 0.570, ValidLoss = 4.619, ValidAccr= 0.061
+6-TrainLoss = 0.841, TrainAccr= 0.747, ValidLoss = 4.357, ValidAccr= 0.086
+7-TrainLoss = 0.563, TrainAccr= 0.840, ValidLoss = 4.129, ValidAccr= 0.098
+8-TrainLoss = 0.564, TrainAccr= 0.876, ValidLoss = 5.099, ValidAccr= 0.090
+9-TrainLoss = 0.395, TrainAccr= 0.891, ValidLoss = 3.503, ValidAccr= 0.154
+10-TrainLoss = 0.288, TrainAccr= 0.931, ValidLoss = 3.643, ValidAccr= 0.133
+11-TrainLoss = 0.226, TrainAccr= 0.942, ValidLoss = 3.084, ValidAccr= 0.216
+12-TrainLoss = 0.171, TrainAccr= 0.957, ValidLoss = 3.849, ValidAccr= 0.147
+13-TrainLoss = 0.082, TrainAccr= 0.984, ValidLoss = 4.146, ValidAccr= 0.146
+14-TrainLoss = 0.056, TrainAccr= 0.990, ValidLoss = 4.800, ValidAccr= 0.132
+15-TrainLoss = 0.060, TrainAccr= 0.988, ValidLoss = 3.076, ValidAccr= 0.262
+16-TrainLoss = 0.055, TrainAccr= 0.989, ValidLoss = 3.090, ValidAccr= 0.276
+17-TrainLoss = 0.041, TrainAccr= 0.994, ValidLoss = 3.118, ValidAccr= 0.288
+18-TrainLoss = 0.029, TrainAccr= 0.995, ValidLoss = 3.127, ValidAccr= 0.298
+19-TrainLoss = 0.017, TrainAccr= 0.998, ValidLoss = 3.184, ValidAccr= 0.303
+20-TrainLoss = 0.010, TrainAccr= 0.999, ValidLoss = 3.269, ValidAccr= 0.300
+21-TrainLoss = 0.008, TrainAccr= 0.999, ValidLoss = 3.301, ValidAccr= 0.306
+22-TrainLoss = 0.007, TrainAccr= 0.999, ValidLoss = 3.319, ValidAccr= 0.309
+23-TrainLoss = 0.005, TrainAccr= 1.000, ValidLoss = 3.394, ValidAccr= 0.308
+24-TrainLoss = 0.005, TrainAccr= 1.000, ValidLoss = 3.432, ValidAccr= 0.308
+accr is 0.900 accr per post is 0.303
+
+
+
+0-TrainLoss = 3.369, TrainAccr= 0.059, ValidLoss = 3.420, ValidAccr= 0.026
+1-TrainLoss = 2.926, TrainAccr= 0.042, ValidLoss = 3.276, ValidAccr= 0.045
+2-TrainLoss = 2.607, TrainAccr= 0.210, ValidLoss = 3.472, ValidAccr= 0.047
+3-TrainLoss = 2.129, TrainAccr= 0.421, ValidLoss = 3.573, ValidAccr= 0.062
+4-TrainLoss = 1.524, TrainAccr= 0.495, ValidLoss = 3.203, ValidAccr= 0.072
+5-TrainLoss = 1.135, TrainAccr= 0.729, ValidLoss = 3.494, ValidAccr= 0.099
+6-TrainLoss = 0.798, TrainAccr= 0.772, ValidLoss = 3.742, ValidAccr= 0.100
+7-TrainLoss = 0.682, TrainAccr= 0.793, ValidLoss = 3.305, ValidAccr= 0.150
+8-TrainLoss = 0.428, TrainAccr= 0.871, ValidLoss = 3.204, ValidAccr= 0.163
+9-TrainLoss = 0.392, TrainAccr= 0.898, ValidLoss = 3.565, ValidAccr= 0.156
+10-TrainLoss = 0.270, TrainAccr= 0.934, ValidLoss = 3.333, ValidAccr= 0.178
+11-TrainLoss = 0.197, TrainAccr= 0.953, ValidLoss = 3.163, ValidAccr= 0.202
+12-TrainLoss = 0.110, TrainAccr= 0.977, ValidLoss = 3.142, ValidAccr= 0.218
+13-TrainLoss = 0.068, TrainAccr= 0.987, ValidLoss = 3.138, ValidAccr= 0.229
+14-TrainLoss = 0.046, TrainAccr= 0.993, ValidLoss = 3.172, ValidAccr= 0.239
+15-TrainLoss = 0.033, TrainAccr= 0.995, ValidLoss = 3.185, ValidAccr= 0.247
+16-TrainLoss = 0.024, TrainAccr= 0.997, ValidLoss = 3.236, ValidAccr= 0.246
+17-TrainLoss = 0.019, TrainAccr= 0.997, ValidLoss = 3.267, ValidAccr= 0.251
+18-TrainLoss = 0.015, TrainAccr= 0.998, ValidLoss = 3.303, ValidAccr= 0.256
+19-TrainLoss = 0.012, TrainAccr= 0.998, ValidLoss = 3.353, ValidAccr= 0.258
+20-TrainLoss = 0.010, TrainAccr= 0.999, ValidLoss = 3.395, ValidAccr= 0.254
+21-TrainLoss = 0.008, TrainAccr= 0.999, ValidLoss = 3.440, ValidAccr= 0.257
+22-TrainLoss = 0.007, TrainAccr= 0.999, ValidLoss = 3.460, ValidAccr= 0.258
+23-TrainLoss = 0.006, TrainAccr= 0.999, ValidLoss = 3.518, ValidAccr= 0.257
+24-TrainLoss = 0.005, TrainAccr= 0.999, ValidLoss = 3.554, ValidAccr= 0.253
+accr is 0.650 accr per post is 0.248
+
+
+
+0-TrainLoss = 3.297, TrainAccr= 0.076, ValidLoss = 3.479, ValidAccr= 0.012
+1-TrainLoss = 2.982, TrainAccr= 0.030, ValidLoss = 3.671, ValidAccr= 0.012
+2-TrainLoss = 2.578, TrainAccr= 0.126, ValidLoss = 3.499, ValidAccr= 0.026
+3-TrainLoss = 1.996, TrainAccr= 0.341, ValidLoss = 3.484, ValidAccr= 0.021
+4-TrainLoss = 1.566, TrainAccr= 0.551, ValidLoss = 3.509, ValidAccr= 0.063
+5-TrainLoss = 1.105, TrainAccr= 0.668, ValidLoss = 4.799, ValidAccr= 0.046
+6-TrainLoss = 0.766, TrainAccr= 0.765, ValidLoss = 7.659, ValidAccr= 0.047
+7-TrainLoss = 0.638, TrainAccr= 0.834, ValidLoss = 4.823, ValidAccr= 0.059
+8-TrainLoss = 0.541, TrainAccr= 0.840, ValidLoss = 4.034, ValidAccr= 0.093
+9-TrainLoss = 0.294, TrainAccr= 0.928, ValidLoss = 3.793, ValidAccr= 0.121
+10-TrainLoss = 0.249, TrainAccr= 0.937, ValidLoss = 3.837, ValidAccr= 0.151
+11-TrainLoss = 0.178, TrainAccr= 0.957, ValidLoss = 3.503, ValidAccr= 0.187
+12-TrainLoss = 0.088, TrainAccr= 0.985, ValidLoss = 3.595, ValidAccr= 0.198
+13-TrainLoss = 0.066, TrainAccr= 0.989, ValidLoss = 3.869, ValidAccr= 0.188
+14-TrainLoss = 0.116, TrainAccr= 0.967, ValidLoss = 3.961, ValidAccr= 0.190
+15-TrainLoss = 0.117, TrainAccr= 0.966, ValidLoss = 3.551, ValidAccr= 0.239
+16-TrainLoss = 0.063, TrainAccr= 0.986, ValidLoss = 3.379, ValidAccr= 0.260
+17-TrainLoss = 0.035, TrainAccr= 0.994, ValidLoss = 3.610, ValidAccr= 0.235
+18-TrainLoss = 0.036, TrainAccr= 0.992, ValidLoss = 3.536, ValidAccr= 0.259
+19-TrainLoss = 0.019, TrainAccr= 0.997, ValidLoss = 3.392, ValidAccr= 0.264
+20-TrainLoss = 0.013, TrainAccr= 0.998, ValidLoss = 3.419, ValidAccr= 0.263
+21-TrainLoss = 0.011, TrainAccr= 0.998, ValidLoss = 3.489, ValidAccr= 0.264
+22-TrainLoss = 0.009, TrainAccr= 0.999, ValidLoss = 3.577, ValidAccr= 0.257
+23-TrainLoss = 0.007, TrainAccr= 0.999, ValidLoss = 3.670, ValidAccr= 0.257
+24-TrainLoss = 0.005, TrainAccr= 0.999, ValidLoss = 3.785, ValidAccr= 0.250
+accr is 0.600 accr per post is 0.258
+
+
+
+0-TrainLoss = 3.576, TrainAccr= 0.057, ValidLoss = 3.399, ValidAccr= 0.036
+1-TrainLoss = 3.029, TrainAccr= 0.094, ValidLoss = 3.726, ValidAccr= 0.144
+2-TrainLoss = 2.745, TrainAccr= 0.121, ValidLoss = 3.474, ValidAccr= 0.169
+3-TrainLoss = 2.159, TrainAccr= 0.245, ValidLoss = 4.106, ValidAccr= 0.085
+4-TrainLoss = 1.700, TrainAccr= 0.427, ValidLoss = 3.482, ValidAccr= 0.173
+5-TrainLoss = 1.230, TrainAccr= 0.640, ValidLoss = 2.635, ValidAccr= 0.257
+6-TrainLoss = 1.271, TrainAccr= 0.663, ValidLoss = 2.654, ValidAccr= 0.274
+7-TrainLoss = 0.883, TrainAccr= 0.738, ValidLoss = 2.717, ValidAccr= 0.283
+8-TrainLoss = 0.536, TrainAccr= 0.853, ValidLoss = 2.611, ValidAccr= 0.310
+9-TrainLoss = 0.474, TrainAccr= 0.874, ValidLoss = 2.581, ValidAccr= 0.334
+10-TrainLoss = 0.325, TrainAccr= 0.912, ValidLoss = 3.543, ValidAccr= 0.271
+11-TrainLoss = 0.228, TrainAccr= 0.941, ValidLoss = 3.080, ValidAccr= 0.294
+12-TrainLoss = 0.183, TrainAccr= 0.956, ValidLoss = 3.425, ValidAccr= 0.293
+13-TrainLoss = 0.166, TrainAccr= 0.958, ValidLoss = 4.632, ValidAccr= 0.301
+14-TrainLoss = 0.175, TrainAccr= 0.953, ValidLoss = 2.699, ValidAccr= 0.353
+15-TrainLoss = 0.134, TrainAccr= 0.969, ValidLoss = 2.741, ValidAccr= 0.367
+16-TrainLoss = 0.084, TrainAccr= 0.981, ValidLoss = 2.605, ValidAccr= 0.380
+17-TrainLoss = 0.053, TrainAccr= 0.990, ValidLoss = 2.626, ValidAccr= 0.384
+18-TrainLoss = 0.030, TrainAccr= 0.995, ValidLoss = 2.677, ValidAccr= 0.379
+19-TrainLoss = 0.019, TrainAccr= 0.997, ValidLoss = 2.729, ValidAccr= 0.389
+20-TrainLoss = 0.014, TrainAccr= 0.998, ValidLoss = 2.787, ValidAccr= 0.384
+21-TrainLoss = 0.010, TrainAccr= 0.999, ValidLoss = 2.840, ValidAccr= 0.384
+22-TrainLoss = 0.010, TrainAccr= 0.999, ValidLoss = 2.869, ValidAccr= 0.385
+23-TrainLoss = 0.008, TrainAccr= 0.999, ValidLoss = 2.946, ValidAccr= 0.379
+24-TrainLoss = 0.006, TrainAccr= 0.999, ValidLoss = 2.980, ValidAccr= 0.382
+accr is 0.900 accr per post is 0.386
+
+
+
