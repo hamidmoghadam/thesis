@@ -148,3 +148,103 @@ accr is 0.850 accr per post is 0.303
 
 
 
+Training Loss = 3.365, Training Accuracy= 0.087
+Validation Loss = 3.132, Validation Accuracy= 0.041
+Training Loss = 2.856, Training Accuracy= 0.073
+Validation Loss = 3.403, Validation Accuracy= 0.041
+Training Loss = 2.327, Training Accuracy= 0.231
+Validation Loss = 3.496, Validation Accuracy= 0.057
+Training Loss = 1.724, Training Accuracy= 0.483
+Validation Loss = 9.748, Validation Accuracy= 0.041
+Training Loss = 1.109, Training Accuracy= 0.650
+Validation Loss = 7.646, Validation Accuracy= 0.058
+Training Loss = 0.865, Training Accuracy= 0.756
+Validation Loss = 6.126, Validation Accuracy= 0.078
+Training Loss = 0.456, Training Accuracy= 0.887
+Validation Loss = 5.765, Validation Accuracy= 0.090
+Training Loss = 0.244, Training Accuracy= 0.949
+Validation Loss = 4.540, Validation Accuracy= 0.125
+Training Loss = 0.153, Training Accuracy= 0.968
+Validation Loss = 4.130, Validation Accuracy= 0.174
+Training Loss = 0.125, Training Accuracy= 0.973
+Validation Loss = 3.246, Validation Accuracy= 0.268
+Training Loss = 0.138, Training Accuracy= 0.970
+Validation Loss = 3.312, Validation Accuracy= 0.277
+Training Loss = 0.108, Training Accuracy= 0.979
+Validation Loss = 3.421, Validation Accuracy= 0.292
+Training Loss = 0.048, Training Accuracy= 0.993
+Validation Loss = 3.267, Validation Accuracy= 0.311
+Training Loss = 0.019, Training Accuracy= 0.998
+Validation Loss = 3.273, Validation Accuracy= 0.318
+Training Loss = 0.011, Training Accuracy= 0.999
+Validation Loss = 3.321, Validation Accuracy= 0.320
+Training Loss = 0.008, Training Accuracy= 1.000
+Validation Loss = 3.368, Validation Accuracy= 0.319
+Training Loss = 0.006, Training Accuracy= 1.000
+Validation Loss = 3.414, Validation Accuracy= 0.320
+Training Loss = 0.004, Training Accuracy= 1.000
+Validation Loss = 3.453, Validation Accuracy= 0.320
+Training Loss = 0.003, Training Accuracy= 1.000
+Validation Loss = 3.501, Validation Accuracy= 0.320
+Training Loss = 0.003, Training Accuracy= 1.000
+Validation Loss = 3.546, Validation Accuracy= 0.319
+Training Loss = 0.002, Training Accuracy= 1.000
+Validation Loss = 3.591, Validation Accuracy= 0.319
+Training Loss = 0.002, Training Accuracy= 1.000
+Validation Loss = 3.628, Validation Accuracy= 0.320
+Training Loss = 0.002, Training Accuracy= 1.000
+Validation Loss = 3.660, Validation Accuracy= 0.319
+accr is 0.750 accr per post is 0.313
+
+
+
+Training Loss = 3.172, Training Accuracy= 0.090
+Validation Loss = 3.081, Validation Accuracy= 0.116
+Training Loss = 3.074, Training Accuracy= 0.179
+Validation Loss = 3.286, Validation Accuracy= 0.124
+Training Loss = 2.595, Training Accuracy= 0.235
+Validation Loss = 3.129, Validation Accuracy= 0.115
+Training Loss = 1.819, Training Accuracy= 0.338
+Validation Loss = 3.065, Validation Accuracy= 0.142
+Training Loss = 1.222, Training Accuracy= 0.585
+Validation Loss = 4.362, Validation Accuracy= 0.142
+Training Loss = 0.852, Training Accuracy= 0.741
+Validation Loss = 3.610, Validation Accuracy= 0.151
+Training Loss = 0.711, Training Accuracy= 0.780
+Validation Loss = 2.854, Validation Accuracy= 0.176
+Training Loss = 0.603, Training Accuracy= 0.846
+Validation Loss = 2.904, Validation Accuracy= 0.237
+Training Loss = 0.381, Training Accuracy= 0.900
+Validation Loss = 3.196, Validation Accuracy= 0.188
+Training Loss = 0.248, Training Accuracy= 0.938
+Validation Loss = 2.894, Validation Accuracy= 0.268
+Training Loss = 0.179, Training Accuracy= 0.959
+Validation Loss = 3.523, Validation Accuracy= 0.212
+Training Loss = 0.184, Training Accuracy= 0.949
+Validation Loss = 4.887, Validation Accuracy= 0.195
+Training Loss = 0.237, Training Accuracy= 0.938
+Validation Loss = 3.397, Validation Accuracy= 0.212
+Training Loss = 0.068, Training Accuracy= 0.986
+Validation Loss = 3.588, Validation Accuracy= 0.193
+Training Loss = 0.125, Training Accuracy= 0.966
+Validation Loss = 3.403, Validation Accuracy= 0.205
+Training Loss = 0.059, Training Accuracy= 0.984
+Validation Loss = 3.086, Validation Accuracy= 0.263
+Training Loss = 0.017, Training Accuracy= 0.998
+Validation Loss = 3.130, Validation Accuracy= 0.266
+Training Loss = 0.012, Training Accuracy= 0.999
+Validation Loss = 3.169, Validation Accuracy= 0.268
+Training Loss = 0.010, Training Accuracy= 0.999
+Validation Loss = 3.215, Validation Accuracy= 0.271
+Training Loss = 0.007, Training Accuracy= 0.999
+Validation Loss = 3.258, Validation Accuracy= 0.270
+Training Loss = 0.006, Training Accuracy= 1.000
+Validation Loss = 3.304, Validation Accuracy= 0.269
+Training Loss = 0.005, Training Accuracy= 1.000
+Validation Loss = 3.341, Validation Accuracy= 0.271
+Training Loss = 0.004, Training Accuracy= 1.000
+Validation Loss = 3.385, Validation Accuracy= 0.270
+accr is 0.850 accr per post is 0.271
+
+
+
