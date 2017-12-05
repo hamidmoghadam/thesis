@@ -60,7 +60,7 @@ def ExactMatch(x, weights, biases):
     output = tf.zeros([tf.shape(x[0])[0], n_hidden_2], tf.float32)
     for word in x:
         output= tf.add(output, tf.nn.sigmoid(tf.matmul(word, weights['h1']) + biases['h1']))
-    
+    output = tf.divide(output, n_input)
     return output
 
 
