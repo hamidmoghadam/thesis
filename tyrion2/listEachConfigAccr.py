@@ -7,7 +7,7 @@ import sys
 
 file_adderess = sys.argv[1]
 print(file_adderess)
-onlyfiles = [f for f in listdir(file_adderess) if isfile(join(file_adderess, f))]
+onlyfiles = [f for f in listdir(file_adderess) if isfile(join(file_adderess, f)) and f.startswith('test')]
 
 
 best_accr = 0.0

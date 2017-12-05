@@ -1,9 +1,9 @@
 import numpy as np
 import subprocess
 
-word_hidden_layer = np.array([150, 170, 200])
-letter_hidden_layer = np.array([20, 50, 100, 150])
-dropout = np.array([0.1, 0.2, 0.3, 0.4, 0.5])
+word_hidden_layer = np.array([170, 200, 250])
+letter_hidden_layer = np.array([100, 150, 200, 250])
+dropout = np.array([0.5])
 word_embedding = np.array([20,40,50,70, 80])
 letter_embedding = np.array([20,40,50,70, 80])
 
@@ -12,7 +12,7 @@ letter_embedding = np.array([20,40,50,70, 80])
 for test_no in range(100) :
     config = { 'word_h' : str(word_hidden_layer[np.random.randint(3,size=1)[0]]),
             'letter_h' : str(letter_hidden_layer[np.random.randint(4,size=1)[0]]),
-            'dropout' : str(dropout[np.random.randint(5,size=1)[0]]),
+            'dropout' : str(dropout[0]),
             'w_embedding' : str(word_embedding[np.random.randint(5,size=1)[0]]),
             'l_embedding' : str(letter_embedding[np.random.randint(5,size=1)[0]]) }
 
