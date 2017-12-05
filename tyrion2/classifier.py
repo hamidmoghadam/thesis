@@ -29,12 +29,11 @@ learning_rate = 0.0005
 batch_size = 200
 number_of_post_per_user = int(sys.argv[2])
 train_iteration = int(sys.argv[3])
-
+n_embedding = int(sys.argv[5])
 
 # Network Parameters
 n_input = 100 # MNIST data input (img shape: 28*28)
 n_hidden = int(sys.argv[4]) # hidden layer num of features
-n_hidden_1 = 10
 n_classes = int(sys.argv[1]) # MNIST total classes (0-9 digits)
 
 #vocab_size = 58000
@@ -46,17 +45,24 @@ y = tf.placeholder(tf.float32, [None, n_classes])
 dropout = tf.placeholder(tf.float32, shape=())
 is_training = tf.placeholder(tf.bool)
 
+n_hidden_2 = 20
 # Define weights
 weights = {
-    'h1': tf.Variable(tf.random_normal([n_hidden, n_hidden_1])),
-    'out': tf.Variable(tf.random_normal([2*n_hidden, n_classes])),
-    'out_2': tf.Variable(tf.random_normal([n_hidden_1, n_classes]))
+    'h1': tf.Variable(tf.random_normal([n_embedding, n_hidden_2])),
+    'out': tf.Variable(tf.random_normal([2*n_hidden + n_hidden_2, n_classes]))
 }
 biases = {
-    'h1': tf.Variable(tf.random_normal([n_hidden_1])),
-    'out': tf.Variable(tf.random_normal([n_classes])),
-    'out_2': tf.Variable(tf.random_normal([n_classes]))
+    'h1': tf.Variable(tf.random_normal([n_hidden_2])),
+    'out': tf.Variable(tf.random_normal([n_classes]))
 }
+
+def ExactMatch(x, weights, biases):
+    output = tf.zeros([tf.shape(x[0])[0], n_hidden_2], tf.float32)
+    for word in x:
+        output= tf.add(output, tf.nn.sigmoid(tf.matmul(word, weights['h1']) + biases['h1']))
+    
+    return output
+
 
 
 def RNN(x, weights, biases, dropout, is_training):
@@ -72,9 +78,10 @@ def RNN(x, weights, biases, dropout, is_training):
     x = tf.unstack(x, n_input, 1)
 
     # Define a lstm cell with tensorflow
-    fw_lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0)
+    fw_lstm_cell = rnn.BasicLSTMCell(n_hidden , forget_bias=1.0)
     bw_lstm_cell = rnn.BasicLSTMCell(n_hidden, forget_bias=1.0)
 	
+    output_exact_match = ExactMatch(x, weights, biases)
     # Get lstm cell output
     #outputs, states = rnn.static_rnn(lstm_cell, x, dtype=tf.float32)
 
@@ -84,41 +91,20 @@ def RNN(x, weights, biases, dropout, is_training):
     output = outputs[0]
     for i in range(1, len(outputs)):
         output = tf.maximum(output, outputs[i])
-    # Linear activation, using rnn inner loop last output
-    return tf.matmul(output, weights['out']) + biases['out']
 
-def ExactMatch(x, weights, biases) :
-    #x = tf.reshape(x, [-1, n_hidden])
-    x = tf.unstack(x, n_input, 1)
-    outputs = []
-    for item in x:
-        # Hidden fully connected layer with 256 neurons
-        outputs.append(tf.add(tf.matmul(item, weights['h1']), biases['h1']))
-    
-    output = outputs[0]
-    for i in range(1, len(outputs)):
-        output = tf.maximum(output, outputs[i])
-    # Output fully connected layer with a neuron for each class
-    return tf.matmul(output, weights['out_2']) + biases['out_2']
+    final_output = tf.concat((output, output_exact_match), 1)
+
+    # Linear activation, using rnn inner loop last output
+    return tf.matmul(final_output, weights['out']) + biases['out']
+
+
 
 
 with tf.device("/cpu:0"):
-        embedding = tf.get_variable("embedding", [dp.vocab_size, n_hidden], dtype=tf.float32)
+        embedding = tf.get_variable("embedding", [dp.vocab_size, n_embedding], dtype=tf.float32)
         inputs = tf.nn.embedding_lookup(embedding, x)
 
 pred = RNN(inputs, weights, biases, dropout, is_training)
-pred_exact_match = ExactMatch(inputs, weights, biases)
-
-
-alpha = tf.Variable(tf.random_uniform([n_classes, n_classes], maxval=0.001), tf.float32)
-alpha = tf.cond(tf.equal(is_training, tf.constant(True)), lambda: tf.nn.dropout(alpha, 0.1), lambda:alpha)
-
-#pred_w = tf.Variable(tf.random_normal(n_hidden, n_classes))
-#pred_bias = tf.Variable(tf.random_normal([n_classes]))
-
-pred = tf.add(pred, tf.matmul(pred_exact_match, alpha))
-
-
 softmax_pred = tf.nn.softmax(pred)
 # Define loss and optimizer
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=pred, labels=y))
@@ -152,9 +138,9 @@ with tf.Session() as sess:
         step = 0
         epoch_size = max(dp.train_size // batch_size, 1)
         while step < epoch_size:
-            batch_x, batch_y = dp.get_next_train_batch(batch_size)
+            batch_x, batch_y= dp.get_next_train_batch(batch_size)
             
-            acc, loss, _, alpha_param = sess.run([accuracy, cost, optimizer, alpha], feed_dict={x: batch_x, y: batch_y, dropout: 0.5, is_training: True})
+            acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: batch_x, y: batch_y, dropout: 0.5, is_training: True})
             train_accr += acc 
             train_cost += loss
             
@@ -162,7 +148,7 @@ with tf.Session() as sess:
         
         lst_train_cost.append(train_cost/epoch_size)
         lst_train_accr.append(train_accr/epoch_size)
-        #'''
+        
         print("Training Loss = {:.3f}".format(train_cost/epoch_size) + ", Training Accuracy= {:.3f}".format(train_accr/epoch_size))
         
         valid_data, valid_label = dp.get_next_valid_batch(dp.valid_size)
@@ -171,9 +157,9 @@ with tf.Session() as sess:
         loss = sess.run(cost, feed_dict={x: valid_data, y: valid_label, dropout: 1.0, is_training:False})
         lst_valid_cost.append(loss)
         lst_valid_accr.append(acc)
-    
+        
         print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
-        #'''
+        
     
     accr = 0
     accr_per_post = 0
@@ -181,15 +167,15 @@ with tf.Session() as sess:
     number_of_post = 0
     for i in range(n_classes):
         #print('for class number {0}'.format(i))
-        test_data, test_label = dp.get_next_test_batch(i)
+        test_data, test_label= dp.get_next_test_batch(i)
         loss, acc, prediction = sess.run([cost, accuracy, softmax_pred], feed_dict={x: test_data, y: test_label, dropout: 1.0, is_training:False})
-        
+
         for predict in prediction:
             number_of_post += 1
             if predict.argmax(axis=0) == i:
                 accr_per_post += 1
 
-        result = np.sum(np.log10(prediction), axis=0)
+        result = np.sum(prediction, axis=0)
         max_idx = result.argmax(axis=0)
         if max_idx == i :
             accr += 1
