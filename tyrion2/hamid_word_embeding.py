@@ -28,7 +28,7 @@ class data_provider(object):
                 for row in reader:
                     item = TwitterItem(row)
                     if item.is_owner == True:
-                        content = refine.clean(item.content, ignore_url= True, ignore_stopword=False)
+                        content = refine.clean(item.content, ignore_url= False, ignore_stopword=True)
                         data.append(content)
 
         self.Vocab = self.build_vocab(' '.join(data))
