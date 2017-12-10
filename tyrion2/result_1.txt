@@ -1,0 +1,12 @@
+lstm.py num_user=20 num_post=500 num_epoch=20 hidden=65
+accr is 0.300 accr per post is 0.180
+lstm.py num_user=20 num_post=1000 num_epoch=20 hidden=65
+accr is 0.550 accr per post is 0.225
+lstm.py num_user=20 num_post=1500 num_epoch=20 hidden=65
+accr is 0.800 accr per post is 0.299
+lstm.py num_user=20 num_post=2000 num_epoch=20 hidden=65
+accr is 0.600 accr per post is 0.342
+lstm.py num_user=20 num_post=2500 num_epoch=20 hidden=65
+accr is 0.350 accr per post is 0.315
+lstm.py num_user=20 num_post=3000 num_epoch=20 hidden=65
+lstm.py num_user=20 num_post=3500 num_epoch=20 hidden=65

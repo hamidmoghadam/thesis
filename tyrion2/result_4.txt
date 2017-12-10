@@ -1,0 +1,49 @@
+lstm.py num_user=10 num_post=500 num_epoch=30 hidden=28
+accr is 0.600 accr per post is 0.267
+accr is 0.400 accr per post is 0.165
+accr is 0.600 accr per post is 0.253
+accr is 0.400 accr per post is 0.394
+accr is 0.500 accr per post is 0.217
+accr is 0.600 accr per post is 0.207
+accr is 0.400 accr per post is 0.205
+accr is 0.300 accr per post is 0.373
+accr is 0.500 accr per post is 0.389
+accr is 0.600 accr per post is 0.143
+lstm.py num_user=10 num_post=1000 num_epoch=30 hidden=28
+accr is 0.300 accr per post is 0.280
+accr is 0.700 accr per post is 0.307
+accr is 0.500 accr per post is 0.253
+accr is 0.700 accr per post is 0.348
+accr is 0.700 accr per post is 0.442
+accr is 0.500 accr per post is 0.416
+accr is 0.600 accr per post is 0.305
+accr is 0.500 accr per post is 0.449
+accr is 0.600 accr per post is 0.243
+accr is 0.500 accr per post is 0.307
+lstm.py num_user=10 num_post=1500 num_epoch=30 hidden=28
+accr is 0.700 accr per post is 0.384
+accr is 0.600 accr per post is 0.435
+accr is 0.800 accr per post is 0.274
+accr is 0.800 accr per post is 0.426
+accr is 1.000 accr per post is 0.386
+accr is 0.700 accr per post is 0.347
+accr is 0.800 accr per post is 0.372
+accr is 0.500 accr per post is 0.332
+accr is 0.800 accr per post is 0.465
+accr is 0.500 accr per post is 0.292
+lstm.py num_user=10 num_post=2000 num_epoch=30 hidden=28
+accr is 0.800 accr per post is 0.370
+accr is 0.800 accr per post is 0.340
+accr is 0.900 accr per post is 0.482
+accr is 0.800 accr per post is 0.378
+accr is 0.900 accr per post is 0.420
+accr is 0.700 accr per post is 0.574
+accr is 0.700 accr per post is 0.366
+accr is 0.500 accr per post is 0.319
+accr is 0.800 accr per post is 0.517
+accr is 0.800 accr per post is 0.358
+lstm.py num_user=10 num_post=2500 num_epoch=30 hidden=28
+accr is 0.800 accr per post is 0.477
+accr is 0.500 accr per post is 0.425
+accr is 1.000 accr per post is 0.455
+accr is 0.300 accr per post is 0.205
