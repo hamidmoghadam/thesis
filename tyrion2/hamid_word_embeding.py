@@ -44,11 +44,11 @@ class data_provider(object):
 dp = data_provider()
 
 word_embedding_size = 5
-vocab_size = 500
+vocab_size = 5000
 train_iteration = 1000
 
 
-print('vocab size is {0}'.format(vocab_size))
+print('vocab size is {0}'.format(dp.VocabSize))
 
 
 x_data = tf.placeholder(tf.float32, [None, word_embedding_size])
@@ -80,7 +80,7 @@ print(y_pred)
 print(y_data)
 
 cost = tf.reduce_mean(tf.square(y_pred - y_data))
-optimizer = tf.train.GradientDescentOptimizer(0.01).minimize(cost)
+optimizer = tf.train.GradientDescentOptimizer(0.05).minimize(cost)
 
 #cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=y_pred, labels=y_data))                 
 #optimizer = tf.train.AdamOptimizer(learning_rate=0.005).minimize(cost)
