@@ -8,6 +8,8 @@ from nltk.corpus import stopwords
 from nltk.stem.porter import *
 from nltk.tokenize import RegexpTokenizer
 from nltk.tokenize import sent_tokenize
+import nltk, pprint
+from nltk import word_tokenize
 import csv
 import getopt
 
@@ -16,6 +18,9 @@ import getopt
 def clean(raw_review, ignore_digit = False, ignore_url= False, ignore_stopword = False):
     # 1. Remove HTML
     #raw_review = BeautifulSoup(raw_review).get_text()
+
+    raw_review = ' '.join(word_tokenize(raw_review))
+
     #
     # 1.1 Remove Url
     if not ignore_url:
@@ -33,7 +38,7 @@ def clean(raw_review, ignore_digit = False, ignore_url= False, ignore_stopword =
     #
     # 3. Convert to lower case, split into individual words
     words = []   
-    words = raw_review.lower().split()
+    words = raw_review.split()
     #
     # 4. In Python, searching a set is much faster than searching
     #   a list, so convert the stop words to a set

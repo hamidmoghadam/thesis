@@ -29,6 +29,8 @@ class data_provider(object):
                     item = TwitterItem(row)
                     if item.is_owner == True:
                         content = refine.clean(item.content, ignore_url= False, ignore_stopword=True)
+                        sents = refine.get_sentences(content)
+                        content = ' '.join(sents)
                         data.append(content)
 
         self.Vocab = self.build_vocab(' '.join(data))
@@ -43,9 +45,9 @@ class data_provider(object):
 
 dp = data_provider()
 
-word_embedding_size = 5
-vocab_size = 5000
-train_iteration = 1000
+word_embedding_size = 100
+vocab_size = 120000
+train_iteration = 100
 
 
 print('vocab size is {0}'.format(dp.VocabSize))
@@ -105,6 +107,10 @@ with tf.Session() as sess:
         _, loss = sess.run([optimizer, cost], feed_dict={x_data: x_set, y_data: y_set})
         print(loss)
         
-        
-
+    output = sess.run(x, feed_dict={x_data: x_set, y_data: y_set})
+   
+    with open('embedding.csv', 'w') as w:
+            writer = csv.writer(w, delimiter=' ')
+            for i in range(vocab_size):
+                writer.writerow([dp.Vocab[i]]+ [item for item in output[i]])
 
