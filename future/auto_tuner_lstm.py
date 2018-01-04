@@ -16,9 +16,9 @@ for test_no in range(100) :
             'w_embedding' : str(word_embedding[np.random.randint(5,size=1)[0]])}
 
     for it in range(5):
-        print('test_{0}_{1}_{2}_{3}.txt iteration {4}'.format(test_no,config['word_h'], config['w_embedding'], config['dropout'].replace('.', '-'), it))
-        with open('tune_lstm/test_{0}_{1}_{2}_{3}.txt'.format(test_no,config['word_h'], config['w_embedding'], config['dropout'].replace('.', '-')), 'a+', encoding='utf-8') as f:
-            output = subprocess.check_output(['python','lstm.py', '20', '2000', '23', config['word_h'], config['w_embedding'], '0.0005', config['dropout']])
+        print('test_{0}_{1}_{2}_{3}_{4}.txt iteration {5}'.format('20', '2000', '23', test_no,config['word_h'], config['w_embedding'], it))
+        with open('tune_lstm/test_{0}_{1}_{2}_{3}_{4}.txt'.format('20', '2000', '23', test_no,config['word_h'], config['w_embedding']), 'a+', encoding='utf-8') as f:
+            output = subprocess.check_output(['python','classifier.py', '20', '2000', '23', config['word_h'], config['w_embedding']])
             f.write(output.decode('utf8'))
             f.write('\n\n\n')
     print('--------- next config ---------')
