@@ -17,7 +17,7 @@ for test_no in range(100) :
 
     for it in range(5):
         print('test_{0}_{1}_{2}_{3}_{4}_{5}.txt iteration {6}'.format(test_no, '20', '2000', '11',config['word_h'], config['w_embedding'], it))
-        with open('tune_lstm/test_{0}_{1}_{2}_{3}_{4}.txt'.format(test_no,'20', '2000', '11' ,config['word_h'], config['w_embedding']), 'a+', encoding='utf-8') as f:
+        with open('tune_lstm/test_{0}_{1}_{2}_{3}_{4}_{5}.txt'.format(test_no,'20', '2000', '11' ,config['word_h'], config['w_embedding']), 'a+', encoding='utf-8') as f:
             output = subprocess.check_output(['python','classifier.py', '20', '2000', '11', config['word_h'], config['w_embedding']])
             f.write(output.decode('utf8'))
             f.write('\n\n\n')
