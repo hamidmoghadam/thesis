@@ -5,6 +5,7 @@ from tensorflow.contrib import rnn
 import numpy as np
 import sys
 
+
 from data_provider import data_provider
 from tensorflow.contrib import learn
 
@@ -23,7 +24,8 @@ n_input = 100
 n_hidden = int(sys.argv[4]) # hidden layer num of features
 n_classes = int(sys.argv[1]) # MNIST total classes (0-9 digits)
 
-vocab_size = 58000
+dp = data_provider(number_of_users=n_classes, sentence_max_len = n_input, number_of_post_per_user = number_of_post_per_user)
+vocab_size = dp.vocab_size
 
 # tf Graph input
 x = tf.placeholder(tf.int32, [None, n_input])
@@ -92,10 +94,6 @@ with tf.Session() as sess:
 
     # Keep training until reach max iterations
     for i in range(train_iteration):
-        dp = data_provider(number_of_users=n_classes, sentence_max_len = n_input, number_of_post_per_user = number_of_post_per_user)
-
-        print(dp.vocab_size)
-
         train_accr = 0.0
         valid_accr = 0.0
         train_cost = 0.0
@@ -125,6 +123,8 @@ with tf.Session() as sess:
         lst_valid_accr.append(acc)
         
         print("Validation Loss = {:.3f}".format(loss) + ", Validation Accuracy= {:.3f}".format(acc))
+        
+        dp.shuffle_train_data()
         
     
     accr = 0

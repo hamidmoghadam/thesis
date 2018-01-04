@@ -158,6 +158,14 @@ class data_provider(object):
         self.valid_size = len(self.valid_set)
         self.test_size = len(self.test_set)
 
+    def shuffle_train_data(self):
+        temp = list(zip(self.train_set, self.y_train_set))
+        np.random.shuffle(temp)
+        self.train_set, self.y_train_set = zip(*temp)
+        self.train_set = np.array(self.train_set)
+        self.y_train_set = np.array(self.y_train_set)
+
+
     def get_next_train_batch(self, batch_size):
         if(self.train_batch_counter >= self.train_size // batch_size):
             self.train_batch_counter = 0
