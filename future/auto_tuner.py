@@ -19,7 +19,7 @@ for test_no in range(100) :
     for it in range(4):
         print('test_{0}_{1}_{2}_{3}_{4}_{5}.txt iteration {6}'.format(test_no,config['word_h'], config['w_embedding'], config['letter_h'], config['l_embedding'], config['dropout'].replace('.', '-'), it))
         with open('tune/test_{0}_{1}_{2}_{3}_{4}_{5}.txt'.format(test_no,config['word_h'], config['w_embedding'], config['letter_h'], config['l_embedding'], config['dropout'].replace('.', '-')), 'a+', encoding='utf-8') as f:
-            output = subprocess.check_output(['python','rnncnn.py', '20', '2000', '12', config['word_h'], config['w_embedding'], config['letter_h'], config['l_embedding'], '0.0005', config['dropout']])
+            output = subprocess.check_output(['python','rnncnn.py', '20', '2000', '17', config['word_h'], config['w_embedding'], config['letter_h'], config['l_embedding'], '0.0005', config['dropout']])
             f.write(output.decode('utf8'))
             f.write('\n\n\n')
     print('--------- next config ---------')
