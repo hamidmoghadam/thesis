@@ -44,7 +44,7 @@ weights = {
     'out': tf.Variable(tf.random_normal([128, n_classes]))
 }
 biases = {
-    'out': tf.Variable(tf.random_normal([n_classes]))
+    'out': tf.Variable(tf.random_normal([n_classes])),
     'out': tf.Variable(tf.random_normal([128]))
 }
 
