@@ -40,10 +40,12 @@ is_training = tf.placeholder(tf.bool)
 
 # Define weights
 weights = {
-    'out': tf.Variable(tf.random_normal([2*n_word_hidden + n_letter_hidden, n_classes]))
+    'inner':tf.Variable(tf.random_normal([2*n_word_hidden + n_letter_hidden, 128])),
+    'out': tf.Variable(tf.random_normal([128, n_classes]))
 }
 biases = {
     'out': tf.Variable(tf.random_normal([n_classes]))
+    'out': tf.Variable(tf.random_normal([128]))
 }
 
 
@@ -58,6 +60,8 @@ def RNN(x, u, weights, biases, dropout, is_training):
         bw_lstm_cell = rnn.BasicLSTMCell(n_word_hidden)
 
         outputs, states, _= rnn.static_bidirectional_rnn(fw_lstm_cell, bw_lstm_cell, x, dtype=tf.float32)
+
+    with tf.variable_scope("letter"):
 
     with tf.variable_scope("letter"):
         u = tf.reshape(u, shape=[-1, n_sent_letters, n_letter_embedding, 1])
@@ -84,9 +88,11 @@ def RNN(x, u, weights, biases, dropout, is_training):
    
     final_output = tf.concat((max_output, output_letter), 1)
 
+    final_output2 = tf.nn.relu(tf.matmul(final_output, weights['inner']) + biases['inner'])
+
     
     # Linear activation, using rnn inner loop last output
-    return tf.matmul(final_output, weights['out']) + biases['out']
+    return tf.matmul(final_output2, weights['out']) + biases['out']
 
 
 with tf.device("/cpu:0"):
@@ -120,11 +126,9 @@ lst_valid_accr = []
 # Launch the graph
 with tf.Session() as sess:
     sess.run(init)
-    #sess.run(embedding_init, feed_dict={embedding_placeholder: embedding})
     
     # Keep training until reach max iterations
     for i in range(train_iteration):
-        #print('epoch {0} :'.format(i+1))
         train_accr = 0.0
         valid_accr = 0.0
         train_cost = 0.0
@@ -134,7 +138,6 @@ with tf.Session() as sess:
         epoch_size = max(dp.train_size // batch_size, 1)
         while step < epoch_size:
             batch_x, batch_y, batch_char_u= dp.get_next_train_batch(batch_size)
-            
             acc, loss, _ = sess.run([accuracy, cost, optimizer], feed_dict={x: batch_x, y: batch_y, u: batch_char_u, word_dropout: my_droup_out, is_training: True})
             train_accr += acc 
             train_cost += loss
@@ -160,7 +163,6 @@ with tf.Session() as sess:
 
     number_of_post = 0
     for i in range(n_classes):
-        #print('for class number {0}'.format(i))
         test_data, test_label, test_char_data= dp.get_next_test_batch(i)
         loss, acc, prediction = sess.run([cost, accuracy, softmax_pred], feed_dict={x: test_data, y: test_label, u:test_char_data, word_dropout: 1.0, is_training:False})
 
