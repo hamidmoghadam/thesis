@@ -62,8 +62,6 @@ def RNN(x, u, weights, biases, dropout, is_training):
         outputs, states, _= rnn.static_bidirectional_rnn(fw_lstm_cell, bw_lstm_cell, x, dtype=tf.float32)
 
     with tf.variable_scope("letter"):
-
-    with tf.variable_scope("letter"):
         u = tf.reshape(u, shape=[-1, n_sent_letters, n_letter_embedding, 1])
 
         conv1 = tf.layers.conv2d(u, n_letter_hidden, (4, n_letter_embedding), activation=tf.nn.relu)
